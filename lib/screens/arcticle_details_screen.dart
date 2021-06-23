@@ -1528,28 +1528,20 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                       BorderRadius.all(
                                                           Radius.circular(
                                                               13.0))),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text(
-                                                    'Thank you for your answer! It’s important to us 💓', // todo
-                                                    style: TextStyle(
-                                                      color:
-                                                          kWelcomDarkTextColor,
-                                                      fontFamily: 'Gilroy Bold',
-                                                      fontSize: height / 59.73,
-                                                      height: 1.343,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                    ),
-                                                  )
-                                                ],
+                                              child: Text(
+                                                AppLocalizations.of(context).translate('thank_you_for_your_answer'),
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color:
+                                                      kWelcomDarkTextColor,
+                                                  fontFamily: 'Gilroy Bold',
+                                                  fontSize: height / 59.73,
+                                                  height: 1.343,
+                                                  fontWeight:
+                                                      FontWeight.bold,
+                                                  fontStyle:
+                                                      FontStyle.normal,
+                                                ),
                                               ),
                                             ),
                                             showBadge: false,
