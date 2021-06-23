@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
-import 'package:sofy_new/models/playlist_data.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';

@@ -1,4 +1,3 @@
-import '../api_article_articles_model.dart';
 
 class ApiFavTopicsAnswerModel {
   String error;

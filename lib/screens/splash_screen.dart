@@ -12,7 +12,6 @@ import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/main_screen.dart';
 import 'package:sofy_new/screens/onboarding_screen.dart';
-import 'package:sofy_new/screens/subscribe_screen.dart';
 
 import 'bloc/local_notification_service.dart';
 import 'bloc/store_qonversion_helper.dart';

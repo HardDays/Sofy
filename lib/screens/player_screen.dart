@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:image_fade/image_fade.dart';
 import 'package:infinity_page_view/infinity_page_view.dart';
 import 'package:intl/intl.dart';

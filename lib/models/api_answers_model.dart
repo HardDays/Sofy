@@ -1,6 +1,3 @@
-import 'api_article_poll_model.dart';
-import 'api_article_question_model.dart';
-
 class ApiAnswersModel {
   int id;
   int questionId;

@@ -1,9 +1,5 @@
-//import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
-import 'package:sofy_new/constants/app_colors.dart';
 
 enum CircularStrokeCap { butt, round, square }
 

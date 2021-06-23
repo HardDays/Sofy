@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sofy_new/constants/app_colors.dart';
 
 import 'neumorphic/neumorphic_button.dart';
 

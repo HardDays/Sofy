@@ -1,13 +1,9 @@
 import 'dart:io';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:rate_my_app/rate_my_app.dart';
@@ -17,7 +13,6 @@ import 'package:sofy_new/models/playlist_data.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
-import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/screens/my_playlist_screen.dart';
 import 'package:sofy_new/screens/player_screen.dart';
 import 'package:sofy_new/screens/playlist_screen.dart';
@@ -26,7 +21,6 @@ import 'package:sofy_new/screens/setting_screen.dart';
 import 'package:sofy_new/widgets/bottom_bar.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 
-import '../rest_api.dart';
 import 'arcticles_screen.dart';
 
 class MainScreen extends StatefulWidget {

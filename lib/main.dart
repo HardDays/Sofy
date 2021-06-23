@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:appmetrica_sdk/appmetrica_sdk.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/models/PlaylistNameData.dart';

@@ -12,7 +12,6 @@ import 'package:flutter_html/style.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
@@ -22,7 +21,6 @@ import 'package:sofy_new/models/api_article_replies.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:flutter_simple_rating_bar/flutter_simple_rating_bar.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
-import 'package:sofy_new/providers/user.dart';
 import 'package:sofy_new/widgets/neumorph_button.dart';
 import 'package:sofy_new/widgets/neumorphic/neumorphic_button.dart';
 
@@ -345,7 +343,6 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                       duration:
                                                           Duration(seconds: 2),
                                                       curve: Curves.ease);
-                                                  ;
                                                 },
                                                 iconLeft:
                                                     'assets/svg/article_comments.svg'),

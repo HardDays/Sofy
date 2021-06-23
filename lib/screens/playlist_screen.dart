@@ -12,7 +12,6 @@ import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
-import 'package:sofy_new/screens/recomendation_screen.dart';
 import 'package:sofy_new/widgets/app_list_view.dart';
 import 'package:sofy_new/widgets/neumorphic/neumorphic_button.dart';
 

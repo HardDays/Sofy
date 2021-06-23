@@ -1,7 +1,5 @@
 import 'package:sofy_new/models/api_answers_info_model.dart';
 
-import 'api_meta_model.dart';
-
 class ApiAnswersDetailsModel {
   String error;
   ApiAnswersInfoModel info;

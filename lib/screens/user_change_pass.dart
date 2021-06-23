@@ -7,7 +7,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
-import 'package:sofy_new/screens/user_recovery_pass.dart';
 import 'package:sofy_new/widgets/user_text_field.dart';
 
 class UserChangePassScreen extends StatefulWidget {

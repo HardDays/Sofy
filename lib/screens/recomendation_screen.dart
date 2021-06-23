@@ -18,13 +18,11 @@ import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
-import 'package:sofy_new/screens/player_screen.dart';
 import 'package:sofy_new/screens/playlist_screen.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/widgets/material_page_route.dart';
 import 'package:sofy_new/widgets/playlist_lead_widget.dart';
 
-import 'my_playlist_screen.dart';
 
 class RecommendationScreen extends StatefulWidget {
   static const int PAGE_INDEX = 1;

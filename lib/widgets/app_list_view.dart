@@ -9,7 +9,6 @@ import 'package:sofy_new/models/PlaylistNameData.dart';
 import 'package:sofy_new/models/api_vibration_data_model.dart';
 import 'package:sofy_new/models/playlist_data.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
-import 'package:sofy_new/models/vibration_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
