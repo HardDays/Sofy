@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "768127410502",
+    "firebase_url": "https://sofy-app-287e8.firebaseio.com",
+    "project_id": "sofy-app-287e8",
+    "storage_bucket": "sofy-app-287e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768127410502:android:f70d48057df59f93f58547",
+        "android_client_info": {
+          "package_name": "com.enjoysofy.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768127410502-8h0pham8u7h4cm8plhnd0r2vfjsncrd8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJUZgDrURD3tdgbGLZuMP_qa2R7ugKrJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768127410502-8h0pham8u7h4cm8plhnd0r2vfjsncrd8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "768127410502-0oitpjlicna8lhphscjuh568ims262f6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.freelancedev.sofy"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768127410502:android:ea19462d9e90ab6af58547",
+        "android_client_info": {
+          "package_name": "com.freelancedev.sofy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768127410502-8h0pham8u7h4cm8plhnd0r2vfjsncrd8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJUZgDrURD3tdgbGLZuMP_qa2R7ugKrJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768127410502-8h0pham8u7h4cm8plhnd0r2vfjsncrd8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "768127410502-0oitpjlicna8lhphscjuh568ims262f6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.freelancedev.sofy"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768127410502:android:9ee66604f9b6c33ef58547",
+        "android_client_info": {
+          "package_name": "sofy.vibrator.massage.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768127410502-8h0pham8u7h4cm8plhnd0r2vfjsncrd8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJUZgDrURD3tdgbGLZuMP_qa2R7ugKrJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768127410502-8h0pham8u7h4cm8plhnd0r2vfjsncrd8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "768127410502-0oitpjlicna8lhphscjuh568ims262f6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.freelancedev.sofy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
