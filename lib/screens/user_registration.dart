@@ -61,48 +61,47 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                        width: width / 3.5,
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                              borderRadius: BorderRadius.circular(60),
-                              radius: 25,
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    width: 50.0,
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding: EdgeInsets.all(12.0),
-                                      child: Container(
-                                        child: SvgPicture.asset(
-                                          'assets/svg/back_vector.svg',
-                                          color: kNavigBarInactiveColor,
-                                        ),
-                                      ),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                          borderRadius: BorderRadius.circular(60),
+                          radius: 25,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Container(
+                                width: 50.0,
+                                alignment: Alignment.center,
+                                child: Padding(
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Container(
+                                    child: SvgPicture.asset(
+                                      'assets/svg/back_vector.svg',
+                                      color: kNavigBarInactiveColor,
                                     ),
                                   ),
-                                  Container(
-                                    padding:
-                                        EdgeInsets.only(bottom: height / 179.2),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      AppLocalizations.of(context)
-                                          .translate('back'),
-                                      style: TextStyle(
-                                          fontFamily: 'Exo 2',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: height / 37.3, //24
-                                          color: kNavigBarInactiveColor),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                              onTap: () {
-                                Navigator.pop(context);
-                              }),
-                        )),
+                              Container(
+                                padding:
+                                    EdgeInsets.only(bottom: height / 179.2),
+                                child: Text(
+                                  AppLocalizations.of(context)
+                                      .translate('back'),
+                                  style: TextStyle(
+                                      fontFamily: 'Exo 2',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: height / 37.33, //24
+                                      color: kNavigBarInactiveColor),
+                                ),
+                              ),
+                              SizedBox(width: height / 37.33),
+                            ],
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          }),
+                    ),
                     Container(
                       margin: EdgeInsets.only(
                           top: height / 89.6, bottom: height / 44.8),
