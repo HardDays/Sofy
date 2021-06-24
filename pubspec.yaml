@@ -27,51 +27,51 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  badges: ^1.1.4
+  badges: ^2.0.1
   flutter_swiper: ^1.1.6
-  flutter_xlider: ^3.1.1
-  flutter_svg: ^0.21.0-nullsafety.0
-  gradient_widgets: ^0.5.2
-  fl_chart: ^0.30.0
+  flutter_xlider: ^3.4.0
+  flutter_svg: ^0.22.0
+  gradient_widgets: ^0.6.0
+  fl_chart: ^0.36.2
   provider: ^5.0.0
 
-  flutter_neumorphic: ^3.0.4+1
-  shared_preferences: ^2.0.5
+  flutter_neumorphic: ^3.1.0
+  shared_preferences: ^2.0.6
   intl: ^0.17.0
-  cached_network_image: ^2.5.0
-  rate_my_app: ^1.0.0+2
-  in_app_review: ^2.0.1
-  url_launcher: ^6.0.3
-  share: ^2.0.1
-  percent_indicator: ^2.1.9+1
+  cached_network_image: ^3.0.0
+  rate_my_app: ^1.1.0+1
+  in_app_review: ^2.0.2
+  url_launcher: ^6.0.7
+  share: ^2.0.4
+  percent_indicator: ^3.3.0-nullsafety.1
   flutter_simple_rating_bar: ^0.0.3
-  fluttertoast: ^8.0.3
+  fluttertoast: ^8.0.7
   focus_detector: ^2.0.0
-  image_picker: ^0.7.4
+  image_picker: ^0.7.4 # todo не обновлял надо разбираться: для андроида есть легаси права в нашем коде, для иос все ок, но требуется версия 14+
   image_fade: ^0.2.1
-  shimmer: ^1.1.2
-  auto_size_text: ^2.1.0
+  shimmer: ^2.0.0
+  auto_size_text: ^3.0.0-nullsafety.0
   infinity_page_view: ^1.0.0
 
-  qonversion_flutter: ^3.2.1
+  qonversion_flutter: ^3.2.1 # todo непонятно работает ли это вообще даже под андроид
 
-  flutter_html: ^2.0.0-nullsafety.0
+  flutter_html: ^2.1.0
 
-  flutter_local_notifications: ^5.0.0
-  firebase_messaging: ^9.1.0
+  flutter_local_notifications: ^7.0.0-dev.1 # todo надо тестить - не нашел нигде в коде использование разработанного сервиса
+  firebase_messaging: ^9.1.0 # todo надо обновить есть BREAKING REFACTOR
 
-  firebase_core: ^1.0.2
-  firebase_remote_config: ^0.10.0-dev.2
+  firebase_core: ^1.3.0
+  firebase_remote_config: ^0.10.0+2
 
   # Analytics
   device_id: ^0.2.0
   appmetrica_sdk: ^0.0.6
-  amplitude_flutter: ^3.0.0
-  firebase_analytics: ^7.0.0
-  facebook_app_events: ^0.11.0
-  uuid: ^3.0.3
-  tenjin_sdk: ^1.0.1
-  app_tracking_transparency: ^2.0.0
+  amplitude_flutter: ^3.1.1 # todo требуется повысить версию иос от 9
+  firebase_analytics: ^8.1.2
+  facebook_app_events: ^0.12.0
+  uuid: ^3.0.4
+  tenjin_sdk: ^1.0.2
+  app_tracking_transparency: ^2.0.1
 
 
 dev_dependencies:
