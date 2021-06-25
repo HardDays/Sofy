@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
-import 'package:sofy_new/helper/cashe/cache_manager_helper.dart';
+import 'package:sofy_new/helper/cache/cache_manager_helper.dart';
 import 'package:sofy_new/rest_api.dart';
 
 class ApplicationDataProvider {

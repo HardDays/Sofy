@@ -1,3 +1,4 @@
+import 'package:sofy_new/constants/constants.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -11,8 +12,7 @@ class CacheManagerHelper {
 
   static void loadImages(List<String> urls, {VoidCallback finishedDownloading}) {
     var filter = urls.where((element) {
-      var urlPattern = r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
-      return new RegExp(urlPattern, caseSensitive: false).hasMatch(element);
+      return new RegExp(kUrlPattern, caseSensitive: false).hasMatch(element);
     }).toList();
 
     if (filter.length == 0) {

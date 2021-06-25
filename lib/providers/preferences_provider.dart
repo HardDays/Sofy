@@ -1,27 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sofy_new/constants/constants.dart';
 
 class PreferencesProvider {
-  static const KEY_USER_TOKEN = "user_token";
-  static const KEY_FAVORITES = "favorites";
-  static const KEY_ADD_FAVOR = "favorite";
-  static const KEY_FIRST_INIT = "first_init";
-  static const KEY_SESSIONS = "sessions";
-
-  static const KEY_USER_ID = "user_id";
-  static const KEY_USER_NAME = "user_name";
-  static const KEY_USER_MAIL = "user_mail";
-  static const KEY_USER_PASS = "user_pass";
-  static const KEY_USER_PHOTO = "user_photo";
-  static const KEY_USER_AUTH_TOKEN = "user_auth_token";
-  static const KEY_USER_AVA_NUMBER = "user_ava_number";
-  static const KEY_USER_AVA_COLOR = "user_ava_color";
-
-  static const KEY_ANON_AUTH_TOKEN = "anon_auth_token";
-  static const KEY_ANON_NAME = "anon_name";
-
-  static const KEY_DB_VERSION = "db_version";
-
-
   static PreferencesProvider _instance;
   Future _initialized;
   SharedPreferences _preferences;

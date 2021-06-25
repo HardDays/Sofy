@@ -5,39 +5,33 @@ import 'package:intl/intl.dart';
 import 'package:sofy_new/models/api_vibration_data_model.dart';
 import 'package:sofy_new/models/api_vibration_model.dart';
 import 'package:sofy_new/library/vibration/vibration.dart';
+import 'package:sofy_new/constants/constants.dart';
 
 
 class Player extends ChangeNotifier {
   ApiVibrationModel _currentPlayListModel;
 
-  bool isLoop = false;
+  bool isLoop = kIsLoop;
   bool _isPlayign = false;
   bool _isPausing = false;
 
 
-  int sliderSpeedValue = 62;
-  int speedValuesPosition = 30;
-  List<double> speedValues = [
-    4,
-    3.9, 3.8, 3.7, 3.6, 3.5, 3.4, 3.3, 3.2, 3.1, 3,
-    2.9, 2.8, 2.7, 2.6, 2.5, 2.4, 2.3, 2.2, 2.1, 2,
-    1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1,
-    0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1];
+  int sliderSpeedValue = kSliderSpeedValue;
+  int speedValuesPosition = kSpeedValuesPosition;
+  List<double> speedValues = kInitSpeedValues;
 
-  int vibrationPosition = 0;
+  int vibrationPosition = kVibrationPosition;
   int _pausePosition = 0;
 
-  int currentPlayTime = 0;
-  int durationAllVibration = 0;
-  int speedDurationDefault = 30;
-  int speedDurationInterval = 30;
+  int currentPlayTime = kCurrentPlayTime;
+  int durationAllVibration = kDurationAllVibration;
+  int speedDurationDefault = kSpeedDurationDefault;
+  int speedDurationInterval = kSpeedDurationInterval;
   Timer vibrateTimer, timeTrackingTimer;
 
   int get pausePosition => _pausePosition;
   bool get isPlayign => _isPlayign;
   ApiVibrationModel get currentPlayListModel => _currentPlayListModel;
-
-   static const int DEFAULT_VIBRATION_DURATION = 600;
 
   String getCurrentTimeString(/*{List<VibrationModel> vibrations}*/) {
     return DateFormat('m:ss').format(

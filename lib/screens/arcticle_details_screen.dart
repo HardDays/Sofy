@@ -54,11 +54,11 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
 
   final SettingBloc _bloc = SettingBloc();
 
-  Color appBar = Colors.transparent;
-  Color shareButton = Colors.white;
-  Color backButton = Colors.white;
-  Color textColor = Colors.transparent;
-  Color dividerColor = Colors.transparent;
+  Color appBar = kAppBarTransparentColor;
+  Color shareButton = kShareButtonWhiteColor;
+  Color backButton = kBackButtonWhiteColor;
+  Color textColor = kTextColorTransparentColor;
+  Color dividerColor = kDividerColorTransparentColor;
   ApiArticlePollModel apiArticlePollModel;
 
   String answersButtonTitle;

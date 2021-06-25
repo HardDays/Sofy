@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 //const kTitleColor = Color(0xff38394F);
 //const kSubtitleColor = Color(0xffB2B1B7);
+const kAppBarTransparentColor = Colors.transparent;
+const kShareButtonWhiteColor = Colors.white;
+const kBackButtonWhiteColor = Colors.white;
+const kTextColorTransparentColor = Colors.transparent;
+const kDividerColorTransparentColor = Colors.transparent;
 const kAppPinkDarkColor = Color(0xffFF96AD);
 const kAppPinkLightColor = Color(0xffFCF0FC);
 const kWelcomDarkTextColor = Color(0xff836771);

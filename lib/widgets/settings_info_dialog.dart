@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
+import 'package:sofy_new/constants/constants.dart';
 
 class SettingsInfoDialog extends StatelessWidget {
   @override
@@ -12,7 +13,7 @@ class SettingsInfoDialog extends StatelessWidget {
       title: Text(
         AppLocalizations.of(context).translate('not_vibrating'),
         style: TextStyle(
-          fontFamily: 'Proxima Nova',
+          fontFamily: kFontFamily,
           fontWeight: FontWeight.bold,
           fontStyle: FontStyle.normal,
           fontSize: height / 52,
@@ -40,7 +41,7 @@ class SettingsInfoDialog extends StatelessWidget {
           Text(
             AppLocalizations.of(context).translate('make_sure'),
             style: TextStyle(
-              fontFamily: 'Proxima Nova',
+              fontFamily: kFontFamily,
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.normal,
               fontSize: height / 60,
@@ -61,7 +62,7 @@ class SettingsInfoDialog extends StatelessWidget {
             Text(
               AppLocalizations.of(context).translate('not_vibrating_ios_1'),
               style: TextStyle(
-                fontFamily: 'Proxima Nova',
+                fontFamily: kFontFamily,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.normal,
                 fontSize: height,
@@ -72,7 +73,7 @@ class SettingsInfoDialog extends StatelessWidget {
             Text(
               AppLocalizations.of(context).translate('not_vibrating_ios_2'),
               style: TextStyle(
-                fontFamily: 'Proxima Nova',
+                fontFamily: kFontFamily,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.normal,
                 fontSize: height,

@@ -1,5 +1,46 @@
 import 'package:flutter/material.dart';
 
+const kFontFamily = 'Proxima Nova';
+const kUrlPattern = r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
+const kInitSpeedValues = [
+  4,
+  3.9, 3.8, 3.7, 3.6, 3.5, 3.4, 3.3, 3.2, 3.1, 3,
+  2.9, 2.8, 2.7, 2.6, 2.5, 2.4, 2.3, 2.2, 2.1, 2,
+  1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1,
+  0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1];
+const kSliderSpeedValue = 62;
+const kSpeedValuesPosition = 30;
+const kIsLoop = false;
+const kVibrationPosition = 0;
+const kCurrentPlayTime = 0;
+const kDurationAllVibration = 0;
+const kSpeedDurationDefault = 30;
+const kSpeedDurationInterval = 30;
+
+const int DEFAULT_VIBRATION_DURATION = 600;
+
+const KEY_USER_TOKEN = "user_token";
+const KEY_FAVORITES = "favorites";
+const KEY_ADD_FAVOR = "favorite";
+const KEY_FIRST_INIT = "first_init";
+const KEY_SESSIONS = "sessions";
+
+const KEY_USER_ID = "user_id";
+const KEY_USER_NAME = "user_name";
+const KEY_USER_MAIL = "user_mail";
+const KEY_USER_PASS = "user_pass";
+const KEY_USER_PHOTO = "user_photo";
+const KEY_USER_AUTH_TOKEN = "user_auth_token";
+const KEY_USER_AVA_NUMBER = "user_ava_number";
+const KEY_USER_AVA_COLOR = "user_ava_color";
+
+const KEY_ANON_AUTH_TOKEN = "anon_auth_token";
+const KEY_ANON_NAME = "anon_name";
+
+const KEY_DB_VERSION = "db_version";
+
+
+
 const kProximaNovaTextStyle = TextStyle(
   height: 1.85,
   fontFamily: 'Proxima Nova',

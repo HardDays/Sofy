@@ -13,7 +13,7 @@ import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/splash_screen.dart';
-// import 'package:tenjin_sdk/tenjin_sdk.dart';
+import 'package:tenjin_sdk/tenjin_sdk.dart';
 
 import 'constants/constants.dart';
 import 'providers/user.dart';
@@ -28,7 +28,7 @@ void main() async {
   /// Initializing the AppMetrica SDK.
   await AppmetricaSdk().activate(apiKey: kAppmetricaSdkApiKey);
   await Firebase.initializeApp();
-  // await TenjinSDK.instance.init(apiKey: kTenjinFlutterApiKey);
+  await TenjinSDK.instance.init(apiKey: kTenjinFlutterApiKey);
   runZoned(() {
     runApp(MyApp());
   });
