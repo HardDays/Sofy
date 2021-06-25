@@ -71,662 +71,525 @@ class _ArticlesScreenState extends State<ArticlesScreen>
     return Stack(
       children: <Widget>[
         AnimatedSwitcher(
-            duration: Duration(milliseconds: 250),
-            child: isLoading
-                ? SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
-              child: Stack(
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: height / 15.0),
-                    child:
-                    SizedBox(
-                        child: Shimmer.fromColors(
-                          baseColor: Color(0xFFE0E0E0),
-                          highlightColor: kAppPinkDarkColor,
-                          direction: ShimmerDirection.ltr,
-                          period: Duration(seconds: 2),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      width: double.infinity,
-                                      height: 10,
-                                      color: Colors.white,
-                                    ),
-                                    SizedBox(height: 10),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 12,
-                                      color: Colors.white,
-                                    ),
-                                  ],
+          duration: Duration(milliseconds: 250),
+          child: isLoading ? _buildSkeleton(context) : _buildResult(context),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSkeleton(BuildContext context) => SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        child: Stack(
+          children: [
+            Container(
+              padding:
+                  EdgeInsets.only(left: 20.0, right: 20.0, top: height / 15.0),
+              child: _shimmerLine(context),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: height / 7.72),
+              child: Container(
+                padding: EdgeInsets.only(left: 20.0),
+                height: height / 3.65,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        padding: EdgeInsets.only(bottom: 10, right: 16),
+                        child: SizedBox(
+                            width: height / 4.42,
+                            height: height / 3.82,
+                            child: Shimmer.fromColors(
+                              baseColor: Color(0xFFE0E0E0),
+                              highlightColor: kAppPinkDarkColor,
+                              direction: ShimmerDirection.ltr,
+                              period: Duration(seconds: 2),
+                              child: Container(
+                                width: height / 4.1,
+                                height: height / 3.65,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25.0)),
                                 ),
-                              ),
-                            ],
-                          ),
-                        )),
-                  ),
-                  Container(
-                      padding: EdgeInsets.only(top: height / 7.72),
-                      child: Container(
-                          padding: EdgeInsets.only(left: 20.0),
-                          height: height / 3.65,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 3,
-                              itemBuilder:
-                                  (BuildContext context, int index) {
-                                return Container(
-                                  padding: EdgeInsets.only(
-                                      bottom: 10, right: 16),
-                                  child: SizedBox(
-                                      width: height / 4.42,
-                                      height: height / 3.82,
-                                      child: Shimmer.fromColors(
-                                        baseColor: Color(0xFFE0E0E0),
-                                        highlightColor: kAppPinkDarkColor,
-                                        direction: ShimmerDirection.ltr,
-                                        period: Duration(seconds: 2),
-                                        child: Container(
-                                          width: height / 4.1,
-                                          height: height / 3.65,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                            BorderRadius.all(
-                                                Radius.circular(
-                                                    25.0)),
-                                          ),
-                                        ),
-                                      )),
-                                );
-                              }))),
-                  Container(
-                    padding: EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: height / 2.28),
-                    child: SizedBox(
-                        child: Shimmer.fromColors(
-                          baseColor: Color(0xFFE0E0E0),
-                          highlightColor: kAppPinkDarkColor,
-                          direction: ShimmerDirection.ltr,
-                          period: Duration(seconds: 2),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      width: double.infinity,
-                                      height: 10,
-                                      color: Colors.white,
-                                    ),
-                                    SizedBox(height: 10),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 12,
-                                      color: Colors.white,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        )),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: height / 2.05),
-                    child: Container(
-                        padding: EdgeInsets.only(left: 20.0),
-                        height: height / 4.13,
-                        child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 3,
-                            itemBuilder:
-                                (BuildContext context, int index) {
-                              return Container(
-                                padding: EdgeInsets.only(
-                                    bottom: 10, right: 16),
-                                child: SizedBox(
-                                    width: height / 5.3,
-                                    height: height / 3.82,
-                                    child: Shimmer.fromColors(
-                                      baseColor: Color(0xFFE0E0E0),
-                                      highlightColor: kAppPinkDarkColor,
-                                      direction: ShimmerDirection.ltr,
-                                      period: Duration(seconds: 2),
-                                      child: Container(
-                                        width: height / 4.1,
-                                        height: height / 3.65,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                          BorderRadius.all(
-                                              Radius.circular(
-                                                  25.0)),
-                                        ),
-                                      ),
-                                    )),
-                              );
-                            })),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: height / 1.305),
-                    child: SizedBox(
-                        child: Shimmer.fromColors(
-                          baseColor: Color(0xFFE0E0E0),
-                          highlightColor: kAppPinkDarkColor,
-                          direction: ShimmerDirection.ltr,
-                          period: Duration(seconds: 2),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      width: double.infinity,
-                                      height: 10,
-                                      color: Colors.white,
-                                    ),
-                                    SizedBox(height: 10),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 12,
-                                      color: Colors.white,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        )),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: height / 1.22),
-                    child: Container(
-                        padding: EdgeInsets.only(left: 20.0),
-                        height: height / 4.13,
-                        child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 3,
-                            itemBuilder:
-                                (BuildContext context, int index) {
-                              return Container(
-                                padding: EdgeInsets.only(
-                                    bottom: 10, right: 16),
-                                child: SizedBox(
-                                    width: height / 5.3,
-                                    height: height / 3.82,
-                                    child: Shimmer.fromColors(
-                                      baseColor: Color(0xFFE0E0E0),
-                                      highlightColor: kAppPinkDarkColor,
-                                      direction: ShimmerDirection.ltr,
-                                      period: Duration(seconds: 2),
-                                      child: Container(
-                                        width: height / 4.1,
-                                        height: height / 3.65,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                          BorderRadius.all(
-                                              Radius.circular(
-                                                  25.0)),
-                                        ),
-                                      ),
-                                    )),
-                              );
-                            })),
-                  ),
-                ],
-              ),
-            )
-                : SingleChildScrollView(
-                    child: Stack(children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        alignment: Alignment.topLeft,
-                        height: height / 3.18,
-                        padding: EdgeInsets.only(left: 0.0, bottom: 0.0),
-                        decoration: BoxDecoration(
-                          gradient: new LinearGradient(
-                              colors: [
-                                const Color(0xFFFDB0C1),
-                                const Color(0xFFFF95AC),
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              stops: [0.0, 1.0],
-                              tileMode: TileMode.clamp),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(25.0)),
-                        ),
-                        child: Padding(
-                            padding: EdgeInsets.only(
-                                left: 20.0, right: 0.0, top: height / 15.0),
-                            child: Container(
-                              height: height / 19.91,
-                              padding: EdgeInsets.only(bottom: 5.0),
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                AppLocalizations.of(context)
-                                    .translate('new_topics'),
-                                style: TextStyle(
-                                    fontFamily: 'Exo 2',
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: height / 34.46,
-                                    //24
-                                    color: Colors.white),
                               ),
                             )),
-                      ),
-                      Column(children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: height / 7.72),
-                          child: Container(
-                              height: height / 3.67,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  padding: EdgeInsets.only(left: 20.0),
-                                  itemCount: newArticlesList.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Container(
-                                        padding: EdgeInsets.only(
-                                            bottom: 10, right: 16),
-                                        width: height / 4.1,
-                                        height: height / 3.82,
-                                        child: Stack(
-                                          children: <Widget>[
-                                            Stack(
-                                              children: <Widget>[
-                                                Container(
-                                                  height: height,
-                                                  width: width,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                25)),
-                                                    child: PlayListLeadWidget(
-                                                      url:
-                                                          newArticlesList[index]
-                                                              .coverImg,
-                                                      created:
-                                                          newArticlesList[index]
-                                                              .dateCreated,
-                                                      height: height,
-                                                      width: width,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      Alignment.bottomCenter,
-                                                  child: Container(
-                                                    height: height / 10.67 + 9,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        bottomLeft:
-                                                            Radius.circular(25),
-                                                        bottomRight:
-                                                            Radius.circular(25),
-                                                      ),
-                                                      child: Container(
-                                                        child: BackdropFilter(
-                                                          child: Container(
-                                                            color: Colors.white
-                                                                .withOpacity(
-                                                                    0.0),
-                                                          ),
-                                                          filter:
-                                                              ImageFilter.blur(
-                                                                  sigmaX: 2.0,
-                                                                  sigmaY: 2.0),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: height,
-                                                  width: width,
-                                                  margin: EdgeInsets.only(
-                                                      bottom: 9),
-                                                  alignment:
-                                                      Alignment.bottomCenter,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                25)),
-                                                  ),
-                                                  child: Container(
-                                                    alignment: Alignment.center,
-                                                    height: height / 10.67,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 13.0),
-                                                      child: Text(
-                                                        newArticlesList[index]
-                                                            .title,
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        maxLines: 5,
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Gilroy Bold',
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontStyle: FontStyle
-                                                                .normal,
-                                                            fontSize:
-                                                                height / 56.0,
-                                                            color: Colors.white,
-                                                            height: 1.37),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
+                      );
+                    }),
+              ),
+            ),
+            Container(
+              padding:
+                  EdgeInsets.only(left: 20.0, right: 20.0, top: height / 2.28),
+              child: _shimmerLine(context),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: height / 2.05),
+              child: _shimmerBox(context),
+            ),
+            Container(
+              padding:
+                  EdgeInsets.only(left: 20.0, right: 20.0, top: height / 1.305),
+              child: _shimmerLine(context),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: height / 1.22),
+              child: _shimmerBox(context),
+            ),
+          ],
+        ),
+      );
+
+  Widget _shimmerBox(BuildContext context) => Container(
+        padding: EdgeInsets.only(left: 20.0),
+        height: height / 4.13,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 3,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              padding: EdgeInsets.only(bottom: 10, right: 16),
+              child: SizedBox(
+                width: height / 5.3,
+                height: height / 3.82,
+                child: Shimmer.fromColors(
+                  baseColor: Color(0xFFE0E0E0),
+                  highlightColor: kAppPinkDarkColor,
+                  direction: ShimmerDirection.ltr,
+                  period: Duration(seconds: 2),
+                  child: Container(
+                    width: height / 4.1,
+                    height: height / 3.65,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      );
+
+  Widget _shimmerLine(BuildContext context) => SizedBox(
+        child: Shimmer.fromColors(
+          baseColor: Color(0xFFE0E0E0),
+          highlightColor: kAppPinkDarkColor,
+          direction: ShimmerDirection.ltr,
+          period: Duration(seconds: 2),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: double.infinity,
+                      height: 10,
+                      color: Colors.white,
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: double.infinity,
+                      height: 12,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+  Widget _buildResult(BuildContext context) => SingleChildScrollView(
+        child: Stack(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              alignment: Alignment.topLeft,
+              height: height / 3.18,
+              padding: EdgeInsets.only(left: 0.0, bottom: 0.0),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [
+                      const Color(0xFFFDB0C1),
+                      const Color(0xFFFF95AC),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: [0.0, 1.0],
+                    tileMode: TileMode.clamp),
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(25.0)),
+              ),
+              child: Padding(
+                  padding: EdgeInsets.only(
+                      left: 20.0, right: 0.0, top: height / 15.0),
+                  child: Container(
+                    height: height / 19.91,
+                    padding: EdgeInsets.only(bottom: 5.0),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      AppLocalizations.of(context).translate('new_topics'),
+                      style: TextStyle(
+                          fontFamily: 'Exo 2',
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.normal,
+                          fontSize: height / 34.46,
+                          //24
+                          color: Colors.white),
+                    ),
+                  )),
+            ),
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: height / 7.72),
+                  child: Container(
+                    height: height / 3.67,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.only(left: 20.0),
+                      itemCount: newArticlesList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          padding: EdgeInsets.only(bottom: 10, right: 16),
+                          width: height / 4.1,
+                          height: height / 3.82,
+                          child: Stack(
+                            children: <Widget>[
+                              Stack(
+                                children: <Widget>[
+                                  Container(
+                                    height: height,
+                                    width: width,
+                                    child: ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      child: PlayListLeadWidget(
+                                        url: newArticlesList[index].coverImg,
+                                        created:
+                                            newArticlesList[index].dateCreated,
+                                        height: height,
+                                        width: width,
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Container(
+                                      height: height / 10.67 + 9,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(25),
+                                          bottomRight: Radius.circular(25),
+                                        ),
+                                        child: Container(
+                                          child: BackdropFilter(
+                                            child: Container(
+                                              color:
+                                                  Colors.white.withOpacity(0.0),
                                             ),
-                                            Visibility(
-                                                // ignore: null_aware_in_logical_operator
-                                                visible: newArticlesList[index]
-                                                            .isPaid ==
-                                                        1
-                                                    ? true
-                                                    : false,
-                                                child: Container(
-                                                  height:
-                                                      Provider.of<SubscribeData>(
-                                                                  context)
-                                                              .isAppPurchase
-                                                          ? 0.0
-                                                          : height,
-                                                  width:
-                                                      Provider.of<SubscribeData>(
-                                                                  context)
-                                                              .isAppPurchase
-                                                          ? 0.0
-                                                          : width,
-                                                  alignment: Alignment.topRight,
-                                                  child: Container(
-                                                      height: height / 12.6,
-                                                      width: height / 12.6,
-                                                      decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                          image: AssetImage(
-                                                              'assets/new_lock.png'),
-                                                          fit: BoxFit.fill,
-                                                        ),
-                                                      )),
-                                                )),
-                                            Positioned.fill(
-                                              child: Material(
-                                                color: Colors.transparent,
-                                                child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    borderRadius:
-                                                        BorderRadius.all(Radius
-                                                            .circular(12.0)),
-                                                    radius: 12,
-                                                    onTap: () {
-                                                      bool isAppPurchase = Provider
-                                                              .of<SubscribeData>(
-                                                                  context,
-                                                                  listen: false)
-                                                          .isAppPurchase;
-                                                      if (newArticlesList[index]
-                                                              .isPaid ==
-                                                          1) {
-                                                        if (isAppPurchase) {
-                                                          Navigator.of(context).push(MaterialPageRoute(
-                                                              builder: (BuildContext context) => ArticlesDetailsScreen(
-                                                                  articleId: newArticlesList[
-                                                                  index]
-                                                                      .id
-                                                                      .toString())));
-                                                          /*Analytics().sendEventReports(
+                                            filter: ImageFilter.blur(
+                                                sigmaX: 2.0, sigmaY: 2.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: height,
+                                    width: width,
+                                    margin: EdgeInsets.only(bottom: 9),
+                                    alignment: Alignment.bottomCenter,
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                    ),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      height: height / 10.67,
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 13.0),
+                                        child: Text(
+                                          newArticlesList[index].title,
+                                          textAlign: TextAlign.left,
+                                          maxLines: 5,
+                                          style: TextStyle(
+                                              fontFamily: 'Gilroy Bold',
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: height / 56.0,
+                                              color: Colors.white,
+                                              height: 1.37),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Visibility(
+                                  // ignore: null_aware_in_logical_operator
+                                  visible: newArticlesList[index].isPaid == 1
+                                      ? true
+                                      : false,
+                                  child: Container(
+                                    height: Provider.of<SubscribeData>(context)
+                                            .isAppPurchase
+                                        ? 0.0
+                                        : height,
+                                    width: Provider.of<SubscribeData>(context)
+                                            .isAppPurchase
+                                        ? 0.0
+                                        : width,
+                                    alignment: Alignment.topRight,
+                                    child: Container(
+                                        height: height / 12.6,
+                                        width: height / 12.6,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                                'assets/new_lock.png'),
+                                            fit: BoxFit.fill,
+                                          ),
+                                        )),
+                                  )),
+                              Positioned.fill(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12.0)),
+                                      radius: 12,
+                                      onTap: () {
+                                        bool isAppPurchase =
+                                            Provider.of<SubscribeData>(context,
+                                                    listen: false)
+                                                .isAppPurchase;
+                                        if (newArticlesList[index].isPaid ==
+                                            1) {
+                                          if (isAppPurchase) {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        ArticlesDetailsScreen(
+                                                  articleId:
+                                                      newArticlesList[index]
+                                                          .id
+                                                          .toString(),
+                                                ),
+                                              ),
+                                            );
+                                            /*Analytics().sendEventReports(
                                               event: vibration_play,
                                               attr: {'vibration_id': playlistData.getCurrentPlaylistModel(context).created,
                                                 'playlist_id': Provider.of<PlaylistNameData>(context, listen: false).getCurrentPlaylistName().name,
                                                 'source': 'playlist_' + Provider.of<PlaylistNameData>(context, listen: false).getCurrentName() + '_screen',
                                               },
                                             );*/
-                                                        } else {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  SubscribeScreen(
-                                                                      isFromSplash:
-                                                                          false),
-                                                            ),
-                                                          );
-                                                        }
-                                                      } else {
-                                                        Navigator.of(context).push(MaterialPageRoute(
-                                                            builder: (BuildContext context) => ArticlesDetailsScreen(
-                                                                articleId: newArticlesList[
-                                                                index]
-                                                                    .id
-                                                                    .toString())));
-                                                      }
-                                                    }),
+                                          } else {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SubscribeScreen(
+                                                        isFromSplash: false),
                                               ),
-                                            ),
-                                          ],
-                                        ));
-                                  })),
-                        ),
-                        showFavTopic(0),
-                        showFavTopic(1),
-                        SizedBox(height: height / 35.73),
-                        Container(
-                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                          height: height / 20.69,
-                          alignment: Alignment.center,
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  height: height / 19.91,
-                                  padding: EdgeInsets.only(bottom: 5.0),
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    AppLocalizations.of(context)
-                                        .translate('popular'),
-                                    style: TextStyle(
-                                        fontFamily: 'Exo 2',
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: height / 37.33,
-                                        //24
-                                        color: Color(0xff38394F)),
-                                  ),
+                                            );
+                                          }
+                                        } else {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      ArticlesDetailsScreen(
+                                                          articleId:
+                                                              newArticlesList[
+                                                                      index]
+                                                                  .id
+                                                                  .toString())));
+                                        }
+                                      }),
                                 ),
                               ),
                             ],
                           ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                showFavTopic(0),
+                showFavTopic(1),
+                SizedBox(height: height / 35.73),
+                Container(
+                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  height: height / 20.69,
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          height: height / 19.91,
+                          padding: EdgeInsets.only(bottom: 5.0),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            AppLocalizations.of(context).translate('popular'),
+                            style: TextStyle(
+                                fontFamily: 'Exo 2',
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.normal,
+                                fontSize: height / 37.33,
+                                //24
+                                color: Color(0xff38394F)),
+                          ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(0.0),
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              padding: EdgeInsets.all(0.0),
-                              itemCount: popularArticle.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return InkWell(
-                                    onTap: () {
-                                      bool isAppPurchase =
-                                          Provider.of<SubscribeData>(context,
-                                                  listen: false)
-                                              .isAppPurchase;
-                                      if (popularArticle[index].isPaid == 1) {
-                                        if (isAppPurchase) {
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (BuildContext context) => ArticlesDetailsScreen(
-                                                  articleId: popularArticle[index]
-                                                      .id
-                                                      .toString())));
-                                          /*Analytics().sendEventReports(
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(0.0),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.all(0.0),
+                    itemCount: popularArticle.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                        onTap: () {
+                          bool isAppPurchase =
+                              Provider.of<SubscribeData>(context, listen: false)
+                                  .isAppPurchase;
+                          if (popularArticle[index].isPaid == 1) {
+                            if (isAppPurchase) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ArticlesDetailsScreen(
+                                          articleId: popularArticle[index]
+                                              .id
+                                              .toString())));
+                              /*Analytics().sendEventReports(
                                               event: vibration_play,
                                               attr: {'vibration_id': playlistData.getCurrentPlaylistModel(context).created,
                                                 'playlist_id': Provider.of<PlaylistNameData>(context, listen: false).getCurrentPlaylistName().name,
                                                 'source': 'playlist_' + Provider.of<PlaylistNameData>(context, listen: false).getCurrentName() + '_screen',
                                               },
                                             );*/
-                                        } else {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SubscribeScreen(
-                                                      isFromSplash: false),
-                                            ),
-                                          );
-                                        }
-                                      } else {
-                                        Navigator.of(context).push(MaterialPageRoute(
-                                            builder: (BuildContext context) => ArticlesDetailsScreen(
-                                                articleId: popularArticle[index]
-                                                    .id
-                                                    .toString())));
-                                      }
-                                    },
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      SubscribeScreen(isFromSplash: false),
+                                ),
+                              );
+                            }
+                          } else {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    ArticlesDetailsScreen(
+                                        articleId: popularArticle[index]
+                                            .id
+                                            .toString())));
+                          }
+                        },
+                        child: Container(
+                          height: height / 9.05,
+                          padding: EdgeInsets.only(
+                              left: 20.0, right: 20.0, bottom: 7.5, top: 7.5),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Stack(
+                                children: [
+                                  SizedBox(
+                                    height: height / 14.93,
+                                    width: height / 14.93,
                                     child: Container(
-                                        height: height / 9.05,
-                                        padding: EdgeInsets.only(
-                                            left: 20.0,
-                                            right: 20.0,
-                                            bottom: 7.5,
-                                            top: 7.5),
-                                        child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Stack(children: [
-                                                SizedBox(
-                                                  height: height / 14.93,
-                                                  width: height / 14.93,
-                                                  child: Container(
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  8)),
-                                                      child: CachedNetworkImage(
-                                                        placeholder:
-                                                            (context, url) =>
-                                                                Image.asset(
-                                                          'assets/player_placeholder.png',
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                        imageUrl:
-                                                            popularArticle[
-                                                                    index]
-                                                                .coverImg,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Visibility(
-                                                    // ignore: null_aware_in_logical_operator
-                                                    visible:
-                                                        popularArticle[index]
-                                                                    .isPaid ==
-                                                                1
-                                                            ? true
-                                                            : false,
-                                                    child: Container(
-                                                      height:
-                                                          Provider.of<SubscribeData>(
-                                                                      context)
-                                                                  .isAppPurchase
-                                                              ? 0.0
-                                                              : height / 14.93,
-                                                      width:
-                                                          Provider.of<SubscribeData>(
-                                                                      context)
-                                                                  .isAppPurchase
-                                                              ? 0.0
-                                                              : height / 14.93,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0x75C4C4C4),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    8)),
-                                                      ),
-                                                      alignment:
-                                                          Alignment.topCenter,
-                                                      child: Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  top: height /
-                                                                      45.95),
-                                                          height:
-                                                              height / 45.95,
-                                                          width: 15.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            image:
-                                                                DecorationImage(
-                                                              image: AssetImage(
-                                                                  'assets/lock.png'),
-                                                              fit: BoxFit.fill,
-                                                            ),
-                                                          )),
-                                                    ))
-                                              ]),
-                                              Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      padding: EdgeInsets.only(
-                                                          left: 16.0),
-                                                      width: width / 1.4,
-                                                      //height: height / 21.9,
-                                                      alignment:
-                                                          Alignment.topLeft,
-                                                      child: Text(
-                                                        popularArticle[index]
-                                                            .title,
-                                                        maxLines: 2,
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Gilroy Bold',
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            fontStyle: FontStyle
-                                                                .normal,
-                                                            fontSize:
-                                                                height / 59.73,
-                                                            height:
-                                                                height / 600.14,
-                                                            color: Color(
-                                                                0xff38394F)),
-                                                      ),
-                                                    ),
-                                                    /*SizedBox(height: height / 89.6),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8)),
+                                        child: CachedNetworkImage(
+                                          placeholder: (context, url) =>
+                                              Image.asset(
+                                            'assets/player_placeholder.png',
+                                            fit: BoxFit.cover,
+                                          ),
+                                          imageUrl:
+                                              popularArticle[index].coverImg,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Visibility(
+                                      // ignore: null_aware_in_logical_operator
+                                      visible: popularArticle[index].isPaid == 1
+                                          ? true
+                                          : false,
+                                      child: Container(
+                                        height:
+                                            Provider.of<SubscribeData>(context)
+                                                    .isAppPurchase
+                                                ? 0.0
+                                                : height / 14.93,
+                                        width:
+                                            Provider.of<SubscribeData>(context)
+                                                    .isAppPurchase
+                                                ? 0.0
+                                                : height / 14.93,
+                                        decoration: BoxDecoration(
+                                          color: Color(0x75C4C4C4),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8)),
+                                        ),
+                                        alignment: Alignment.topCenter,
+                                        child: Container(
+                                            margin: EdgeInsets.only(
+                                                top: height / 45.95),
+                                            height: height / 45.95,
+                                            width: 15.0,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/lock.png'),
+                                                fit: BoxFit.fill,
+                                              ),
+                                            )),
+                                      ))
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(left: 16.0),
+                                    width: width / 1.4,
+                                    //height: height / 21.9,
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      popularArticle[index].title,
+                                      maxLines: 2,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          fontFamily: 'Gilroy Bold',
+                                          fontWeight: FontWeight.w700,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: height / 59.73,
+                                          height: height / 600.14,
+                                          color: Color(0xff38394F)),
+                                    ),
+                                  ),
+                                  /*SizedBox(height: height / 89.6),
                                         Container(
                                           padding: EdgeInsets.only(left: 16.0),
                                           alignment: Alignment.centerLeft,
@@ -748,131 +611,133 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                                     .withOpacity(0.5)),
                                           ),
                                         ),*/
-                                                    SizedBox(
-                                                        height: height / 49.77),
-                                                    Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 16.0),
-                                                        child: Container(
-                                                            height: 1.0,
-                                                            width: width / 1.4,
-                                                            color: Color(
-                                                                0x40edc3ed))),
-                                                    //SizedBox(height: height / 99.54),
-                                                  ])
-                                            ])));
-                              }),
-                        ),
-                        //SizedBox(height: height / 33.18),
-                        showFavTopic(2),
-                        Container(
-                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                          height: height / 13.69,
-                          alignment: Alignment.center,
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  height: height / 19.91,
-                                  padding: EdgeInsets.only(bottom: 5.0),
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    AppLocalizations.of(context)
-                                        .translate('popular_categories'),
-                                    style: TextStyle(
-                                        fontFamily: 'Exo 2',
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: height / 37.33,
-                                        color: Color(0xff38394F)),
+                                  SizedBox(height: height / 49.77),
+                                  Container(
+                                    padding: EdgeInsets.only(left: 16.0),
+                                    child: Container(
+                                      height: 1.0,
+                                      width: width / 1.4,
+                                      color: Color(0x40edc3ed),
+                                    ),
                                   ),
-                                ),
+                                  //SizedBox(height: height / 99.54),
+                                ],
                               ),
                             ],
                           ),
                         ),
-                        Padding(
-                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                            child: ListView.builder(
-                              itemCount: popularTopicsList.length > 4
-                                  ? 4
-                                  : popularTopicsList.length,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              padding: EdgeInsets.all(0.0),
-                              itemBuilder: (context, index) =>
-                                  ArticlesCategoryScreenButton(
-                                iconUrl: popularTopicsList[index].coverImg,
-                                height: 1,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: popularTopicsList.first.id ==
-                                            popularTopicsList[index].id
-                                        ? Radius.circular(10.0)
-                                        : Radius.circular(0.0),
-                                    topRight: popularTopicsList.first.id ==
-                                            popularTopicsList[index].id
-                                        ? Radius.circular(10.0)
-                                        : Radius.circular(0.0),
-                                    bottomLeft: popularTopicsList.last.id ==
-                                            popularTopicsList[index].id
-                                        ? Radius.circular(10.0)
-                                        : Radius.circular(0.0),
-                                    bottomRight: popularTopicsList.last.id ==
-                                            popularTopicsList[index].id
-                                        ? Radius.circular(10.0)
-                                        : Radius.circular(0.0)),
-                                text: popularTopicsList[index].name,
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          ArticlesCategoriesDetailsScreen(
-                                              screenTitle:
-                                                  popularTopicsList[index].name,
-                                              categoryId:
-                                                  popularTopicsList[index]
-                                                      .id)));
-                                  /*Analytics().sendEventReports(
+                      );
+                    },
+                  ),
+                ),
+                //SizedBox(height: height / 33.18),
+                showFavTopic(2),
+                Container(
+                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  height: height / 13.69,
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          height: height / 19.91,
+                          padding: EdgeInsets.only(bottom: 5.0),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            AppLocalizations.of(context)
+                                .translate('popular_categories'),
+                            style: TextStyle(
+                                fontFamily: 'Exo 2',
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.normal,
+                                fontSize: height / 37.33,
+                                color: Color(0xff38394F)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                    child: ListView.builder(
+                      itemCount: popularTopicsList.length > 4
+                          ? 4
+                          : popularTopicsList.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.all(0.0),
+                      itemBuilder: (context, index) =>
+                          ArticlesCategoryScreenButton(
+                        iconUrl: popularTopicsList[index].coverImg,
+                        height: 1,
+                        borderRadius: BorderRadius.only(
+                            topLeft: popularTopicsList.first.id ==
+                                    popularTopicsList[index].id
+                                ? Radius.circular(10.0)
+                                : Radius.circular(0.0),
+                            topRight: popularTopicsList.first.id ==
+                                    popularTopicsList[index].id
+                                ? Radius.circular(10.0)
+                                : Radius.circular(0.0),
+                            bottomLeft: popularTopicsList.last.id ==
+                                    popularTopicsList[index].id
+                                ? Radius.circular(10.0)
+                                : Radius.circular(0.0),
+                            bottomRight: popularTopicsList.last.id ==
+                                    popularTopicsList[index].id
+                                ? Radius.circular(10.0)
+                                : Radius.circular(0.0)),
+                        text: popularTopicsList[index].name,
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  ArticlesCategoriesDetailsScreen(
+                                      screenTitle:
+                                          popularTopicsList[index].name,
+                                      categoryId:
+                                          popularTopicsList[index].id)));
+                          /*Analytics().sendEventReports(
                             event: not_vibrating_click,
                           );*/
-                                },
-                              ),
-                            )),
-                        SizedBox(height: height / 42.66),
-                        Container(
-                            margin: EdgeInsets.only(
-                                left: 20.0, right: 20.0, bottom: height / 28),
-                            child: NeumorphButton(
-                                width: width,
-                                height: height,
-                                text: AppLocalizations.of(context)
-                                    .translate('view_all'),
-                                onTap: () {
-                                  /*Analytics().sendEventReports(
+                        },
+                      ),
+                    )),
+                SizedBox(height: height / 42.66),
+                Container(
+                    margin: EdgeInsets.only(
+                        left: 20.0, right: 20.0, bottom: height / 28),
+                    child: NeumorphButton(
+                        width: width,
+                        height: height,
+                        text:
+                            AppLocalizations.of(context).translate('view_all'),
+                        onTap: () {
+                          /*Analytics().sendEventReports(
                             event: banner_click,
                           );*/
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ArticlesCategoriesScreen(),
-                                    ),
-                                  );
-                                })),
-                        ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: EdgeInsets.all(0.0),
-                            itemCount: 12,
-                            itemBuilder: (BuildContext context, int index) {
-                              return showFavTopic(index + 3);
-                            }),
-                        SizedBox(height: height / 8.54),
-                      ]),
-                    ]))),
-      ],
-    );
-  }
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ArticlesCategoriesScreen(),
+                            ),
+                          );
+                        })),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.all(0.0),
+                  itemCount: 12,
+                  itemBuilder: (BuildContext context, int index) {
+                    return showFavTopic(index + 3);
+                  },
+                ),
+                SizedBox(height: height / 8.54),
+              ],
+            ),
+          ],
+        ),
+      );
 
   Widget showFavTopic(int pos) {
     return favoritesTopics.length > pos
@@ -885,12 +750,15 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                 splashColor: kSettingActiveButtonColor.withOpacity(0.2),
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
                       builder: (BuildContext context) =>
                           ArticlesCategoriesDetailsScreen(
-                            screenTitle: favoritesTopics[pos].name,
-                            categoryId: favoritesTopics[pos].id,
-                          )));
+                        screenTitle: favoritesTopics[pos].name,
+                        categoryId: favoritesTopics[pos].id,
+                      ),
+                    ),
+                  );
                 },
                 child: Container(
                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -907,11 +775,12 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                             favoritesTopics[pos].name,
                             maxLines: 2,
                             style: TextStyle(
-                                fontFamily: 'Exo 2',
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.normal,
-                                fontSize: height / 37.33,
-                                color: Color(0xff38394F)),
+                              fontFamily: 'Exo 2',
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.normal,
+                              fontSize: height / 37.33,
+                              color: Color(0xff38394F),
+                            ),
                           ),
                         ),
                       ),
@@ -946,27 +815,26 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(25)),
                                     child: CachedNetworkImage(
-                                      placeholder: (context, url) =>
-                                          SizedBox(
-                                              width: height / 4.42,
-                                              height: height / 3.82,
-                                              child: Shimmer.fromColors(
-                                                baseColor: Color(0xFFE0E0E0),
-                                                highlightColor: kAppPinkDarkColor,
-                                                direction: ShimmerDirection.ltr,
-                                                period: Duration(seconds: 2),
-                                                child: Container(
-                                                  width: height / 4.1,
-                                                  height: height / 3.65,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(
-                                                            25.0)),
-                                                  ),
-                                                ),
-                                              )),
+                                      placeholder: (context, url) => SizedBox(
+                                        width: height / 4.42,
+                                        height: height / 3.82,
+                                        child: Shimmer.fromColors(
+                                          baseColor: Color(0xFFE0E0E0),
+                                          highlightColor: kAppPinkDarkColor,
+                                          direction: ShimmerDirection.ltr,
+                                          period: Duration(seconds: 2),
+                                          child: Container(
+                                            width: height / 4.1,
+                                            height: height / 3.65,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(25.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                       imageUrl: favoritesTopics[pos]
                                           .items[index]
                                           ?.coverImg,
@@ -1032,33 +900,34 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                               ],
                             ),
                             Visibility(
-                                // ignore: null_aware_in_logical_operator
-                                visible:
-                                    favoritesTopics[pos].items[index].isPaid ==
-                                            '1'
-                                        ? true
-                                        : false,
+                              // ignore: null_aware_in_logical_operator
+                              visible:
+                                  favoritesTopics[pos].items[index].isPaid ==
+                                          '1'
+                                      ? true
+                                      : false,
+                              child: Container(
+                                height: Provider.of<SubscribeData>(context)
+                                        .isAppPurchase
+                                    ? 0.0
+                                    : height,
+                                width: Provider.of<SubscribeData>(context)
+                                        .isAppPurchase
+                                    ? 0.0
+                                    : width,
+                                alignment: Alignment.topRight,
                                 child: Container(
-                                  height: Provider.of<SubscribeData>(context)
-                                          .isAppPurchase
-                                      ? 0.0
-                                      : height,
-                                  width: Provider.of<SubscribeData>(context)
-                                          .isAppPurchase
-                                      ? 0.0
-                                      : width,
-                                  alignment: Alignment.topRight,
-                                  child: Container(
-                                      height: height / 12.6,
-                                      width: height / 12.6,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image:
-                                              AssetImage('assets/new_lock.png'),
-                                          fit: BoxFit.fill,
-                                        ),
-                                      )),
-                                )),
+                                  height: height / 12.6,
+                                  width: height / 12.6,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage('assets/new_lock.png'),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                             Positioned.fill(
                               child: Material(
                                 color: Colors.transparent,
@@ -1078,12 +947,17 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                               .isPaid ==
                                           '1') {
                                         if (isAppPurchase) {
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (BuildContext context) => ArticlesDetailsScreen(
-                                                  articleId: favoritesTopics[pos]
-                                                      .items[index]
-                                                      .id
-                                                      .toString())));
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      ArticlesDetailsScreen(
+                                                          articleId:
+                                                              favoritesTopics[
+                                                                      pos]
+                                                                  .items[index]
+                                                                  .id
+                                                                  .toString())));
                                           /*Analytics().sendEventReports(
                                               event: vibration_play,
                                               attr: {'vibration_id': playlistData.getCurrentPlaylistModel(context).created,
@@ -1102,12 +976,16 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                           );
                                         }
                                       } else {
-                                        Navigator.of(context).push(MaterialPageRoute(
-                                            builder: (BuildContext context) => ArticlesDetailsScreen(
-                                                articleId: favoritesTopics[pos]
-                                                    .items[index]
-                                                    .id
-                                                    .toString())));
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (BuildContext
+                                                        context) =>
+                                                    ArticlesDetailsScreen(
+                                                        articleId:
+                                                            favoritesTopics[pos]
+                                                                .items[index]
+                                                                .id
+                                                                .toString())));
                                       }
                                     }),
                               ),
