@@ -58,7 +58,7 @@ dependencies:
   flutter_html: ^2.1.0
 
   flutter_local_notifications: ^7.0.0-dev.1 # todo надо тестить - не нашел нигде в коде использование разработанного сервиса
-  firebase_messaging: ^9.1.0 # todo надо обновить есть BREAKING REFACTOR
+  firebase_messaging: ^10.0.2 # todo надо обновить есть BREAKING REFACTOR
 
   firebase_core: ^1.3.0
   firebase_remote_config: ^0.10.0+2
@@ -70,7 +70,7 @@ dependencies:
   firebase_analytics: ^8.1.2
   facebook_app_events: ^0.12.0
   uuid: ^3.0.4
-  tenjin_sdk: ^1.0.2
+  #tenjin_sdk: ^1.0.1
   app_tracking_transparency: ^2.0.1
 
 

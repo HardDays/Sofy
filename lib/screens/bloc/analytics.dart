@@ -5,7 +5,7 @@ import 'package:device_id/device_id.dart';
 import 'package:facebook_app_events/facebook_app_events.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:sofy_new/constants/constants.dart';
-import 'package:tenjin_sdk/tenjin_sdk.dart';
+// import 'package:tenjin_sdk/tenjin_sdk.dart';
 
 class Analytics {
   Amplitude _amplitude;
@@ -59,7 +59,7 @@ class Analytics {
       parameters: attr,
     );*/
 
-    TenjinSDK.instance.eventWithName(event);
+    // TenjinSDK.instance.eventWithName(event);
 
     await firebaseAnalytics.logEvent(name: event, parameters: attr);
   }
