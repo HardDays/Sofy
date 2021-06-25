@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/screens/user_auth.dart';
 import 'package:sofy_new/widgets/user_text_field.dart';
@@ -90,7 +91,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                                     AppLocalizations.of(context)
                                         .translate('back'),
                                     style: TextStyle(
-                                        fontFamily: 'Exo 2',
+                                        fontFamily: kFontFamilyExo2,
                                         fontWeight: FontWeight.bold,
                                         fontSize: height / 37.33, //24
                                         color: kNavigBarInactiveColor),
@@ -111,10 +112,10 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                           AppLocalizations.of(context)
                               .translate('create_an_account_title'),
                           style: TextStyle(
-                              fontFamily: 'Exo 2',
+                              fontFamily: kFontFamilyExo2,
                               fontWeight: FontWeight.bold,
                               fontSize: height / 37.33,
-                              color: Color(0xffE0347A)),
+                              color: onBoardingTitleColor),
                         ),
                       ),
                       Container(
@@ -126,7 +127,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                               .translate('create_an_account_sub'),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontFamily: 'Gilroy',
+                              fontFamily: kFontFamilyGilroy,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize: height / 64,
@@ -206,12 +207,12 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                fontFamily: 'Gilroy Bold',
+                                                fontFamily: kFontFamilyGilroyBold,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: height / 64,
                                                 height: 1.44,
-                                                color: Colors.white,
+                                                color: kArticlesWhiteColor,
                                               ),
                                             ),
                                           ),
@@ -242,7 +243,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                               text: AppLocalizations.of(context)
                                   .translate('have_an_account'),
                               style: TextStyle(
-                                fontFamily: 'Gilroy Bold',
+                                fontFamily: kFontFamilyGilroyBold,
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.normal,
                                 fontSize: height / 74.66,
@@ -254,12 +255,12 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                                     text: AppLocalizations.of(context)
                                         .translate('sign_in'),
                                     style: TextStyle(
-                                      fontFamily: 'Gilroy Bold',
+                                      fontFamily: kFontFamilyGilroyBold,
                                       fontWeight: FontWeight.bold,
                                       fontStyle: FontStyle.normal,
                                       fontSize: height / 74.66,
                                       height: 1.20,
-                                      color: Color(0xffE0347A),
+                                      color: onBoardingTitleColor,
                                     ),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {

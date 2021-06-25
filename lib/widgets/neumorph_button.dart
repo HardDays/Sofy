@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 
 import 'neumorphic/neumorphic_button.dart';
 
@@ -39,7 +41,7 @@ class _NeumorphButton extends State<NeumorphButton> {
                 shadowLightColorEmboss: Color(0xffFBE5FB),
                 shadowDarkColor: Color(0xffFBE5FB),
                 shadowDarkColorEmboss: Color(0xff663966),
-                shadowLightColor: Colors.white,
+                shadowLightColor: kArticlesWhiteColor,
                 color: Color(0xffFCEFFC)),
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
             provideHapticFeedback: false,
@@ -87,12 +89,12 @@ class _NeumorphButton extends State<NeumorphButton> {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              fontFamily: 'Montserrat Bold',
+                              fontFamily: kFontFamilyMontserratBold,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.normal,
                               fontSize: widget.height / 56,
                               height: 1.44,
-                              color: Colors.white,
+                              color: kArticlesWhiteColor,
                             ),
                           ),
                         ),

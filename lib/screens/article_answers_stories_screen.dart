@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/models/api_answers_model.dart';
 import 'package:sofy_new/models/stories_model.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
@@ -96,7 +98,7 @@ class _ArticleAnswersStoriesScreenState
             BackdropFilter(
                 filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
                 child: Container(
-                    color: Color(0x502F2E41),
+                    color: kArticlesAnsStoriesBackdropFilterColor,
                     height: double.infinity,
                     width: double.infinity)),
             Padding(
@@ -122,17 +124,17 @@ class _ArticleAnswersStoriesScreenState
                                           BorderRadius.circular(15)),
                                       depth: 3,
                                       intensity: 0.65,
-                                      shadowLightColorEmboss: Colors.white,
-                                      shadowLightColor: Colors.white,
-                                      shadowDarkColor: Color(0xffdbc4db),
-                                      shadowDarkColorEmboss: Color(0xffdbc4db),
+                                      shadowLightColorEmboss: kArticlesWhiteColor,
+                                      shadowLightColor: kArticlesWhiteColor,
+                                      shadowDarkColor: kNeumorphicShadowDarkColor,
+                                      shadowDarkColorEmboss: kNeumorphicShadowDarkColor,
                                       shape: NeumorphicShape.flat,
-                                      color: Color(0xffFAEBF8)),
+                                      color: kNeumorphicColor2),
                                   child: Container(
                                       width: width,
                                       child: Column(children: [
                                         Container(
-                                          color: Color(0xffFF95AC),
+                                          color: kArticlesAnsStoriesColor,
                                           width: double.infinity,
                                           height: height / 14.45,
                                           padding: EdgeInsets.only(
@@ -143,12 +145,12 @@ class _ArticleAnswersStoriesScreenState
                                             overflow: TextOverflow.clip,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                                fontFamily: 'Gilroy Bold',
+                                                fontFamily: kFontFamilyGilroyBold,
                                                 height: 1.40,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: height / 59.7,
-                                                color: Colors.white),
+                                                color: kArticlesWhiteColor),
                                           ),
                                         ),
                                         Container(
@@ -164,12 +166,12 @@ class _ArticleAnswersStoriesScreenState
                                             overflow: TextOverflow.clip,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                                fontFamily: 'Gilroy',
+                                                fontFamily: kFontFamilyGilroy,
                                                 height: 1.50,
                                                 fontWeight: FontWeight.normal,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: height / 59.7,
-                                                color: Color(0xff2F2E41)),
+                                                color: kArticlesAnsStories2Color),
                                           ),
                                         ),
                                       ])))),
@@ -356,8 +358,8 @@ class AnimatedBar extends StatelessWidget {
                 _buildContainer(
                   double.infinity,
                   position < currentIndex
-                      ? Colors.white
-                      : Colors.white.withOpacity(0.3),
+                      ? kArticlesWhiteColor
+                      : kArticlesWhiteColor.withOpacity(0.3),
                 ),
                 position == currentIndex
                     ? AnimatedBuilder(
@@ -365,7 +367,7 @@ class AnimatedBar extends StatelessWidget {
                   builder: (context, child) {
                     return _buildContainer(
                       constraints.maxWidth * animController.value,
-                      Colors.white,
+                      kArticlesWhiteColor,
                     );
                   },
                 )

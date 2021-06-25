@@ -27,8 +27,6 @@ import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/widgets/neumorphic/neumorphic_button.dart';
 
 class PlayerScreen extends StatefulWidget {
-  static const int PAGE_INDEX = 0;
-
   @override
   _PlayerScreenState createState() => _PlayerScreenState();
 }
@@ -157,7 +155,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                           ),
                           child: SliderTheme(
                             data: SliderTheme.of(context).copyWith(
-                              overlayColor: Colors.white,
+                              overlayColor: kArticlesWhiteColor,
                               activeTrackColor: Colors.transparent,
                               inactiveTrackColor:
                                   kMainScreenScaffoldBackColor.withOpacity(0.6),
@@ -327,7 +325,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     child: Center(
                         child: Icon(
                       Icons.photo,
-                      color: Colors.white30,
+                      color: kArticlesWhiteColor,
                       size: 128.0,
                     )),
                   ),
@@ -383,7 +381,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
 //                  Color(0xffFBEEFB).withOpacity(0.34),
 //                  Color(0xffFBEEFB).withOpacity(0.8),
 //                  Color(0xffFBEEFB).withOpacity(0.3),
-////                  Colors.white.withOpacity(0.22),
+////                  kArticlesWhiteColor.withOpacity(0.22),
 //                ],
 //                begin: Alignment.topCenter,
 //                end: Alignment.bottomCenter,
@@ -403,7 +401,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'Exo 2',
+                      fontFamily: kFontFamilyExo2,
                       fontSize: height / 27.15,
                       color: Color(0xff242424),
                       fontWeight: FontWeight.bold,
@@ -415,7 +413,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     getPlaylistName(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'Gilroy',
+                      fontFamily: kFontFamilyGilroy,
                       fontSize: height / 59.73,
                       color: Color(0xff242424),
                       fontWeight: FontWeight.normal,
@@ -454,7 +452,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  fontFamily: 'Proxima Nova',
+                                  fontFamily: kFontFamilyProximaNova,
                                   fontSize: 20.00,
                                   color: kListviewTitleColor,
                                 ),
@@ -490,7 +488,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 '',
                                 style: TextStyle(
                                   color: kWelcomButtonDarkColor,
-                                  fontFamily: 'Gilroy',
+                                  fontFamily: kFontFamilyGilroy,
                                   fontSize: 12,
                                   fontWeight: FontWeight.normal,
                                   fontStyle: FontStyle.normal,
@@ -526,7 +524,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 //getTimeString(),
                                 '',
                                 style: TextStyle(
-                                  fontFamily: 'Gilroy',
+                                  fontFamily: kFontFamilyGilroy,
                                   fontSize: 12,
                                   fontWeight: FontWeight.normal,
                                   fontStyle: FontStyle.normal,
@@ -586,7 +584,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                                             context)
                                                         .parentPlaylistId));
                                         pcProvider.animateToPage(
-                                            index: MyPlaylistScreen.PAGE_INDEX);
+                                            index: MyPlaylistScreen_PAGE_INDEX);
                                       }
                                     }),
                               ),
@@ -604,7 +602,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Colors.white.withOpacity(0.86),
+                                      color: kArticlesWhiteColor.withOpacity(0.86),
                                       blurRadius: 10.0,
                                       offset: Offset(-2, -2)),
                                   BoxShadow(
@@ -626,7 +624,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                           shadowDarkColor: Color(0xffFBE5FB),
                                           shadowDarkColorEmboss:
                                               Color(0xff663966),
-                                          shadowLightColor: Colors.white,
+                                          shadowLightColor: kArticlesWhiteColor,
                                           color: Color(0xffFCEFFC)),
                                       boxShape: NeumorphicBoxShape.roundRect(
                                           BorderRadius.circular(16)),
@@ -738,7 +736,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Colors.white.withOpacity(0.86),
+                                      color: kArticlesWhiteColor.withOpacity(0.86),
                                       blurRadius: 10.0,
                                       offset: Offset(-2, -2)),
                                   BoxShadow(
@@ -760,7 +758,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                           shadowDarkColor: Color(0xffFBE5FB),
                                           shadowDarkColorEmboss:
                                               Color(0xff663966),
-                                          shadowLightColor: Colors.white,
+                                          shadowLightColor: kArticlesWhiteColor,
                                           color: Color(0xffFCEFFC)),
                                       boxShape: NeumorphicBoxShape.roundRect(
                                           BorderRadius.circular(16)),

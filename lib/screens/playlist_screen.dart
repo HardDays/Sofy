@@ -6,6 +6,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/models/PlaylistNameData.dart';
 import 'package:sofy_new/models/playlist_data.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
@@ -16,8 +17,6 @@ import 'package:sofy_new/widgets/app_list_view.dart';
 import 'package:sofy_new/widgets/neumorphic/neumorphic_button.dart';
 
 class PlayListScreen extends StatefulWidget {
-  static const int PAGE_INDEX = 2;
-
   @override
   _PlayListScreenState createState() => _PlayListScreenState();
 }
@@ -126,7 +125,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
                     .getCurrentPlaylistNameApi().titleEn,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontFamily: 'Gilroy Bold',
+                  fontFamily: kFontFamilyGilroyBold,
                   color: kListviewTitleColor,
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.normal,
@@ -152,7 +151,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
                       ),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.white.withOpacity(0.86),
+                            color: kArticlesWhiteColor.withOpacity(0.86),
                             blurRadius: 10.0,
                             offset: Offset(-2, -2)),
                         BoxShadow(

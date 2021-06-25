@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 
 // ignore: must_be_immutable
 class CreateAccountButton extends StatefulWidget {
@@ -103,7 +104,7 @@ class _CreateAccountButton extends State<CreateAccountButton> {
                       child: Text(
                         widget.text,
                         style: TextStyle(
-                          fontFamily: 'Gilroy Bold',
+                          fontFamily: kFontFamilyGilroyBold,
                           fontWeight: FontWeight.bold,
                           fontSize: widget.height / 64.0,
                           color: kWelcomDarkTextColor,

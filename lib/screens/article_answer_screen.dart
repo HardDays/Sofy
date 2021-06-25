@@ -31,7 +31,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
   double width;
   bool isAnswerSent = false;
   TextEditingController textController = TextEditingController();
-  Color backColor = Color(0xffdbc4db);
+  Color backColor = kArticlesBackColor;
 
   @override
   void initState() {
@@ -42,10 +42,10 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
     ]);
     textController.addListener(() {
       if (textController.text.length > 255) {
-        backColor = Color(0xFFFF95AC);
+        backColor = kArticlesBackTextColor;
         setState(() {});
       } else {
-        backColor = Color(0xffdbc4db);
+        backColor = kArticlesBackColor;
         setState(() {});
       }
     });
@@ -69,7 +69,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
         .width;
 
     return Scaffold(
-      backgroundColor: Color(0x752F2E41),
+      backgroundColor: kArticlesBackgroundColorColor,
       body: BackdropFilter(
         filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
         child: Container(
@@ -84,13 +84,13 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                   Container(
                       width: width / 3,
                       child: Material(
-                        color: Colors.transparent,
+                        color: kArticlesTransparentColor,
                         child: InkWell(
                             borderRadius: BorderRadius.circular(60),
-                            focusColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            splashColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
+                            focusColor: kArticlesTransparentColor,
+                            highlightColor: kArticlesTransparentColor,
+                            splashColor: kArticlesTransparentColor,
+                            hoverColor: kArticlesTransparentColor,
                             radius: 25,
                             child: Row(
                               children: <Widget>[
@@ -115,7 +115,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                     AppLocalizations.of(context)
                                         .translate('back'),
                                     style: TextStyle(
-                                        fontFamily: 'Exo 2',
+                                        fontFamily: kFontFamilyExo2,
                                         fontWeight: FontWeight.bold,
                                         fontSize: height / 37.3, //24
                                         color: kNavigBarInactiveColor),
@@ -142,14 +142,14 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                         depth: 3,
                                         intensity: 0.65,
                                         shadowLightColorEmboss:
-                                        Colors.white.withOpacity(0.5),
+                                        kArticlesWhiteColor.withOpacity(0.5),
                                         shadowLightColor:
-                                        Colors.white.withOpacity(0.5),
-                                        shadowDarkColor: Color(0xffdbc4db),
+                                        kArticlesWhiteColor.withOpacity(0.5),
+                                        shadowDarkColor: kArticlesBackColor,
                                         shadowDarkColorEmboss:
-                                        Color(0xffdbc4db),
+                                        kArticlesBackColor,
                                         shape: NeumorphicShape.flat,
-                                        color: Color(0xffFAEBF8)),
+                                        color: kNeumorphicColor2),
                                     child: Container(
                                         width: width, height: height / 4.0))),
                             Padding(
@@ -171,12 +171,12 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                            fontFamily: 'Gilroy Bold',
+                                            fontFamily: kFontFamilyGilroyBold,
                                             height: 1.5,
                                             fontWeight: FontWeight.bold,
                                             fontStyle: FontStyle.normal,
                                             fontSize: 16.0,
-                                            color: Color(0xff836771)),
+                                            color: kWelcomDarkTextColor),
                                       ),
                                     )),
                                 Container(
@@ -194,19 +194,19 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                             depth: 3,
                                             intensity: 0.65,
                                             shadowLightColorEmboss:
-                                            backColor == Color(0xFFFF95AC)
+                                            backColor == kArticlesBackTextColor
                                                 ? backColor
-                                                : Colors.white,
+                                                : kArticlesWhiteColor,
                                             shadowLightColor:
-                                            backColor == Color(0xFFFF95AC)
+                                            backColor == kArticlesBackTextColor
                                                 ? backColor
-                                                : Colors.white,
+                                                : kArticlesWhiteColor,
                                             shadowDarkColor:
                                             backColor,
                                             shadowDarkColorEmboss:
                                             backColor,
                                             shape: NeumorphicShape.flat,
-                                            color: Color(0xffF9D9F4)),
+                                            color: kNeumorphicColor),
                                     child: TextField(
                                       enabled: true,
                                       autofocus: true,
@@ -215,18 +215,18 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                       TextCapitalization.sentences,
                                       controller: textController,
                                       style: TextStyle(
-                                          fontFamily: 'Gilroy',
+                                          fontFamily: kFontFamilyGilroy,
                                           fontSize: height / 64.0,
                                           fontWeight: FontWeight.w600,
-                                          color: Color(0xff836771)),
+                                          color: kArticleAnsTextFieldColor),
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.only(
                                             left: 16.0, bottom: 7.0),
                                         hintStyle: TextStyle(
-                                            fontFamily: 'Gilroy',
+                                            fontFamily: kFontFamilyGilroy,
                                             fontSize: height / 64.0,
                                             fontWeight: FontWeight.w600,
-                                            color: Color(0x50836771)),
+                                            color: kArticleAnsTextFieldInpDecColor),
                                         hintText: AppLocalizations.of(
                                             context)
                                             .translate('answer_hint'),
@@ -237,7 +237,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                 decoration:
                                 BoxDecoration(boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xffC4C4C4),
+                                    color: kArticlesAnsShadow,
                                     offset: Offset(3, 3),
                                     blurRadius: 10.0,
                                   ),
@@ -253,14 +253,14 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                         shape: NeumorphicShape.flat,
                                         intensity: 0.6,
                                         shadowLightColorEmboss:
-                                        Color(0xffFBE5FB),
+                                        kADNeumorphicShadowLightColorEmboss,
                                         shadowDarkColor:
-                                        Color(0xffFBE5FB),
+                                        kADNeumorphicShadowDarkColor,
                                         shadowDarkColorEmboss:
-                                        Color(0xff663966),
+                                        kADNeumorphicShadowDarkColorEmboss,
                                         shadowLightColor:
-                                        Colors.white,
-                                        color: Color(0xffFCEFFC)),
+                                        kArticlesWhiteColor,
+                                        color: kADNeumorphicColor),
                                     boxShape: NeumorphicBoxShape
                                         .roundRect(
                                         BorderRadius.circular(
@@ -296,12 +296,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                     .topCenter,
                                                 end: Alignment
                                                     .bottomCenter,
-                                                colors: [
-                                                  const Color(
-                                                      0xFFFDB0C1),
-                                                  const Color(
-                                                      0xFFFF95AC),
-                                                ],
+                                                colors: kLinearGrad2Color,
                                               ),
                                               borderRadius:
                                               BorderRadius.all(
@@ -346,13 +341,13 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                       .ellipsis,
                                                   style:
                                                   TextStyle(
-                                                    fontFamily: 'Montserrat Bold',
+                                                    fontFamily: kFontFamilyMontserratBold,
                                                     fontWeight: FontWeight.bold,
                                                     fontStyle: FontStyle.normal,
                                                     fontSize: height / 56,
                                                     //14
                                                     height: 1.7,
-                                                    color: Colors.white,
+                                                    color: kArticlesWhiteColor,
                                                   ),
                                                 ),
                                               ),
@@ -396,13 +391,13 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                       .ellipsis,
                                                   style:
                                                   TextStyle(
-                                                    fontFamily: 'Montserrat Bold',
+                                                    fontFamily: kFontFamilyMontserratBold,
                                                     fontWeight: FontWeight.bold,
                                                     fontStyle: FontStyle.normal,
                                                     fontSize: height / 56,
                                                     //14
                                                     height: 1.7,
-                                                    color: Colors.white,
+                                                    color: kArticlesWhiteColor,
                                                   ),
                                                 ),
                                               ),

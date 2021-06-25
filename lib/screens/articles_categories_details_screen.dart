@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
@@ -52,10 +53,7 @@ class _ArticlesCategoriesDetailsScreen
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xffFDF3FF),
-              Color(0xffF9EAF7),
-            ],
+            colors: kLinearGradResultColor,
           ),
         ),
         child: Padding(
@@ -98,7 +96,7 @@ class _ArticlesCategoriesDetailsScreen
                                   child: Text(
                                     widget.screenTitle,
                                     style: TextStyle(
-                                        fontFamily: 'Exo 2',
+                                        fontFamily: kFontFamilyExo2,
                                         fontWeight: FontWeight.bold,
                                         fontSize: height / 37.3, //24
                                         color: kNavigBarInactiveColor),
@@ -157,7 +155,7 @@ class _ArticlesCategoriesDetailsScreen
                                           child: BackdropFilter(
                                             child: Container(
                                               color:
-                                                  Colors.white.withOpacity(0.0),
+                                                  kArticlesWhiteColor.withOpacity(0.0),
                                             ),
                                             filter: ImageFilter.blur(
                                                 sigmaX: 2.0, sigmaY: 2.0),
@@ -186,11 +184,11 @@ class _ArticlesCategoriesDetailsScreen
                                           textAlign: TextAlign.left,
                                           maxLines: 4,
                                           style: TextStyle(
-                                              fontFamily: 'Gilroy Bold',
+                                              fontFamily: kFontFamilyGilroyBold,
                                               fontWeight: FontWeight.bold,
                                               fontStyle: FontStyle.normal,
                                               fontSize: height / 64.0,
-                                              color: Colors.white,
+                                              color: kArticlesWhiteColor,
                                               height: 1.37),
                                         ),
                                       ),

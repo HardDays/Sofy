@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/providers/user.dart';
@@ -100,7 +101,7 @@ class _UserProfileScreen extends State<UserProfileScreen> {
                                       AppLocalizations.of(context)
                                           .translate('back'),
                                       style: TextStyle(
-                                          fontFamily: 'Exo 2',
+                                          fontFamily: kFontFamilyExo2,
                                           fontWeight: FontWeight.bold,
                                           fontSize: height / 37.3, //24
                                           color: kNavigBarInactiveColor),
@@ -129,7 +130,7 @@ class _UserProfileScreen extends State<UserProfileScreen> {
                                     ? Container(
                                         decoration: BoxDecoration(
                                             border: Border.all(
-                                                color: Color(0xffE0347A)),
+                                                color: onBoardingTitleColor),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(100))),
                                         height: height / 7.11,
@@ -159,7 +160,7 @@ class _UserProfileScreen extends State<UserProfileScreen> {
                                               fit: BoxFit.cover,
                                             ),
                                             border: Border.all(
-                                                color: Color(0xffE0347A)),
+                                                color: onBoardingTitleColor),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(100))),
                                         child: image != null
@@ -182,7 +183,7 @@ class _UserProfileScreen extends State<UserProfileScreen> {
                                           fit: BoxFit.cover,
                                         ),
                                         border: Border.all(
-                                            color: Color(0xffE0347A)),
+                                            color: onBoardingTitleColor),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(100))),
                                     child: image != null
@@ -270,12 +271,12 @@ class _UserProfileScreen extends State<UserProfileScreen> {
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          fontFamily: 'Gilroy Bold',
+                                          fontFamily: kFontFamilyGilroyBold,
                                           fontWeight: FontWeight.bold,
                                           fontStyle: FontStyle.normal,
                                           fontSize: height / 64,
                                           height: 1.44,
-                                          color: Colors.white,
+                                          color: kArticlesWhiteColor,
                                         ),
                                       ),
                                     ),

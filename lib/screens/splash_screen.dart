@@ -126,14 +126,14 @@ class _SplashScreenState extends State<SplashScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Color(0xffE5356F),
-                            fontFamily: 'Exo 2',
+                            fontFamily: kFontFamilyExo2,
                             fontSize:
                             MediaQuery.of(context).size.height / 13.78,
                             letterSpacing: 0.015)),*/
                     /*Padding(
                       padding: EdgeInsets.only(top: 50),
                       child:SizedBox(
-                        child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.white), strokeWidth: 2.0),
+                        child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(kArticlesWhiteColor), strokeWidth: 2.0),
                         width: 30,
                         height: 30,
                       ) ,

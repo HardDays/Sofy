@@ -25,8 +25,6 @@ import 'package:sofy_new/widgets/playlist_lead_widget.dart';
 
 
 class RecommendationScreen extends StatefulWidget {
-  static const int PAGE_INDEX = 1;
-
   @override
   _RecommendationScreenState createState() => _RecommendationScreenState();
 }
@@ -160,12 +158,12 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                 child: Text(
                   AppLocalizations.of(context).translate('recommendations'),
                   style: TextStyle(
-                      fontFamily: 'Exo 2',
+                      fontFamily: kFontFamilyExo2,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.normal,
                       fontSize: height / 37.33,
                       //24
-                      color: Colors.white),
+                      color: kArticlesWhiteColor),
                 ),
               )),
         ),
@@ -187,10 +185,10 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                   AppLocalizations.of(context).translate('recommended'),
 //                  'Рекомендованные',
                   style: TextStyle(
-                    fontFamily: 'Gilroy Bold',
+                    fontFamily: kFontFamilyGilroyBold,
                     fontWeight: FontWeight.bold,
                     fontSize: height / 68.92,
-                    color: Colors.white,
+                    color: kArticlesWhiteColor,
                   ),
                 ),
               ),
@@ -367,12 +365,12 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                                       AppLocalizations.of(context).translate(
                                           '${playlistsData.apiPlaylistsForRecomendScreen[index].titleEn}'),
                                       style: TextStyle(
-                                        fontFamily: 'Gilroy Bold',
+                                        fontFamily: kFontFamilyGilroyBold,
                                         fontWeight: FontWeight.bold,
                                         fontStyle: FontStyle.normal,
                                         fontSize: height / 49.77,
                                         //16
-                                        color: Colors.white,
+                                        color: kArticlesWhiteColor,
                                       ),
                                     ),
                                   ),
@@ -478,12 +476,12 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                                       textAlign: TextAlign.center,
                                       maxLines: 2,
                                       style: TextStyle(
-                                        fontFamily: 'Gilroy Bold',
+                                        fontFamily: kFontFamilyGilroyBold,
                                         fontWeight: FontWeight.bold,
                                         fontStyle: FontStyle.normal,
                                         fontSize: height / 68.92,
                                         //13
-                                        color: Colors.white,
+                                        color: kArticlesWhiteColor,
                                       ),
                                     ),
                                   ),

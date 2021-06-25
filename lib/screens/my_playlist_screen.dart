@@ -16,8 +16,6 @@ import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/widgets/playlist_lead_widget.dart';
 
 class MyPlaylistScreen extends StatefulWidget {
-  static const int PAGE_INDEX = 3;
-
   @override
   _MyPlaylistScreenState createState() => _MyPlaylistScreenState();
 }
@@ -72,7 +70,7 @@ class _MyPlaylistScreenState extends State<MyPlaylistScreen> {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: TextStyle(
-                        fontFamily: 'Exo 2',
+                        fontFamily: kFontFamilyExo2,
                         color: kListviewTitleColor,
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.normal,
@@ -89,7 +87,7 @@ class _MyPlaylistScreenState extends State<MyPlaylistScreen> {
                         event: playlist_current_screen_close,
                       );*/
                       pcProvider.animateToPage(
-                        index: PlayerScreen.PAGE_INDEX,
+                        index: PlayerScreen_PAGE_INDEX,
                       );
                     },
                     icon: Icon(
@@ -191,7 +189,7 @@ class _MyPlaylistScreenState extends State<MyPlaylistScreen> {
                                     width: 56.0,
                                     height: 56.0,
                                     decoration: BoxDecoration(
-                                      color: Color(0x85C4C4C4),
+                                      color: kMyPlScrPlayListLeadWidgetColor,
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(15)),
                                     ))
@@ -204,14 +202,14 @@ class _MyPlaylistScreenState extends State<MyPlaylistScreen> {
                               : AppLocalizations.of(context).translate(
                                   '${Provider.of<PlaylistData>(context).vibrosByPlayListIdApi[index].titleEn}'),
                           style: TextStyle(
-                            fontFamily: 'Gilroy Bold',
+                            fontFamily: kFontFamilyGilroyBold,
                             fontSize: height / 52.71,
                             //17
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.normal,
                             color: (isFullAccess(playlistData, index))
                                 ? kListviewTitleColor
-                                : Color(0x25242424),
+                                : kMyPlScrPlayListLeadWidgetTitColor,
                           ),
                         ),
                         subtitle: null,

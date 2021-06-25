@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
-import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/providers/app_localizations.dart';
 
 class SettingsInfoDialog extends StatelessWidget {
   @override
@@ -13,12 +13,12 @@ class SettingsInfoDialog extends StatelessWidget {
       title: Text(
         AppLocalizations.of(context).translate('not_vibrating'),
         style: TextStyle(
-          fontFamily: kFontFamily,
+          fontFamily: kFontFamilyProximaNova,
           fontWeight: FontWeight.bold,
           fontStyle: FontStyle.normal,
           fontSize: height / 52,
 //          height: 1.44,
-//          color: Colors.white,
+//          color: kArticlesWhiteColor,
         ),
       ),
       actions: <Widget>[
@@ -41,12 +41,12 @@ class SettingsInfoDialog extends StatelessWidget {
           Text(
             AppLocalizations.of(context).translate('make_sure'),
             style: TextStyle(
-              fontFamily: kFontFamily,
+              fontFamily: kFontFamilyProximaNova,
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.normal,
               fontSize: height / 60,
               height: 1.44,
-//          color: Colors.white,
+//          color: kArticlesWhiteColor,
             ),
           ),
           getAdditionalText(context, height / 60),
@@ -62,23 +62,23 @@ class SettingsInfoDialog extends StatelessWidget {
             Text(
               AppLocalizations.of(context).translate('not_vibrating_ios_1'),
               style: TextStyle(
-                fontFamily: kFontFamily,
+                fontFamily: kFontFamilyProximaNova,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.normal,
                 fontSize: height,
                 height: 1.44,
-//          color: Colors.white,
+//          color: kArticlesWhiteColor,
               ),
             ),
             Text(
               AppLocalizations.of(context).translate('not_vibrating_ios_2'),
               style: TextStyle(
-                fontFamily: kFontFamily,
+                fontFamily: kFontFamilyProximaNova,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.normal,
                 fontSize: height,
                 height: 1.44,
-//          color: Colors.white,
+//          color: kArticlesWhiteColor,
               ),
             ),
           ],

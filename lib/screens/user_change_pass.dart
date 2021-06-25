@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/widgets/user_text_field.dart';
 
@@ -86,7 +87,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                                       AppLocalizations.of(context)
                                           .translate('back'),
                                       style: TextStyle(
-                                          fontFamily: 'Exo 2',
+                                          fontFamily: kFontFamilyExo2,
                                           fontWeight: FontWeight.bold,
                                           fontSize: height / 37.3, //24
                                           color: kNavigBarInactiveColor),
@@ -106,10 +107,10 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                         child: Text(
                           AppLocalizations.of(context).translate('create_new_pass'),
                           style: TextStyle(
-                              fontFamily: 'Exo 2',
+                              fontFamily: kFontFamilyExo2,
                               fontWeight: FontWeight.bold,
                               fontSize: height / 37.33,
-                              color: Color(0xffE0347A)),
+                              color: onBoardingTitleColor),
                         ),
                       ),
                       Container(
@@ -121,7 +122,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                               .translate('create_new_pass_hint'),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontFamily: 'Gilroy',
+                              fontFamily: kFontFamilyGilroy,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize: height / 64,
@@ -196,12 +197,12 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                fontFamily: 'Gilroy Bold',
+                                                fontFamily: kFontFamilyGilroyBold,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: height / 64,
                                                 height: 1.44,
-                                                color: Colors.white,
+                                                color: kArticlesWhiteColor,
                                               ),
                                             ),
                                           ),
@@ -242,10 +243,10 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                           AppLocalizations.of(context)
                               .translate('success'),
                           style: TextStyle(
-                              fontFamily: 'Exo 2',
+                              fontFamily: kFontFamilyExo2,
                               fontWeight: FontWeight.bold,
                               fontSize: height / 37.33,
-                              color: Color(0xffE0347A)),
+                              color: onBoardingTitleColor),
                         ),
                       ),
                       Container(
@@ -257,7 +258,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                               .translate('pass_has_been_changed'),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontFamily: 'Gilroy',
+                              fontFamily: kFontFamilyGilroy,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize: height / 64,
@@ -325,12 +326,12 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
-                                            fontFamily: 'Gilroy Bold',
+                                            fontFamily: kFontFamilyGilroyBold,
                                             fontWeight: FontWeight.bold,
                                             fontStyle: FontStyle.normal,
                                             fontSize: height / 64,
                                             height: 1.44,
-                                            color: Colors.white,
+                                            color: kArticlesWhiteColor,
                                           ),
                                         ),
                                       ),

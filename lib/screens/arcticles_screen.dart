@@ -12,6 +12,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
 import 'package:sofy_new/models/api_article_topic_model.dart';
 import 'package:sofy_new/models/favortes/api_fav_topics_answer_model.dart';
@@ -29,8 +30,6 @@ import 'arcticle_details_screen.dart';
 import 'articles_categories_details_screen.dart';
 
 class ArticlesScreen extends StatefulWidget {
-  static const int PAGE_INDEX = 5;
-
   @override
   _ArticlesScreenState createState() => _ArticlesScreenState();
 }
@@ -102,7 +101,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                             width: height / 4.42,
                             height: height / 3.82,
                             child: Shimmer.fromColors(
-                              baseColor: Color(0xFFE0E0E0),
+                              baseColor: kShimmerBaseColor,
                               highlightColor: kAppPinkDarkColor,
                               direction: ShimmerDirection.ltr,
                               period: Duration(seconds: 2),
@@ -110,7 +109,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                 width: height / 4.1,
                                 height: height / 3.65,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: kArticlesWhiteColor,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(25.0)),
                                 ),
@@ -155,7 +154,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                 width: height / 5.3,
                 height: height / 3.82,
                 child: Shimmer.fromColors(
-                  baseColor: Color(0xFFE0E0E0),
+                  baseColor: kShimmerBaseColor,
                   highlightColor: kAppPinkDarkColor,
                   direction: ShimmerDirection.ltr,
                   period: Duration(seconds: 2),
@@ -163,7 +162,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                     width: height / 4.1,
                     height: height / 3.65,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: kArticlesWhiteColor,
                       borderRadius: BorderRadius.all(Radius.circular(25.0)),
                     ),
                   ),
@@ -176,7 +175,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
 
   Widget _shimmerLine(BuildContext context) => SizedBox(
         child: Shimmer.fromColors(
-          baseColor: Color(0xFFE0E0E0),
+          baseColor: kShimmerBaseColor,
           highlightColor: kAppPinkDarkColor,
           direction: ShimmerDirection.ltr,
           period: Duration(seconds: 2),
@@ -188,13 +187,13 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                     Container(
                       width: double.infinity,
                       height: 10,
-                      color: Colors.white,
+                      color: kArticlesWhiteColor,
                     ),
                     SizedBox(height: 10),
                     Container(
                       width: double.infinity,
                       height: 12,
-                      color: Colors.white,
+                      color: kArticlesWhiteColor,
                     ),
                   ],
                 ),
@@ -214,10 +213,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
               padding: EdgeInsets.only(left: 0.0, bottom: 0.0),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [
-                      const Color(0xFFFDB0C1),
-                      const Color(0xFFFF95AC),
-                    ],
+                    colors: kLinearGradColor,
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     stops: [0.0, 1.0],
@@ -235,12 +231,12 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                     child: Text(
                       AppLocalizations.of(context).translate('new_topics'),
                       style: TextStyle(
-                          fontFamily: 'Exo 2',
+                          fontFamily: kFontFamilyExo2,
                           fontWeight: FontWeight.bold,
                           fontStyle: FontStyle.normal,
                           fontSize: height / 34.46,
                           //24
-                          color: Colors.white),
+                          color: kArticlesWhiteColor),
                     ),
                   )),
             ),
@@ -291,7 +287,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                           child: BackdropFilter(
                                             child: Container(
                                               color:
-                                                  Colors.white.withOpacity(0.0),
+                                                  kArticlesWhiteColor.withOpacity(0.0),
                                             ),
                                             filter: ImageFilter.blur(
                                                 sigmaX: 2.0, sigmaY: 2.0),
@@ -320,11 +316,11 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                           textAlign: TextAlign.left,
                                           maxLines: 5,
                                           style: TextStyle(
-                                              fontFamily: 'Gilroy Bold',
+                                              fontFamily: kFontFamilyGilroyBold,
                                               fontWeight: FontWeight.bold,
                                               fontStyle: FontStyle.normal,
                                               fontSize: height / 56.0,
-                                              color: Colors.white,
+                                              color: kArticlesWhiteColor,
                                               height: 1.37),
                                         ),
                                       ),
@@ -360,10 +356,10 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                   )),
                               Positioned.fill(
                                 child: Material(
-                                  color: Colors.transparent,
+                                  color: kArticlesTransparentColor,
                                   child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
+                                      splashColor: kArticlesTransparentColor,
+                                      highlightColor: kArticlesTransparentColor,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(12.0)),
                                       radius: 12,
@@ -443,12 +439,12 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                           child: Text(
                             AppLocalizations.of(context).translate('popular'),
                             style: TextStyle(
-                                fontFamily: 'Exo 2',
+                                fontFamily: kFontFamilyExo2,
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.normal,
                                 fontSize: height / 37.33,
                                 //24
-                                color: Color(0xff38394F)),
+                                color: kArticlesPopularColor),
                           ),
                         ),
                       ),
@@ -547,7 +543,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                                 ? 0.0
                                                 : height / 14.93,
                                         decoration: BoxDecoration(
-                                          color: Color(0x75C4C4C4),
+                                          color: kPlayerPlaceholderColor,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(8)),
                                         ),
@@ -581,12 +577,12 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                       maxLines: 2,
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          fontFamily: 'Gilroy Bold',
+                                          fontFamily: kFontFamilyGilroyBold,
                                           fontWeight: FontWeight.w700,
                                           fontStyle: FontStyle.normal,
                                           fontSize: height / 59.73,
                                           height: height / 600.14,
-                                          color: Color(0xff38394F)),
+                                          color: kArticlesPopularColor),
                                     ),
                                   ),
                                   /*SizedBox(height: height / 89.6),
@@ -603,11 +599,11 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                                     .toLowerCase(),
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
-                                                fontFamily: 'Gilroy',
+                                                fontFamily: kFontFamilyGilroy,
                                                 fontWeight: FontWeight.w600,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: height / 74.66,
-                                                color: Color(0xff38394F)
+                                                color: kPopularColor
                                                     .withOpacity(0.5)),
                                           ),
                                         ),*/
@@ -617,7 +613,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                     child: Container(
                                       height: 1.0,
                                       width: width / 1.4,
-                                      color: Color(0x40edc3ed),
+                                      color: kPlayerColor,
                                     ),
                                   ),
                                   //SizedBox(height: height / 99.54),
@@ -647,11 +643,11 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                             AppLocalizations.of(context)
                                 .translate('popular_categories'),
                             style: TextStyle(
-                                fontFamily: 'Exo 2',
+                                fontFamily: kFontFamilyExo2,
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.normal,
                                 fontSize: height / 37.33,
-                                color: Color(0xff38394F)),
+                                color: kArticlesPopularColor),
                           ),
                         ),
                       ),
@@ -775,11 +771,11 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                             favoritesTopics[pos].name,
                             maxLines: 2,
                             style: TextStyle(
-                              fontFamily: 'Exo 2',
+                              fontFamily: kFontFamilyExo2,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.normal,
                               fontSize: height / 37.33,
-                              color: Color(0xff38394F),
+                              color: kArticlesPopularColor,
                             ),
                           ),
                         ),
@@ -819,7 +815,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                         width: height / 4.42,
                                         height: height / 3.82,
                                         child: Shimmer.fromColors(
-                                          baseColor: Color(0xFFE0E0E0),
+                                          baseColor: kShimmerBaseColor,
                                           highlightColor: kAppPinkDarkColor,
                                           direction: ShimmerDirection.ltr,
                                           period: Duration(seconds: 2),
@@ -827,7 +823,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                             width: height / 4.1,
                                             height: height / 3.65,
                                             decoration: BoxDecoration(
-                                              color: Colors.white,
+                                              color: kArticlesWhiteColor,
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(25.0),
                                               ),
@@ -887,11 +883,11 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                         textAlign: TextAlign.left,
                                         maxLines: 5,
                                         style: TextStyle(
-                                          fontFamily: 'Gilroy Bold',
+                                          fontFamily: kFontFamilyGilroyBold,
                                           fontWeight: FontWeight.bold,
                                           fontStyle: FontStyle.normal,
                                           fontSize: height / 56,
-                                          color: Colors.white,
+                                          color: kArticlesWhiteColor,
                                         ),
                                       ),
                                     ),
@@ -930,10 +926,10 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                             ),
                             Positioned.fill(
                               child: Material(
-                                color: Colors.transparent,
+                                color: kArticlesTransparentColor,
                                 child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
+                                    splashColor: kArticlesTransparentColor,
+                                    highlightColor: kArticlesTransparentColor,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(12.0)),
                                     radius: 12,

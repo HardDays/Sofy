@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sofy_new/constants/app_colors.dart';
 import 'dart:math' as math;
+
+import 'package:sofy_new/constants/constants.dart';
 
 enum CircularStrokeCap { butt, round, square }
 
@@ -255,9 +258,9 @@ class _CircularPercentIndicatorState extends State<CircularPercentIndicator>
                   ? Center(child: new Text(
                 (_percent * 100).toStringAsFixed(0) + "%",
                 style: new TextStyle(
-                    fontFamily: 'Exo 2',
+                    fontFamily: kFontFamilyExo2,
                     fontSize: MediaQuery.of(context).size.height / 20.36,
-                    color: Colors.white),
+                    color: kArticlesWhiteColor),
               ))
                   : Container(),
             ),

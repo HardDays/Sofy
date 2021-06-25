@@ -41,7 +41,7 @@ class PlayListLeadWidget extends StatelessWidget {
                         width: height / 4.1,
                         height: height / 3.65,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: kArticlesWhiteColor,
                           borderRadius:
                           BorderRadius.all(
                               Radius.circular(

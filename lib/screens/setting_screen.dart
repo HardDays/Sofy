@@ -27,8 +27,6 @@ import '../rest_api.dart';
 class SettingsScreen extends StatefulWidget {
 //  final PageController pageController;
 //  final int previousPageIndex;
-  static const int PAGE_INDEX = 4;
-
 //  SettingsScreen({this.pageController, this.previousPageIndex});
 
   @override
@@ -98,7 +96,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   .translate('settings'),
 //                  'Настройки',
                               style: TextStyle(
-                                  fontFamily: 'Exo 2',
+                                  fontFamily: kFontFamilyExo2,
                                   fontWeight: FontWeight.bold,
                                   fontSize: height / 37.33, //24
                                   color: kNavigBarInactiveColor),
@@ -166,12 +164,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              fontFamily: 'Gilroy Bold',
+                                              fontFamily: kFontFamilyGilroyBold,
                                               fontWeight: FontWeight.bold,
                                               fontStyle: FontStyle.normal,
                                               fontSize: height / 64.0,
                                               height: 1.50,
-                                              color: Colors.white,
+                                              color: kArticlesWhiteColor,
                                             ),
                                           ),
                                         ),

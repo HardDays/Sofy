@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-const kFontFamily = 'Proxima Nova';
+const kFontFamilyProximaNova = 'Proxima Nova';
+const kFontFamilyExo2 = 'Exo 2';
+const kFontFamilyGilroyBold = 'Gilroy Bold';
+const kFontFamilyGilroy = 'Gilroy';
+const kFontFamilyMontserratSemi = 'Montserrat Semi';
+const kFontFamilyMontserratBold = 'Montserrat Bold';
+const kFontFamilyMontserrat = 'Montserrat';
+
 const kUrlPattern = r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
 const List<double> kInitSpeedValues = [
   4,
@@ -18,6 +25,13 @@ const kSpeedDurationDefault = 30;
 const kSpeedDurationInterval = 30;
 
 const int DEFAULT_VIBRATION_DURATION = 600;
+
+const int ArticlesScreen_PAGE_INDEX = 5;
+const int PlayerScreen_PAGE_INDEX = 0;
+const int PlayListScreen_PAGE_INDEX = 2;
+const int SettingsScreen_PAGE_INDEX = 4;
+const int RecommendationScreen_PAGE_INDEX = 1;
+const int MyPlaylistScreen_PAGE_INDEX = 3;
 
 const KEY_USER_TOKEN = "user_token";
 const KEY_FAVORITES = "favorites";
@@ -39,7 +53,15 @@ const KEY_ANON_NAME = "anon_name";
 
 const KEY_DB_VERSION = "db_version";
 
-
+const precacheImageAssetImageOnBoarding1 = 'assets/on_boarding1_1.png';
+const precacheImageAssetImageOnBoarding1c = 'assets/on_boarding1_center.png';
+const precacheImageAssetImageOnBoarding2c = 'assets/on_boarding2_center.png';
+const precacheImageAssetImageOnBoarding3c = 'assets/on_boarding3_center.png';
+const precacheImageAssetImageOnBoarding4c = 'assets/on_boarding4_center.png';
+const precacheImageAssetImageOnBoarding5c = 'assets/on_boarding5_center.png';
+const precacheImageAssetImageOnBoarding6p = 'assets/on_boarding6_poitns.png';
+const precacheImageAssetImageOnBoarding6tl = 'assets/on_boarding6_top_left.png';
+const precacheImageAssetImageOnBoarding6c = 'assets/on_boarding6_center.png';
 
 const kProximaNovaTextStyle = TextStyle(
   height: 1.85,

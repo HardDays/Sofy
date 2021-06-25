@@ -23,7 +23,7 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   double height = 0;
-  double widht = 0;
+  double width = 0;
   int slidePage = 0;
   int liquidDuration = 650;
   bool press1 = false,
@@ -115,7 +115,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
-    widht = MediaQuery.of(context).size.width;
+    width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: Builder(
@@ -171,7 +171,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     width: 15,
                     height: 15,
                     decoration: new BoxDecoration(
-                      color: Colors.white,
+                      color: kArticlesWhiteColor,
                       shape: BoxShape.circle,
                     ))),
             Positioned(
@@ -286,7 +286,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   height: MediaQuery.of(context).size.height / 7.42),
             ),
             Container(
-              width: widht,
+              width: width,
               height: height,
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height / 9.53,
@@ -302,7 +302,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: 'Exo 2',
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -335,7 +335,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: onBoardingSubTitleColor,
-                              fontFamily: 'Gilroy Bold',
+                              fontFamily: kFontFamilyGilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               height: 1.3,
@@ -396,9 +396,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                         .toUpperCase(),
                                     style: TextStyle(
                                         color: press1
-                                            ? Colors.white.withOpacity(0.7)
-                                            : Colors.white,
-                                        fontFamily: 'Gilroy Bold',
+                                            ? kArticlesWhiteColor.withOpacity(0.7)
+                                            : kArticlesWhiteColor,
+                                        fontFamily: kFontFamilyGilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -454,7 +454,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   height: MediaQuery.of(context).size.height / 5.64),
             ),
             Container(
-              width: widht,
+              width: width,
               height: height,
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height / 9.53,
@@ -469,8 +469,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Exo 2',
+                                color: kArticlesWhiteColor,
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -484,7 +484,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             AppLocalizations.of(context)
                                 .translate('new_on_boarding_with_sofy'),
                             style: TextStyle(
-                              color: Colors.white,
+                              color: kArticlesWhiteColor,
                               fontFamily: 'Kalam',
                               fontSize: MediaQuery.of(context).size.height / 32,
                             )),
@@ -502,8 +502,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .translate('new_on_boarding_1'),
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Gilroy Bold',
+                              color: kArticlesWhiteColor,
+                              fontFamily: kFontFamilyGilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               height: 1.3,
@@ -567,7 +567,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                           ? kWelcomDarkTextColor
                                               .withOpacity(0.7)
                                           : kWelcomDarkTextColor,
-                                      fontFamily: 'Gilroy Bold',
+                                      fontFamily: kFontFamilyGilroyBold,
                                       fontSize:
                                           MediaQuery.of(context).size.height /
                                               49.78,
@@ -633,7 +633,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   height: MediaQuery.of(context).size.height),
             ),
             Container(
-              width: widht,
+              width: width,
               height: height,
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height / 9.53,
@@ -648,7 +648,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             maxLines: 2,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: 'Exo 2',
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 22.88,
                                 letterSpacing: 0.015)),
@@ -669,7 +669,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             style: TextStyle(
                               color: onBoardingSubTitleColor,
                               height: 1.3,
-                              fontFamily: 'Gilroy Bold',
+                              fontFamily: kFontFamilyGilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize:
@@ -732,7 +732,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: 'Gilroy Bold',
+                                        fontFamily: kFontFamilyGilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -859,7 +859,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                                   child: Image.network(
                                                       topicsList[index]
                                                           .coverImg,
-                                                      color: Colors.white,
+                                                      color: kArticlesWhiteColor,
                                                       height: height / 49.77)),
                                               Container(
                                                   margin: EdgeInsets.only(
@@ -869,7 +869,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                                     style: TextStyle(
                                                       color:
                                                           kWelcomDarkTextColor,
-                                                      fontFamily: 'Gilroy Bold',
+                                                      fontFamily: kFontFamilyGilroyBold,
                                                       fontSize: height / 56.0,
                                                       height: 1.343,
                                                       fontWeight:
@@ -884,11 +884,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                               backgroundColor:
                                                   topicsList[index].selected
                                                       ? kAppPinkDarkColor
-                                                      : Colors.white,
+                                                      : kArticlesWhiteColor,
                                               child: Icon(
                                                 Icons.check,
                                                 size: 12,
-                                                color: Colors.white,
+                                                color: kArticlesWhiteColor,
                                               ),
                                             )
                                           ],
@@ -903,7 +903,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ]),
             ),
             Container(
-              width: widht,
+              width: width,
               height: height,
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height / 9.53,
@@ -919,7 +919,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: 'Exo 2',
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 26.35,
                                 letterSpacing: 0.015)),
@@ -934,7 +934,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: 'Exo 2',
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 47.15,
                                 letterSpacing: 0.015)),
@@ -998,7 +998,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: 'Gilroy Bold',
+                                        fontFamily: kFontFamilyGilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -1071,7 +1071,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   height: MediaQuery.of(context).size.height),
             ),
             Container(
-              width: widht,
+              width: width,
               height: height,
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height / 9.53,
@@ -1088,8 +1088,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             maxLines: 2,
                             style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Exo 2',
+                                color: kArticlesWhiteColor,
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -1103,8 +1103,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Exo 2',
+                                color: kArticlesWhiteColor,
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                 MediaQuery.of(context).size.height / 36.35,
                                 letterSpacing: 0.015)),
@@ -1123,9 +1123,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .translate('new_on_boarding_3'),
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: kArticlesWhiteColor,
                               height: 1.3,
-                              fontFamily: 'Gilroy Bold',
+                              fontFamily: kFontFamilyGilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize:
@@ -1188,7 +1188,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: 'Gilroy Bold',
+                                        fontFamily: kFontFamilyGilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -1279,7 +1279,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               child: timePicker(),
             ),
             Container(
-              width: widht,
+              width: width,
               height: height,
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height / 9.53,
@@ -1295,7 +1295,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: 'Exo 2',
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -1310,7 +1310,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: 'Exo 2',
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 36.35,
                                 letterSpacing: 0.015)),
@@ -1331,7 +1331,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             style: TextStyle(
                               color: onBoardingSubTitleColor,
                               height: 1.3,
-                              fontFamily: 'Gilroy Bold',
+                              fontFamily: kFontFamilyGilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize:
@@ -1420,7 +1420,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: 'Gilroy Bold',
+                                        fontFamily: kFontFamilyGilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -1477,7 +1477,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   height: MediaQuery.of(context).size.height / 7.18),
             ),
             Container(
-              width: widht,
+              width: width,
               height: height,
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height / 9.53,
@@ -1493,7 +1493,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: 'Exo 2',
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 26.35,
                                 letterSpacing: 0.015)),
@@ -1514,7 +1514,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             style: TextStyle(
                               color: onBoardingSubTitleColor,
                               height: 1.3,
-                              fontFamily: 'Gilroy Bold',
+                              fontFamily: kFontFamilyGilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize:
@@ -1596,7 +1596,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: 'Gilroy Bold',
+                                        fontFamily: kFontFamilyGilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -1646,7 +1646,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   height: MediaQuery.of(context).size.height / 6.04),
             ),
             Container(
-              width: widht,
+              width: width,
               height: height,
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height / 9.53,
@@ -1661,8 +1661,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Exo 2',
+                                color: kArticlesWhiteColor,
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -1681,9 +1681,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .translate('new_on_boarding_5'),
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: kArticlesWhiteColor,
                               height: 1.3,
-                              fontFamily: 'Gilroy Bold',
+                              fontFamily: kFontFamilyGilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize:
@@ -1763,7 +1763,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: 'Gilroy Bold',
+                                        fontFamily: kFontFamilyGilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -1830,7 +1830,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   center: new Text(
                     "100%",
                     style: new TextStyle(
-                        fontFamily: 'Exo 2',
+                        fontFamily: kFontFamilyExo2,
                         fontSize: MediaQuery.of(context).size.height / 20.36,
                         color: Colors.black),
                   ),
@@ -1878,7 +1878,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   height: MediaQuery.of(context).size.height / 3.36),
             ),
             Container(
-              width: widht,
+              width: width,
               height: height,
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height / 9.53,
@@ -1893,8 +1893,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Exo 2',
+                                color: kArticlesWhiteColor,
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -1908,8 +1908,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Exo 2',
+                                color: kArticlesWhiteColor,
+                                fontFamily: kFontFamilyExo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 36.35,
                                 letterSpacing: 0.015)),
@@ -1938,7 +1938,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 brightness: Brightness.light,
                 textTheme: CupertinoTextThemeData(
                     pickerTextStyle: TextStyle(
-                        fontFamily: 'Gilroy',
+                        fontFamily: kFontFamilyGilroy,
                         fontSize: MediaQuery.of(context).size.height / 38.95,
                         color: onBoardingSubTitleColor))),
             child: CupertinoDatePicker(

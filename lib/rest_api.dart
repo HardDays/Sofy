@@ -180,7 +180,7 @@ class RestApi {
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           backgroundColor: kAppPinkDarkColor,
-          textColor: Colors.white,
+          textColor: kArticlesWhiteColor,
           fontSize: 12.0);
     }
   }
@@ -225,7 +225,7 @@ class RestApi {
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             backgroundColor: kAppPinkDarkColor,
-            textColor: Colors.white,
+            textColor: kArticlesWhiteColor,
             fontSize: 12.0);
       }
     }

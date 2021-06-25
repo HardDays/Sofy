@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/models/api_article_topic_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
@@ -73,7 +74,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                                 AppLocalizations.of(context)
                                     .translate('all_categories'),
                                 style: TextStyle(
-                                    fontFamily: 'Exo 2',
+                                    fontFamily: kFontFamilyExo2,
                                     fontWeight: FontWeight.bold,
                                     fontSize: height / 37.3, //24
                                     color: kNavigBarInactiveColor),

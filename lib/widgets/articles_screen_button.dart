@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 
 // ignore: must_be_immutable
 class ArticlesCategoryScreenButton extends StatefulWidget {
@@ -67,7 +68,7 @@ class _ArticlesCategoryScreenButton
                               width: widget.height / 32.0,
                               decoration: BoxDecoration(
                                 color: toggle
-                                    ? Colors.white
+                                    ? kArticlesWhiteColor
                                     : kSettingActiveButtonColor,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5.0)),
@@ -76,13 +77,13 @@ class _ArticlesCategoryScreenButton
                               child:
                               Image.network(widget.iconUrl, color: toggle
                                   ? kSettingActiveButtonColor
-                                  : Colors.white, height: widget.height / 49.77,))
+                                  : kArticlesWhiteColor, height: widget.height / 49.77,))
                         ),
                         Expanded(
                           child: Text(
                             widget.text,
                             style: TextStyle(
-                              fontFamily: 'Gilroy Bold',
+                              fontFamily: kFontFamilyGilroyBold,
                               fontWeight: FontWeight.bold,
                               fontSize: widget.height / 56.0,
                               color: kWelcomDarkTextColor,
