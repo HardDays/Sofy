@@ -249,173 +249,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                       padding: EdgeInsets.only(left: 20.0),
                       itemCount: newArticlesList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          padding: EdgeInsets.only(bottom: 10, right: 16),
-                          width: height / 4.1,
-                          height: height / 3.82,
-                          child: Stack(
-                            children: <Widget>[
-                              Stack(
-                                children: <Widget>[
-                                  Container(
-                                    height: height,
-                                    width: width,
-                                    child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(25)),
-                                      child: PlayListLeadWidget(
-                                        url: newArticlesList[index].coverImg,
-                                        created:
-                                            newArticlesList[index].dateCreated,
-                                        height: height,
-                                        width: width,
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Container(
-                                      height: height / 10.67 + 9,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(25),
-                                          bottomRight: Radius.circular(25),
-                                        ),
-                                        child: Container(
-                                          child: BackdropFilter(
-                                            child: Container(
-                                              color:
-                                                  kArticlesWhiteColor.withOpacity(0.0),
-                                            ),
-                                            filter: ImageFilter.blur(
-                                                sigmaX: 2.0, sigmaY: 2.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: height,
-                                    width: width,
-                                    margin: EdgeInsets.only(bottom: 9),
-                                    alignment: Alignment.bottomCenter,
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(25)),
-                                    ),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: height / 10.67,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 13.0),
-                                        child: Text(
-                                          newArticlesList[index].title,
-                                          textAlign: TextAlign.left,
-                                          maxLines: 5,
-                                          style: TextStyle(
-                                              fontFamily: kFontFamilyGilroyBold,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: height / 56.0,
-                                              color: kArticlesWhiteColor,
-                                              height: 1.37),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Visibility(
-                                  // ignore: null_aware_in_logical_operator
-                                  visible: newArticlesList[index].isPaid == 1
-                                      ? true
-                                      : false,
-                                  child: Container(
-                                    height: Provider.of<SubscribeData>(context)
-                                            .isAppPurchase
-                                        ? 0.0
-                                        : height,
-                                    width: Provider.of<SubscribeData>(context)
-                                            .isAppPurchase
-                                        ? 0.0
-                                        : width,
-                                    alignment: Alignment.topRight,
-                                    child: Container(
-                                        height: height / 12.6,
-                                        width: height / 12.6,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                                'assets/new_lock.png'),
-                                            fit: BoxFit.fill,
-                                          ),
-                                        )),
-                                  )),
-                              Positioned.fill(
-                                child: Material(
-                                  color: kArticlesTransparentColor,
-                                  child: InkWell(
-                                      splashColor: kArticlesTransparentColor,
-                                      highlightColor: kArticlesTransparentColor,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(12.0)),
-                                      radius: 12,
-                                      onTap: () {
-                                        bool isAppPurchase =
-                                            Provider.of<SubscribeData>(context,
-                                                    listen: false)
-                                                .isAppPurchase;
-                                        if (newArticlesList[index].isPaid ==
-                                            1) {
-                                          if (isAppPurchase) {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        ArticlesDetailsScreen(
-                                                  articleId:
-                                                      newArticlesList[index]
-                                                          .id
-                                                          .toString(),
-                                                ),
-                                              ),
-                                            );
-                                            /*Analytics().sendEventReports(
-                                              event: vibration_play,
-                                              attr: {'vibration_id': playlistData.getCurrentPlaylistModel(context).created,
-                                                'playlist_id': Provider.of<PlaylistNameData>(context, listen: false).getCurrentPlaylistName().name,
-                                                'source': 'playlist_' + Provider.of<PlaylistNameData>(context, listen: false).getCurrentName() + '_screen',
-                                              },
-                                            );*/
-                                          } else {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SubscribeScreen(
-                                                        isFromSplash: false),
-                                              ),
-                                            );
-                                          }
-                                        } else {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (BuildContext
-                                                          context) =>
-                                                      ArticlesDetailsScreen(
-                                                          articleId:
-                                                              newArticlesList[
-                                                                      index]
-                                                                  .id
-                                                                  .toString())));
-                                        }
-                                      }),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                        return _customContainer(newArticlesList[index]);
                       },
                     ),
                   ),
@@ -469,7 +303,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                       ArticlesDetailsScreen(
                                           articleId: popularArticle[index]
                                               .id
-                                              .toString())));
+                                              .toString(),),),);
                               /*Analytics().sendEventReports(
                                               event: vibration_play,
                                               attr: {'vibration_id': playlistData.getCurrentPlaylistModel(context).created,
@@ -732,6 +566,157 @@ class _ArticlesScreenState extends State<ArticlesScreen>
           ],
         ),
       );
+
+  Widget _customContainer(apiArticlesModel) {
+    final ApiArticlesModel _apiArticlesModel = apiArticlesModel;
+    return Container(
+      padding: EdgeInsets.only(bottom: 10, right: 16),
+      width: height / 4.1,
+      height: height / 3.82,
+      child: Stack(
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              Container(
+                height: height,
+                width: width,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  child: PlayListLeadWidget(
+                    url: _apiArticlesModel.coverImg,
+                    created: _apiArticlesModel.dateCreated,
+                    height: height,
+                    width: width,
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: height / 10.67 + 9,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(25),
+                      bottomRight: Radius.circular(25),
+                    ),
+                    child: Container(
+                      child: BackdropFilter(
+                        child: Container(
+                          color: kArticlesWhiteColor.withOpacity(0.0),
+                        ),
+                        filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: height,
+                width: width,
+                margin: EdgeInsets.only(bottom: 9),
+                alignment: Alignment.bottomCenter,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                ),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: height / 10.67,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 13.0),
+                    child: Text(
+                      _apiArticlesModel.title,
+                      textAlign: TextAlign.left,
+                      maxLines: 5,
+                      style: TextStyle(
+                          fontFamily: kFontFamilyGilroyBold,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.normal,
+                          fontSize: height / 56.0,
+                          color: kArticlesWhiteColor,
+                          height: 1.37),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Visibility(
+              // ignore: null_aware_in_logical_operator
+              visible: _apiArticlesModel.isPaid == 1 ? true : false,
+              child: Container(
+                height: Provider.of<SubscribeData>(context).isAppPurchase
+                    ? 0.0
+                    : height,
+                width: Provider.of<SubscribeData>(context).isAppPurchase
+                    ? 0.0
+                    : width,
+                alignment: Alignment.topRight,
+                child: Container(
+                    height: height / 12.6,
+                    width: height / 12.6,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/new_lock.png'),
+                        fit: BoxFit.fill,
+                      ),
+                    )),
+              )),
+          Positioned.fill(
+            child: Material(
+              color: kArticlesTransparentColor,
+              child: InkWell(
+                splashColor: kArticlesTransparentColor,
+                highlightColor: kArticlesTransparentColor,
+                borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                radius: 12,
+                onTap: () {
+                  bool isAppPurchase =
+                      Provider.of<SubscribeData>(context, listen: false)
+                          .isAppPurchase;
+                  if (_apiArticlesModel.isPaid == 1) {
+                    if (isAppPurchase) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              ArticlesDetailsScreen(
+                            articleId: _apiArticlesModel.id.toString(),
+                          ),
+                        ),
+                      );
+                      /*Analytics().sendEventReports(
+                                              event: vibration_play,
+                                              attr: {'vibration_id': playlistData.getCurrentPlaylistModel(context).created,
+                                                'playlist_id': Provider.of<PlaylistNameData>(context, listen: false).getCurrentPlaylistName().name,
+                                                'source': 'playlist_' + Provider.of<PlaylistNameData>(context, listen: false).getCurrentName() + '_screen',
+                                              },
+                                            );*/
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              SubscribeScreen(isFromSplash: false),
+                        ),
+                      );
+                    }
+                  } else {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            ArticlesDetailsScreen(
+                          articleId: _apiArticlesModel.id.toString(),
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget showFavTopic(int pos) {
     return favoritesTopics.length > pos
