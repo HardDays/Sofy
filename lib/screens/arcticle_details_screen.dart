@@ -137,97 +137,16 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                 children: <Widget>[
                   Expanded(
                     child: Column(
-                      children: <Widget>[
-                        Container(
-                          width: double.infinity,
-                          height: 10,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          height: 12,
-                          color: kArticlesWhiteColor,
-                        ),
-                      ],
+                      children: List.generate(
+                        30,
+                        (index) => index % 2 != 0
+                            ? Container(
+                                width: double.infinity,
+                                height: 10,
+                                color: kArticlesWhiteColor,
+                              )
+                            : SizedBox(height: 10),
+                      ),
                     ),
                   ),
                 ],
@@ -693,7 +612,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                     child: Icon(
                                                       Icons.check,
                                                       size: 14,
-                                                      color: kArticlesWhiteColor,
+                                                      color:
+                                                          kArticlesWhiteColor,
                                                     ),
                                                   )
                                                 ],
@@ -827,9 +747,9 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                                 .percent /
                                                             100,
                                                         backgroundColor:
-                                                        kLinearPercentIndicatorBGColor,
+                                                            kLinearPercentIndicatorBGColor,
                                                         progressColor:
-                                                        kLinearPercentIndicatorPGColor),
+                                                            kLinearPercentIndicatorPGColor),
                                                     Text(
                                                       article
                                                               .apiArticlePollModel
@@ -840,7 +760,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                       style: TextStyle(
                                                         color:
                                                             kWelcomDarkTextColor,
-                                                        fontFamily: kFontFamilyGilroy,
+                                                        fontFamily:
+                                                            kFontFamilyGilroy,
                                                         fontSize: height / 74.6,
                                                         height: 1.343,
                                                         fontWeight:
@@ -873,9 +794,12 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                       depth: !isVote ? 0 : -3,
                                       shape: NeumorphicShape.flat,
                                       intensity: 0.6,
-                                      shadowLightColorEmboss: kADNeumorphicShadowLightColorEmboss,
-                                      shadowDarkColor: kADNeumorphicShadowDarkColor,
-                                      shadowDarkColorEmboss: kADNeumorphicShadowDarkColorEmboss,
+                                      shadowLightColorEmboss:
+                                          kADNeumorphicShadowLightColorEmboss,
+                                      shadowDarkColor:
+                                          kADNeumorphicShadowDarkColor,
+                                      shadowDarkColorEmboss:
+                                          kADNeumorphicShadowDarkColorEmboss,
                                       shadowLightColor: kArticlesWhiteColor,
                                       color: kArticlesDetailsAppBarColor),
                                   boxShape: NeumorphicBoxShape.roundRect(
@@ -932,7 +856,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                         fontSize: height / 56,
                                                         //14
                                                         height: 1.7,
-                                                        color: kArticlesWhiteColor,
+                                                        color:
+                                                            kArticlesWhiteColor,
                                                       ),
                                                     ),
                                                   ),
@@ -964,7 +889,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                           fontSize: height / 56,
                                                           //14
                                                           height: 1.7,
-                                                          color: kArticlesWhiteColor,
+                                                          color:
+                                                              kArticlesWhiteColor,
                                                         )),
                                                   ),
                                                 ],
@@ -1030,7 +956,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                 intensity: 0.65,
                                                 shadowLightColorEmboss:
                                                     kArticlesWhiteColor,
-                                                shadowLightColor: kArticlesWhiteColor,
+                                                shadowLightColor:
+                                                    kArticlesWhiteColor,
                                                 shadowDarkColor:
                                                     kNeumorphicShadowDarkColor,
                                                 shadowDarkColorEmboss:
@@ -1070,7 +997,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: height / 56,
-                                                      color: kArticlesDetailsScreenInputColor),
+                                                      color:
+                                                          kArticlesDetailsScreenInputColor),
                                                 ),
                                               )),
                                           Container(
@@ -1081,11 +1009,12 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                   right: 42.0),
                                               child: Neumorphic(
                                                   style: NeumorphicStyle(
-                                                      boxShape: NeumorphicBoxShape
-                                                          .roundRect(
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10)),
+                                                      boxShape:
+                                                          NeumorphicBoxShape
+                                                              .roundRect(
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
                                                       depth: 3,
                                                       intensity: 0.65,
                                                       shadowLightColorEmboss:
@@ -1125,7 +1054,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                           fontSize: height / 64,
                                                           fontWeight:
                                                               FontWeight.w600,
-                                                          color: kArticlesDetailsScreenInput2Color),
+                                                          color:
+                                                              kArticlesDetailsScreenInput2Color),
                                                       hintText: AppLocalizations
                                                               .of(context)
                                                           .translate(
@@ -1219,8 +1149,7 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                               child: RatingBar(
                                 rating: rating == -1 ? 0.0 : rating.toDouble(),
                                 icon: Icon(Icons.star_border,
-                                    size: height / 40.72,
-                                    color: kSvgColor),
+                                    size: height / 40.72, color: kSvgColor),
                                 starCount: 10,
                                 spacing: 5.0,
                                 size: height / 40.72,
@@ -1297,12 +1226,14 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                     .translate('done'),
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
-                                                  fontFamily: kFontFamilyMontserratBold,
+                                                  fontFamily:
+                                                      kFontFamilyMontserratBold,
                                                   fontWeight: FontWeight.bold,
                                                   fontStyle: FontStyle.normal,
                                                   fontSize: height / 56,
                                                   height: 1.9,
-                                                  color: kArticlesDetailsDoneColor,
+                                                  color:
+                                                      kArticlesDetailsDoneColor,
                                                 ),
                                               ),
                                             ),
@@ -1553,7 +1484,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                               fontSize: height / 68.92,
                                               //14
                                               height: 1.5,
-                                              color: kArticlesDetailsScreenColor,
+                                              color:
+                                                  kArticlesDetailsScreenColor,
                                             ),
                                           ),
                                           underline: Container(),
@@ -1572,14 +1504,16 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
-                                                    fontFamily: kFontFamilyGilroy,
+                                                    fontFamily:
+                                                        kFontFamilyGilroy,
                                                     fontWeight:
                                                         FontWeight.normal,
                                                     fontStyle: FontStyle.normal,
                                                     fontSize: height / 68.92,
                                                     //14
                                                     height: 1.5,
-                                                    color: kArticlesDetailsScreenColor,
+                                                    color:
+                                                        kArticlesDetailsScreenColor,
                                                   ),
                                                 ));
                                           }).toList(),
@@ -1619,7 +1553,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                               20.0)),
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: kArticlesDetailsShadowColor,
+                                                      color:
+                                                          kArticlesDetailsShadowColor,
                                                       spreadRadius: 4,
                                                       blurRadius: 10,
                                                       offset: Offset(0,
@@ -1678,13 +1613,15 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
-                                                    fontFamily: kFontFamilyGilroy,
+                                                    fontFamily:
+                                                        kFontFamilyGilroy,
                                                     fontWeight:
                                                         FontWeight.normal,
                                                     fontStyle: FontStyle.normal,
                                                     fontSize: height / 74.66,
                                                     height: 1.305,
-                                                    color: kArticlesDetailsScreenColor,
+                                                    color:
+                                                        kArticlesDetailsScreenColor,
                                                   ),
                                                 ),
                                               ),
@@ -1710,14 +1647,16 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: TextStyle(
-                                                      fontFamily: kFontFamilyGilroy,
+                                                      fontFamily:
+                                                          kFontFamilyGilroy,
                                                       fontWeight:
                                                           FontWeight.normal,
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: height / 81.45,
                                                       height: 1.305,
-                                                      color: kArticlesDetailsTextColor,
+                                                      color:
+                                                          kArticlesDetailsTextColor,
                                                     ),
                                                   ),
                                                 ),
@@ -1789,7 +1728,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                         overflow: TextOverflow
                                                             .ellipsis,
                                                         style: TextStyle(
-                                                          fontFamily: kFontFamilyGilroy,
+                                                          fontFamily:
+                                                              kFontFamilyGilroy,
                                                           fontWeight:
                                                               FontWeight.normal,
                                                           fontStyle:
@@ -1837,7 +1777,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                             BorderRadius.circular(10)),
                                         depth: 3,
                                         intensity: 0.65,
-                                        shadowLightColorEmboss: kArticlesWhiteColor,
+                                        shadowLightColorEmboss:
+                                            kArticlesWhiteColor,
                                         shape: NeumorphicShape.flat,
                                         color: kNeumorphicColor),
                                     child: TextField(
@@ -1850,7 +1791,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                           fontSize: height / 64,
                                           height: 1.4,
                                           fontWeight: FontWeight.w700,
-                                          color: kArticlesDetailsScreenInputColor),
+                                          color:
+                                              kArticlesDetailsScreenInputColor),
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.only(
                                             left: 15.0, bottom: 12.0),
@@ -1859,7 +1801,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                             fontSize: height / 64,
                                             height: 1.4,
                                             fontWeight: FontWeight.normal,
-                                            color: kArticlesDetailsScreenInput2Color),
+                                            color:
+                                                kArticlesDetailsScreenInput2Color),
                                         hintText: AppLocalizations.of(context)
                                             .translate('comments'),
                                         border: InputBorder.none,
@@ -1879,7 +1822,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                   BorderRadius.circular(10)),
                                           depth: 3,
                                           intensity: 0.65,
-                                          shadowLightColorEmboss: kArticlesWhiteColor,
+                                          shadowLightColorEmboss:
+                                              kArticlesWhiteColor,
                                           shape: NeumorphicShape.flat,
                                           color: onBoardingTitleColor),
                                       child: Container(
@@ -2022,8 +1966,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                       color: dividerColor,
                       child: LinearProgressIndicator(
                         backgroundColor: dividerColor,
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(kAlwaysStoppedAnimation),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            kAlwaysStoppedAnimation),
                         value: scroll.value,
                       ),
                     ),
@@ -2301,7 +2245,8 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(height: 1.0, width: width / 3, color: kDividerWithStarsColor2),
+            Container(
+                height: 1.0, width: width / 3, color: kDividerWithStarsColor2),
             Container(
               margin: EdgeInsets.only(left: 21.0),
               child: SvgPicture.asset(

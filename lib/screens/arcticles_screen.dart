@@ -40,12 +40,10 @@ class _ArticlesScreenState extends State<ArticlesScreen>
   double height, width;
   int currentIndex = 0;
   SwiperController swiperController = SwiperController();
-  List<ApiArticleTopicModel> popularTopicsList =
-      new List<ApiArticleTopicModel>();
-  List<ApiArticlesModel> newArticlesList = new List<ApiArticlesModel>();
-  List<ApiArticlesModel> popularArticle = new List<ApiArticlesModel>();
-  List<ApiFavTopicsInfoModel> favoritesTopics =
-      new List<ApiFavTopicsInfoModel>();
+  List<ApiArticleTopicModel> popularTopicsList = [];
+  List<ApiArticlesModel> newArticlesList = [];
+  List<ApiArticlesModel> popularArticle = [];
+  List<ApiFavTopicsInfoModel> favoritesTopics = [];
 
   @override
   void initState() {
