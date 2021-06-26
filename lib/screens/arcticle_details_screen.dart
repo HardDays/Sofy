@@ -19,6 +19,7 @@ import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/models/api_article_model.dart';
 import 'package:sofy_new/models/api_article_poll_model.dart';
 import 'package:sofy_new/models/api_article_replies.dart';
+import 'package:sofy_new/models/api_article_variants_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/widgets/neumorph_button.dart';
@@ -509,122 +510,24 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                 ),
                               )),
                           Visibility(
-                              visible: !isVote,
-                              child: Column(children: [
+                            visible: !isVote,
+                            child: Column(
+                              children: [
                                 ListView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    padding: EdgeInsets.all(0.0),
-                                    itemCount: apiArticlePollModel != null
-                                        ? apiArticlePollModel.variants.length
-                                        : 0,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Padding(
-                                        padding: EdgeInsets.only(
-                                            top: height / 56,
-                                            left: 20.0,
-                                            right: 20.0),
-                                        child: InkWell(
-                                          onTap: () {
-                                            apiArticlePollModel
-                                                    .variants[index].selected =
-                                                !article.apiArticlePollModel
-                                                    .variants[index].selected;
-                                            for (int i = 0;
-                                                i <
-                                                    article.apiArticlePollModel
-                                                        .variants.length;
-                                                i++) {
-                                              if (i != index) {
-                                                apiArticlePollModel.variants[i]
-                                                    .selected = false;
-                                              }
-                                            }
-                                            pollId = article.apiArticlePollModel
-                                                .variants[index].id;
-                                            setState(() {});
-                                            //Analytics().sendEventReports(event: subscription_purchase_y_click);
-                                          },
-                                          child: Badge(
-                                            padding: EdgeInsets.all(3),
-                                            elevation: 0.0,
-                                            shape: BadgeShape.square,
-                                            borderRadius:
-                                                BorderRadius.circular(6.0),
-                                            child: Container(
-                                              height: height / 16,
-                                              padding: EdgeInsets.only(
-                                                  left: 20.0, right: 16.0),
-                                              alignment: Alignment.center,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    kSettingInActiveButtonColor,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(13.0)),
-                                                border: Border.all(
-                                                  color: article
-                                                          .apiArticlePollModel
-                                                          .variants[index]
-                                                          .selected
-                                                      ? kAppPinkDarkColor
-                                                      : Colors.transparent,
-                                                  width: 1.3,
-                                                ),
-                                              ),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Container(
-                                                      width: width / 1.33,
-                                                      child: Text(
-                                                        article
-                                                            .apiArticlePollModel
-                                                            .variants[index]
-                                                            .content,
-                                                        maxLines: 2,
-                                                        style: TextStyle(
-                                                          color:
-                                                              kWelcomDarkTextColor,
-                                                          fontFamily:
-                                                              kFontFamilyGilroyBold,
-                                                          fontSize: height / 56,
-                                                          height: 1.343,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                        ),
-                                                      )),
-                                                  CircleAvatar(
-                                                    radius: 10.0,
-                                                    backgroundColor: article
-                                                            .apiArticlePollModel
-                                                            .variants[index]
-                                                            .selected
-                                                        ? kAppPinkDarkColor
-                                                        : kArticlesWhiteColor,
-                                                    child: Icon(
-                                                      Icons.check,
-                                                      size: 14,
-                                                      color:
-                                                          kArticlesWhiteColor,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            showBadge: false,
-                                          ),
-                                        ),
-                                      );
-                                    })
-                              ])),
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsets.all(0.0),
+                                  itemCount: apiArticlePollModel != null
+                                      ? apiArticlePollModel.variants.length
+                                      : 0,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return _voteRadioButton(context, index);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
                           Visibility(
                               visible: isVote,
                               child: ListView.builder(
@@ -636,147 +539,7 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                       : 0,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    return Padding(
-                                      padding: EdgeInsets.only(
-                                          top: height / 56,
-                                          left: 20.0,
-                                          right: 20.0),
-                                      child: Badge(
-                                        padding: EdgeInsets.all(3),
-                                        elevation: 0.0,
-                                        shape: BadgeShape.square,
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              left: 20.0,
-                                              right: 16.0,
-                                              top: height / 72,
-                                              bottom: height / 72),
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color: kSettingInActiveButtonColor,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(13.0)),
-                                            border: Border.all(
-                                              color: Colors.transparent,
-                                              width: 1.3,
-                                            ),
-                                          ),
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Container(
-                                                      width: width / 1.5,
-                                                      child: Text(
-                                                        article
-                                                            .apiArticlePollModel
-                                                            .variants[index]
-                                                            .content,
-                                                        maxLines: 2,
-                                                        style: TextStyle(
-                                                          color:
-                                                              kWelcomDarkTextColor,
-                                                          fontFamily:
-                                                              kFontFamilyGilroyBold,
-                                                          fontSize: height / 56,
-                                                          height: 1.343,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    /*Text(
-                                                              article
-                                                                      .apiArticlePollModel
-                                                                      .variants[
-                                                                          index]
-                                                                      .answerCount
-                                                                      .toString() +
-                                                                  " " +
-                                                                  AppLocalizations.of(
-                                                                          context)
-                                                                      .translate(
-                                                                          'users'),
-                                                              style: TextStyle(
-                                                                color:
-                                                                    kWelcomDarkTextColor,
-                                                                fontFamily:
-                                                                    kFontFamilyGilroy,
-                                                                fontSize:
-                                                                    height /
-                                                                        74.6,
-                                                                height: 1.343,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontStyle:
-                                                                    FontStyle
-                                                                        .normal,
-                                                              ),
-                                                            )*/
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    LinearPercentIndicator(
-                                                        animation: true,
-                                                        animationDuration: 1500,
-                                                        padding:
-                                                            EdgeInsets.all(0.0),
-                                                        width: height / 3.01,
-                                                        lineHeight: 5.0,
-                                                        percent: article
-                                                                .apiArticlePollModel
-                                                                .variants[index]
-                                                                .percent /
-                                                            100,
-                                                        backgroundColor:
-                                                            kLinearPercentIndicatorBGColor,
-                                                        progressColor:
-                                                            kLinearPercentIndicatorPGColor),
-                                                    Text(
-                                                      article
-                                                              .apiArticlePollModel
-                                                              .variants[index]
-                                                              .percent
-                                                              .toString() +
-                                                          "%",
-                                                      style: TextStyle(
-                                                        color:
-                                                            kWelcomDarkTextColor,
-                                                        fontFamily:
-                                                            kFontFamilyGilroy,
-                                                        fontSize: height / 74.6,
-                                                        height: 1.343,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                      ),
-                                                    )
-                                                  ],
-                                                )
-                                              ]),
-                                        ),
-                                        showBadge: false,
-                                      ),
-                                    );
+                                    return _voteResultButton(context, index);
                                   })),
                           Container(
                               decoration: BoxDecoration(boxShadow: [
@@ -1527,89 +1290,115 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                     )
                                   ])),
                           ListView.builder(
-                              itemCount: articleReplies.length,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              padding: EdgeInsets.all(0.0),
-                              itemBuilder: (context, index) => Padding(
-                                  padding: EdgeInsets.only(
-                                      top: height / 52.7,
-                                      left: 20.0,
-                                      right: 20.0),
-                                  child: Column(children: [
-                                    Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                              width: height / 27.15,
-                                              height: height / 27.15,
-                                              margin:
-                                                  EdgeInsets.only(right: 12.0),
-                                              decoration: new BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              20.0)),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color:
-                                                          kArticlesDetailsShadowColor,
-                                                      spreadRadius: 4,
-                                                      blurRadius: 10,
-                                                      offset: Offset(0,
-                                                          3), // changes position of shadow
-                                                    ),
-                                                  ]),
-                                              child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                  child: CachedNetworkImage(
-                                                    placeholder:
-                                                        (context, url) =>
-                                                            Image.asset(
-                                                      'assets/player_placeholder.png',
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                    imageUrl:
-                                                        articleReplies[index]
-                                                                .coverImg ??
-                                                            '',
+                            itemCount: articleReplies.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.all(0.0),
+                            itemBuilder: (context, index) => Padding(
+                              padding: EdgeInsets.only(
+                                  top: height / 52.7, left: 20.0, right: 20.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                            width: height / 27.15,
+                                            height: height / 27.15,
+                                            margin:
+                                                EdgeInsets.only(right: 12.0),
+                                            decoration: new BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(20.0)),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color:
+                                                        kArticlesDetailsShadowColor,
+                                                    spreadRadius: 4,
+                                                    blurRadius: 10,
+                                                    offset: Offset(0,
+                                                        3), // changes position of shadow
+                                                  ),
+                                                ]),
+                                            child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                                child: CachedNetworkImage(
+                                                  placeholder: (context, url) =>
+                                                      Image.asset(
+                                                    'assets/player_placeholder.png',
                                                     fit: BoxFit.cover,
-                                                  ))),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              articleReplies[index]
-                                                      .userName
-                                                      .contains('Anonim')
-                                                  ? Container()
-                                                  : Container(
-                                                      child: Text(
-                                                        articleReplies[index]
-                                                            .userName,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: TextStyle(
-                                                          fontFamily:
-                                                              kFontFamilyGilroyBold,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize:
-                                                              height / 81.45,
-                                                          height: 1.305,
-                                                          color:
-                                                              kArticlesDetailsScreenColor,
-                                                        ),
+                                                  ),
+                                                  imageUrl:
+                                                      articleReplies[index]
+                                                              .coverImg ??
+                                                          '',
+                                                  fit: BoxFit.cover,
+                                                ))),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            articleReplies[index]
+                                                    .userName
+                                                    .contains('Anonim')
+                                                ? Container()
+                                                : Container(
+                                                    child: Text(
+                                                      articleReplies[index]
+                                                          .userName,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            kFontFamilyGilroyBold,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize:
+                                                            height / 81.45,
+                                                        height: 1.305,
+                                                        color:
+                                                            kArticlesDetailsScreenColor,
                                                       ),
                                                     ),
+                                                  ),
+                                            Container(
+                                              child: Text(
+                                                articleReplies[index].content,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontFamily: kFontFamilyGilroy,
+                                                  fontWeight: FontWeight.normal,
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: height / 74.66,
+                                                  height: 1.305,
+                                                  color:
+                                                      kArticlesDetailsScreenColor,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ]),
+                                  Padding(
+                                      padding:
+                                          EdgeInsets.only(top: 3.0, left: 37.0),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Row(children: [
                                               Container(
                                                 child: Text(
-                                                  articleReplies[index].content,
+                                                  displayTimeAgoFromTimestamp(
+                                                      articleReplies[index]
+                                                          .dateCreated,
+                                                      context),
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
@@ -1618,49 +1407,14 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                     fontWeight:
                                                         FontWeight.normal,
                                                     fontStyle: FontStyle.normal,
-                                                    fontSize: height / 74.66,
+                                                    fontSize: height / 81.45,
                                                     height: 1.305,
                                                     color:
-                                                        kArticlesDetailsScreenColor,
+                                                        kArticlesDetailsTextColor,
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ]),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 3.0, left: 37.0),
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Row(children: [
-                                                Container(
-                                                  child: Text(
-                                                    displayTimeAgoFromTimestamp(
-                                                        articleReplies[index]
-                                                            .dateCreated,
-                                                        context),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      fontFamily:
-                                                          kFontFamilyGilroy,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: height / 81.45,
-                                                      height: 1.305,
-                                                      color:
-                                                          kArticlesDetailsTextColor,
-                                                    ),
-                                                  ),
-                                                ),
-                                                /*Container(
+                                              /*Container(
                                                           margin:
                                                               EdgeInsets.only(
                                                                   left: 11.0),
@@ -1686,65 +1440,67 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                                             ),
                                                           ),
                                                         ),*/
-                                              ]),
-                                              Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    GestureDetector(
-                                                      child: Container(
-                                                        margin: EdgeInsets.only(
-                                                            right: 6.0),
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: SvgPicture.asset(
-                                                          articleReplies[index]
-                                                                      .isLiked ==
-                                                                  '0'
-                                                              ? 'assets/svg/article_likes.svg'
-                                                              : 'assets/svg/article_likes_liked.svg',
-                                                          color:
-                                                              kArticlesDetailsScreenColor,
-                                                        ),
-                                                      ),
-                                                      onTap: () {
-                                                        print(articleReplies[
-                                                                index]
-                                                            .isLiked);
-                                                        likeReply(int.parse(
-                                                            articleReplies[
-                                                                    index]
-                                                                .id));
-                                                      },
-                                                    ),
-                                                    Container(
+                                            ]),
+                                            Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  GestureDetector(
+                                                    child: Container(
                                                       margin: EdgeInsets.only(
-                                                          bottom: 0.0),
-                                                      child: Text(
+                                                          right: 6.0),
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: SvgPicture.asset(
                                                         articleReplies[index]
-                                                            .likesCount,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: TextStyle(
-                                                          fontFamily:
-                                                              kFontFamilyGilroy,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize:
-                                                              height / 68.92,
-                                                          height: 1.5,
-                                                          color:
-                                                              kArticlesDetailsScreenColor,
-                                                        ),
+                                                                    .isLiked ==
+                                                                '0'
+                                                            ? 'assets/svg/article_likes.svg'
+                                                            : 'assets/svg/article_likes_liked.svg',
+                                                        color:
+                                                            kArticlesDetailsScreenColor,
                                                       ),
                                                     ),
-                                                  ])
-                                            ]))
-                                  ]))),
+                                                    onTap: () {
+                                                      print(
+                                                          articleReplies[index]
+                                                              .isLiked);
+                                                      likeReply(int.parse(
+                                                          articleReplies[index]
+                                                              .id));
+                                                    },
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 0.0),
+                                                    child: Text(
+                                                      articleReplies[index]
+                                                          .likesCount,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            kFontFamilyGilroy,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize:
+                                                            height / 68.92,
+                                                        height: 1.5,
+                                                        color:
+                                                            kArticlesDetailsScreenColor,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ])
+                                          ]))
+                                ],
+                              ),
+                            ),
+                          ),
                           Container(
                             decoration: BoxDecoration(
                               color: kNeumorphicColor2,
@@ -2015,6 +1771,221 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
           ],
         ),
       );
+
+  Widget _voteRadioButton(BuildContext context,int id) {
+    ApiArticleVariantsModel _apiArticleVariantsModel =
+        apiArticlePollModel.variants[id];
+    return Padding(
+      padding: EdgeInsets.only(top: height / 56, left: 20.0, right: 20.0),
+      child: InkWell(
+        onTap: () {
+          for (int i = 0; i < article.apiArticlePollModel.variants.length; i++) {
+            if (i != id) {
+              apiArticlePollModel.variants[i].selected = false;
+            } else {
+              apiArticlePollModel.variants[i].selected = true;
+            }
+          }
+          pollId = _apiArticleVariantsModel.id;
+          print(_apiArticleVariantsModel.id);
+          setState(() {});
+          //Analytics().sendEventReports(event: subscription_purchase_y_click);
+        },
+        child: Badge(
+          padding: EdgeInsets.all(3),
+          elevation: 0.0,
+          shape: BadgeShape.square,
+          borderRadius: BorderRadius.circular(6.0),
+          child: Container(
+            height: height / 16,
+            padding: EdgeInsets.only(left: 20.0, right: 16.0),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: kSettingInActiveButtonColor,
+              borderRadius: BorderRadius.all(Radius.circular(13.0)),
+              border: Border.all(
+                color: _apiArticleVariantsModel.selected
+                    ? Colors.red//kAppPinkDarkColor
+                    : Colors.transparent,
+                width: 1.3,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                    width: width / 1.33,
+                    child: Text(
+                      _apiArticleVariantsModel.content,
+                      maxLines: 2,
+                      style: TextStyle(
+                        color: kWelcomDarkTextColor,
+                        fontFamily: kFontFamilyGilroyBold,
+                        fontSize: height / 56,
+                        height: 1.343,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.normal,
+                      ),
+                    )),
+                CircleAvatar(
+                  radius: 10.0,
+                  backgroundColor: _apiArticleVariantsModel.selected
+                      ? kAppPinkDarkColor
+                      : kArticlesWhiteColor,
+                  child: Icon(
+                    Icons.check,
+                    size: 14,
+                    color: kArticlesWhiteColor,
+                  ),
+                )
+              ],
+            ),
+          ),
+          showBadge: false,
+        ),
+      ),
+    );
+  }
+
+  Widget _voteResultButton(BuildContext context, int id) {
+    final ApiArticleVariantsModel _apiArticleVariantsModel = apiArticlePollModel.variants[id];
+    return Padding(
+      padding: EdgeInsets.only(
+          top: height / 56,
+          left: 20.0,
+          right: 20.0),
+      child: Badge(
+        padding: EdgeInsets.all(3),
+        elevation: 0.0,
+        shape: BadgeShape.square,
+        borderRadius:
+        BorderRadius.circular(6.0),
+        child: Container(
+          padding: EdgeInsets.only(
+              left: 20.0,
+              right: 16.0,
+              top: height / 72,
+              bottom: height / 72),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: kSettingInActiveButtonColor,
+            borderRadius: BorderRadius.all(
+                Radius.circular(13.0)),
+            border: Border.all(
+              color: Colors.transparent,
+              width: 1.3,
+            ),
+          ),
+          child: Column(
+              mainAxisAlignment:
+              MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment:
+                  MainAxisAlignment
+                      .spaceBetween,
+                  crossAxisAlignment:
+                  CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: width / 1.5,
+                      child: Text(
+                        _apiArticleVariantsModel
+                            .content,
+                        maxLines: 2,
+                        style: TextStyle(
+                          color:
+                          kWelcomDarkTextColor,
+                          fontFamily:
+                          kFontFamilyGilroyBold,
+                          fontSize: height / 56,
+                          height: 1.343,
+                          fontWeight:
+                          FontWeight.bold,
+                          fontStyle:
+                          FontStyle.normal,
+                        ),
+                      ),
+                    ),
+                    /*Text(
+                                                              article
+                                                                      .apiArticlePollModel
+                                                                      .variants[
+                                                                          index]
+                                                                      .answerCount
+                                                                      .toString() +
+                                                                  " " +
+                                                                  AppLocalizations.of(
+                                                                          context)
+                                                                      .translate(
+                                                                          'users'),
+                                                              style: TextStyle(
+                                                                color:
+                                                                    kWelcomDarkTextColor,
+                                                                fontFamily:
+                                                                    kFontFamilyGilroy,
+                                                                fontSize:
+                                                                    height /
+                                                                        74.6,
+                                                                height: 1.343,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .normal,
+                                                              ),
+                                                            )*/
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment:
+                  MainAxisAlignment
+                      .spaceBetween,
+                  crossAxisAlignment:
+                  CrossAxisAlignment.center,
+                  children: <Widget>[
+                    LinearPercentIndicator(
+                        animation: true,
+                        animationDuration: 1500,
+                        padding:
+                        EdgeInsets.all(0.0),
+                        width: height / 3.01,
+                        lineHeight: 5.0,
+                        percent: _apiArticleVariantsModel
+                            .percent /
+                            100,
+                        backgroundColor:
+                        kLinearPercentIndicatorBGColor,
+                        progressColor:
+                        kLinearPercentIndicatorPGColor),
+                    Text(
+                      _apiArticleVariantsModel
+                          .percent
+                          .toString() +
+                          "%",
+                      style: TextStyle(
+                        color:
+                        kWelcomDarkTextColor,
+                        fontFamily:
+                        kFontFamilyGilroy,
+                        fontSize: height / 74.6,
+                        height: 1.343,
+                        fontWeight:
+                        FontWeight.bold,
+                        fontStyle:
+                        FontStyle.normal,
+                      ),
+                    )
+                  ],
+                )
+              ]),
+        ),
+        showBadge: false,
+      ),
+    );
+  }
 
   Widget _dividerWithAnswers(BuildContext context) => Padding(
         padding: EdgeInsets.only(top: height / 14.93, left: 20.0, right: 20.0),

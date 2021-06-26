@@ -19,7 +19,10 @@ class ArticleAnswerScreen extends StatefulWidget {
   final int questionId;
 
   ArticleAnswerScreen(
-      {Key key, @required this.articleId, @required this.questionId, @required this.articleTitle})
+      {Key key,
+      @required this.articleId,
+      @required this.questionId,
+      @required this.articleTitle})
       : super(key: key);
 
   @override
@@ -59,107 +62,103 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: kArticlesBackgroundColorColor,
       body: BackdropFilter(
         filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
         child: Container(
-            child: Container(
-              height: height,
-              child: Column(
+          child: Container(
+            height: height,
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: height / 16.69),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-              SizedBox(height: height / 16.69),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                      width: width / 3,
-                      child: Material(
-                        color: kArticlesTransparentColor,
-                        child: InkWell(
-                            borderRadius: BorderRadius.circular(60),
-                            focusColor: kArticlesTransparentColor,
-                            highlightColor: kArticlesTransparentColor,
-                            splashColor: kArticlesTransparentColor,
-                            hoverColor: kArticlesTransparentColor,
-                            radius: 25,
-                            child: Row(
-                              children: <Widget>[
-                                Container(
-                                  width: 50.0,
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(12.0),
-                                    child: Container(
-                                      child: SvgPicture.asset(
-                                        'assets/svg/back_vector.svg',
-                                        color: kNavigBarInactiveColor,
+                    Container(
+                        width: width / 3,
+                        child: Material(
+                          color: kArticlesTransparentColor,
+                          child: InkWell(
+                              borderRadius: BorderRadius.circular(60),
+                              focusColor: kArticlesTransparentColor,
+                              highlightColor: kArticlesTransparentColor,
+                              splashColor: kArticlesTransparentColor,
+                              hoverColor: kArticlesTransparentColor,
+                              radius: 25,
+                              child: Row(
+                                children: <Widget>[
+                                  Container(
+                                    width: 50.0,
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(12.0),
+                                      child: Container(
+                                        child: SvgPicture.asset(
+                                          'assets/svg/back_vector.svg',
+                                          color: kNavigBarInactiveColor,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(
-                                      bottom: height / 179.2),
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    AppLocalizations.of(context)
-                                        .translate('back'),
-                                    style: TextStyle(
-                                        fontFamily: kFontFamilyExo2,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: height / 37.3, //24
-                                        color: kNavigBarInactiveColor),
+                                  Container(
+                                    padding:
+                                        EdgeInsets.only(bottom: height / 179.2),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      AppLocalizations.of(context)
+                                          .translate('back'),
+                                      style: TextStyle(
+                                          fontFamily: kFontFamilyExo2,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: height / 37.3, //24
+                                          color: kNavigBarInactiveColor),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            onTap: () {
-                              Navigator.pop(context);
-                            }),
-                      )),
-                  Padding(
+                                ],
+                              ),
+                              onTap: () {
+                                Navigator.pop(context);
+                              }),
+                        )),
+                    Padding(
                       padding: EdgeInsets.only(top: height / 9),
                       child: Stack(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.only(
-                                    top: height / 25.6, left: 20, right: 20),
-                                child: Neumorphic(
-                                    style: NeumorphicStyle(
-                                        boxShape:
-                                        NeumorphicBoxShape.roundRect(
-                                            BorderRadius.circular(15)),
-                                        depth: 3,
-                                        intensity: 0.65,
-                                        shadowLightColorEmboss:
-                                        kArticlesWhiteColor.withOpacity(0.5),
-                                        shadowLightColor:
-                                        kArticlesWhiteColor.withOpacity(0.5),
-                                        shadowDarkColor: kArticlesBackColor,
-                                        shadowDarkColorEmboss:
-                                        kArticlesBackColor,
-                                        shape: NeumorphicShape.flat,
-                                        color: kNeumorphicColor2),
-                                    child: Container(
-                                        width: width, height: height / 4.0))),
-                            Padding(
-                                padding: EdgeInsets.only(top: 0.0),
-                                child: Column(children: [
-                                    Container(
-                                    width: 75.0,
-                                    height: 75.0,
-                                    child: Image.asset(
-                                        'assets/answer_title_image.png')),
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                                top: height / 25.6, left: 20, right: 20),
+                            child: Neumorphic(
+                              style: NeumorphicStyle(
+                                  boxShape: NeumorphicBoxShape.roundRect(
+                                      BorderRadius.circular(15)),
+                                  depth: 3,
+                                  intensity: 0.65,
+                                  shadowLightColorEmboss:
+                                      kArticlesWhiteColor.withOpacity(0.5),
+                                  shadowLightColor:
+                                      kArticlesWhiteColor.withOpacity(0.5),
+                                  shadowDarkColor: kArticlesBackColor,
+                                  shadowDarkColorEmboss: kArticlesBackColor,
+                                  shape: NeumorphicShape.flat,
+                                  color: kNeumorphicColor2),
+                              child:
+                                  Container(width: width, height: height / 4.0),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 0.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 75.0,
+                                  height: 75.0,
+                                  child: Image.asset(
+                                      'assets/answer_title_image.png'),
+                                ),
                                 Padding(
                                     padding: EdgeInsets.only(
                                         top: 5.0, left: 20.0, right: 20.0),
@@ -180,39 +179,35 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                       ),
                                     )),
                                 Container(
-                                    height: height / 18.66,
-                                    margin: EdgeInsets.only(
-                                        top: height / 42.66,
-                                        left: 42.0,
-                                        right: 42.0),
-                                    child: Neumorphic(
-                                        style: NeumorphicStyle(
-                                            boxShape: NeumorphicBoxShape
-                                                .roundRect(
-                                                BorderRadius.circular(
-                                                    10)),
-                                            depth: 3,
-                                            intensity: 0.65,
-                                            shadowLightColorEmboss:
+                                  height: height / 18.66,
+                                  margin: EdgeInsets.only(
+                                      top: height / 42.66,
+                                      left: 42.0,
+                                      right: 42.0),
+                                  child: Neumorphic(
+                                    style: NeumorphicStyle(
+                                        boxShape: NeumorphicBoxShape.roundRect(
+                                            BorderRadius.circular(10)),
+                                        depth: 3,
+                                        intensity: 0.65,
+                                        shadowLightColorEmboss:
                                             backColor == kArticlesBackTextColor
                                                 ? backColor
                                                 : kArticlesWhiteColor,
-                                            shadowLightColor:
+                                        shadowLightColor:
                                             backColor == kArticlesBackTextColor
                                                 ? backColor
                                                 : kArticlesWhiteColor,
-                                            shadowDarkColor:
-                                            backColor,
-                                            shadowDarkColorEmboss:
-                                            backColor,
-                                            shape: NeumorphicShape.flat,
-                                            color: kNeumorphicColor),
+                                        shadowDarkColor: backColor,
+                                        shadowDarkColorEmboss: backColor,
+                                        shape: NeumorphicShape.flat,
+                                        color: kNeumorphicColor),
                                     child: TextField(
                                       enabled: true,
                                       autofocus: true,
                                       textAlign: TextAlign.left,
                                       textCapitalization:
-                                      TextCapitalization.sentences,
+                                          TextCapitalization.sentences,
                                       controller: textController,
                                       style: TextStyle(
                                           fontFamily: kFontFamilyGilroy,
@@ -226,57 +221,51 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                             fontFamily: kFontFamilyGilroy,
                                             fontSize: height / 64.0,
                                             fontWeight: FontWeight.w600,
-                                            color: kArticleAnsTextFieldInpDecColor),
-                                        hintText: AppLocalizations.of(
-                                            context)
+                                            color:
+                                                kArticleAnsTextFieldInpDecColor),
+                                        hintText: AppLocalizations.of(context)
                                             .translate('answer_hint'),
                                         border: InputBorder.none,
                                       ),
-                                    ))),
-                            Container(
-                                decoration:
-                                BoxDecoration(boxShadow: [
-                                  BoxShadow(
-                                    color: kArticlesAnsShadow,
-                                    offset: Offset(3, 3),
-                                    blurRadius: 10.0,
+                                    ),
                                   ),
-                                ]),
-                                height: height / 18.66,
-                                margin: EdgeInsets.only(
-                                    left: 40.0,
-                                    right: 40.0,
-                                    top: height / 56),
-                                child: NeumorphicCustomButton(
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(boxShadow: [
+                                    BoxShadow(
+                                      color: kArticlesAnsShadow,
+                                      offset: Offset(3, 3),
+                                      blurRadius: 10.0,
+                                    ),
+                                  ]),
+                                  height: height / 18.66,
+                                  margin: EdgeInsets.only(
+                                      left: 40.0,
+                                      right: 40.0,
+                                      top: height / 56),
+                                  child: NeumorphicCustomButton(
                                     style: NeumorphicStyle(
                                         depth: !isAnswerSent ? 0 : -3,
                                         shape: NeumorphicShape.flat,
                                         intensity: 0.6,
                                         shadowLightColorEmboss:
-                                        kADNeumorphicShadowLightColorEmboss,
+                                            kADNeumorphicShadowLightColorEmboss,
                                         shadowDarkColor:
-                                        kADNeumorphicShadowDarkColor,
+                                            kADNeumorphicShadowDarkColor,
                                         shadowDarkColorEmboss:
-                                        kADNeumorphicShadowDarkColorEmboss,
-                                        shadowLightColor:
-                                        kArticlesWhiteColor,
+                                            kADNeumorphicShadowDarkColorEmboss,
+                                        shadowLightColor: kArticlesWhiteColor,
                                         color: kADNeumorphicColor),
-                                    boxShape: NeumorphicBoxShape
-                                        .roundRect(
-                                        BorderRadius.circular(
-                                            10)),
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                        BorderRadius.circular(10)),
                                     provideHapticFeedback: false,
                                     onClick: () {
-                                      if (textController
-                                          .text.length >
-                                          0 || textController
-                                          .text.length <
-                                          255) {
+                                      if (textController.text.length > 0 ||
+                                          textController.text.length < 255) {
                                         sendAnswer(
                                             widget.articleId,
                                             widget.questionId,
-                                            textController.text
-                                                .toString());
+                                            textController.text.toString());
                                       }
                                       /*Analytics().sendEventReports(
                             event: banner_click,
@@ -287,135 +276,119 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                       children: <Widget>[
                                         Container(
                                           height: height / 18.66,
-                                          alignment:
-                                          Alignment.center,
+                                          alignment: Alignment.center,
                                           decoration: BoxDecoration(
-                                              gradient:
-                                              new LinearGradient(
-                                                begin: Alignment
-                                                    .topCenter,
-                                                end: Alignment
-                                                    .bottomCenter,
-                                                colors: kLinearGrad2Color,
-                                              ),
-                                              borderRadius:
-                                              BorderRadius.all(
-                                                  Radius.circular(
-                                                      10.0))),
+                                            gradient: new LinearGradient(
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              colors: kLinearGrad2Color,
+                                            ),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0),
+                                            ),
+                                          ),
                                           child: !isAnswerSent
                                               ? Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .center,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment
-                                                .center,
-                                            children: <
-                                                Widget>[
-                                              Container(
-                                                alignment:
-                                                Alignment
-                                                    .center,
-                                                margin: EdgeInsets
-                                                    .only(
-                                                    right:
-                                                    9.0),
-                                                child:
-                                                SvgPicture
-                                                    .asset(
-                                                  'assets/svg/article_send_comment.svg',
-                                                ),
-                                              ),
-                                              Container(
-                                                margin: EdgeInsets
-                                                    .only(
-                                                    bottom:
-                                                    4.0),
-                                                child: Text(
-                                                  AppLocalizations.of(
-                                                      context)
-                                                      .translate(
-                                                      'send'),
-                                                  overflow:
-                                                  TextOverflow
-                                                      .ellipsis,
-                                                  style:
-                                                  TextStyle(
-                                                    fontFamily: kFontFamilyMontserratBold,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: height / 56,
-                                                    //14
-                                                    height: 1.7,
-                                                    color: kArticlesWhiteColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          )
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      margin: EdgeInsets.only(
+                                                          right: 9.0),
+                                                      child: SvgPicture.asset(
+                                                        'assets/svg/article_send_comment.svg',
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          bottom: 4.0),
+                                                      child: Text(
+                                                        AppLocalizations.of(
+                                                                context)
+                                                            .translate('send'),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              kFontFamilyMontserratBold,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontSize: height / 56,
+                                                          //14
+                                                          height: 1.7,
+                                                          color:
+                                                              kArticlesWhiteColor,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
                                               : Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .center,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment
-                                                .center,
-                                            children: <
-                                                Widget>[
-                                              Container(
-                                                alignment:
-                                                Alignment
-                                                    .center,
-                                                margin: EdgeInsets
-                                                    .only(
-                                                    right:
-                                                    9.0),
-                                                child:
-                                                SvgPicture
-                                                    .asset(
-                                                  'assets/svg/sent.svg',
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      margin: EdgeInsets.only(
+                                                          right: 9.0),
+                                                      child: SvgPicture.asset(
+                                                        'assets/svg/sent.svg',
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          bottom: 4.0),
+                                                      child: Text(
+                                                        AppLocalizations.of(
+                                                                context)
+                                                            .translate(
+                                                                'answer_sent'),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              kFontFamilyMontserratBold,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontSize: height / 56,
+                                                          //14
+                                                          height: 1.7,
+                                                          color:
+                                                              kArticlesWhiteColor,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                              Container(
-                                                margin: EdgeInsets
-                                                    .only(
-                                                    bottom:
-                                                    4.0),
-                                                child: Text(
-                                                  AppLocalizations.of(
-                                                      context)
-                                                      .translate(
-                                                      'answer_sent'),
-                                                  overflow:
-                                                  TextOverflow
-                                                      .ellipsis,
-                                                  style:
-                                                  TextStyle(
-                                                    fontFamily: kFontFamilyMontserratBold,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: height / 56,
-                                                    //14
-                                                    height: 1.7,
-                                                    color: kArticlesWhiteColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
                                         ),
                                       ],
-                                    ))),
-                          ])),
-                ],
-              ),
-            )
-            ]),
-        ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
-    ),)
-    )
-    ,
     );
   }
 
