@@ -43,6 +43,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //print('playlist_screen');
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     PCProvider pcProvider = Provider.of<PCProvider>(context, listen: false);

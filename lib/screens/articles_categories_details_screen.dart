@@ -32,7 +32,9 @@ class ArticlesCategoriesDetailsScreen extends StatefulWidget {
 
 class _ArticlesCategoriesDetailsScreen
     extends State<ArticlesCategoriesDetailsScreen> {
-  List<ApiArticlesModel> articlesList = new List<ApiArticlesModel>();
+  List<ApiArticlesModel> articlesList = [];
+
+  double width, height;
 
   @override
   void initState() {
@@ -45,8 +47,8 @@ class _ArticlesCategoriesDetailsScreen
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
     PCProvider pcProvider = Provider.of<PCProvider>(context, listen: false);
 
     return Scaffold(
@@ -123,171 +125,7 @@ class _ArticlesCategoriesDetailsScreen
                       children: List<Widget>.generate(
                         articlesList.length,
                         (index) {
-                          return Stack(
-                            children: <Widget>[
-                              Stack(
-                                children: <Widget>[
-                                  Container(
-                                    height: height,
-                                    width: width,
-                                    child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
-                                      child: PlayListLeadWidget(
-                                        url: articlesList[index].coverImg,
-                                        created:
-                                            articlesList[index].dateCreated,
-                                        height: height,
-                                        width: width,
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Container(
-                                      height: height / 12.45,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(20),
-                                          bottomRight: Radius.circular(20),
-                                        ),
-                                        child: Container(
-                                          child: BackdropFilter(
-                                            child: Container(
-                                              color:
-                                                  kArticlesWhiteColor.withOpacity(0.0),
-                                            ),
-                                            filter: ImageFilter.blur(
-                                                sigmaX: 2.0, sigmaY: 2.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: height,
-                                    width: width,
-                                    margin: EdgeInsets.only(bottom: 9),
-                                    alignment: Alignment.bottomCenter,
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
-                                    ),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: height / 15.67,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 13.0),
-                                        child: Text(
-                                          articlesList[index].title,
-                                          textAlign: TextAlign.left,
-                                          maxLines: 4,
-                                          style: TextStyle(
-                                              fontFamily: kFontFamilyGilroyBold,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: height / 64.0,
-                                              color: kArticlesWhiteColor,
-                                              height: 1.37),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Visibility(
-                                  // ignore: null_aware_in_logical_operator
-                                  visible: articlesList[index].isPaid == 1
-                                      ? true
-                                      : false,
-                                  child: Container(
-                                    height: Provider.of<SubscribeData>(context)
-                                            .isAppPurchase
-                                        ? 0.0
-                                        : height,
-                                    width: Provider.of<SubscribeData>(context)
-                                            .isAppPurchase
-                                        ? 0.0
-                                        : width,
-                                    decoration: BoxDecoration(
-                                      //color: Color(0x75C4C4C4),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
-                                    ),
-                                    alignment: Alignment.topRight,
-                                    child: Container(
-                                        height: height / 12.6,
-                                        width: height / 12.6,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                                'assets/new_lock.png'),
-                                            fit: BoxFit.fill,
-                                          ),
-                                        )),
-                                  )),
-                              Positioned.fill(
-                                child: Material(
-                                  color: Colors.transparent,
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12.0)),
-                                    radius: 12,
-                                    onTap: () {
-                                      bool isAppPurchase =
-                                          Provider.of<SubscribeData>(context,
-                                                  listen: false)
-                                              .isAppPurchase;
-                                      if (articlesList[index].isPaid == 1) {
-                                        if (isAppPurchase) {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (BuildContext
-                                                          context) =>
-                                                      ArticlesDetailsScreen(
-                                                          articleId:
-                                                              articlesList[
-                                                                      index]
-                                                                  .id
-                                                                  .toString())));
-                                          /*Analytics().sendEventReports(
-                                              event: vibration_play,
-                                              attr: {'vibration_id': playlistData.getCurrentPlaylistModel(context).created,
-                                                'playlist_id': Provider.of<PlaylistNameData>(context, listen: false).getCurrentPlaylistName().name,
-                                                'source': 'playlist_' + Provider.of<PlaylistNameData>(context, listen: false).getCurrentName() + '_screen',
-                                              },
-                                            );*/
-                                        } else {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SubscribeScreen(
-                                                      isFromSplash: false),
-                                            ),
-                                          );
-                                        }
-                                      } else {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                ArticlesDetailsScreen(
-                                              articleId: articlesList[index]
-                                                  .id
-                                                  .toString(),
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
+                          return _customContainer(articlesList[index]);
                         },
                       ),
                     ),
@@ -298,6 +136,155 @@ class _ArticlesCategoriesDetailsScreen
           ),
         ),
       ),
+    );
+  }
+
+  Widget _customContainer(apiArticlesModel) {
+    final ApiArticlesModel _apiArticlesModel = apiArticlesModel;
+    return Stack(
+      children: <Widget>[
+        Stack(
+          children: <Widget>[
+            Container(
+              height: height,
+              width: width,
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                child: PlayListLeadWidget(
+                  url: _apiArticlesModel.coverImg,
+                  created: _apiArticlesModel.dateCreated,
+                  height: height,
+                  width: width,
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: height / 12.45,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                  child: Container(
+                    child: BackdropFilter(
+                      child: Container(
+                        color: kArticlesWhiteColor.withOpacity(0.0),
+                      ),
+                      filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              height: height,
+              width: width,
+              margin: EdgeInsets.only(bottom: 9),
+              alignment: Alignment.bottomCenter,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Container(
+                alignment: Alignment.center,
+                height: height / 15.67,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 13.0),
+                  child: Text(
+                    _apiArticlesModel.title,
+                    textAlign: TextAlign.left,
+                    maxLines: 4,
+                    style: TextStyle(
+                        fontFamily: kFontFamilyGilroyBold,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.normal,
+                        fontSize: height / 64.0,
+                        color: kArticlesWhiteColor,
+                        height: 1.37),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Visibility(
+            // ignore: null_aware_in_logical_operator
+            visible: _apiArticlesModel.isPaid == 1 ? true : false,
+            child: Container(
+              height: Provider.of<SubscribeData>(context).isAppPurchase
+                  ? 0.0
+                  : height,
+              width: Provider.of<SubscribeData>(context).isAppPurchase
+                  ? 0.0
+                  : width,
+              decoration: BoxDecoration(
+                //color: Color(0x75C4C4C4),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              alignment: Alignment.topRight,
+              child: Container(
+                  height: height / 12.6,
+                  width: height / 12.6,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/new_lock.png'),
+                      fit: BoxFit.fill,
+                    ),
+                  )),
+            )),
+        Positioned.fill(
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              borderRadius: BorderRadius.all(Radius.circular(12.0)),
+              radius: 12,
+              onTap: () {
+                bool isAppPurchase =
+                    Provider.of<SubscribeData>(context, listen: false)
+                        .isAppPurchase;
+                if (_apiArticlesModel.isPaid == 1) {
+                  if (isAppPurchase) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            ArticlesDetailsScreen(
+                          articleId: _apiArticlesModel.id.toString(),
+                        ),
+                      ),
+                    );
+                    /*Analytics().sendEventReports(
+                                              event: vibration_play,
+                                              attr: {'vibration_id': playlistData.getCurrentPlaylistModel(context).created,
+                                                'playlist_id': Provider.of<PlaylistNameData>(context, listen: false).getCurrentPlaylistName().name,
+                                                'source': 'playlist_' + Provider.of<PlaylistNameData>(context, listen: false).getCurrentName() + '_screen',
+                                              },
+                                            );*/
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SubscribeScreen(isFromSplash: false),
+                      ),
+                    );
+                  }
+                } else {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => ArticlesDetailsScreen(
+                        articleId: _apiArticlesModel.id.toString(),
+                      ),
+                    ),
+                  );
+                }
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 

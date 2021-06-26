@@ -98,6 +98,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //print('player_screen');
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     PCProvider pcProvider = Provider.of<PCProvider>(context, listen: false);
@@ -464,7 +465,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       return AnimatedOpacity(child: Container(
                         child: setSwiper(playlistData),
                         height: height / 3.34,
-                      ), opacity: isShowSwiper ? 1.0 : 0.0, duration: Duration(milliseconds: 125));
+                      ), opacity: isShowSwiper ? 1.0 : 0.0, duration: Duration(milliseconds: 125),);
                     },
                   ),
                   /** SLIDER SHKALA**/

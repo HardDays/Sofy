@@ -298,12 +298,15 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                   .isAppPurchase;
                           if (popularArticle[index].isPaid == 1) {
                             if (isAppPurchase) {
-                              Navigator.of(context).push(MaterialPageRoute(
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
                                   builder: (BuildContext context) =>
                                       ArticlesDetailsScreen(
-                                          articleId: popularArticle[index]
-                                              .id
-                                              .toString(),),),);
+                                    articleId:
+                                        popularArticle[index].id.toString(),
+                                  ),
+                                ),
+                              );
                               /*Analytics().sendEventReports(
                                               event: vibration_play,
                                               attr: {'vibration_id': playlistData.getCurrentPlaylistModel(context).created,
@@ -487,50 +490,52 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                   ),
                 ),
                 Padding(
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                    child: ListView.builder(
-                      itemCount: popularTopicsList.length > 4
-                          ? 4
-                          : popularTopicsList.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: EdgeInsets.all(0.0),
-                      itemBuilder: (context, index) =>
-                          ArticlesCategoryScreenButton(
-                        iconUrl: popularTopicsList[index].coverImg,
-                        height: 1,
-                        borderRadius: BorderRadius.only(
-                            topLeft: popularTopicsList.first.id ==
-                                    popularTopicsList[index].id
-                                ? Radius.circular(10.0)
-                                : Radius.circular(0.0),
-                            topRight: popularTopicsList.first.id ==
-                                    popularTopicsList[index].id
-                                ? Radius.circular(10.0)
-                                : Radius.circular(0.0),
-                            bottomLeft: popularTopicsList.last.id ==
-                                    popularTopicsList[index].id
-                                ? Radius.circular(10.0)
-                                : Radius.circular(0.0),
-                            bottomRight: popularTopicsList.last.id ==
-                                    popularTopicsList[index].id
-                                ? Radius.circular(10.0)
-                                : Radius.circular(0.0)),
-                        text: popularTopicsList[index].name,
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  ArticlesCategoriesDetailsScreen(
-                                      screenTitle:
-                                          popularTopicsList[index].name,
-                                      categoryId:
-                                          popularTopicsList[index].id)));
-                          /*Analytics().sendEventReports(
+                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  child: ListView.builder(
+                    itemCount: popularTopicsList.length > 4
+                        ? 4
+                        : popularTopicsList.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.all(0.0),
+                    itemBuilder: (context, index) =>
+                        ArticlesCategoryScreenButton(
+                      iconUrl: popularTopicsList[index].coverImg,
+                      height: 1,
+                      borderRadius: BorderRadius.only(
+                          topLeft: popularTopicsList.first.id ==
+                                  popularTopicsList[index].id
+                              ? Radius.circular(10.0)
+                              : Radius.circular(0.0),
+                          topRight: popularTopicsList.first.id ==
+                                  popularTopicsList[index].id
+                              ? Radius.circular(10.0)
+                              : Radius.circular(0.0),
+                          bottomLeft: popularTopicsList.last.id ==
+                                  popularTopicsList[index].id
+                              ? Radius.circular(10.0)
+                              : Radius.circular(0.0),
+                          bottomRight: popularTopicsList.last.id ==
+                                  popularTopicsList[index].id
+                              ? Radius.circular(10.0)
+                              : Radius.circular(0.0)),
+                      text: popularTopicsList[index].name,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                ArticlesCategoriesDetailsScreen(
+                                    screenTitle: popularTopicsList[index].name,
+                                    categoryId: popularTopicsList[index].id),
+                          ),
+                        );
+                        /*Analytics().sendEventReports(
                             event: not_vibrating_click,
                           );*/
-                        },
-                      ),
-                    )),
+                      },
+                    ),
+                  ),
+                ),
                 SizedBox(height: height / 42.66),
                 Container(
                     margin: EdgeInsets.only(
@@ -720,260 +725,261 @@ class _ArticlesScreenState extends State<ArticlesScreen>
 
   Widget showFavTopic(int pos) {
     return favoritesTopics.length > pos
-        ? Column(children: [
-            SizedBox(height: height / 59.73),
-            Container(
-              height: height / 13.69,
-              child: InkWell(
-                highlightColor: kSettingActiveButtonColor.withOpacity(0.2),
-                splashColor: kSettingActiveButtonColor.withOpacity(0.2),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          ArticlesCategoriesDetailsScreen(
-                        screenTitle: favoritesTopics[pos].name,
-                        categoryId: favoritesTopics[pos].id,
+        ? Column(
+            children: [
+              SizedBox(height: height / 59.73),
+              Container(
+                height: height / 13.69,
+                child: InkWell(
+                  highlightColor: kSettingActiveButtonColor.withOpacity(0.2),
+                  splashColor: kSettingActiveButtonColor.withOpacity(0.2),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            ArticlesCategoriesDetailsScreen(
+                          screenTitle: favoritesTopics[pos].name,
+                          categoryId: favoritesTopics[pos].id,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                  height: height / 14.69,
-                  alignment: Alignment.center,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          //height: height / 19.91,
-                          padding: EdgeInsets.only(bottom: 5.0),
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            favoritesTopics[pos].name,
-                            maxLines: 2,
-                            style: TextStyle(
-                              fontFamily: kFontFamilyExo2,
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: height / 37.33,
-                              color: kArticlesPopularColor,
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                    height: height / 14.69,
+                    alignment: Alignment.center,
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            //height: height / 19.91,
+                            padding: EdgeInsets.only(bottom: 5.0),
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              favoritesTopics[pos].name,
+                              maxLines: 2,
+                              style: TextStyle(
+                                fontFamily: kFontFamilyExo2,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.normal,
+                                fontSize: height / 37.33,
+                                color: kArticlesPopularColor,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SvgPicture.asset(
-                        'assets/svg/arrow_next_vector.svg',
-                        color: kWelcomDarkTextColor,
-                      ),
-                    ],
+                        SvgPicture.asset(
+                          'assets/svg/arrow_next_vector.svg',
+                          color: kWelcomDarkTextColor,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
+              Container(
                 height: height / 4.2,
                 child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.only(left: 20.0),
-                    itemCount: favoritesTopics[pos].items.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        width: height / 5.27,
-                        height: height / 4.2,
-                        margin: EdgeInsets.only(bottom: 10, right: 16),
-                        child: Stack(
-                          children: <Widget>[
-                            Stack(
-                              children: <Widget>[
-                                Container(
-                                  width: height / 5.27,
-                                  height: height / 4.2,
-                                  child: ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                    child: CachedNetworkImage(
-                                      placeholder: (context, url) => SizedBox(
-                                        width: height / 4.42,
-                                        height: height / 3.82,
-                                        child: Shimmer.fromColors(
-                                          baseColor: kShimmerBaseColor,
-                                          highlightColor: kAppPinkDarkColor,
-                                          direction: ShimmerDirection.ltr,
-                                          period: Duration(seconds: 2),
-                                          child: Container(
-                                            width: height / 4.1,
-                                            height: height / 3.65,
-                                            decoration: BoxDecoration(
-                                              color: kArticlesWhiteColor,
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(25.0),
-                                              ),
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.only(left: 20.0),
+                  itemCount: favoritesTopics[pos].items.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      width: height / 5.27,
+                      height: height / 4.2,
+                      margin: EdgeInsets.only(bottom: 10, right: 16),
+                      child: Stack(
+                        children: <Widget>[
+                          Stack(
+                            children: <Widget>[
+                              Container(
+                                width: height / 5.27,
+                                height: height / 4.2,
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25)),
+                                  child: CachedNetworkImage(
+                                    placeholder: (context, url) => SizedBox(
+                                      width: height / 4.42,
+                                      height: height / 3.82,
+                                      child: Shimmer.fromColors(
+                                        baseColor: kShimmerBaseColor,
+                                        highlightColor: kAppPinkDarkColor,
+                                        direction: ShimmerDirection.ltr,
+                                        period: Duration(seconds: 2),
+                                        child: Container(
+                                          width: height / 4.1,
+                                          height: height / 3.65,
+                                          decoration: BoxDecoration(
+                                            color: kArticlesWhiteColor,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(25.0),
                                             ),
                                           ),
                                         ),
                                       ),
-                                      imageUrl: favoritesTopics[pos]
-                                          .items[index]
-                                          ?.coverImg,
-                                      fit: BoxFit.cover,
                                     ),
+                                    imageUrl: favoritesTopics[pos]
+                                        .items[index]
+                                        ?.coverImg,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Container(
-                                    width: height / 5.27,
-                                    height: height / 9.2 + 5,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(25),
-                                        bottomRight: Radius.circular(25),
-                                      ),
-                                      child: Container(
-                                        child: BackdropFilter(
-                                          child: Container(
-                                            color:
-                                                Colors.black.withOpacity(0.1),
-                                          ),
-                                          filter: ImageFilter.blur(
-                                              sigmaX: 2.0, sigmaY: 2.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: height / 5.27,
-                                  height: height / 4.76,
-                                  margin: EdgeInsets.only(bottom: 5),
-                                  alignment: Alignment.bottomCenter,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12)),
-                                  ),
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: height / 10.2,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          right: 10.0, left: 10.0),
-                                      child: Text(
-                                        favoritesTopics[pos]
-                                            .items[index]
-                                            ?.title,
-                                        textAlign: TextAlign.left,
-                                        maxLines: 5,
-                                        style: TextStyle(
-                                          fontFamily: kFontFamilyGilroyBold,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: height / 56,
-                                          color: kArticlesWhiteColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Visibility(
-                              // ignore: null_aware_in_logical_operator
-                              visible:
-                                  favoritesTopics[pos].items[index].isPaid ==
-                                          '1'
-                                      ? true
-                                      : false,
-                              child: Container(
-                                height: Provider.of<SubscribeData>(context)
-                                        .isAppPurchase
-                                    ? 0.0
-                                    : height,
-                                width: Provider.of<SubscribeData>(context)
-                                        .isAppPurchase
-                                    ? 0.0
-                                    : width,
-                                alignment: Alignment.topRight,
+                              ),
+                              Align(
+                                alignment: Alignment.bottomCenter,
                                 child: Container(
-                                  height: height / 12.6,
-                                  width: height / 12.6,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('assets/new_lock.png'),
-                                      fit: BoxFit.fill,
+                                  width: height / 5.27,
+                                  height: height / 9.2 + 5,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(25),
+                                      bottomRight: Radius.circular(25),
+                                    ),
+                                    child: Container(
+                                      child: BackdropFilter(
+                                        child: Container(
+                                          color: Colors.black.withOpacity(0.1),
+                                        ),
+                                        filter: ImageFilter.blur(
+                                            sigmaX: 2.0, sigmaY: 2.0),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
+                              Container(
+                                width: height / 5.27,
+                                height: height / 4.76,
+                                margin: EdgeInsets.only(bottom: 5),
+                                alignment: Alignment.bottomCenter,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12)),
+                                ),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: height / 10.2,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        right: 10.0, left: 10.0),
+                                    child: Text(
+                                      favoritesTopics[pos].items[index]?.title,
+                                      textAlign: TextAlign.left,
+                                      maxLines: 5,
+                                      style: TextStyle(
+                                        fontFamily: kFontFamilyGilroyBold,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: height / 56,
+                                        color: kArticlesWhiteColor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Visibility(
+                            // ignore: null_aware_in_logical_operator
+                            visible:
+                                favoritesTopics[pos].items[index].isPaid == '1'
+                                    ? true
+                                    : false,
+                            child: Container(
+                              height: Provider.of<SubscribeData>(context)
+                                      .isAppPurchase
+                                  ? 0.0
+                                  : height,
+                              width: Provider.of<SubscribeData>(context)
+                                      .isAppPurchase
+                                  ? 0.0
+                                  : width,
+                              alignment: Alignment.topRight,
+                              child: Container(
+                                height: height / 12.6,
+                                width: height / 12.6,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('assets/new_lock.png'),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
                             ),
-                            Positioned.fill(
-                              child: Material(
-                                color: kArticlesTransparentColor,
-                                child: InkWell(
-                                    splashColor: kArticlesTransparentColor,
-                                    highlightColor: kArticlesTransparentColor,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12.0)),
-                                    radius: 12,
-                                    onTap: () {
-                                      bool isAppPurchase =
-                                          Provider.of<SubscribeData>(context,
-                                                  listen: false)
-                                              .isAppPurchase;
-                                      if (favoritesTopics[pos]
-                                              .items[index]
-                                              .isPaid ==
-                                          '1') {
-                                        if (isAppPurchase) {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (BuildContext
-                                                          context) =>
-                                                      ArticlesDetailsScreen(
-                                                          articleId:
-                                                              favoritesTopics[
-                                                                      pos]
-                                                                  .items[index]
-                                                                  .id
-                                                                  .toString())));
-                                          /*Analytics().sendEventReports(
+                          ),
+                          Positioned.fill(
+                            child: Material(
+                              color: kArticlesTransparentColor,
+                              child: InkWell(
+                                splashColor: kArticlesTransparentColor,
+                                highlightColor: kArticlesTransparentColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12.0)),
+                                radius: 12,
+                                onTap: () {
+                                  bool isAppPurchase =
+                                      Provider.of<SubscribeData>(context,
+                                              listen: false)
+                                          .isAppPurchase;
+                                  if (favoritesTopics[pos]
+                                          .items[index]
+                                          .isPaid ==
+                                      '1') {
+                                    if (isAppPurchase) {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              ArticlesDetailsScreen(
+                                            articleId: favoritesTopics[pos]
+                                                .items[index]
+                                                .id
+                                                .toString(),
+                                          ),
+                                        ),
+                                      );
+                                      /*Analytics().sendEventReports(
                                               event: vibration_play,
                                               attr: {'vibration_id': playlistData.getCurrentPlaylistModel(context).created,
                                                 'playlist_id': Provider.of<PlaylistNameData>(context, listen: false).getCurrentPlaylistName().name,
                                                 'source': 'playlist_' + Provider.of<PlaylistNameData>(context, listen: false).getCurrentName() + '_screen',
                                               },
                                             );*/
-                                        } else {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SubscribeScreen(
-                                                      isFromSplash: false),
-                                            ),
-                                          );
-                                        }
-                                      } else {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (BuildContext
-                                                        context) =>
-                                                    ArticlesDetailsScreen(
-                                                        articleId:
-                                                            favoritesTopics[pos]
-                                                                .items[index]
-                                                                .id
-                                                                .toString())));
-                                      }
-                                    }),
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SubscribeScreen(
+                                              isFromSplash: false),
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            ArticlesDetailsScreen(
+                                          articleId: favoritesTopics[pos]
+                                              .items[index]
+                                              .id
+                                              .toString(),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
                             ),
-                          ],
-                        ),
-                      );
-                    })),
-          ])
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          )
         : Container();
   }
 
