@@ -45,10 +45,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
         body: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Color(0xffFDF3FF),
-                  Color(0xffF9EAF7),
-                ],
+                colors: kUserCngPassLinearGradColor,
               ),
             ),
             child: Padding(
@@ -127,7 +124,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                               fontStyle: FontStyle.normal,
                               fontSize: height / 64,
                               height: 1.4,
-                              color: Color(0xff38394F)),
+                              color: kUserCngPassTextColor),
                         ),
                       ),
                       SizedBox(height: height / 40.72),
@@ -168,16 +165,13 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                                       gradient: new LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
-                                        colors: [
-                                          const Color(0xFFFDB0C1),
-                                          const Color(0xFFFF95AC),
-                                        ],
+                                        colors: kUserCngPassLinearGrad2Color,
                                       ),
                                       borderRadius:
                                       BorderRadius.all(Radius.circular(10.0)),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color(0xffFFBFCD),
+                                          color: kUserCngPassShadowColor,
                                           offset: Offset(7, 7),
                                           blurRadius: 10.0,
                                         ),
@@ -263,7 +257,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                               fontStyle: FontStyle.normal,
                               fontSize: height / 64,
                               height: 1.4,
-                              color: Color(0xff38394F)),
+                              color: kUserCngPassTextColor),
                         ),
                       ),
                       Container(
@@ -297,16 +291,13 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                                   gradient: new LinearGradient(
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
-                                    colors: [
-                                      const Color(0xFFFDB0C1),
-                                      const Color(0xFFFF95AC),
-                                    ],
+                                    colors: kUserCngPassLinearGrd3Color,
                                   ),
                                   borderRadius: BorderRadius.all(
                                       Radius.circular(10.0)),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Color(0xffFFBFCD),
+                                      color: kUserCngPassShadowColor,
                                       offset: Offset(7, 7),
                                       blurRadius: 10.0,
                                     ),

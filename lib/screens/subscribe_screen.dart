@@ -93,10 +93,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xffFDF3FF),
-              Color(0xffF9EAF7),
-            ],
+            colors: kSubscrScrLinearGradColor,
           ),
         ),
         child: Stack(
@@ -139,8 +136,8 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                                   ? 'assets/svg/close.svg'
                                                   : 'assets/svg/back_vector.svg',
                                               color: widget.isFromSplash
-                                                  ? Color(0xffa8a8a8)
-                                                  : kNavigBarInactiveColor,
+                                                  ? kSubscrScrSvgBtnColor
+                                                  : kSubscrScrSvgBtn2Color,
                                               height: height / 30.33,
                                             ),
                                           ),
@@ -198,7 +195,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                       AppLocalizations.of(context)
                                           .translate('restore'),
                                       style: TextStyle(
-                                        color: Color(0xffC4C4C4),
+                                        color: kSubscrScrRestoreColor,
                                         fontFamily: kFontFamilyExo2,
                                         fontWeight: FontWeight.bold,
                                         fontSize:
@@ -284,7 +281,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                         shape: BadgeShape.square,
                         borderRadius: BorderRadius.circular(6.0),
                         toAnimate: false,
-                        badgeColor: kAppPinkDarkColor,
+                        badgeColor: kSubscrScrWidgColor,
                         position: BadgePosition.topEnd(end: 25, top: -12.0),
                         child: Container(
                           height: height / 12.8,
@@ -297,13 +294,13 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                           decoration: BoxDecoration(
                             color: isFree
                                 ? kSettingInActiveButtonColor
-                                : Color.fromRGBO(255, 225, 232, 0.6),
+                                : kSubscrScrWidgNotColor,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(12.0)),
                             border: Border.all(
                               color: isFree
-                                  ? kAppPinkDarkColor
-                                  : Color.fromRGBO(255, 225, 232, 0.6),
+                                  ? kSubscrScrWidgColor
+                                  : kSubscrScrWidgNotColor,
                               width: isFree ? 1.3 : 0.0,
                             ),
                           ),
@@ -320,8 +317,8 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                         .value(context, annualPlanNameKey),
                                     style: TextStyle(
                                       color: isFree
-                                          ? kWelcomDarkTextColor
-                                          : Color(0xffc5acb5),
+                                          ? kSubscrScrTextColor
+                                          : kSubscrScrNotTextColor,
                                       fontFamily: kFontFamilyGilroyBold,
                                       fontSize: height / 52,
                                       fontWeight: FontWeight.normal,
@@ -334,8 +331,8 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                         context, annualPlanDescriptionKey),
                                     style: TextStyle(
                                       color: isFree
-                                          ? kWelcomDarkTextColor
-                                          : Color(0xffc5acb5),
+                                          ? kSubscrScrTextColor
+                                          : kSubscrScrNotTextColor,
                                       fontFamily: kFontFamilyGilroy,
                                       fontSize: height / 74.6,
                                       fontWeight: FontWeight.bold,
@@ -346,12 +343,12 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                               CircleAvatar(
                                 radius: 8.0,
                                 backgroundColor: isFree
-                                    ? kAppPinkDarkColor
-                                    : Color(0xffFFF5F9),
+                                    ? kSubscrScrWidgColor
+                                    : kSubscrScrNotAvaColor,
                                 child: Icon(
                                   Icons.check,
                                   size: 12,
-                                  color: Color(0xffFFF5F9),
+                                  color: kSubscrScrNotAvaColor,
                                 ),
                               )
                             ],
@@ -405,12 +402,12 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                         decoration: BoxDecoration(
                           color: isByMonth
                               ? kSettingInActiveButtonColor
-                              : Color.fromRGBO(255, 225, 232, 0.6),
+                              : kSubscrScrWidgNotColor,
                           borderRadius: BorderRadius.all(Radius.circular(12.0)),
                           border: Border.all(
                             color: isByMonth
-                                ? kAppPinkDarkColor
-                                : Color.fromRGBO(255, 225, 232, 0.6),
+                                ? kSubscrScrWidgColor
+                                : kSubscrScrWidgNotColor,
                             width: isByMonth ? 1.3 : 0.0,
                           ),
                         ),
@@ -427,8 +424,8 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                       .value(context, monthPlanNameKey),
                                   style: TextStyle(
                                     color: isByMonth
-                                        ? kWelcomDarkTextColor
-                                        : Color(0xffc5acb5),
+                                        ? kSubscrScrTextColor
+                                        : kSubscrScrNotTextColor,
                                     fontFamily: kFontFamilyGilroyBold,
                                     fontSize: height / 52,
                                     fontWeight: FontWeight.normal,
@@ -441,8 +438,8 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                       .value(context, monthPlanDescriptionKey),
                                   style: TextStyle(
                                     color: isByMonth
-                                        ? kWelcomDarkTextColor
-                                        : Color(0xffc5acb5),
+                                        ? kSubscrScrTextColor
+                                        : kSubscrScrNotTextColor,
                                     fontFamily: kFontFamilyGilroy,
                                     fontSize: height / 74.6,
                                     fontWeight: FontWeight.bold,
@@ -453,12 +450,12 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                             CircleAvatar(
                               radius: 8.0,
                               backgroundColor: isByMonth
-                                  ? kAppPinkDarkColor
-                                  : Color(0xffFFF5F9),
+                                  ? kSubscrScrWidgColor
+                                  : kSubscrScrNotAvaColor,
                               child: Icon(
                                 Icons.check,
                                 size: 12,
-                                color: Color(0xffFFF5F9),
+                                color: kSubscrScrNotAvaColor,
                               ),
                             )
                           ],
@@ -472,11 +469,11 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                       gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          colors: [Color(0xffFDB0C1), Color(0xffFF95AC)]),
+                          colors: kSubscrScrLinear2GradColor),
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: Color(0x39FF98AD),
+                          color: kSubscrScrShadowColor,
                           spreadRadius: 3,
                           blurRadius: 5,
                           offset: Offset(2, 5),
@@ -523,7 +520,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                             }
                           }
                         },
-                        splashColor: kAppPinkDarkColor,
+                        splashColor: kSubscrScrWidgColor,
                         highlightColor: Colors.transparent,
                         child: new Ink(
                           child: Container(
@@ -558,7 +555,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                       : ''),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Color(0x8C38394F),
+                        color: kSubscrScrText2Color,
                         fontFamily: kFontFamilyGilroy,
                         fontSize: 10.0,
                         fontWeight: FontWeight.normal,
@@ -578,7 +575,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                 color: Colors.transparent,
                                 child: InkWell(
                                   highlightColor:
-                                      kAppPinkDarkColor.withOpacity(0.2),
+                                      kSubscrScrWidgColor.withOpacity(0.2),
                                   splashColor: Colors.transparent,
                                   borderRadius: BorderRadius.circular(25.0),
                                   onTap: () {
@@ -607,7 +604,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                 color: Colors.transparent,
                                 child: InkWell(
                                   highlightColor:
-                                      kAppPinkDarkColor.withOpacity(0.2),
+                                      kSubscrScrWidgColor.withOpacity(0.2),
                                   splashColor: Colors.transparent,
                                   borderRadius: BorderRadius.circular(25.0),
                                   onTap: () {
@@ -682,7 +679,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: kWelcomDarkTextColor,
+                color: kSubscrScrTextColor,
                 fontFamily: kFontFamilyProximaNova,
                 fontSize: height / 50.71,
                 fontWeight: FontWeight.bold,
@@ -727,7 +724,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
           Container(
               child: Text(text,
                   style: TextStyle(
-                    color: kWelcomDarkTextColor,
+                    color: kSubscrScrTextColor,
                     fontFamily: kFontFamilyGilroyBold,
                     fontSize: height / 40.72,
                     fontWeight: FontWeight.bold,

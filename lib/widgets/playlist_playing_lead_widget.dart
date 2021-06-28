@@ -10,7 +10,7 @@ class PlayingLeadWidget extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Color(0x753f3d56),
+          color: kPlayingLeadWidgetColor,
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
         child: Center(

@@ -46,10 +46,7 @@ class _UserAuthScreen extends State<UserAuthScreen> {
         body: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Color(0xffFDF3FF),
-                  Color(0xffF9EAF7),
-                ],
+                colors: kUserAuthLinearGradColor,
               ),
             ),
             child: Padding(
@@ -127,7 +124,7 @@ class _UserAuthScreen extends State<UserAuthScreen> {
                             fontStyle: FontStyle.normal,
                             fontSize: height / 64,
                             height: 1.4,
-                            color: Color(0xff38394F)),
+                            color: kUserAuthTextColor),
                       ),
                     ),
                     SizedBox(height: height / 40.72),
@@ -169,16 +166,13 @@ class _UserAuthScreen extends State<UserAuthScreen> {
                                     gradient: new LinearGradient(
                                       begin: Alignment.topCenter,
                                       end: Alignment.bottomCenter,
-                                      colors: [
-                                        const Color(0xFFFDB0C1),
-                                        const Color(0xFFFF95AC),
-                                      ],
+                                      colors: kUserAuthLinearGrad2Color,
                                     ),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10.0)),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color(0xffFFBFCD),
+                                        color: kUserAuthShadowColor,
                                         offset: Offset(7, 7),
                                         blurRadius: 10.0,
                                       ),

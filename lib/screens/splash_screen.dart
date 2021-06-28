@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/config/remote_config_helper.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
@@ -85,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Color(0xffFDF3FF), Color(0xffF9EBF8), Color(0xffF9EAF7)],
+                colors: kSplashScrLinearGradColor,
                 stops: [0.45, 0.89, 0.96]),
           ),
           child: Stack(

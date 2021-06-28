@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+const appStoreIdentifier = '1532641266';
+const googlePlayIdentifier = 'sofy.vibrator.app';
+const feedbackEmail = 'sofy1.app@gmail.com';
+
+
 const kFontFamilyProximaNova = 'Proxima Nova';
 const kFontFamilyExo2 = 'Exo 2';
 const kFontFamilyGilroyBold = 'Gilroy Bold';
@@ -33,6 +38,18 @@ const int SettingsScreen_PAGE_INDEX = 4;
 const int RecommendationScreen_PAGE_INDEX = 1;
 const int MyPlaylistScreen_PAGE_INDEX = 3;
 
+ const DEFAULT_DURATION = const Duration(milliseconds: 100);
+ const DEFAULT_CURVE = Curves.linear;
+
+ const double MIN_DEPTH = -20.0;
+ const double MAX_DEPTH = 20.0;
+
+ const double MIN_INTENSITY = 0.0;
+ const double MAX_INTENSITY = 1.0;
+
+ const double MIN_CURVE = 0.0;
+ const double MAX_CURVE = 1.0;
+
 const KEY_USER_TOKEN = "user_token";
 const KEY_FAVORITES = "favorites";
 const KEY_ADD_FAVOR = "favorite";
@@ -52,16 +69,6 @@ const KEY_ANON_AUTH_TOKEN = "anon_auth_token";
 const KEY_ANON_NAME = "anon_name";
 
 const KEY_DB_VERSION = "db_version";
-
-const precacheImageAssetImageOnBoarding1 = 'assets/on_boarding1_1.png';
-const precacheImageAssetImageOnBoarding1c = 'assets/on_boarding1_center.png';
-const precacheImageAssetImageOnBoarding2c = 'assets/on_boarding2_center.png';
-const precacheImageAssetImageOnBoarding3c = 'assets/on_boarding3_center.png';
-const precacheImageAssetImageOnBoarding4c = 'assets/on_boarding4_center.png';
-const precacheImageAssetImageOnBoarding5c = 'assets/on_boarding5_center.png';
-const precacheImageAssetImageOnBoarding6p = 'assets/on_boarding6_poitns.png';
-const precacheImageAssetImageOnBoarding6tl = 'assets/on_boarding6_top_left.png';
-const precacheImageAssetImageOnBoarding6c = 'assets/on_boarding6_center.png';
 
 const kProximaNovaTextStyle = TextStyle(
   height: 1.85,

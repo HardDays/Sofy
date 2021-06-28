@@ -28,7 +28,7 @@ class _NeumorphButton extends State<NeumorphButton> {
     return Container(
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
-            color: Color(0xffC4C4C4),
+            color: kNeumBtnWidgetShadowColor,
             offset: Offset(3, 3),
             blurRadius: 10.0,
           ),
@@ -38,11 +38,11 @@ class _NeumorphButton extends State<NeumorphButton> {
             style: NeumorphicStyle(
                 shape: NeumorphicShape.flat,
                 intensity: 0.6,
-                shadowLightColorEmboss: Color(0xffFBE5FB),
-                shadowDarkColor: Color(0xffFBE5FB),
-                shadowDarkColorEmboss: Color(0xff663966),
-                shadowLightColor: kArticlesWhiteColor,
-                color: Color(0xffFCEFFC)),
+                shadowLightColorEmboss: kADNeumorphicShadowLightColorEmboss,
+                shadowDarkColor: kADNeumorphicShadowDarkColor,
+                shadowDarkColorEmboss: kADNeumorphicShadowDarkColorEmboss,
+                shadowLightColor: kADNeumorphicShadowLightColor,
+                color: kADNeumorphicColor),
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
             provideHapticFeedback: false,
             onClick: widget.onTap,
@@ -56,15 +56,12 @@ class _NeumorphButton extends State<NeumorphButton> {
                     gradient: new LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [
-                        const Color(0xFFFDB0C1),
-                        const Color(0xFFFF95AC),
-                      ],
+                      colors: kNeumBtnWidgetLinearGradColor,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     boxShadow: [
                       BoxShadow(
-                        color: Color(0xffFFBFCD),
+                        color: kNeumBtnWidgetShadow2Color,
                         offset: Offset(7, 7),
                         blurRadius: 10.0,
                       ),

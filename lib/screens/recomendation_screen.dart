@@ -140,10 +140,7 @@ class _RecommendationScreenState extends State<RecommendationScreen>
           padding: EdgeInsets.only(left: 0.0, bottom: 0.0),
           decoration: BoxDecoration(
             gradient: new LinearGradient(
-                colors: [
-                  const Color(0xFFFDB0C1),
-                  const Color(0xFFFF95AC),
-                ],
+                colors: kRecomndScrLinearGradColor,
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 stops: [0.0, 1.0],
@@ -365,7 +362,7 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                   child: Container(
                     child: BackdropFilter(
                       child: Container(
-                        color: Color(0xff9E9E9E).withOpacity(0.3),
+                        color: kRecomndScrGreyColor.withOpacity(0.3),
                       ),
                       filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
                     ),
@@ -553,7 +550,7 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                     child: Container(
                       child: BackdropFilter(
                         child: Container(
-                          color: Color(0xff9E9E9E).withOpacity(0.25),
+                          color: kRecomndScrGreyColor.withOpacity(0.25),
                         ),
                         filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
                       ),
@@ -616,10 +613,10 @@ class _RecommendationScreenState extends State<RecommendationScreen>
             shape: BoxShape.circle,
             color: isActive
                 ? kMainScreenScaffoldBackColor
-                : Color.fromRGBO(253, 176, 193, 0.49),
+                : kRecomndScrIndicNotActineColor,
             border: Border.all(
               width: isActive ? 3.0 : 0.0,
-              color: isActive ? Color(0xffFDB0C1) : Colors.transparent,
+              color: isActive ? kRecomndScrIndicActiveBrdColor : Colors.transparent,
             ),
           ),
         ),

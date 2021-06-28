@@ -1509,7 +1509,7 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
                                   topRight: Radius.circular(25.0)),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color(0xffFFBFCD).withOpacity(0.5),
+                                  color: kArticlesDetailsShadow2Color.withOpacity(0.5),
                                   offset: Offset(7, 7),
                                   blurRadius: 10.0,
                                 ),
@@ -2030,7 +2030,7 @@ class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
         appBar = kArticlesDetailsAppBarColor;
         shareButton = kArticlesPopularColor;
         backButton = kArticlesPopularColor;
-        dividerColor = Color(0xffFEA9BC).withOpacity(0.15);
+        dividerColor = kArticlesDetailsNotifColor.withOpacity(0.15);
         Future.delayed(Duration(milliseconds: 100), () {
           SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
         });

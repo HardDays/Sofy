@@ -33,7 +33,7 @@ class PlayListLeadWidget extends StatelessWidget {
                     width: height / 4.42,
                     height: height / 3.82,
                     child: Shimmer.fromColors(
-                      baseColor: Color(0xFFE0E0E0),
+                      baseColor: kShimmerBaseColor,
                       highlightColor: kAppPinkDarkColor,
                       direction: ShimmerDirection.ltr,
                       period: Duration(seconds: 2),

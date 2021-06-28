@@ -350,11 +350,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              colors: [Color(0xffFDB0C1), Color(0xffFF95AC)]),
+                              colors: kOnBrdScrLinearGrdColor),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Color(0x39FF98AD),
+                              color: kOnBrdScrShadowColor,
                               spreadRadius: 3,
                               blurRadius: 5,
                               offset: Offset(2, 5),
@@ -518,11 +518,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         gradient: LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
-                            colors: [Color(0xffFFE1E8), Color(0xffFFBECD)]),
+                            colors: kOnBrdScrLinearGrd2Color),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Color.fromRGBO(240, 127, 152, 0.2),
+                            color: kOnBrdScrShadow2Color,
                             spreadRadius: 5,
                             blurRadius: 5,
                             offset: Offset(5, 5),
@@ -601,7 +601,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xffFDF3FF), Color(0xffF9EBF8), Color(0xffF9EAF7)],
+              colors: kOnBrdScr2LinearGrd3Color,
               stops: [0.45, 0.89, 0.96]),
         ),
         // color: kMainScreenScaffoldBackColor,
@@ -683,11 +683,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              colors: [Color(0xffFDB0C1), Color(0xffFF95AC)]),
+                              colors: kOnBrdScrLinearGrd3Color),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Color(0x39FF98AD),
+                              color: kOnBrdScrShadowColor,
                               spreadRadius: 3,
                               blurRadius: 5,
                               offset: Offset(2, 5),
@@ -757,7 +757,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xffFDF3FF), Color(0xffF9EBF8), Color(0xffF9EAF7)],
+              colors: kOnBrdScr2LinearGrd3Color,
               stops: [0.45, 0.89, 0.96]),
         ),
         // color: kMainScreenScaffoldBackColor,
@@ -947,11 +947,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              colors: [Color(0xffFDB0C1), Color(0xffFF95AC)]),
+                              colors: kOnBrdScrLinearGrd3Color),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Color(0x39FF98AD),
+                              color: kOnBrdScrShadowColor,
                               spreadRadius: 3,
                               blurRadius: 5,
                               offset: Offset(2, 5),
@@ -1139,11 +1139,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              colors: [Color(0xffFFE1E8), Color(0xffFFBECD)]),
+                              colors: kOnBrdScrLinearGrd2Color),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Color.fromRGBO(240, 127, 152, 0.2),
+                              color: kOnBrdScrShadow2Color,
                               spreadRadius: 5,
                               blurRadius: 5,
                               offset: Offset(5, 5),
@@ -1213,7 +1213,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Color(0xffFDF3FF), Color(0xffF9EBF8), Color(0xffF9EAF7)],
+          colors: kOnBrdScr2LinearGrd3Color,
           stops: [0.45, 0.89, 0.96]),
     ),
         child: Stack(
@@ -1345,11 +1345,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              colors: [Color(0xffFDB0C1), Color(0xffFF95AC)]),
+                              colors: kOnBrdScrLinearGrd3Color),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Color(0x39FF98AD),
+                              color: kOnBrdScrShadowColor,
                               spreadRadius: 3,
                               blurRadius: 5,
                               offset: Offset(2, 5),
@@ -1445,7 +1445,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xffFDF3FF), Color(0xffF9EBF8), Color(0xffF9EAF7)],
+              colors: kOnBrdScr2LinearGrd3Color,
               stops: [0.45, 0.89, 0.96]),
         ),
         // color: kMainScreenScaffoldBackColor,
@@ -1528,11 +1528,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              colors: [Color(0xffFDB0C1), Color(0xffFF95AC)]),
+                              colors: kOnBrdScrLinearGrd3Color),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Color(0x39FF98AD),
+                              color: kOnBrdScrShadowColor,
                               spreadRadius: 3,
                               blurRadius: 5,
                               offset: Offset(2, 5),
@@ -1697,11 +1697,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              colors: [Color(0xffFFE1E8), Color(0xffFFBECD)]),
+                              colors: kOnBrdScrLinearGrd2Color),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Color.fromRGBO(240, 127, 152, 0.2),
+                              color: kOnBrdScrShadow2Color,
                               spreadRadius: 5,
                               blurRadius: 5,
                               offset: Offset(5, 5),
@@ -1826,7 +1826,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   animation: true,
                   percent: percent,
                   animationDuration: 1500,
-                  backgroundColor: Color(0xffFFA1B5),
+                  backgroundColor: kOnBrdScrCirclePrgIndBGColor,
                   center: new Text(
                     "100%",
                     style: new TextStyle(
@@ -1835,7 +1835,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         color: Colors.black),
                   ),
                   circularStrokeCap: CircularStrokeCap.round,
-                  progressColor: Color(0xffFCE6F4)),
+                  progressColor: kOnBrdScrPrgColor),
             ),
             Positioned(
               left: 0,

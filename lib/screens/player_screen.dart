@@ -22,7 +22,6 @@ import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
-import 'package:sofy_new/screens/my_playlist_screen.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/widgets/neumorphic/neumorphic_button.dart';
 
@@ -35,7 +34,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
   double height, width;
 
   //SwiperController swiperController = SwiperController();
-  InfinityPageController swiperController = InfinityPageController(viewportFraction: 0.63);
+  InfinityPageController swiperController =
+      InfinityPageController(viewportFraction: 0.63);
   var currentPage = 0.0;
 
   double opacityWave2 = 1;
@@ -72,7 +72,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
             }
         } else
           swiperController.jumpToPage(0);
-          //await moveSwiperToCurrentIndex(indexToMove: 0);
+        //await moveSwiperToCurrentIndex(indexToMove: 0);
       }
     });
   }
@@ -298,7 +298,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
           Container(
             height: height / 1.35,
             decoration: BoxDecoration(
-              color: Color(0xffFBEEFB),
+              color: kPlayerScrColor,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(49.0),
                 bottomRight: Radius.circular(49.0),
@@ -322,7 +322,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                 imageBuilder: (context, imageProvider) => ImageFade(
                   image: imageProvider,
                   placeholder: Container(
-                    color: Color(0xFFCFCDCA),
+                    color: kPlayerScrPlaceholderColor,
                     child: Center(
                         child: Icon(
                       Icons.photo,
@@ -342,7 +342,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   errorBuilder:
                       (BuildContext context, Widget child, dynamic exception) {
                     return Container(
-                      color: Color(0xFF6F6D6A),
+                      color: kPlayerScrErrorBgrColor,
                       child: Center(
                           child: Icon(Icons.warning,
                               color: Colors.black26, size: 128.0)),
@@ -358,9 +358,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xfffceffc).withOpacity(0.53),
-                  Color(0xffFBEEFB).withOpacity(0.93),
-                  Color(0xffFBEEFB).withOpacity(1),
+                  kPlayerScrAdditColor.withOpacity(0.53),
+                  kPlayerScrColor.withOpacity(0.93),
+                  kPlayerScrColor.withOpacity(1),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -378,10 +378,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
                 ),
 //              gradient: LinearGradient(
 //                colors: [
-//                  Color(0xffFBEEFB).withOpacity(0.05),
-//                  Color(0xffFBEEFB).withOpacity(0.34),
-//                  Color(0xffFBEEFB).withOpacity(0.8),
-//                  Color(0xffFBEEFB).withOpacity(0.3),
+//                  kPlayerScrColor.withOpacity(0.05),
+//                  kPlayerScrColor.withOpacity(0.34),
+//                  kPlayerScrColor.withOpacity(0.8),
+//                  kPlayerScrColor.withOpacity(0.3),
 ////                  kArticlesWhiteColor.withOpacity(0.22),
 //                ],
 //                begin: Alignment.topCenter,
@@ -404,7 +404,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     style: TextStyle(
                       fontFamily: kFontFamilyExo2,
                       fontSize: height / 27.15,
-                      color: Color(0xff242424),
+                      color: kPlayerTextColor,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.normal,
                     ),
@@ -416,7 +416,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     style: TextStyle(
                       fontFamily: kFontFamilyGilroy,
                       fontSize: height / 59.73,
-                      color: Color(0xff242424),
+                      color: kPlayerTextColor,
                       fontWeight: FontWeight.normal,
                       fontStyle: FontStyle.normal,
                     ),
@@ -462,10 +462,14 @@ class _PlayerScreenState extends State<PlayerScreen> {
                           ),
                         );
                       }
-                      return AnimatedOpacity(child: Container(
-                        child: setSwiper(playlistData),
-                        height: height / 3.34,
-                      ), opacity: isShowSwiper ? 1.0 : 0.0, duration: Duration(milliseconds: 125),);
+                      return AnimatedOpacity(
+                        child: Container(
+                          child: setSwiper(playlistData),
+                          height: height / 3.34,
+                        ),
+                        opacity: isShowSwiper ? 1.0 : 0.0,
+                        duration: Duration(milliseconds: 125),
+                      );
                     },
                   ),
                   /** SLIDER SHKALA**/
@@ -529,7 +533,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                   fontSize: 12,
                                   fontWeight: FontWeight.normal,
                                   fontStyle: FontStyle.normal,
-                                  color: Color(0xffb0a8b0),
+                                  color: kPlayerScrTextColor,
                                 ),
                               ),
                             ),
@@ -603,12 +607,13 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: kArticlesWhiteColor.withOpacity(0.86),
+                                      color: kPlayerScrShadow2Color
+                                          .withOpacity(0.86),
                                       blurRadius: 10.0,
                                       offset: Offset(-2, -2)),
                                   BoxShadow(
-                                      color:
-                                          Color(0xffb686b6).withOpacity(0.41),
+                                      color: kPlayerScrShadowColor
+                                          .withOpacity(0.41),
                                       blurRadius: 10.0,
                                       offset: Offset(2, 2)),
                                 ],
@@ -621,12 +626,13 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                           shape: NeumorphicShape.flat,
                                           intensity: 0.6,
                                           shadowLightColorEmboss:
-                                              Color(0xffFBE5FB),
-                                          shadowDarkColor: Color(0xffFBE5FB),
+                                              kADNeumorphicShadowLightColorEmboss,
+                                          shadowDarkColor:
+                                              kADNeumorphicShadowDarkColor,
                                           shadowDarkColorEmboss:
-                                              Color(0xff663966),
+                                              kADNeumorphicShadowDarkColorEmboss,
                                           shadowLightColor: kArticlesWhiteColor,
-                                          color: Color(0xffFCEFFC)),
+                                          color: kADNeumorphicColor),
                                       boxShape: NeumorphicBoxShape.roundRect(
                                           BorderRadius.circular(16)),
                                       provideHapticFeedback: false,
@@ -651,7 +657,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                           },
                                         );
                                         //swiperController.previous();
-                                        await swiperController.animateToPage(swiperController.page-1,
+                                        await swiperController.animateToPage(
+                                            swiperController.page - 1,
                                             duration:
                                                 Duration(milliseconds: 300),
                                             curve: Curves.easeInOut);
@@ -677,12 +684,12 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 shape: BoxShape.circle,
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Color(0xffCFB2CD),
+                                      color: kPlayerScrShadow3Color,
                                       blurRadius: 8.0,
                                       offset: Offset(3, 3)),
                                   BoxShadow(
-                                      color:
-                                          Color(0xffffffff).withOpacity(0.41),
+                                      color: kPlayerScrShadow4Color
+                                          .withOpacity(0.41),
                                       blurRadius: 10.0,
                                       offset: Offset(-3, -3)),
                                 ],
@@ -699,12 +706,14 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                               : 3,
                                           intensity: 0.5,
                                           shadowLightColorEmboss:
-                                              Color(0xffFBE5FB),
-                                          shadowDarkColor: Color(0xffFBE5FB),
+                                              kADNeumorphicShadowLightColorEmboss,
+                                          shadowDarkColor:
+                                              kADNeumorphicShadowDarkColor,
                                           shadowDarkColorEmboss:
-                                              Color(0xff663966),
-                                          shadowLightColor: Color(0xffFBE5FB),
-                                          color: Color(0xffff9cb1)),
+                                              kADNeumorphicShadowDarkColorEmboss,
+                                          shadowLightColor:
+                                              kADNeumorphicShadowLightColor,
+                                          color: kADNeumorphic2Color),
                                       boxShape: NeumorphicBoxShape.roundRect(
                                           BorderRadius.circular(50)),
                                       onClick: () {
@@ -737,12 +746,13 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: kArticlesWhiteColor.withOpacity(0.86),
+                                      color: kPlayerScrShadow4Color
+                                          .withOpacity(0.86),
                                       blurRadius: 10.0,
                                       offset: Offset(-2, -2)),
                                   BoxShadow(
-                                      color:
-                                          Color(0xffb686b6).withOpacity(0.41),
+                                      color: kPlayerScrShadowColor
+                                          .withOpacity(0.41),
                                       blurRadius: 10.0,
                                       offset: Offset(2, 2)),
                                 ],
@@ -755,20 +765,22 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                           shape: NeumorphicShape.flat,
                                           intensity: 0.5,
                                           shadowLightColorEmboss:
-                                              Color(0xffFBE5FB),
-                                          shadowDarkColor: Color(0xffFBE5FB),
+                                              kADNeumorphicShadowLightColorEmboss,
+                                          shadowDarkColor:
+                                              kADNeumorphicShadowDarkColor,
                                           shadowDarkColorEmboss:
-                                              Color(0xff663966),
+                                              kADNeumorphicShadowDarkColorEmboss,
                                           shadowLightColor: kArticlesWhiteColor,
-                                          color: Color(0xffFCEFFC)),
+                                          color: kADNeumorphicColor),
                                       boxShape: NeumorphicBoxShape.roundRect(
                                           BorderRadius.circular(16)),
                                       provideHapticFeedback: false,
                                       onClick: () async {
                                         //swiperController.next();
-                                        await swiperController.animateToPage(swiperController.page+1,
+                                        await swiperController.animateToPage(
+                                            swiperController.page + 1,
                                             duration:
-                                            Duration(milliseconds: 300),
+                                                Duration(milliseconds: 300),
                                             curve: Curves.easeInOut);
                                         Analytics().sendEventReports(
                                           event: vibration_previous,
@@ -1029,7 +1041,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
           return Container(
             height: height / 3.34,
             width: height / 4.14,
-            margin: EdgeInsets.only(bottom: 15, left: height / 40, right: height / 40),
+            margin: EdgeInsets.only(
+                bottom: 15, left: height / 40, right: height / 40),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(31)),
               boxShadow: [

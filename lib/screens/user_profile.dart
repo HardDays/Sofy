@@ -29,13 +29,6 @@ class _UserProfileScreen extends State<UserProfileScreen> {
   User user;
   File image;
   final picker = ImagePicker();
-  List<int> avasColorList = [
-    0xffFFA3B8,
-    0xffE3C2CE,
-    0xffEA6C96,
-    0xffF6D4F6,
-    0xffFAD5DE
-  ];
   String avaPath;
   int avaColor;
 
@@ -243,16 +236,13 @@ class _UserProfileScreen extends State<UserProfileScreen> {
                                 gradient: new LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
-                                  colors: [
-                                    const Color(0xFFFDB0C1),
-                                    const Color(0xFFFF95AC),
-                                  ],
+                                  colors: kUserProfileLinearGrd3Color,
                                 ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10.0)),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xffFFBFCD),
+                                    color: kUserProfileShadowColor,
                                     offset: Offset(7, 7),
                                     blurRadius: 10.0,
                                   ),
@@ -369,7 +359,7 @@ class _UserProfileScreen extends State<UserProfileScreen> {
     int avaColor = random.nextInt(3);
 
     await PreferencesProvider().saveAvaNumber(imagePath);
-    await PreferencesProvider().saveAvaBackground(avasColorList[avaColor]);
+    await PreferencesProvider().saveAvaBackground(kUserProfileAvasColorList[avaColor]);
     setState(() {});
   }
 

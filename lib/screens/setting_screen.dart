@@ -54,9 +54,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     minLaunches: 5,
     remindDays: 0,
     remindLaunches: 5,
-    googlePlayIdentifier: 'sofy.vibrator.app',
+    googlePlayIdentifier: googlePlayIdentifier,
     //TODO CHECK iOs Identifier
-    appStoreIdentifier: '1532641266',
+    appStoreIdentifier: appStoreIdentifier
   );
 
   @override
@@ -130,7 +130,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                         BorderRadius.all(Radius.circular(10.0)),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color(0x90FFBFCD),
+                                        color: kSettScrShadowColor,
                                         offset: Offset(7, 7),
                                         blurRadius: 10.0,
                                       ),
@@ -216,7 +216,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 : height / 18.66),
                         CreateAccountButton(
                           iconUrl: !user.isAuth ? 'assets/create_account.png' : avaPath != null ? avaPath : 'assets/create_account.png',
-                          backColor: avaPath != null ? avaColor : 0x00000000,
+                          backColor: avaPath != null ? avaColor : kSettScrCreteAccBtnColor,
                           height: !user.isAuth ? 1 : 0,
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           text: AppLocalizations.of(context)
@@ -236,7 +236,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         SizedBox(height: !user.isAuth ? height / 42.66 : 0),
                         CreateAccountButton(
                           iconUrl: avaPath != null ? avaPath : 'assets/create_account.png',
-                          backColor: avaPath != null ? avaColor : 0x00000000,
+                          backColor: avaPath != null ? avaColor : kSettScrCreteAccBtnColor,
                           height: user.isAuth ? 1 : 0,
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           text: userName,
@@ -299,7 +299,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             Analytics().sendEventReports(
                               event: send_feedback_click,
                             );
-                            _bloc.launchURL('sofy1.app@gmail.com');
+                            _bloc.launchURL(feedbackEmail);
                           },
                         ),
                         SettingScreenButton(

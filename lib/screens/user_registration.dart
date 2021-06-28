@@ -52,10 +52,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
             height: height,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Color(0xffFDF3FF),
-                  Color(0xffF9EAF7),
-                ],
+                colors: kUserRegLinearGrd2Color,
               ),
             ),
             child: Padding(
@@ -132,7 +129,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                               fontStyle: FontStyle.normal,
                               fontSize: height / 64,
                               height: 1.4,
-                              color: Color(0xff38394F)),
+                              color: kUserRegCreateAnAccSubtColor),
                         ),
                       ),
                       SizedBox(height: height / 40.72),
@@ -180,16 +177,13 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                                       gradient: new LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
-                                        colors: [
-                                          const Color(0xFFFDB0C1),
-                                          const Color(0xFFFF95AC),
-                                        ],
+                                        colors: kUserRegLinearGrdColor,
                                       ),
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color(0xffFFBFCD),
+                                          color: kUserRegShadowColor,
                                           offset: Offset(7, 7),
                                           blurRadius: 10.0,
                                         ),
@@ -248,7 +242,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                                 fontStyle: FontStyle.normal,
                                 fontSize: height / 74.66,
                                 height: 1.20,
-                                color: Color(0x40836771),
+                                color: kUserRegCreateAnAccRedBrColor,
                               ),
                               children: <TextSpan>[
                                 TextSpan(

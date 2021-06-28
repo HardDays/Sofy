@@ -109,7 +109,7 @@ class AppListView extends StatelessWidget {
                     width: 56.0,
                     height: 56.0,
                     decoration: BoxDecoration(
-                      color: Color(0x85C4C4C4),
+                      color: kAppListViewGreyColor,
                       borderRadius:
                       BorderRadius.all(Radius.circular(15)),
                     ))
@@ -123,7 +123,7 @@ class AppListView extends StatelessWidget {
                 //17
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.normal,
-                color: (isFullAccess(context, playlistData, index)) ? kListviewTitleColor : Color(0x25242424),
+                color: (isFullAccess(context, playlistData, index)) ? kListviewTitleColor : kAppListViewNotColor,
               ),
             ),
             /*subtitle: Padding(

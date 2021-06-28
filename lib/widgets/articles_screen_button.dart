@@ -102,7 +102,7 @@ class _ArticlesCategoryScreenButton
                   margin: EdgeInsets.only(left:16.0),
                   height: 1.0,
                   width: MediaQuery.of(context).size.width,
-                  color: Color(0x65FFF2F5),
+                  color: kArticlesScrBBgBtnColor,
                 )
               ]),
           duration: Duration(seconds: 1),

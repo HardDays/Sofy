@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/widgets/neumorphic/neumorphic_decoration.dart';
 
 import 'neumorphic_box_shape_clipper.dart';
 
 @immutable
 class NeumorphicCard extends Neumorphic {
-  static const DEFAULT_DURATION = const Duration(milliseconds: 100);
-  static const DEFAULT_CURVE = Curves.linear;
-
-  static const double MIN_DEPTH = -20.0;
-  static const double MAX_DEPTH = 20.0;
-
-  static const double MIN_INTENSITY = 0.0;
-  static const double MAX_INTENSITY = 1.0;
-
-  static const double MIN_CURVE = 0.0;
-  static const double MAX_CURVE = 1.0;
-
   final Widget child;
 
   final NeumorphicStyle style;
@@ -34,8 +23,8 @@ class NeumorphicCard extends Neumorphic {
   NeumorphicCard({
     Key key,
     this.child,
-    this.duration = NeumorphicCard.DEFAULT_DURATION,
-    this.curve = NeumorphicCard.DEFAULT_CURVE,
+    this.duration = DEFAULT_DURATION,
+    this.curve = DEFAULT_CURVE,
     this.style,
     this.boxShape,
     this.textStyle,

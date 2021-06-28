@@ -30,11 +30,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
     super.initState();
     Analytics().sendEventReports(
       event: 'playlist_' +
-          Provider
-              .of<PlaylistNameData>(
-              context,
-              listen:
-              false)
+          Provider.of<PlaylistNameData>(context, listen: false)
               .getCurrentPlaylistNameApi()
               .titleEn +
           '_screen_show',
@@ -47,7 +43,8 @@ class _PlayListScreenState extends State<PlayListScreen> {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     PCProvider pcProvider = Provider.of<PCProvider>(context, listen: false);
-    return Scaffold(body: Stack(
+    return Scaffold(
+        body: Stack(
       children: <Widget>[
         Container(
           width: width,
@@ -57,12 +54,9 @@ class _PlayListScreenState extends State<PlayListScreen> {
               'assets/player_placeholder.png',
               fit: BoxFit.cover,
             ),
-            imageUrl: Provider
-                .of<PlaylistNameData>(
-                context,
-                listen:
-                false)
-                .getCurrentPlaylistNameApi().coverImg,
+            imageUrl: Provider.of<PlaylistNameData>(context, listen: false)
+                .getCurrentPlaylistNameApi()
+                .coverImg,
             fit: BoxFit.cover,
           ),
         ),
@@ -92,8 +86,10 @@ class _PlayListScreenState extends State<PlayListScreen> {
                         Analytics().sendEventReports(
                           event: 'playlist_' +
                               Provider.of<PlaylistNameData>(context,
-                                  listen: false)
-                                  .getCurrentNameApi(AppLocalizations.of(context).languageCode())
+                                      listen: false)
+                                  .getCurrentNameApi(
+                                      AppLocalizations.of(context)
+                                          .languageCode())
                                   .replaceAll(' ', '_') +
                               '_screen_close',
                         );
@@ -118,12 +114,9 @@ class _PlayListScreenState extends State<PlayListScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                Provider
-                    .of<PlaylistNameData>(
-                    context,
-                    listen:
-                    false)
-                    .getCurrentPlaylistNameApi().titleEn,
+                Provider.of<PlaylistNameData>(context, listen: false)
+                    .getCurrentPlaylistNameApi()
+                    .titleEn,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: kFontFamilyGilroyBold,
@@ -133,9 +126,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
                   fontSize: height / 33.19,
                 ),
               ),
-
               SizedBox(height: 20),
-
               Center(
                 child: Container(
                     width: height / 13,
@@ -143,20 +134,17 @@ class _PlayListScreenState extends State<PlayListScreen> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(
-                        colors: [
-                          kAppPinkDarkColor,
-                          Color(0xffFFE1E8),
-                        ],
+                        colors: kPlaylistScrLinearGradColor,
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       ),
                       boxShadow: [
                         BoxShadow(
-                            color: kArticlesWhiteColor.withOpacity(0.86),
+                            color: kPlaylistScrShadow2Color.withOpacity(0.86),
                             blurRadius: 10.0,
                             offset: Offset(-2, -2)),
                         BoxShadow(
-                            color: Color(0xffb686b6).withOpacity(0.41),
+                            color: kPlaylistScrShadowColor.withOpacity(0.41),
                             blurRadius: 10.0,
                             offset: Offset(3, 3)),
                       ],
@@ -164,18 +152,23 @@ class _PlayListScreenState extends State<PlayListScreen> {
                     child: NeumorphicCustomButton(
                         style: NeumorphicStyle(
                             shape: NeumorphicShape.convex,
-                            depth: Provider.of<Player>(context).isPlayign ? -6 : 3,
+                            depth:
+                                Provider.of<Player>(context).isPlayign ? -6 : 3,
                             intensity: 0.5,
-                            shadowLightColorEmboss: Color(0xffFBE5FB),
-                            shadowDarkColor: Color(0xffFBE5FB),
-                            shadowDarkColorEmboss: Color(0xff663966),
-                            shadowLightColor: Color(0xffFBE5FB),
-                            color: Color(0xffFEC8D4)),
+                            shadowLightColorEmboss: kADNeumorphicShadowLightColorEmboss,
+                            shadowDarkColor: kADNeumorphicShadowDarkColor,
+                            shadowDarkColorEmboss: kADNeumorphicShadowDarkColorEmboss,
+                            shadowLightColor: kADNeumorphicShadowLightColor,
+                            color: kADNeumorphic3Color),
                         boxShape: NeumorphicBoxShape.roundRect(
                             BorderRadius.circular(50)),
                         onClick: () {
-                          var player = Provider.of<Player>(context, listen: false);
-                          var playlistData = Provider.of<PlaylistData>(context, listen: false).vibrosByPlayListIdApi.first;
+                          var player =
+                              Provider.of<Player>(context, listen: false);
+                          var playlistData =
+                              Provider.of<PlaylistData>(context, listen: false)
+                                  .vibrosByPlayListIdApi
+                                  .first;
                           player.updateCurrentPlayListModel(
                             model: playlistData,
                           );
@@ -192,26 +185,28 @@ class _PlayListScreenState extends State<PlayListScreen> {
                         padding: EdgeInsets.all(0.0),
                         child: Center(
                             child: Container(
-                              height: height / 35,
-                              width: height / 35,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(Provider.of<Player>(context).isPlayign ? 'assets/pause.png' : 'assets/play.png'),
-                                    fit: BoxFit.fitHeight,
-                                  )),
-                            )))),
+                          height: height / 35,
+                          width: height / 35,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                            image: AssetImage(
+                                Provider.of<Player>(context).isPlayign
+                                    ? 'assets/pause.png'
+                                    : 'assets/play.png'),
+                            fit: BoxFit.fitHeight,
+                          )),
+                        )))),
               ),
               SizedBox(height: 20),
               Expanded(
-                child: AppListView (
+                child: AppListView(
                   isDivider: false,
-                  isLiked: Provider
-                      .of<PlaylistNameData>(
-                      context,
-                      listen:
-                      false)
-                      .getCurrentPlaylistNameApi()
-                      .titleEn == 'Liked' ? true : false,
+                  isLiked: Provider.of<PlaylistNameData>(context, listen: false)
+                              .getCurrentPlaylistNameApi()
+                              .titleEn ==
+                          'Liked'
+                      ? true
+                      : false,
                 ),
               ),
             ],

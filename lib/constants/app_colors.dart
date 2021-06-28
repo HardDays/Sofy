@@ -33,6 +33,7 @@ const onBoardingTitleColor = Color(0xffE0347A);
 const onBoardingSubTitleColor = Color(0xff846570);
 
 const kPlayerColor = Color(0x40edc3ed);
+const kPlayerTextColor = Color(0xff242424);
 const kPlayerPlaceholderColor = Color(0x75C4C4C4);
 
 const List<Color> kLinearGradColor = [Color(0xFFFDB0C1), Color(0xFFFF95AC)];
@@ -42,6 +43,8 @@ const kArticlesTransparentColor = Colors.transparent;
 const kArticlesBackColor = kNeumorphicShadowDarkColor;
 const kArticlesBackTextColor = Color(0xFFFF95AC);
 const kArticlesBackgroundColorColor = Color(0x752F2E41);
+const kArticlesScrBBgBtnColor = Color(0x65FFF2F5);
+
 const kNeumorphicColor = Color(0xffF9D9F4);
 const kNeumorphicShadowDarkColor = Color(0xffdbc4db);
 const kNeumorphicColor2 = Color(0xffFAEBF8);
@@ -58,31 +61,149 @@ const kArticlesDetailsAppBarColor = Color(0xffFCEFFC);
 const kArticlesDetailsDoneColor = Color(0xffE0347A);
 const kArticlesDetailsShadowColor = Color(0xffCFB2CD);
 const kArticlesDetailsTextColor = Color(0xFFA9A8C1);
-const kArticlesDetailsShadow2= Color(0xffC4C4C4);
+const kArticlesDetailsShadow2 = Color(0xffC4C4C4);
+const kArticlesDetailsNotifColor = Color(0xffFEA9BC);
+const kArticlesDetailsShadow2Color = Color(0xffFFBFCD);
 
-const List<Color> kLinearGradResultColor = [Color(0xFFFDF3FF), Color(0xffF9EAF7)];
-const List<Color> kLinearGrad2Color = [
-  const Color(0xFFFDB0C1),
-  const Color(0xFFFF95AC),
+const List<Color> kLinearGradResultColor = [
+  Color(0xFFFDF3FF),
+  Color(0xffF9EAF7)
 ];
-const kAlwaysStoppedAnimation =Color(0xffFEA9BC);
+const List<Color> kLinearGrad2Color = kLinearGradColor;
+const kAlwaysStoppedAnimation = Color(0xffFEA9BC);
 
-const kLinearPercentIndicatorBGColor =Color(0xffFFF5F9);
-const kLinearPercentIndicatorPGColor =Color(0xffFFF5F9);
+const kLinearPercentIndicatorBGColor = Color(0xffFFF5F9);
+const kLinearPercentIndicatorPGColor = Color(0xffFFF5F9);
 
-const kADNeumorphicShadowLightColorEmboss= Color(0xffFBE5FB);
+const kADNeumorphicShadowLightColorEmboss = Color(0xffFBE5FB);
 const kADNeumorphicShadowDarkColor = Color(0xffFBE5FB);
-const kADNeumorphicShadowDarkColorEmboss= Color(0xff663966);
-const kADNeumorphicColor= Color(0xffFCEFFC);
+const kADNeumorphicShadowDarkColorEmboss = Color(0xff663966);
+const kADNeumorphicShadowLightColor = Color(0xffFBE5FB);
+const kADNeumorphicColor = Color(0xffFCEFFC);
+const kADNeumorphic2Color = Color(0xffff9cb1);
+const kADNeumorphic3Color = Color(0xffFEC8D4);
 
 const kArticleAnsTextFieldColor = Color(0xff836771);
 const kArticleAnsTextFieldInpDecColor = Color(0x50836771);
-const kArticlesAnsShadow= Color(0xffC4C4C4);
+const kArticlesAnsShadow = Color(0xffC4C4C4);
 
-const kArticlesAnsStoriesColor= Color(0xffFF95AC);
-const kArticlesAnsStories2Color= Color(0xff2F2E41);
-const kArticlesAnsStoriesBackdropFilterColor= Color(0x502F2E41);
+const kArticlesAnsStoriesColor = Color(0xffFF95AC);
+const kArticlesAnsStories2Color = Color(0xff2F2E41);
+const kArticlesAnsStoriesBackdropFilterColor = Color(0x502F2E41);
 
-const kMyPlScrPlayListLeadWidgetColor= Color(0x85C4C4C4);
-const kMyPlScrPlayListLeadWidgetTitColor= Color(0x25242424);
+const kMyPlScrPlayListLeadWidgetColor = Color(0x85C4C4C4);
+const kMyPlScrPlayListLeadWidgetTitColor = Color(0x25242424);
+
+const List<Color> kOnBrdScrLinearGrdColor = kLinearGradColor;
+const List<Color> kOnBrdScrLinearGrd2Color = [
+  Color(0xffFFE1E8),
+  Color(0xffFFBECD)
+];
+const List<Color> kOnBrdScr2LinearGrd3Color = [
+  Color(0xffFDF3FF),
+  Color(0xffF9EBF8),
+  Color(0xffF9EAF7)
+];
+const kOnBrdScrShadowColor = Color(0x39FF98AD);
+const kOnBrdScrShadow2Color = Color.fromRGBO(240, 127, 152, 0.2);
+const List<Color> kOnBrdScrLinearGrd3Color = [
+  Color(0xffFDB0C1),
+  Color(0xffFF95AC)
+];
+const kOnBrdScrCirclePrgIndBGColor = Color(0xffFFA1B5);
+const kOnBrdScrPrgColor = Color(0xffFCE6F4);
+
+const kPlayerScrColor = Color(0xffFBEEFB);
+const kPlayerScrPlaceholderColor = Color(0xFFCFCDCA);
+const kPlayerScrErrorBgrColor = Color(0xFF6F6D6A);
+const kPlayerScrAdditColor = Color(0xfffceffc);
+const kPlayerScrTextColor = Color(0xffb0a8b0);
+const kPlayerScrShadow2Color = Colors.white;
+const kPlayerScrShadowColor = Color(0xffb686b6);
+const kPlayerScrShadow3Color = Color(0xffCFB2CD);
+const kPlayerScrShadow4Color = Color(0xffffffff);
+
+const List<Color> kPlaylistScrLinearGradColor = [
+  Color(0xffFF96AD),
+  Color(0xffFFE1E8),
+];
+const kPlaylistScrShadow2Color = Colors.white;
+const kPlaylistScrShadowColor = Color(0xffb686b6);
+
+const List<Color> kRecomndScrLinearGradColor = kOnBrdScrLinearGrd3Color;
+const kRecomndScrGreyColor = Color(0xff9E9E9E);
+const kRecomndScrIndicNotActineColor = Color.fromRGBO(253, 176, 193, 0.49);
+const kRecomndScrIndicActiveBrdColor = Color(0xffFDB0C1);
+
+const kSettScrShadowColor = Color(0x90FFBFCD);
+const kSettScrCreteAccBtnColor = 0x00000000;
+
+const List<Color> kSplashScrLinearGradColor = [
+  Color(0xffFDF3FF),
+  Color(0xffF9EBF8),
+  Color(0xffF9EAF7)
+];
+
+const List<Color> kSubscrScrLinearGradColor = [
+  Color(0xffFDF3FF),
+  Color(0xffF9EAF7),
+];
+const kSubscrScrSvgBtnColor = Color(0xffa8a8a8);
+const kSubscrScrSvgBtn2Color = Color(0xfffdb0c1);
+const kSubscrScrRestoreColor = Color(0xffC4C4C4);
+const kSubscrScrWidgNotColor = Color.fromRGBO(255, 225, 232, 0.6);
+const kSubscrScrWidgColor = Color(0xffFF96AD);
+const kSubscrScrTextColor = Color(0xff836771);
+const kSubscrScrText2Color = Color(0x8C38394F);
+const kSubscrScrNotTextColor = Color(0xffc5acb5);
+const kSubscrScrNotAvaColor = Color(0xffFFF5F9);
+const List<Color> kSubscrScrLinear2GradColor = [
+  Color(0xffFDB0C1),
+  Color(0xffFF95AC)
+];
+const kSubscrScrShadowColor = Color(0x39FF98AD);
+
+const List<Color> kUserAuthLinearGradColor = kSubscrScrLinearGradColor;
+const kUserAuthTextColor = Color(0xff38394F);
+const kUserAuthShadowColor = Color(0xffFFBFCD);
+const List<Color> kUserAuthLinearGrad2Color = kSubscrScrLinear2GradColor;
+
+const List<Color> kUserCngPassLinearGradColor = kSubscrScrLinearGradColor;
+const List<Color> kUserCngPassLinearGrad2Color = kSubscrScrLinear2GradColor;
+const kUserCngPassShadowColor = kUserAuthShadowColor;
+const kUserCngPassTextColor = kUserAuthTextColor;
+const List<Color> kUserCngPassLinearGrd3Color = kSubscrScrLinear2GradColor;
+
+const List<int> kUserProfileAvasColorList = [
+  0xffFFA3B8,
+  0xffE3C2CE,
+  0xffEA6C96,
+  0xffF6D4F6,
+  0xffFAD5DE
+];
+const kUserProfileShadowColor = kUserAuthShadowColor;
+const List<Color> kUserProfileLinearGrd3Color = kSubscrScrLinear2GradColor;
+
+const List<Color> kRecovPassLinearGrd3Color = kSubscrScrLinear2GradColor;
+const List<Color> kRecovPassLinearGrdColor = kSubscrScrLinearGradColor;
+const kRecovPassShadowColor = kUserAuthShadowColor;
+const kRecovPassRedBrColor = Color(0x40836771);
+
+
+const List<Color> kUserRegLinearGrdColor = kSubscrScrLinear2GradColor;
+const List<Color> kUserRegLinearGrd2Color = kSubscrScrLinearGradColor;
+const kUserRegShadowColor = kUserAuthShadowColor;
+const kUserRegCreateAnAccSubtColor = Color(0xff38394F);
+const kUserRegCreateAnAccRedBrColor = kRecovPassRedBrColor;
+
+
+const kAppListViewGreyColor = Color(0x85C4C4C4);
+const kAppListViewNotColor = Color(0x25242424);
+
+const kPlayingLeadWidgetColor = Color(0x753f3d56);
+
+const kSettScrBtnWidgetColor = Color(0x65FFF2F5);
+const kNeumBtnWidgetShadowColor = Color(0xffC4C4C4);
+const kNeumBtnWidgetShadow2Color = Color(0xffFFBFCD);
+const kNeumBtnWidgetLinearGradColor = kSubscrScrLinear2GradColor;
 

@@ -46,10 +46,7 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
         body: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Color(0xffFDF3FF),
-                  Color(0xffF9EAF7),
-                ],
+                colors: kRecovPassLinearGrdColor,
               ),
             ),
             child: Padding(
@@ -165,16 +162,13 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                                           gradient: new LinearGradient(
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,
-                                            colors: [
-                                              const Color(0xFFFDB0C1),
-                                              const Color(0xFFFF95AC),
-                                            ],
+                                            colors: kRecovPassLinearGrd3Color,
                                           ),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(10.0)),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Color(0xffFFBFCD),
+                                              color: kRecovPassShadowColor,
                                               offset: Offset(7, 7),
                                               blurRadius: 10.0,
                                             ),
@@ -302,16 +296,13 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                                       gradient: new LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
-                                        colors: [
-                                          const Color(0xFFFDB0C1),
-                                          const Color(0xFFFF95AC),
-                                        ],
+                                        colors: kRecovPassLinearGrd3Color,
                                       ),
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color(0xffFFBFCD),
+                                          color: kRecovPassShadowColor,
                                           offset: Offset(7, 7),
                                           blurRadius: 10.0,
                                         ),
@@ -383,7 +374,7 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                                   fontStyle: FontStyle.normal,
                                   fontSize: height / 74.66,
                                   height: 1.20,
-                                  color: Color(0x40836771),
+                                  color: kRecovPassRedBrColor,
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
