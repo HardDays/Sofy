@@ -11,15 +11,18 @@ class ArticlesListWithHeader extends StatelessWidget {
       this.title,
       this.listOfArticles,
       this.textColor = kArticlesHeaderTextColor,
-      this.fontSize = 24})
+      this.fontSize = 24,
+      this.cardHeight = 50,
+      this.cardWidth = 50,
+      this.imageRadius = 8})
       : super(key: key);
   final String title;
   final List<ApiArticlesModel> listOfArticles;
   final Color textColor;
   final double fontSize;
-  final double cardHeight = 50;
-  final double cardWidth = 50;
-  final double imageRadius = 8;
+  final double cardHeight;
+  final double cardWidth;
+  final double imageRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,10 @@ class ArticlesListWithHeader extends StatelessWidget {
                             ),
                             Column(
                               children: [
-                                Text(listOfArticles[index].title),
+                                Text(
+                            listOfArticles[index].title.length < 30
+                            ? listOfArticles[index].title
+                                : '${listOfArticles[index].title.substring(0, 30)}...',),
                                 Text(
                                     '${listOfArticles[index].repliesCount} ${AppLocalizations.of(context).translate('comments')}'),
                               ],

@@ -214,3 +214,11 @@ const kArticlesBgColor = Colors.white;
 const kArticleCardTextColor = Color(0xFF725E5C);
 const kArticlesHeaderTextColor = Color(0xFF38394F);
 const kArticlesDividerColor = Color.fromARGB(102,237, 195, 237);
+const kArticlesPopCatBgColor = Color(0xFFFFE1E8);
+const kArticlePopCatListTextColor = Color.fromARGB (201, 77, 59, 55);
+const kArticlePopCatIconBgColor = Color(0xFFFDB0C1);
+const kArticlePopCatIconBorderColor = [
+  Colors.white,
+  Color(0xFFFDB0C1),
+  Color(0xFFBF7786)
+];

@@ -29,7 +29,7 @@ import 'models/playlist_data.dart';
 import 'providers/player.dart';
 
 class RestApi {
-  RestApi({this.lang});
+  RestApi({this.systemLang});
 
   //домен сервера
   String serverUrl = 'https://api.enjoysofy.com/v1';
@@ -383,6 +383,32 @@ class RestApi {
     return temp;
   }
 
+  //Список категорий
+  Future<List<ApiArticleTopicModel>> getTopicsListWithoutCtx(
+      {String token}) async {
+    String lang = 'eng';
+    if (systemLang == 'ru')
+      lang = 'rus';
+    String url = serverUrl + getTopicsListUrl + '?lang_code=' + lang;
+    Dio dio = new Dio();
+    dio.options.headers["X-Api-Key"] = token;
+    dio.interceptors
+        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url,
+        options:
+            buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
+    ApiArticleTopicAnswerModel apiPlayListAnswerModel =
+        ApiArticleTopicAnswerModel.fromJson(response.data);
+    List<ApiArticleTopicModel> temp = List();
+    if (apiPlayListAnswerModel != null &&
+        apiPlayListAnswerModel.info != null &&
+        apiPlayListAnswerModel.info.items != null &&
+        apiPlayListAnswerModel.info.items.length > 0) {
+      temp = apiPlayListAnswerModel.info.items;
+    }
+    return temp;
+  }
+
   //Список популярных категорий
   Future<List<ApiArticleTopicModel>> getArticleTopicsPopular(
       BuildContext context,
@@ -417,11 +443,9 @@ class RestApi {
   //Список популярных категорий
   Future<List<ApiArticleTopicModel>> getArticleTopicsPopularWithoutCtx(
       {String token}) async {
-    if (lang == 'ru') {
+    String lang = 'eng';
+    if (systemLang == 'ru')
       lang = 'rus';
-    } else {
-      lang = 'eng';
-    }
     String url =
         serverUrl + getArticleTopicsPopularListUrl + '?lang_code=' + lang;
     Dio dio = new Dio();
@@ -503,15 +527,13 @@ class RestApi {
     return temp;
   }
 
-  String lang = 'ru';
+  String systemLang;
   //Список новых статей BuildContext не нужен
   Future<List<ApiArticlesModel>> getNewArticlesWithoutCtx(
       {String token}) async {
-    if (lang == 'ru') {
+    String lang = 'eng';
+    if (systemLang == 'ru')
       lang = 'rus';
-    } else {
-      lang = 'eng';
-    }
     String url = serverUrl + getNewArticlesListUrl + '?lang_code=' + lang;
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
@@ -561,11 +583,9 @@ class RestApi {
   //Список новых статей
   Future<List<ApiArticlesModel>> getPopularArticlesWithoutCtx(
       {String token}) async {
-    if (lang == 'ru') {
+    String lang = 'eng';
+    if (systemLang == 'ru')
       lang = 'rus';
-    } else {
-      lang = 'eng';
-    }
     String url = serverUrl + getPopularArticlesListUrl + '?lang_code=' + lang;
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
@@ -777,11 +797,9 @@ class RestApi {
   //Список новых статей
   Future<List<ApiFavTopicsInfoModel>> getFavoritesTopicsWithoutCtx(
       {String token}) async {
-    if (lang == 'ru') {
+    String lang = 'eng';
+    if (systemLang == 'ru')
       lang = 'rus';
-    } else {
-      lang = 'eng';
-    }
     String url = serverUrl + getListFavCategoryUrl + '?lang_code=' + lang;
 
     Dio dio = new Dio();

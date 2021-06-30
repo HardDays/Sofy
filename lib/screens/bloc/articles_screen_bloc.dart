@@ -17,13 +17,13 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
       String userToken = await PreferencesProvider().getAnonToken();
       List<ApiArticlesModel> listOfArticles =
           await restApi.getNewArticlesWithoutCtx(token: userToken);
-
       List<ApiArticleTopicModel> listOfTopicsPopular =
-          await RestApi().getArticleTopicsPopularWithoutCtx(token: userToken);
+          await restApi.getArticleTopicsPopularWithoutCtx(token: userToken);
+
       List<ApiArticlesModel> listOfPopularArticles =
-          await RestApi().getPopularArticlesWithoutCtx(token: userToken);
+          await restApi.getPopularArticlesWithoutCtx(token: userToken);
       List<ApiFavTopicsInfoModel> listOfFavoritesTopics =
-          await RestApi().getFavoritesTopicsWithoutCtx(token: userToken);
+          await restApi.getFavoritesTopicsWithoutCtx(token: userToken);
 
       yield ArticlesStateResult(
           listOfArticles: listOfArticles,

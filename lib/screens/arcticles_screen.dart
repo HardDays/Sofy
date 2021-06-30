@@ -26,6 +26,7 @@ import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/widgets/articles/article_skeletion.dart';
 import 'package:sofy_new/widgets/articles/article_card.dart';
 import 'package:sofy_new/widgets/articles/articles_cards_header_button.dart';
+import 'package:sofy_new/widgets/articles/articles_categories_with_header.dart';
 import 'package:sofy_new/widgets/articles/articles_list_with_header.dart';
 import 'package:sofy_new/widgets/articles_screen_button.dart';
 import 'package:sofy_new/widgets/neumorph_button.dart';
@@ -56,9 +57,10 @@ class _ArticlesScreenState extends State<ArticlesScreen>
   }
 
   void _initializeLocale(BuildContext context) {
+    final String systemLang = AppLocalizations.of(context).locale.languageCode;
     _articlesBloc = ArticlesBloc(
         restApi:
-            RestApi(lang: AppLocalizations.of(context).locale.languageCode));
+            RestApi(systemLang: systemLang));
     _articlesBloc.add(ArticlesEventLoad());
   }
 
@@ -187,6 +189,21 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                     child: ArticlesListWithHeader(title: AppLocalizations.of(context)
                         .translate('popular'), listOfArticles: state.listOfPopularArticles),
                   ),
+                  ArticlesCardsHeaderButton(
+                      listOfArticles: state.listOfPopularArticles,
+                      callback: () {},
+                      title: AppLocalizations.of(context)
+                          .translate('orgasms'),
+                      cardHeight: 220,
+                      cardRadius: 20,
+                      cardWidth: 170,
+                      frozenCardFontSize: 14,
+                      frozenCardHeight: 57,
+                      titleFontSize: 24),
+                  Padding(
+                    padding: const EdgeInsets.all(22),
+                    child: ArticlesCategoriesWithHeader(listOfTopics: state.listOfTopicsPopular,title: 'Популярные категории',),
+                  ), // todo
                   SizedBox(height: height / 8.54),
                 ],
               ),
