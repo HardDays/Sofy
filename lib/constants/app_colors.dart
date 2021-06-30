@@ -207,3 +207,10 @@ const kNeumBtnWidgetShadowColor = Color(0xffC4C4C4);
 const kNeumBtnWidgetShadow2Color = Color(0xffFFBFCD);
 const kNeumBtnWidgetLinearGradColor = kSubscrScrLinear2GradColor;
 
+const kArticleCardBgColor = Color(0xffFFBFCD);
+const kArticlesNewBgColor = Color(0xffFEA9BB);
+const kArticlesTextColor = Colors.white;
+const kArticlesBgColor = Colors.white;
+const kArticleCardTextColor = Color(0xFF725E5C);
+const kArticlesHeaderTextColor = Color(0xFF38394F);
+const kArticlesDividerColor = Color.fromARGB(102,237, 195, 237);

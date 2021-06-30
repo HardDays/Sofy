@@ -317,7 +317,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .translate('new_on_boarding_with_sofy'),
                             style: TextStyle(
                               color: onBoardingTitleColor,
-                              fontFamily: 'Kalam',
+                              fontFamily: kFontFamilyKalam,
                               fontSize: MediaQuery.of(context).size.height / 32,
                             )),
                       ),
@@ -485,7 +485,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .translate('new_on_boarding_with_sofy'),
                             style: TextStyle(
                               color: kArticlesWhiteColor,
-                              fontFamily: 'Kalam',
+                              fontFamily: kFontFamilyKalam,
                               fontSize: MediaQuery.of(context).size.height / 32,
                             )),
                       ),
