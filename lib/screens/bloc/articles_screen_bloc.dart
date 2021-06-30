@@ -24,12 +24,25 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
           await restApi.getPopularArticlesWithoutCtx(token: userToken);
       List<ApiFavTopicsInfoModel> listOfFavoritesTopics =
           await restApi.getFavoritesTopicsWithoutCtx(token: userToken);
+      // List<ApiArticleTopicModel> listOfArticleTopic =
+      //     await restApi.getTopicsListWithoutCtx(token: userToken);
+
+      List<ApiArticlesModel> femaleSexuality =
+          await restApi.getArticlesWithoutCtx(21, token: userToken);
+      List<ApiArticlesModel> interestingAboutSex =
+          await restApi.getArticlesWithoutCtx(11, token: userToken);
+      List<ApiArticlesModel> orgasms =
+          await restApi.getArticlesWithoutCtx(13, token: userToken);
 
       yield ArticlesStateResult(
-          listOfArticles: listOfArticles,
-          listOfFavoritesTopics: listOfFavoritesTopics,
-          listOfPopularArticles: listOfPopularArticles,
-          listOfTopicsPopular: listOfTopicsPopular);
+        listOfArticles: listOfArticles,
+        listOfFavoritesTopics: listOfFavoritesTopics,
+        listOfPopularArticles: listOfPopularArticles,
+        listOfTopicsPopular: listOfTopicsPopular,
+        femaleSexuality: femaleSexuality,
+        interestingAboutSex: interestingAboutSex,
+        orgasms: orgasms,
+      );
     }
     return;
   }
@@ -40,16 +53,23 @@ abstract class ArticlesState {}
 class ArticlesStateLoading extends ArticlesState {}
 
 class ArticlesStateResult extends ArticlesState {
-  ArticlesStateResult(
-      {this.listOfArticles = const [],
-      this.listOfFavoritesTopics = const [],
-      this.listOfPopularArticles = const [],
-      this.listOfTopicsPopular = const []});
+  ArticlesStateResult({
+    this.listOfArticles = const [],
+    this.listOfFavoritesTopics = const [],
+    this.listOfPopularArticles = const [],
+    this.listOfTopicsPopular = const [],
+    this.femaleSexuality = const [],
+    this.interestingAboutSex = const [],
+    this.orgasms = const [],
+  });
 
   final List<ApiArticlesModel> listOfArticles;
   final List<ApiArticleTopicModel> listOfTopicsPopular;
   final List<ApiArticlesModel> listOfPopularArticles;
   final List<ApiFavTopicsInfoModel> listOfFavoritesTopics;
+  final List<ApiArticlesModel> femaleSexuality; // 21
+  final List<ApiArticlesModel> interestingAboutSex; // 11
+  final List<ApiArticlesModel> orgasms; // 13
 }
 
 class ArticlesStateError extends ArticlesState {

@@ -163,7 +163,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                     ),
                   ),
                   ArticlesCardsHeaderButton(
-                      listOfArticles: state.listOfPopularArticles,
+                      listOfArticles: state.femaleSexuality,
                       callback: () {},
                       title: AppLocalizations.of(context)
                           .translate('female_sexuality'),
@@ -174,7 +174,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                       frozenCardHeight: 57,
                       titleFontSize: 24),
                   ArticlesCardsHeaderButton(
-                      listOfArticles: state.listOfPopularArticles,
+                      listOfArticles: state.interestingAboutSex,
                       callback: () {},
                       title: AppLocalizations.of(context)
                           .translate('interesting_about_sex'),
@@ -190,7 +190,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                         .translate('popular'), listOfArticles: state.listOfPopularArticles),
                   ),
                   ArticlesCardsHeaderButton(
-                      listOfArticles: state.listOfPopularArticles,
+                      listOfArticles: state.orgasms,
                       callback: () {},
                       title: AppLocalizations.of(context)
                           .translate('orgasms'),
@@ -203,7 +203,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                   Padding(
                     padding: const EdgeInsets.all(22),
                     child: ArticlesCategoriesWithHeader(listOfTopics: state.listOfTopicsPopular,title: 'Популярные категории',),
-                  ), // todo
+                  ),
                   SizedBox(height: height / 8.54),
                 ],
               ),

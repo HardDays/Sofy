@@ -500,6 +500,36 @@ class RestApi {
     return temp;
   }
 
+  //Список статей по категории
+  Future<List<ApiArticlesModel>> getArticlesWithoutCtx(
+      int categoryId,
+      {String token}) async {
+    String lang = 'eng';
+    if (systemLang == 'ru')
+      lang = 'rus';
+    String url = serverUrl +
+        getArticlesListUrl +
+        '?lang_code=' +
+        lang +
+        '&topic_id=' +
+        categoryId.toString();
+    Dio dio = new Dio();
+    dio.options.headers["X-Api-Key"] = token;
+    dio.interceptors
+        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url);
+    ApiArticlesAnswerModel apiPlayListAnswerModel =
+        ApiArticlesAnswerModel.fromJson(response.data, false);
+    List<ApiArticlesModel> temp = List();
+    if (apiPlayListAnswerModel != null &&
+        apiPlayListAnswerModel.info != null &&
+        apiPlayListAnswerModel.info.items != null &&
+        apiPlayListAnswerModel.info.items.length > 0) {
+      temp = apiPlayListAnswerModel.info.items;
+    }
+    return temp;
+  }
+
   //Список новых статей
   Future<List<ApiArticlesModel>> getNewArticles(BuildContext context,
       {String token}) async {
