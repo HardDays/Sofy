@@ -1,3 +1,18 @@
+import 'package:flutter/material.dart';
+
+class ArticlesDetailsScreen extends StatefulWidget {
+  const ArticlesDetailsScreen({Key key, this.articleId = 100}) : super(key: key);
+final int articleId;
+  @override
+  _ArticlesDetailsScreenState createState() => _ArticlesDetailsScreenState();
+}
+
+class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
 
 // import 'dart:ui';
 //
