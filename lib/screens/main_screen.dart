@@ -17,6 +17,7 @@ import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/my_playlist_screen.dart';
 import 'package:sofy_new/screens/player_screen.dart';
+import 'package:sofy_new/screens/player_screen_v2.dart';
 import 'package:sofy_new/screens/playlist_screen.dart';
 import 'package:sofy_new/screens/recomendation_screen.dart';
 import 'package:sofy_new/screens/setting_screen.dart';
@@ -91,7 +92,7 @@ class _MainScreenState extends State<MainScreen> {
 
   void initScreenLists() {
     screensList = [
-      PlayerScreen(),
+      PlayerScreenV2(),
       RecommendationScreen(),
       PlayListScreen(),
       MyPlaylistScreen(),
