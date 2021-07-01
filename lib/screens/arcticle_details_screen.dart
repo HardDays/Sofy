@@ -1,16 +1,228 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/providers/app_localizations.dart';
+import 'package:sofy_new/rest_api.dart';
+import 'package:sofy_new/screens/bloc/article_detales_screen_bloc.dart';
+import 'package:sofy_new/widgets/articles/article_author_desciption.dart';
+import 'package:sofy_new/widgets/articles/article_details_skeletion.dart';
 
-class ArticlesDetailsScreen extends StatefulWidget {
-  const ArticlesDetailsScreen({Key key, this.articleId = 100}) : super(key: key);
-final int articleId;
+class ArticleDetailsScreen extends StatefulWidget {
+  const ArticleDetailsScreen({Key key, this.articleId = 100}) : super(key: key);
+  final int articleId;
+
   @override
-  _ArticlesDetailsScreenState createState() => _ArticlesDetailsScreenState();
+  _ArticleDetailsScreenState createState() => _ArticleDetailsScreenState();
 }
 
-class _ArticlesDetailsScreenState extends State<ArticlesDetailsScreen> {
+class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
+  ArticleDetailsBloc _articleDetailsBloc;
+  double radius = 25;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _initializeLocale(BuildContext context) {
+    final String systemLang = AppLocalizations.of(context).locale.languageCode;
+    _articleDetailsBloc =
+        ArticleDetailsBloc(restApi: RestApi(systemLang: systemLang));
+    _articleDetailsBloc
+        .add(ArticleDetailsEventLoad(articleId: widget.articleId));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    _initializeLocale(context);
+    return Scaffold(
+      // backgroundColor: kMainScreenScaffoldBackColor,
+      backgroundColor: kArticleDetailsBgColor,
+      body: AnimatedSwitcher(
+        duration: Duration(milliseconds: 250),
+        child: BlocProvider.value(
+          value: _articleDetailsBloc,
+          child: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
+            builder: (context, state) {
+              if (state is ArticleDetailsStateResult) {
+                double fontSize = 38 / height * 926;
+                double bottom = 522 - 161 - fontSize;
+                double fontSize2 = 46 / height * 926;
+                double bottom2 = 522 - 42 - fontSize2 * 2;
+                return Container(
+                    height: height,
+                    width: width,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                height: 390,
+                                width: width,
+                                child: ExtendedImage.network(
+                                  state.articleDetails.article.coverImg,
+                                  fit: BoxFit.cover,
+                                  cache: true,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 366),
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(radius)),
+                                  child: Stack(
+                                    alignment: Alignment.topCenter,
+                                    children: [
+                                      Container(
+                                        height: 50,
+                                        width: width,
+                                        color: kArticleDetailsBgColor,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 366),
+                                child: Stack(
+                                  alignment: Alignment.topCenter,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(21),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(bottom: 26),
+                                            child: ArticleAuthorDescription(
+                                                author: state.author),
+                                          ),
+                                          Text(
+                                            state.articleDetails.article
+                                                .title,
+                                            style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 24,
+                                                color: ArticlesColors
+                                                    .HeaderTextColor),
+                                          ),
+                                          Html(
+                                            style: {
+                                              "p": Style(
+                                                  wordSpacing: 5,
+                                                  lineHeight:
+                                                      LineHeight.number(
+                                                          1.5),
+                                                  fontFamily:
+                                                      kFontFamilyMontserrat,
+                                                  fontStyle:
+                                                      FontStyle.normal,
+                                                  fontSize: FontSize(
+                                                      height / 57.73),
+                                                  color:
+                                                      kArticlesDetailsScreenColor),
+                                              "strong": Style(
+                                                  wordSpacing: 5,
+                                                  lineHeight:
+                                                      LineHeight.number(
+                                                          1.6),
+                                                  fontFamily:
+                                                      kFontFamilyMontserratBold,
+                                                  fontWeight:
+                                                      FontWeight.w600,
+                                                  fontStyle:
+                                                      FontStyle.normal,
+                                                  fontSize: FontSize(
+                                                      height / 50.7),
+                                                  color:
+                                                      kArticlesDetailsScreenColor),
+                                              "h1": Style(
+                                                  wordSpacing: 5,
+                                                  lineHeight:
+                                                      LineHeight.number(
+                                                          1.6),
+                                                  fontFamily:
+                                                      kFontFamilyMontserrat,
+                                                  fontWeight:
+                                                      FontWeight.w600,
+                                                  fontStyle:
+                                                      FontStyle.normal,
+                                                  fontSize: FontSize(
+                                                      height / 50.7),
+                                                  color:
+                                                      kArticlesDetailsScreenColor),
+                                              "li": Style(
+                                                  wordSpacing: 5,
+                                                  lineHeight:
+                                                      LineHeight.number(
+                                                          1.5),
+                                                  fontFamily:
+                                                      kFontFamilyMontserrat,
+                                                  fontStyle:
+                                                      FontStyle.normal,
+                                                  fontSize: FontSize(
+                                                      height / 57.73),
+                                                  color:
+                                                      kArticlesDetailsScreenColor),
+                                              "u": Style(
+                                                  wordSpacing: 5,
+                                                  lineHeight:
+                                                      LineHeight.number(
+                                                          1.5),
+                                                  fontFamily:
+                                                      kFontFamilyMontserrat,
+                                                  fontStyle:
+                                                      FontStyle.normal,
+                                                  fontSize: FontSize(
+                                                      height / 57.73),
+                                                  color:
+                                                      kArticlesDetailsScreenColor),
+                                            },
+                                            data: state.articleDetails
+                                                        .article.content !=
+                                                    null
+                                                ? state.articleDetails
+                                                    .article.content
+                                                : '',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    // todo container with linear grad
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ));
+              }
+              if (state is ArticleDetailsStateError) {
+                return Padding(
+                  padding: const EdgeInsets.all(22),
+                  child: Center(
+                    child: Container(child: Text(state.error)),
+                  ),
+                );
+              }
+              return ArticleDetailsSkeletion();
+            },
+          ),
+        ),
+      ),
+    );
   }
 }
 

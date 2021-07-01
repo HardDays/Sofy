@@ -14,35 +14,39 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
   Stream<ArticlesState> mapEventToState(ArticlesEvent event) async* {
     if (event is ArticlesEventLoad) {
       yield ArticlesStateLoading();
-      String userToken = await PreferencesProvider().getAnonToken();
-      List<ApiArticlesModel> listOfArticles =
-          await restApi.getNewArticlesWithoutCtx(token: userToken);
-      List<ApiArticleTopicModel> listOfTopicsPopular =
-          await restApi.getArticleTopicsPopularWithoutCtx(token: userToken);
+      try {
+        String userToken = await PreferencesProvider().getAnonToken();
+        List<ApiArticlesModel> listOfArticles =
+            await restApi.getNewArticlesWithoutCtx(token: userToken);
+        List<ApiArticleTopicModel> listOfTopicsPopular =
+            await restApi.getArticleTopicsPopularWithoutCtx(token: userToken);
 
-      List<ApiArticlesModel> listOfPopularArticles =
-          await restApi.getPopularArticlesWithoutCtx(token: userToken);
-      List<ApiFavTopicsInfoModel> listOfFavoritesTopics =
-          await restApi.getFavoritesTopicsWithoutCtx(token: userToken);
-      // List<ApiArticleTopicModel> listOfArticleTopic =
-      //     await restApi.getTopicsListWithoutCtx(token: userToken);
+        List<ApiArticlesModel> listOfPopularArticles =
+            await restApi.getPopularArticlesWithoutCtx(token: userToken);
+        List<ApiFavTopicsInfoModel> listOfFavoritesTopics =
+            await restApi.getFavoritesTopicsWithoutCtx(token: userToken);
+        // List<ApiArticleTopicModel> listOfArticleTopic =
+        //     await restApi.getTopicsListWithoutCtx(token: userToken);
 
-      List<ApiArticlesModel> femaleSexuality =
-          await restApi.getArticlesWithoutCtx(21, token: userToken);
-      List<ApiArticlesModel> interestingAboutSex =
-          await restApi.getArticlesWithoutCtx(11, token: userToken);
-      List<ApiArticlesModel> orgasms =
-          await restApi.getArticlesWithoutCtx(13, token: userToken);
+        List<ApiArticlesModel> femaleSexuality =
+            await restApi.getArticlesWithoutCtx(21, token: userToken);
+        List<ApiArticlesModel> interestingAboutSex =
+            await restApi.getArticlesWithoutCtx(11, token: userToken);
+        List<ApiArticlesModel> orgasms =
+            await restApi.getArticlesWithoutCtx(13, token: userToken);
 
-      yield ArticlesStateResult(
-        listOfArticles: listOfArticles,
-        listOfFavoritesTopics: listOfFavoritesTopics,
-        listOfPopularArticles: listOfPopularArticles,
-        listOfTopicsPopular: listOfTopicsPopular,
-        femaleSexuality: femaleSexuality,
-        interestingAboutSex: interestingAboutSex,
-        orgasms: orgasms,
-      );
+        yield ArticlesStateResult(
+          listOfArticles: listOfArticles,
+          listOfFavoritesTopics: listOfFavoritesTopics,
+          listOfPopularArticles: listOfPopularArticles,
+          listOfTopicsPopular: listOfTopicsPopular,
+          femaleSexuality: femaleSexuality,
+          interestingAboutSex: interestingAboutSex,
+          orgasms: orgasms,
+        );
+      } catch(e) {
+        yield ArticlesStateError('Ошибка загрузки');
+      }
     }
     return;
   }

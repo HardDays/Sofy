@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/models/api_articles_answer_model.dart';
+import 'package:sofy_new/models/api_profile_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/screens/user_profile.dart';
@@ -659,6 +660,28 @@ class RestApi {
     return temp;
   }
 
+  //Детали статьи
+  Future<ApiArticleDetailsInfoModel> getArticleDetailsWithoutCtx(String articleId,
+      {String token}) async {
+    String url = serverUrl + getArticleDetailsUrl + '?id=' + articleId;
+
+    Dio dio = new Dio();
+    dio.options.headers["X-Api-Key"] = token;
+    dio.interceptors
+        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url,
+        options: buildCacheOptions(Duration(days: 1),
+            maxStale: Duration(days: 7), forceRefresh: true));
+
+    ApiArticleDetailsModel apiPlayListAnswerModel =
+        ApiArticleDetailsModel.fromJson(response.data);
+    ApiArticleDetailsInfoModel temp = ApiArticleDetailsInfoModel();
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null) {
+      temp = apiPlayListAnswerModel.info;
+    }
+    return temp;
+  }
+
   //анонимный вход
   Future<void> sendPollId(int id, {String token}) async {
     String url = serverUrl + userPollAddUrl;
@@ -894,6 +917,24 @@ class RestApi {
     await PreferencesProvider()
         .saveUserPhoto(responseJson['info']['cover_img']);
     return responseJson['info']['cover_img'];
+  }
+
+  //профиль пользователя
+  Future<ApiProfileModel> getUserProfile({String id, String token}) async {
+    String url = serverUrl + userProfileUrl + '?id=' + id;
+
+    Response response = await Dio(BaseOptions(
+      contentType: Headers.jsonContentType,
+      responseType: ResponseType.json,
+      validateStatus: (_) => true,
+    )).get(url,
+        options: Options(
+          headers: {"X-Api-Key": token},
+        ));
+
+    Map<String, dynamic> responseJson = json.decode(response.toString());
+
+    return ApiProfileModel.fromJson(responseJson['info']);
   }
 
   //Список сообщений

@@ -9,13 +9,14 @@ class ArticleSkeletion extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Center(
-        child: Container(
-      child: CircularProgressIndicator(
-        color: kAppPinkDarkColor,
+      child: Container(
+        child: CircularProgressIndicator(
+          color: kAppPinkDarkColor,
+        ),
+        height: height / 10,
+        width: height / 10,
       ),
-      height: height / 10,
-      width: height / 10,
-    ));
+    );
     return SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: Stack(

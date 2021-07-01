@@ -222,3 +222,23 @@ const kArticlePopCatIconBorderColor = [
   Color(0xFFFDB0C1),
   Color(0xFFBF7786)
 ];
+
+class ArticlesColors {
+  static const CardBgColor = Color(0xffFFBFCD);
+  static const NewBgColor = Color(0xffFEA9BB);
+  static const TextColor = Colors.white;
+  static const BgColor = Colors.white;
+  static const CardTextColor = Color(0xFF725E5C);
+  static const HeaderTextColor = Color(0xFF38394F);
+  static const DividerColor = Color.fromARGB(102,237, 195, 237);
+  static const PopCatBgColor = Color(0xFFFFE1E8);
+  static const PopCatListTextColor = Color.fromARGB (201, 77, 59, 55);
+  static const PopCatIconBgColor = Color(0xFFFDB0C1);
+  static const PopCatIconBorderColor = [
+    Colors.white,
+    Color(0xFFFDB0C1),
+    Color(0xFFBF7786)
+  ];
+}
+
+const kArticleDetailsBgColor = Color(0xFFFFFFFF);
