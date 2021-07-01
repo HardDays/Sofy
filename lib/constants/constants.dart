@@ -6,6 +6,7 @@ const feedbackEmail = 'sofy1.app@gmail.com';
 
 
 const kFontFamilyProximaNova = 'Proxima Nova';
+const kFontFamilyKalam = 'Kalam';
 const kFontFamilyExo2 = 'Exo 2';
 const kFontFamilyGilroyBold = 'Gilroy Bold';
 const kFontFamilyGilroy = 'Gilroy';

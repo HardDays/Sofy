@@ -238,3 +238,38 @@ const kNeumBtnWidgetShadowColor = Color(0xffC4C4C4);
 const kNeumBtnWidgetShadow2Color = Color(0xffFFBFCD);
 const kNeumBtnWidgetLinearGradColor = kSubscrScrLinear2GradColor;
 
+const kArticleCardBgColor = Color(0xffFFBFCD);
+const kArticlesNewBgColor = Color(0xffFEA9BB);
+const kArticlesTextColor = Colors.white;
+const kArticlesBgColor = Colors.white;
+const kArticleCardTextColor = Color(0xFF725E5C);
+const kArticlesHeaderTextColor = Color(0xFF38394F);
+const kArticlesDividerColor = Color.fromARGB(102,237, 195, 237);
+const kArticlesPopCatBgColor = Color(0xFFFFE1E8);
+const kArticlePopCatListTextColor = Color.fromARGB (201, 77, 59, 55);
+const kArticlePopCatIconBgColor = Color(0xFFFDB0C1);
+const kArticlePopCatIconBorderColor = [
+  Colors.white,
+  Color(0xFFFDB0C1),
+  Color(0xFFBF7786)
+];
+
+class ArticlesColors {
+  static const CardBgColor = Color(0xffFFBFCD);
+  static const NewBgColor = Color(0xffFEA9BB);
+  static const TextColor = Colors.white;
+  static const BgColor = Colors.white;
+  static const CardTextColor = Color(0xFF725E5C);
+  static const HeaderTextColor = Color(0xFF38394F);
+  static const DividerColor = Color.fromARGB(102,237, 195, 237);
+  static const PopCatBgColor = Color(0xFFFFE1E8);
+  static const PopCatListTextColor = Color.fromARGB (201, 77, 59, 55);
+  static const PopCatIconBgColor = Color(0xFFFDB0C1);
+  static const PopCatIconBorderColor = [
+    Colors.white,
+    Color(0xFFFDB0C1),
+    Color(0xFFBF7786)
+  ];
+}
+
+const kArticleDetailsBgColor = Color(0xFFFFFFFF);
