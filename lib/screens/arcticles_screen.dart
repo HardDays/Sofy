@@ -391,7 +391,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
                                                 image: AssetImage(
-                                                    'assets/lock.png'),
+                                                    'assets/lock.png',),
                                                 fit: BoxFit.fill,
                                               ),
                                             )),

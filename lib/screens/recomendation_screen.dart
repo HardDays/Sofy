@@ -318,8 +318,7 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                         Provider.of<PlaylistData>(context)
                             .vibrosByPlayListIdApi
                             .length, (index) {
-                      return _miniContainer(Provider.of<PlaylistData>(context)
-                          .vibrosByPlayListIdApi[index]);
+                      return _miniContainer(Provider.of<PlaylistData>(context).vibrosByPlayListIdApi[index]);
                     }),
                   );
                 }),
