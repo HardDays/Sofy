@@ -34,7 +34,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
   bool get wantKeepAlive => true;
 
   ArticlesBloc _articlesBloc;
-  double radius = 25;
+  double radius = 22;
 
   @override
   void initState() {
@@ -62,19 +62,22 @@ class _ArticlesScreenState extends State<ArticlesScreen>
             double fontSize2 = 46 / height * 926;
             double bottom2 = 522 - 42 - fontSize2 * 2;
             return Container(
-              height: height,
-              width: width,
-              color: kArticlesBgColor,
-              child: SingleChildScrollView(
-                child: Column(
+              color: ArticlesColors.NewBgColor,
+              child: SafeArea(
+                top: false,
+                child: ListView(
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(radius)),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(radius),
+                          bottomRight: Radius.circular(radius)),
                       child: Stack(
                         alignment: Alignment.bottomLeft,
                         children: [
                           Container(
-                            height: 522,
+                            height: 508,
                             width: width,
                             color: kArticlesNewBgColor,
                           ),
@@ -105,126 +108,148 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 22),
-                            child: Container(
-                              height: 293,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: state.listOfArticles.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Row(
-                                      children: [
-                                        index == 0
-                                            ? SizedBox(width: 22)
-                                            : SizedBox(width: 7.5),
-                                        InkWell(
-                                          child: ArticleCard(
-                                            title: state
-                                                .listOfArticles[index].title,
-                                            path: state
-                                                .listOfArticles[index].coverImg,
-                                            height: 293,
-                                            width: 242,
-                                            frozenHeight: 81,
-                                            fontSize: 17,
-                                            textColor: kArticleCardTextColor,
-                                            radius: 27,
-                                          ),
-                                          onTap: () {
-                                            print(
-                                                state.listOfArticles[index].id);
-
-                                            Analytics().sendEventReports(
-                                              event:
-                                                  'new_topics_${state.listOfArticles[index].id}_click'
-                                                      .replaceAll(' ', '_'),
-                                            );
-                                            Navigator.push(
-                                              context,
-                                              CustomMaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ArticleDetailsScreen(
-                                                          articleId: state
-                                                              .listOfArticles[
-                                                                  index]
-                                                              .id)),
-                                            );
-                                          },
+                          Container(
+                            height: 293,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: state.listOfArticles.length,
+                                itemBuilder:
+                                    (BuildContext context, int index) {
+                                  return Row(
+                                    children: [
+                                      index == 0
+                                          ? SizedBox(width: 22)
+                                          : SizedBox(width: 7.5),
+                                      InkWell(
+                                        child: ArticleCard(
+                                          title: state
+                                              .listOfArticles[index].title,
+                                          path: state
+                                              .listOfArticles[index].coverImg,
+                                          height: 293,
+                                          width: 242,
+                                          frozenHeight: 81,
+                                          fontSize: 17,
+                                          textColor: kArticleCardTextColor,
+                                          radius: 27,
                                         ),
-                                        index == state.listOfArticles.length - 1
-                                            ? SizedBox(width: 22)
-                                            : SizedBox(width: 7.5),
-                                      ],
-                                    );
-                                  }),
-                            ),
+                                        onTap: () {
+                                          print(
+                                              state.listOfArticles[index].id);
+
+                                          Analytics().sendEventReports(
+                                            event:
+                                                'new_topics_${state.listOfArticles[index].id}_click'
+                                                    .replaceAll(' ', '_'),
+                                          );
+                                          Navigator.push(
+                                            context,
+                                            CustomMaterialPageRoute(
+                                                builder: (context) =>
+                                                    ArticleDetailsScreen(
+                                                        articleId: state
+                                                            .listOfArticles[
+                                                                index]
+                                                            .id)),
+                                          );
+                                        },
+                                      ),
+                                      index == state.listOfArticles.length - 1
+                                          ? SizedBox(width: 22)
+                                          : SizedBox(width: 7.5),
+                                    ],
+                                  );
+                                }),
                           )
                         ],
                       ),
                     ),
-                    ArticlesCardsHeaderButton(
-                        listOfArticles: state.femaleSexuality,
-                        callback: () {
-                          print('header femaleSexuality clicker');
-                        },
-                        title: AppLocalizations.of(context)
-                            .translate('female_sexuality'),
-                        cardHeight: 220,
-                        cardRadius: 20,
-                        cardWidth: 170,
-                        frozenCardFontSize: 14,
-                        frozenCardHeight: 57,
-                        titleFontSize: 24),
-                    ArticlesCardsHeaderButton(
-                        listOfArticles: state.interestingAboutSex,
-                        callback: () {
-                          print('header interesting_about_sex clicker');
-                        },
-                        title: AppLocalizations.of(context)
-                            .translate('interesting_about_sex'),
-                        cardHeight: 220,
-                        cardRadius: 20,
-                        cardWidth: 170,
-                        frozenCardFontSize: 14,
-                        frozenCardHeight: 57,
-                        titleFontSize: 24),
-                    Padding(
-                      padding: const EdgeInsets.all(22),
-                      child: ArticlesListWithHeader(
-                          title:
-                              AppLocalizations.of(context).translate('popular'),
-                          listOfArticles: state.listOfPopularArticles),
-                    ),
-                    ArticlesCardsHeaderButton(
-                        listOfArticles: state.orgasms,
-                        callback: () {
-                          print('header orgasms clicker');
-                        },
-                        title:
-                            AppLocalizations.of(context).translate('orgasms'),
-                        cardHeight: 220,
-                        cardRadius: 20,
-                        cardWidth: 170,
-                        frozenCardFontSize: 14,
-                        frozenCardHeight: 57,
-                        titleFontSize: 24),
-                    Padding(
-                      padding: const EdgeInsets.all(22),
-                      child: ArticlesCategoriesWithHeader(
-                        listOfTopics: state.listOfTopicsPopular,
-                        title: 'Популярные категории',
+                    Container(
+                      color: ArticlesColors.BgColor,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(radius),
+                            bottomRight: Radius.circular(radius)),
+                        child: Stack(
+                          alignment: Alignment.bottomLeft,
+                          children: [
+                            Container(
+                              height: 22,
+                              width: width,
+                              color: ArticlesColors.NewBgColor,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 22),
-                      child: SofyButton(
-                        label:
-                            AppLocalizations.of(context).translate('view_all'),
+                    Container(
+                      color: ArticlesColors.BgColor,
+                      child: Column(
+                        children: [
+                          ArticlesCardsHeaderButton(
+                              listOfArticles: state.femaleSexuality,
+                              callback: () {
+                                print('header femaleSexuality clicker');
+                              },
+                              title: AppLocalizations.of(context)
+                                  .translate('female_sexuality'),
+                              cardHeight: 220,
+                              cardRadius: 20,
+                              cardWidth: 170,
+                              frozenCardFontSize: 14,
+                              frozenCardHeight: 57,
+                              titleFontSize: 24),
+                          ArticlesCardsHeaderButton(
+                              listOfArticles: state.interestingAboutSex,
+                              callback: () {
+                                print('header interesting_about_sex clicker');
+                              },
+                              title: AppLocalizations.of(context)
+                                  .translate('interesting_about_sex'),
+                              cardHeight: 220,
+                              cardRadius: 20,
+                              cardWidth: 170,
+                              frozenCardFontSize: 14,
+                              frozenCardHeight: 57,
+                              titleFontSize: 24),
+                          Padding(
+                            padding: const EdgeInsets.all(22),
+                            child: ArticlesListWithHeader(
+                                title: AppLocalizations.of(context)
+                                    .translate('popular'),
+                                listOfArticles: state.listOfPopularArticles),
+                          ),
+                          ArticlesCardsHeaderButton(
+                              listOfArticles: state.orgasms,
+                              callback: () {
+                                print('header orgasms clicker');
+                              },
+                              title: AppLocalizations.of(context)
+                                  .translate('orgasms'),
+                              cardHeight: 220,
+                              cardRadius: 20,
+                              cardWidth: 170,
+                              frozenCardFontSize: 14,
+                              frozenCardHeight: 57,
+                              titleFontSize: 24),
+                          Padding(
+                            padding: const EdgeInsets.all(22),
+                            child: ArticlesCategoriesWithHeader(
+                              listOfTopics: state.listOfTopicsPopular,
+                              title: 'Популярные категории',
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 22),
+                            child: SofyButton(
+                              label: AppLocalizations.of(context)
+                                  .translate('view_all'),
+                            ),
+                          ),
+                          SizedBox(height: height / 8.54),
+                        ],
                       ),
-                    ),
-                    SizedBox(height: height / 8.54),
+                    )
                   ],
                 ),
               ),
@@ -234,9 +259,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
             return Padding(
               padding: const EdgeInsets.all(22),
               child: Center(
-                child: Container(
-                  child: Text(state.error)
-                ),
+                child: Container(child: Text(state.error)),
               ),
             );
           }
