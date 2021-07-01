@@ -52,40 +52,47 @@ class ArticlesListWithHeader extends StatelessWidget {
               return Column(
                 children: [
                   index != 0 ? SizedBox(height: 21) : Container(),
-                  Row(
-                    children: [
-                      // index == 0 ? SizedBox(width: 22) : SizedBox(width: 7.5),
-                      Container(
-                        height: cardHeight,
-                        child: Row(
-                          children: [
-                            ExtendedImage.network(
-                              listOfArticles[index].coverImg,
-                              cache: true,
-                              fit: BoxFit.cover,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(imageRadius)),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                            listOfArticles[index].title.length < 30
-                            ? listOfArticles[index].title
-                                : '${listOfArticles[index].title.substring(0, 30)}...',),
-                                Text(
-                                    '${listOfArticles[index].repliesCount} ${AppLocalizations.of(context).translate('comments')}'),
-                              ],
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            )
-                          ],
+                  InkWell(
+                    child: Row(
+                      children: [
+                        // index == 0 ? SizedBox(width: 22) : SizedBox(width: 7.5),
+                        Container(
+                          height: cardHeight,
+                          child: Row(
+                            children: [
+                              ExtendedImage.network(
+                                listOfArticles[index].coverImg,
+                                cache: true,
+                                fit: BoxFit.cover,
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(imageRadius)),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    listOfArticles[index].title.length < 30
+                                        ? listOfArticles[index].title
+                                        : '${listOfArticles[index].title.substring(0, 30)}...',
+                                  ),
+                                  Text(
+                                      '${listOfArticles[index].repliesCount} ${AppLocalizations.of(context).translate('comments')}'),
+                                ],
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    onTap: () {
+                      print(listOfArticles[index].id);
+                    },
                   ),
                   index != listOfArticles.length - 1
                       ? SizedBox(height: 19)

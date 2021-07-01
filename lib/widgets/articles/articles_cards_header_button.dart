@@ -53,15 +53,20 @@ class ArticlesCardsHeaderButton extends StatelessWidget {
                 return Row(
                   children: [
                     index == 0 ? SizedBox(width: 22) : SizedBox(width: 7.5),
-                    ArticleCard(
-                        title: listOfArticles[index].title,
-                        path: listOfArticles[index].coverImg,
-                        height: cardHeight,
-                        width: cardWidth,
-                        frozenHeight: frozenCardHeight,
-                        fontSize: frozenCardFontSize,
-                        textColor: kArticleCardTextColor,
-                        radius: cardRadius),
+                    InkWell(
+                      child: ArticleCard(
+                          title: listOfArticles[index].title,
+                          path: listOfArticles[index].coverImg,
+                          height: cardHeight,
+                          width: cardWidth,
+                          frozenHeight: frozenCardHeight,
+                          fontSize: frozenCardFontSize,
+                          textColor: kArticleCardTextColor,
+                          radius: cardRadius),
+                      onTap: () {
+                        print(listOfArticles[index].id);
+                      },
+                    ),
                     index == listOfArticles.length - 1
                         ? SizedBox(width: 22)
                         : SizedBox(width: 7.5),

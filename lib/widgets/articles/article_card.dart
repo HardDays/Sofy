@@ -5,8 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 
 class ArticleCard extends StatelessWidget {
-  const ArticleCard({Key key, this.title = 'Title',this.path = 'assets/articles/card_1.png',this.width = 242,
-  this.height = 293, this.frozenHeight = 81, this.fontSize = 17, this.textColor = const Color(0x725E5C), this.radius = 27}) : super(key: key);
+  const ArticleCard(
+      {Key key,
+      this.title = 'Title',
+      this.path = 'assets/articles/card_1.png',
+      this.width = 242,
+      this.height = 293,
+      this.frozenHeight = 81,
+      this.fontSize = 17,
+      this.textColor = const Color(0x725E5C),
+      this.radius = 27})
+      : super(key: key);
   final double radius;
   final double height;
   final double width;
@@ -57,7 +66,12 @@ class ArticleCard extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: Text(title,textAlign: TextAlign.center, style: TextStyle(color: textColor, fontSize: fontSize),),
+                            child: Text(
+                              title,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: textColor, fontSize: fontSize),
+                            ),
                           ),
                         ),
                       ),
