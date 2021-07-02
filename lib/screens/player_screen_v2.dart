@@ -1,39 +1,63 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/models/api_playlist_model.dart';
+import 'package:sofy_new/models/api_vibration_model.dart';
+import 'package:sofy_new/providers/app_localizations.dart';
+import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
 
 class PlayerScreenV2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    return Stack(
-      children: [
-        _BackgroundLinearColor(),
-        _BackgroundImages(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 55,
+    return BlocBuilder<PlayerScreenBloc, PlayerScreenState>(
+      builder: (context, state) {
+        if (state is VibrationLoading)
+          return Container(
+            child: Text('Loading'),
+          );
+        if (state is ErrorState)
+          return Container(
+            child: Text(state.error),
+          );
+        final data = (state as VibrationsLoaded);
+        return Stack(
+          children: [
+            _BackgroundLinearColor(),
+            _BackgroundImages(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 55,
+                  ),
+                  _SelectableButtons(
+                    list: data.playlistNames,
+                    id: data.selected,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  _CustomSlider(),
+                  _VibrationList2(
+                    path: data.path,
+                    list: data.playlist,
+                  ),
+                  _EqualizeLines(),
+                  _PowerAndFireButton(),
+                  SizedBox(
+                    height: 100,
+                  )
+                ],
               ),
-              _SelectableButtons(),
-              SizedBox(
-                height: 15,
-              ),
-              _CustomSlider(),
-              _VibrationList(),
-              _EqualizeLines(),
-              _PowerAndFireButton(),
-              SizedBox(
-                height: 100,
-              )
-            ],
-          ),
-        ),
-      ],
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -56,7 +80,9 @@ class _BackgroundImages extends StatelessWidget {
         Positioned(
           right: 0,
           top: height / 4 * 2.6,
-          child: SvgPicture.asset('assets/svg/background2.svg', ),
+          child: SvgPicture.asset(
+            'assets/svg/background2.svg',
+          ),
         ),
         Positioned(
           right: 0,
@@ -275,61 +301,62 @@ class _BackgroundLinearColor extends StatelessWidget {
 }
 
 class _SelectableButtons extends StatelessWidget {
-  const _SelectableButtons({Key key}) : super(key: key);
+  const _SelectableButtons({Key key, @required this.list, @required this.id})
+      : super(key: key);
+  final List<ApiPlayListModel> list;
+  final id;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Container(
       height: height / 20 * 1.3,
+      width: double.infinity,
       decoration: BoxDecoration(
         color: kPlayerScrV2ButtonThemeColor,
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _SelectableButtonsItem(
-            text: 'Soft',
-            selected: true,
-            id: 0,
-          ),
-          _SelectableButtonsItem(
-            text: 'Strong',
-            selected: false,
-            id: 1,
-          ),
-          _SelectableButtonsItem(
-            text: 'Hard',
-            selected: false,
-            id: 2,
-          ),
-        ],
+        children: List<Widget>.generate(list.length, (index) {
+          return _SelectableButtonsItem(
+            selected: id == list[index].id ? true : false,
+            model: list[index],
+            onTap: () {
+              BlocProvider.of<PlayerScreenBloc>(context)
+                  .add(SetMode(id: list[index].id));
+            },
+          );
+        }),
       ),
     );
   }
 }
 
 class _SelectableButtonsItem extends StatelessWidget {
-  final int id;
-  final String text;
   final Function onTap;
   final bool selected;
+  final ApiPlayListModel model;
 
   const _SelectableButtonsItem(
-      {Key key, this.id, this.text, this.onTap, this.selected = false})
+      {Key key,
+      @required this.onTap,
+      this.selected = false,
+      @required this.model})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      flex: 1,
       child: InkWell(
         onTap: onTap,
         child: Container(
           margin: EdgeInsets.all(4),
           child: Center(
             child: Text(
-              text,
+              //model.titleEn,
+              AppLocalizations.of(context).translate(model.titleEn),
               style: TextStyle(
                   color: selected
                       ? kPlayerScrV2SelectedTextColor
@@ -363,23 +390,22 @@ class CircleSelectableButton extends StatelessWidget {
   const CircleSelectableButton(
       {Key key,
       this.selected = false,
-      @required this.id,
       @required this.iconPath,
-      @required this.text})
+      @required this.model,
+      this.onTap})
       : super(key: key);
+
+  final ApiVibrationModel model;
   final bool selected;
-  final int id;
   final String iconPath;
-  final String text;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             height: width / 6,
@@ -397,7 +423,8 @@ class CircleSelectableButton extends StatelessWidget {
                     )
                   : null,
               color: selected ? Color(0xFFFFE1E8) : Color(0xFFFFFFFF),
-              borderRadius: BorderRadius.circular(width / 12),
+              //borderRadius: BorderRadius.circular(width / 12),
+              shape: BoxShape.circle,
               boxShadow: selected
                   ? null
                   : [
@@ -438,7 +465,8 @@ class CircleSelectableButton extends StatelessWidget {
             height: 8,
           ),
           Text(
-            text,
+            //model.titleEn,
+            AppLocalizations.of(context).translate(model.titleEn),
             style: TextStyle(color: Color(0xFFFDAABC)),
           )
         ],
@@ -448,7 +476,10 @@ class CircleSelectableButton extends StatelessWidget {
 }
 
 class _VibrationList extends StatelessWidget {
-  const _VibrationList({Key key}) : super(key: key);
+  const _VibrationList({Key key, @required this.list, @required this.path})
+      : super(key: key);
+  final List<ApiVibrationModel> list;
+  final List<String> path;
 
   @override
   Widget build(BuildContext context) {
@@ -460,46 +491,61 @@ class _VibrationList extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              CircleSelectableButton(
-                text: 'Starfall',
-                iconPath: 'assets/vibration_icons/Starfall.png',
-                id: 0,
-              ),
-              CircleSelectableButton(
-                selected: true,
-                text: 'Wave',
-                iconPath: 'assets/vibration_icons/Wave.png',
-                id: 1,
-              ),
-              CircleSelectableButton(
-                text: 'Tornado',
-                iconPath: 'assets/vibration_icons/Tornado.png',
-                id: 1,
-              ),
-            ],
+            children: List<Widget>.generate(3, (index) {
+              return CircleSelectableButton(
+                model: list[index],
+                iconPath: path[index],
+              );
+            }),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              CircleSelectableButton(
-                text: 'Firework',
-                iconPath: 'assets/vibration_icons/Firework.png',
-                id: 0,
-              ),
-              CircleSelectableButton(
-                text: 'Mild pulse',
-                iconPath: 'assets/vibration_icons/Mild pulse.png',
-                id: 1,
-              ),
-              CircleSelectableButton(
-                text: 'Waterfall',
-                iconPath: 'assets/vibration_icons/Waterfall.png',
-                id: 1,
-              ),
-            ],
+            children: List<Widget>.generate(3, (index) {
+              return CircleSelectableButton(
+                model: list[index + 3],
+                iconPath: path[index + 3],
+              );
+            }),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _VibrationList2 extends StatelessWidget {
+  const _VibrationList2({Key key, @required this.list, @required this.path})
+      : super(key: key);
+  final List<ApiVibrationModel> list;
+  final List<String> path;
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    return Container(
+      height: height / 3 ,
+      child: GridView.builder(
+        itemCount: list.length,
+        itemBuilder: (BuildContext context, int index) {
+          return CircleSelectableButton(
+            onTap: () {},
+            model: list[index],
+            iconPath: path[index],
+          );
+        },
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+        ),
+        // children: List<Widget>.generate(6, (index) {
+        //   return CircleSelectableButton(
+        //     onTap: () {},
+        //     model: list[index],
+        //     iconPath: path[index],
+        //   );
+        // }),
       ),
     );
   }

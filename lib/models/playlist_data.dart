@@ -75,6 +75,10 @@ class PlaylistData extends ChangeNotifier {
     return UnmodifiableListView(list);
   }
 
+  UnmodifiableListView<ApiVibrationModel> getAllPlaylist() {
+    return UnmodifiableListView(_playListApi);
+  }
+
   UnmodifiableListView<ApiVibrationModel> get vibrosByPlayListIdApi {
     return UnmodifiableListView(_vibrosByPlaylistIdApi);
   }
@@ -108,7 +112,8 @@ class PlaylistData extends ChangeNotifier {
     if (isPlayListNullApi(context))
       return null;
     else
-      return AppLocalizations.of(context).languageCode() == 'ru' ? getCurrentPlaylistModelApi(context).titleRu : getCurrentPlaylistModelApi(context).titleEn;
+      //return AppLocalizations.of(context).languageCode() == 'ru' ? getCurrentPlaylistModelApi(context).titleRu : getCurrentPlaylistModelApi(context).titleEn;
+      return AppLocalizations.of(context).translate(getCurrentPlaylistModelApi(context).titleEn) ?? 'unnamed';
   }
 
   void updateVibrosByPlaylistIdApi({int playlistId, bool notify = true}) {
