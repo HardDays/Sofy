@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
 
 class ArticleAuthorDescription extends StatelessWidget {
@@ -16,6 +17,17 @@ class ArticleAuthorDescription extends StatelessWidget {
               ? Row(
                   children: [
                     Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(38)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xffCFB2CD),
+                            spreadRadius: 4,
+                            offset: Offset(4, 4),
+                            blurRadius: 10,
+                          ),
+                        ],
+                      ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(38)),
                         child: Stack(
@@ -53,19 +65,20 @@ class ArticleAuthorDescription extends StatelessWidget {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                     )
                   : Container(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // ExtendedImage.network(icon) : Container(), // todo insta logo
-                  author.role != null
-                      ? Text(
+              author.role != null
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset('assets/svg/instagram.svg'),
+                        SizedBox(width: 4),
+                        Text(
                           author.role,
                           style: TextStyle(fontSize: 13),
                         )
-                      : Container(),
-                ],
-              )
+                      ],
+                    )
+                  : Container(),
             ],
           )
         ],

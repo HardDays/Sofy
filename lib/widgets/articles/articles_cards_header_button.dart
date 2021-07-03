@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
+import 'package:sofy_new/screens/arcticle_details_screen.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/widgets/articles/article_card.dart';
 import 'package:sofy_new/widgets/articles/header_button.dart';
+import 'package:sofy_new/widgets/material_page_route.dart';
 
 class ArticlesCardsHeaderButton extends StatelessWidget {
   const ArticlesCardsHeaderButton(
@@ -65,6 +68,17 @@ class ArticlesCardsHeaderButton extends StatelessWidget {
                           radius: cardRadius),
                       onTap: () {
                         print(listOfArticles[index].id);
+
+                        Analytics().sendEventReports(
+                          event: 'article_${listOfArticles[index].id}_click'
+                              .replaceAll(' ', '_'),
+                        );
+                        Navigator.push(
+                          context,
+                          CustomMaterialPageRoute(
+                              builder: (context) => ArticleDetailsScreen(
+                                  articleId: listOfArticles[index].id)),
+                        );
                       },
                     ),
                     index == listOfArticles.length - 1

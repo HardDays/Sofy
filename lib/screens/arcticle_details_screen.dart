@@ -1,4 +1,5 @@
 import 'package:extended_image/extended_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -9,6 +10,7 @@ import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/bloc/article_detales_screen_bloc.dart';
 import 'package:sofy_new/widgets/articles/article_author_desciption.dart';
 import 'package:sofy_new/widgets/articles/article_details_skeletion.dart';
+import 'package:sofy_new/widgets/articles/sofy_button.dart';
 
 class ArticleDetailsScreen extends StatefulWidget {
   const ArticleDetailsScreen({Key key, this.articleId = 100}) : super(key: key);
@@ -21,6 +23,11 @@ class ArticleDetailsScreen extends StatefulWidget {
 class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
   ArticleDetailsBloc _articleDetailsBloc;
   double radius = 25;
+
+  var linearGradientColors = const [
+    Color(0xFFFDB0C1),
+    Color(0xFFFF95AC),
+  ];
 
   @override
   void initState() {
@@ -94,104 +101,112 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                 Padding(
                                   padding: const EdgeInsets.all(21),
                                   child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(bottom: 26),
+                                        padding:
+                                            const EdgeInsets.only(bottom: 26),
                                         child: ArticleAuthorDescription(
                                             author: state.author),
                                       ),
                                       Text(
-                                        state.articleDetails.article
-                                            .title,
+                                        state.articleDetails.article.title,
                                         style: TextStyle(
                                             fontFamily: 'Roboto',
                                             fontWeight: FontWeight.w700,
                                             fontSize: 24,
-                                            color: ArticlesColors
-                                                .HeaderTextColor),
+                                            color:
+                                                ArticlesColors.HeaderTextColor),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 25, bottom: 38),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SofyButton(
+                                              width: width / 2 - 30,
+                                              label:
+                                                  AppLocalizations.of(context)
+                                                      .translate('questions_btn'),
+                                              callback: () {
+                                                print('111');
+                                              },
+                                            ),
+                                            SofyButton(
+                                                width: width / 2 - 30,
+                                                label:
+                                                    AppLocalizations.of(context)
+                                                        .translate('comments_btn'),
+                                                callback: () {
+                                                  print('222');
+                                                }),
+                                          ],
+                                        ),
                                       ),
                                       Html(
                                         style: {
                                           "p": Style(
                                               wordSpacing: 5,
                                               lineHeight:
-                                                  LineHeight.number(
-                                                      1.5),
-                                              fontFamily:
-                                                  kFontFamilyMontserrat,
-                                              fontStyle:
-                                                  FontStyle.normal,
-                                              fontSize: FontSize(
-                                                  height / 57.73),
+                                                  LineHeight.number(1.5),
+                                              fontFamily: kFontFamilyMontserrat,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize:
+                                                  FontSize(height / 57.73),
                                               color:
                                                   kArticlesDetailsScreenColor),
                                           "strong": Style(
                                               wordSpacing: 5,
                                               lineHeight:
-                                                  LineHeight.number(
-                                                      1.6),
+                                                  LineHeight.number(1.6),
                                               fontFamily:
                                                   kFontFamilyMontserratBold,
-                                              fontWeight:
-                                                  FontWeight.w600,
-                                              fontStyle:
-                                                  FontStyle.normal,
-                                              fontSize: FontSize(
-                                                  height / 50.7),
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: FontSize(height / 50.7),
                                               color:
                                                   kArticlesDetailsScreenColor),
                                           "h1": Style(
                                               wordSpacing: 5,
                                               lineHeight:
-                                                  LineHeight.number(
-                                                      1.6),
-                                              fontFamily:
-                                                  kFontFamilyMontserrat,
-                                              fontWeight:
-                                                  FontWeight.w600,
-                                              fontStyle:
-                                                  FontStyle.normal,
-                                              fontSize: FontSize(
-                                                  height / 50.7),
+                                                  LineHeight.number(1.6),
+                                              fontFamily: kFontFamilyMontserrat,
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: FontSize(height / 50.7),
                                               color:
                                                   kArticlesDetailsScreenColor),
                                           "li": Style(
                                               wordSpacing: 5,
                                               lineHeight:
-                                                  LineHeight.number(
-                                                      1.5),
-                                              fontFamily:
-                                                  kFontFamilyMontserrat,
-                                              fontStyle:
-                                                  FontStyle.normal,
-                                              fontSize: FontSize(
-                                                  height / 57.73),
+                                                  LineHeight.number(1.5),
+                                              fontFamily: kFontFamilyMontserrat,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize:
+                                                  FontSize(height / 57.73),
                                               color:
                                                   kArticlesDetailsScreenColor),
                                           "u": Style(
                                               wordSpacing: 5,
                                               lineHeight:
-                                                  LineHeight.number(
-                                                      1.5),
-                                              fontFamily:
-                                                  kFontFamilyMontserrat,
-                                              fontStyle:
-                                                  FontStyle.normal,
-                                              fontSize: FontSize(
-                                                  height / 57.73),
+                                                  LineHeight.number(1.5),
+                                              fontFamily: kFontFamilyMontserrat,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize:
+                                                  FontSize(height / 57.73),
                                               color:
                                                   kArticlesDetailsScreenColor),
                                         },
-                                        data: state.articleDetails
-                                                    .article.content !=
+                                        data: state.articleDetails.article
+                                                    .content !=
                                                 null
-                                            ? state.articleDetails
-                                                .article.content
+                                            ? state
+                                                .articleDetails.article.content
                                             : '',
                                       ),
                                     ],
@@ -199,6 +214,32 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                 ),
                                 // todo container with linear grad
                               ],
+                            ),
+                          ),
+                          SafeArea(
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 21),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.maybePop(context);
+                                    },
+                                    color: Colors.white,
+                                    icon: Icon(Icons.arrow_back_ios),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      print('share'); //todo how to???
+                                    },
+                                    color: Colors.white,
+                                    icon: Icon(Icons.ios_share),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],

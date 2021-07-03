@@ -4,6 +4,7 @@ class SofyButton extends StatelessWidget {
   const SofyButton({
     Key key,
     this.height = 52,
+    this.width,
     this.linearGradientColors = const [
       Color(0xFFFDB0C1),
       Color(0xFFFF95AC),
@@ -14,6 +15,7 @@ class SofyButton extends StatelessWidget {
     this.callback,
   }) : super(key: key);
   final double height;
+  final double width;
   final List<Color> linearGradientColors;
   final Color labelColor;
   final double labelFontSize;
@@ -22,40 +24,37 @@ class SofyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            height: height,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(229, 207, 178, 205),
-                  offset: Offset(4, 4),
-                  blurRadius: 10.0,
-                ),
-              ],
-              gradient: LinearGradient(
-                colors: linearGradientColors,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-              borderRadius: BorderRadius.circular(9),
-              // boxShadow: BoxShadow
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(229, 207, 178, 205),
+            offset: Offset(4, 4),
+            blurRadius: 10.0,
           ),
-          Text(
+        ],
+        gradient: LinearGradient(
+          colors: linearGradientColors,
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+        borderRadius: BorderRadius.circular(9),
+      ),
+      height: height,
+      width: width,
+      child: InkWell(
+        child: Center(
+          child: Text(
             label,
             style: TextStyle(
                 color: labelColor,
                 fontSize: labelFontSize,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Hind Guntur'),
-          )
-        ],
+          ),
+        ),
+        onTap: callback,
       ),
-      onTap: callback,
     );
   }
 }

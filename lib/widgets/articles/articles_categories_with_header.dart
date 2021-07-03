@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/models/api_article_topic_model.dart';
+import 'package:sofy_new/screens/arcticle_details_screen.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
+import 'package:sofy_new/widgets/material_page_route.dart';
 
 class ArticlesCategoriesWithHeader extends StatelessWidget {
   const ArticlesCategoriesWithHeader({
@@ -59,104 +62,120 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: listOfTopics.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Column(
-                        children: [
-                          index != 0 ? SizedBox(height: 21) : Container(),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Stack(
-                                    alignment: AlignmentDirectional.center,
-                                    children: [
-                                      Container(
-                                        height: 28,
-                                        width: 28,
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            colors:
-                                                kArticlePopCatIconBorderColor,
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
+                      return InkWell(
+                        onTap: () {
+                          print(listOfTopics[index].id);
+
+                          // Analytics().sendEventReports(
+                          //   event: 'article_${listOfTopics[index].id}_click'
+                          //       .replaceAll(' ', '_'),
+                          // );
+                          // Navigator.push(
+                          //   context,
+                          //   CustomMaterialPageRoute(
+                          //       builder: (context) => ArticleDetailsScreen(
+                          //           articleId: listOfTopics[index].id)),
+                          // );
+                        },
+                        child: Column(
+                          children: [
+                            index != 0 ? SizedBox(height: 21) : Container(),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Stack(
+                                      alignment: AlignmentDirectional.center,
+                                      children: [
+                                        Container(
+                                          height: 28,
+                                          width: 28,
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              colors:
+                                                  kArticlePopCatIconBorderColor,
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
                                           ),
-                                          borderRadius:
-                                              BorderRadius.circular(5),
                                         ),
+                                        Container(
+                                          height: 26,
+                                          width: 26,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: ExtendedImage.network(
+                                              listOfTopics[index].coverImg,
+                                              cache: true,
+                                            ),
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: kArticlePopCatIconBgColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 16,
+                                      height: cardHeight,
+                                    ),
+                                    Text(
+                                      listOfTopics[index].name.length < 30
+                                          ? listOfTopics[index].name
+                                          : '${listOfTopics[index].name.substring(0, 30)}...',
+                                      style: TextStyle(
+                                          fontFamily: 'Hind Guntur',
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14,
+                                          color: kArticlePopCatListTextColor),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                    child: Stack(
+                                  children: <Widget>[
+                                    Container(
+                                      child: SvgPicture.asset(
+                                        'assets/svg/arrow_next_vector.svg',
+                                        color: textColor,
+                                        height: fontTitleSize,
                                       ),
-                                      Container(
-                                        height: 26,
-                                        width: 26,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(5.0),
-                                          child: ExtendedImage.network(
-                                            listOfTopics[index].coverImg,
-                                            cache: true,
-                                          ),
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: kArticlePopCatIconBgColor,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: 16,
-                                    height: cardHeight,
-                                  ),
-                                  Text(
-                                    listOfTopics[index].name.length < 30
-                                        ? listOfTopics[index].name
-                                        : '${listOfTopics[index].name.substring(0, 30)}...',
-                                    style: TextStyle(
-                                        fontFamily: 'Hind Guntur',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                        color: kArticlePopCatListTextColor),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                  child: Stack(
-                                children: <Widget>[
-                                  Container(
-                                    child: SvgPicture.asset(
-                                      'assets/svg/arrow_next_vector.svg',
-                                      color: textColor,
-                                      height: fontTitleSize,
                                     ),
-                                  ),
-                                  Positioned.fill(
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      child: InkWell(
-                                          focusColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          splashColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(60),
-                                          radius: fontTitleSize * 2,
-                                          onTap: callback),
+                                    Positioned.fill(
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                            focusColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            splashColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(60),
+                                            radius: fontTitleSize * 2,
+                                            onTap: callback),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              )),
-                            ],
-                          ),
-                          index != listOfTopics.length - 1
-                              ? SizedBox(height: 19)
-                              : Container(),
-                          index != listOfTopics.length - 1
-                              ? Container(
-                                  height: 1,
-                                  width: width,
-                                  color: kArticlesDividerColor)
-                              : Container(),
-                        ],
+                                  ],
+                                )),
+                              ],
+                            ),
+                            index != listOfTopics.length - 1
+                                ? SizedBox(height: 19)
+                                : Container(),
+                            index != listOfTopics.length - 1
+                                ? Container(
+                                    height: 1,
+                                    width: width,
+                                    color: kArticlesDividerColor)
+                                : Container(),
+                          ],
+                        ),
                       );
                     }),
               ),

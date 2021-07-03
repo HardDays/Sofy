@@ -139,7 +139,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
 
                                           Analytics().sendEventReports(
                                             event:
-                                                'new_topics_${state.listOfArticles[index].id}_click'
+                                                'article_${state.listOfArticles[index].id}_click'
                                                     .replaceAll(' ', '_'),
                                           );
                                           Navigator.push(
