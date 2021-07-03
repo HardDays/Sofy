@@ -4,12 +4,14 @@ import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/models/api_articles_answer_model.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
+import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
 import 'package:sofy_new/screens/user_profile.dart';
 
 import 'constants/app_colors.dart';
@@ -285,6 +287,7 @@ class RestApi {
             buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
     ApiPlayListAnswerModel apiPlayListAnswerModel =
         ApiPlayListAnswerModel.fromJson(response.data);
+    //print(response.data);
     List<ApiPlayListModel> temp = List();
     if (apiPlayListAnswerModel != null &&
         apiPlayListAnswerModel.info != null &&
@@ -319,6 +322,7 @@ class RestApi {
             buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
     ApiVibrationAnswerModel apiVibrationAnswerModel =
         ApiVibrationAnswerModel.fromJson(response.data);
+    //print(response.data);
     List<ApiVibrationModel> temp = List();
     if (apiVibrationAnswerModel != null &&
         apiVibrationAnswerModel.info != null &&
@@ -336,6 +340,7 @@ class RestApi {
             temp.add(apiVibrationAnswerModel.info.items[i]);
           }
         }*/
+        //print(apiVibrationAnswerModel.info.items[i].titleEn);
         temp.add(apiVibrationAnswerModel.info.items[i]);
       }
     }
@@ -346,6 +351,7 @@ class RestApi {
     if (temp.length != 0) {
       Provider.of<PlaylistData>(context, listen: false)
           .updateListApi(list: temp);
+      //BlocProvider.of<PlayerScreenBloc>(context);
       Provider.of<Player>(context, listen: false)
           .updateCurrentPlayListModel(model: temp[0]);
     } else {

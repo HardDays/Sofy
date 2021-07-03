@@ -123,6 +123,37 @@ const kPlayerScrShadowColor = Color(0xffb686b6);
 const kPlayerScrShadow3Color = Color(0xffCFB2CD);
 const kPlayerScrShadow4Color = Color(0xffffffff);
 
+const List<Color> kPlayerScrV2LinearGradientColor = [
+  Color(0xFFFFFFFF),
+  Color(0xFFF9EAF7)
+];
+const List<Color> kPlayerScrV2ButtonGradientColor = [
+  Color(0xFFFDB0C1),
+  Color(0xFFFF95AC),
+];
+const List<Color> kPlayerScrV2SliderBoxColor = [
+  Color(0xFFFFE9F0),
+  Color(0xFFFFD7E4),
+  Color(0xFFFFC2D6),
+  Color(0xFFFF8EB3),
+  Color(0xFFF95C8F),
+  Color(0xFFE33871),
+  Color(0xFFCE1E65),
+  Color(0xFFA0174F),
+];
+
+const List<Color> kPlayerScrV2SliderColor = [
+  Color(0xFFF95C8F),
+  Color(0xFFA0174F),
+];
+
+const kPlayerScrV2ButtonThemeColor = Color(0xFFFFE1E8);
+const kPlayerScrV2UnselectedTextColor = Color(0xFFE0347A);
+const kPlayerScrV2SelectedTextColor = Color(0xFFFFFFFF);
+const kPlayerScrV2ShadowColor = Color(0xffFF96AD);
+const kPlayerScrV2PinkColor = Color(0xFFE0347A);
+const kPlayerScrV2MeleePinkColor = Color(0xFFFFBCCC);
+
 const List<Color> kPlaylistScrLinearGradColor = [
   Color(0xffFF96AD),
   Color(0xffFFE1E8),

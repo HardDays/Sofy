@@ -145,32 +145,34 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         ),
                       ),
                       SizedBox(width: 15.0),
-                      Stack(alignment: Alignment.center, children: <Widget>[
-                        Container(
-                          height: height / 23.57,
-                          width: height / 4.05,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/slider_fon.png'),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          Container(
+                            height: height / 23.57,
+                            width: height / 4.05,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/slider_fon.png'),
+                              ),
                             ),
-                          ),
-                          child: SliderTheme(
-                            data: SliderTheme.of(context).copyWith(
-                              overlayColor: kArticlesWhiteColor,
-                              activeTrackColor: Colors.transparent,
-                              inactiveTrackColor:
-                                  kMainScreenScaffoldBackColor.withOpacity(0.6),
-                              trackHeight: 75,
-                              thumbColor: Colors.transparent,
-                              overlayShape:
-                                  RoundSliderOverlayShape(overlayRadius: 0),
-                              thumbShape:
-                                  RoundSliderThumbShape(enabledThumbRadius: 0),
-                            ),
-                            child: MediaQuery.removePadding(
-                              context: context,
-                              removeRight: true,
-                              child: Slider(
+                            child: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                overlayColor: kArticlesWhiteColor,
+                                activeTrackColor: Colors.transparent,
+                                inactiveTrackColor: kMainScreenScaffoldBackColor
+                                    .withOpacity(0.6),
+                                trackHeight: 75,
+                                thumbColor: Colors.transparent,
+                                overlayShape:
+                                    RoundSliderOverlayShape(overlayRadius: 0),
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 0),
+                              ),
+                              child: MediaQuery.removePadding(
+                                context: context,
+                                removeRight: true,
+                                child: Slider(
                                   min: 0.0,
                                   max: 78.0,
                                   divisions: 40,
@@ -201,27 +203,32 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                               value: value.round());
                                     } else {
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SubscribeScreen(
-                                                      isFromSplash: false)));
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SubscribeScreen(
+                                              isFromSplash: false),
+                                        ),
+                                      );
                                     }
-                                  }),
+                                  },
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        Align(
+                          Align(
                             alignment: Alignment.center,
                             child: Visibility(
                               child: Material(
                                 color: Colors.transparent,
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.of(context).push(FadeRoute(
+                                    Navigator.of(context).push(
+                                      FadeRoute(
                                         builder: (BuildContext context) =>
                                             SubscribeScreen(
-                                                isFromSplash: false)));
+                                                isFromSplash: false),
+                                      ),
+                                    );
                                   },
                                   child: Container(
                                     height: 25.0,
@@ -240,8 +247,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                       .isAppPurchase
                                   ? false
                                   : true,
-                            ))
-                      ]),
+                            ),
+                          ),
+                        ],
+                      ),
                       SizedBox(width: 15.0),
                       Container(
                         child: Row(
@@ -673,8 +682,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                           image:
                                               AssetImage('assets/previous.png'),
                                           fit: BoxFit.fitHeight,
-                                        )),
-                                      )))),
+                                        ),),
+                                      ),),),),
                             ),
                             SizedBox(width: 25.0),
                             Container(
@@ -691,7 +700,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                       color: kPlayerScrShadow4Color
                                           .withOpacity(0.41),
                                       blurRadius: 10.0,
-                                      offset: Offset(-3, -3)),
+                                      offset: Offset(-3, -3),),
                                 ],
                               ),
                               alignment: Alignment.center,
@@ -732,8 +741,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                                   ? 'assets/pause.png'
                                                   : 'assets/play.png'),
                                           fit: BoxFit.fitHeight,
-                                        )),
-                                      )))),
+                                        ),),
+                                      ),),),),
                             ),
                             SizedBox(width: 25.0),
                             Container(
@@ -773,7 +782,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                           shadowLightColor: kArticlesWhiteColor,
                                           color: kADNeumorphicColor),
                                       boxShape: NeumorphicBoxShape.roundRect(
-                                          BorderRadius.circular(16)),
+                                          BorderRadius.circular(16),),
                                       provideHapticFeedback: false,
                                       onClick: () async {
                                         //swiperController.next();
@@ -811,8 +820,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                             image: DecorationImage(
                                           image: AssetImage('assets/next.png'),
                                           fit: BoxFit.fitHeight,
-                                        )),
-                                      )))),
+                                        ),),
+                                      ),),),),
                             ),
                           ],
                         ),
