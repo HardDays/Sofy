@@ -4,7 +4,6 @@ abstract class PlayerScreenEvent extends Equatable {
   const PlayerScreenEvent();
 
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
 
@@ -12,11 +11,21 @@ class LoadVibrations extends PlayerScreenEvent {
   final List<ApiVibrationModel> playlist;
   final int id;
   final List<ApiPlayListModel> playlistNames;
-  LoadVibrations({this.playlistNames, this.id, this.playlist});
+
+  LoadVibrations(
+      {@required this.playlistNames,
+      @required this.id,
+      @required this.playlist});
+
+  @override
+  List<Object> get props => [playlist, id, playlistNames];
 }
 
 class SetMode extends PlayerScreenEvent {
   final int id;
 
-  SetMode({this.id});
+  SetMode({@required this.id});
+  @override
+  List<Object> get props => [id];
 }
+

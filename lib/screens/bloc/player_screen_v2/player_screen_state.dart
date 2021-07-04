@@ -6,6 +6,7 @@ abstract class PlayerScreenState extends Equatable {
   @override
   List<Object> get props => [];
 }
+
 class VibrationLoading extends PlayerScreenState {}
 
 class VibrationsLoaded extends PlayerScreenState {
@@ -14,11 +15,11 @@ class VibrationsLoaded extends PlayerScreenState {
   final List<String> path;
   final int selected;
 
-  VibrationsLoaded({this.playlistNames, this.playlist, this.path, this.selected});
+  VibrationsLoaded(
+      {this.playlistNames, this.playlist, this.path, this.selected});
 
   @override
-  // TODO: implement props
-  List<Object> get props => [playlist];
+  List<Object> get props => [playlist, playlistNames, path, selected];
 }
 
 class ErrorState extends PlayerScreenState {
@@ -27,8 +28,5 @@ class ErrorState extends PlayerScreenState {
   ErrorState({this.error});
 
   @override
-  // TODO: implement props
   List<Object> get props => [error];
 }
-
-

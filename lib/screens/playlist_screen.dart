@@ -153,7 +153,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
                         style: NeumorphicStyle(
                             shape: NeumorphicShape.convex,
                             depth:
-                                Provider.of<Player>(context).isPlayign ? -6 : 3,
+                                Provider.of<Player>(context).isPlaying ? -6 : 3,
                             intensity: 0.5,
                             shadowLightColorEmboss: kADNeumorphicShadowLightColorEmboss,
                             shadowDarkColor: kADNeumorphicShadowDarkColor,
@@ -172,8 +172,8 @@ class _PlayListScreenState extends State<PlayListScreen> {
                           player.updateCurrentPlayListModel(
                             model: playlistData,
                           );
-                          player.updateIsPlaying(flag: !player.isPlayign);
-                          if (player.isPlayign) {
+                          player.updateIsPlaying(flag: !player.isPlaying);
+                          if (player.isPlaying) {
                             player.startVibrate(
                               vibrations: playlistData.data,
                               startPosition: player.pausePosition,
@@ -190,7 +190,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                             image: AssetImage(
-                                Provider.of<Player>(context).isPlayign
+                                Provider.of<Player>(context).isPlaying
                                     ? 'assets/pause.png'
                                     : 'assets/play.png'),
                             fit: BoxFit.fitHeight,

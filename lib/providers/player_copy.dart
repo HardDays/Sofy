@@ -10,7 +10,7 @@ import 'package:sofy_new/constants/constants.dart';
 
 class Player extends ChangeNotifier {
   ApiVibrationModel _currentPlayListModel;
-  List<ApiVibrationDataModel> _vibrationModel;
+
   //bool isLoop = kIsLoop;
   bool _isPlaying = false;
   bool _isPausing = false;
@@ -66,7 +66,6 @@ class Player extends ChangeNotifier {
 
   void updateCurrentPlayListModel({ApiVibrationModel model}) {
     _currentPlayListModel = model;
-    _vibrationModel = _currentPlayListModel.data;
     durationAllVibration = 0;
     _currentPlayListModel.data
         .forEach((element) => durationAllVibration += element.duration);
@@ -84,7 +83,7 @@ class Player extends ChangeNotifier {
 
   void pauseVibrations({List<ApiVibrationDataModel> vibrations}) {
     int time = 0;
-    _vibrationModel.sublist(0, vibrationPosition).forEach((element) => time += element.duration);
+    vibrations.sublist(0, vibrationPosition).forEach((element) => time += element.duration);
     updateCurrentPlayTime(time: time);
     updateIsPlaying(flag: false);
     _pausePosition = vibrationPosition;
@@ -96,12 +95,15 @@ class Player extends ChangeNotifier {
     List<ApiVibrationDataModel> vibrations,
     int startPosition = 0,
   }) async {
+    if(vibrations != _currentPlayListModel.data) {
+      startPosition = 0;
+    }
     print('startVibrate $startPosition');
     if (await canVibrate()) {
       _isPausing = false;
       modifyCurrentPlayTime();
       await vibrateMain(
-        vibrations: _vibrationModel,
+        vibrations: vibrations,
         startPosition: startPosition,
       );
     }
@@ -119,17 +121,17 @@ class Player extends ChangeNotifier {
 
   Future<void> vibrateMain(
       {List<ApiVibrationDataModel> vibrations, int startPosition}) async {
-    for (var i = startPosition; i < _vibrationModel.length; i++) {
+    for (var i = startPosition; i < vibrations.length; i++) {
       if (_isPlaying) {
         await vibrateOnePattern(
-            pattern: transformVibration(vibration: _vibrationModel[i]));
+            pattern: transformVibration(vibration: vibrations[i]));
         vibrationPosition = i;
       } else {
         if (_pausePosition == 0) vibrationPosition = 0;
         break;
       }
     }
-    if (vibrationPosition == _vibrationModel.length - 1 && !_isPausing) {
+    if (vibrationPosition == vibrations.length - 1 && !_isPausing) {
         zeroingAllVariables(isPlay: true);
         if (_currentPlayListModel != null) {
           startVibrate(

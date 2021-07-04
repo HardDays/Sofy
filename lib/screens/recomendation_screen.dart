@@ -451,7 +451,7 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                     );
                     if (player.currentPlayListModel != null &&
                         player.currentPlayListModel == _apiVibrationModel) {
-                      if (player.isPlayign) {
+                      if (player.isPlaying) {
                         player.stopVibrations();
                         return;
                       }

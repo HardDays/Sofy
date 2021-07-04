@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sofy_new/constants/vibration_path.dart';
 import 'package:sofy_new/models/api_playlist_model.dart';
 import 'package:sofy_new/models/api_vibration_model.dart';
@@ -35,7 +36,7 @@ class PlayerScreenBloc extends Bloc<PlayerScreenEvent, PlayerScreenState> {
         yield ErrorState(error: e.toString());
       }
     } else if (event is SetMode) {
-      yield VibrationLoading();
+      //yield VibrationLoading();
       try {
         final id = event.id;
         yield VibrationsLoaded(

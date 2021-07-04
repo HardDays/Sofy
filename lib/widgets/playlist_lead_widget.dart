@@ -86,7 +86,7 @@ class PlayListLeadWidget extends StatelessWidget {
 
   Widget _getPlayingMaskWidget(BuildContext context) {
     return AnimatedOpacity(
-      opacity: Provider.of<Player>(context).isPlayign &&
+      opacity: Provider.of<Player>(context).isPlaying &&
           created == Provider.of<Player>(context).currentPlayListModel.dateCreated ? 1 : 0 ,
       curve: Curves.easeInOut,
       duration: Duration(milliseconds: 500),

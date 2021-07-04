@@ -710,7 +710,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                       style: NeumorphicStyle(
                                           shape: NeumorphicShape.convex,
                                           depth: Provider.of<Player>(context)
-                                                  .isPlayign
+                                                  .isPlaying
                                               ? -6
                                               : 3,
                                           intensity: 0.5,
@@ -737,7 +737,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                             image: DecorationImage(
                                           image: AssetImage(
                                               Provider.of<Player>(context)
-                                                      .isPlayign
+                                                      .isPlaying
                                                   ? 'assets/pause.png'
                                                   : 'assets/play.png'),
                                           fit: BoxFit.fitHeight,
@@ -864,15 +864,15 @@ class _PlayerScreenState extends State<PlayerScreen> {
   }
 
   void playOrPause({bool isNeedChangePlayerStatus = true}) {
-    var playlists = Provider.of<PlaylistNameData>(context, listen: false);
+    //var playlists = Provider.of<PlaylistNameData>(context, listen: false);
     var vibrations = Provider.of<PlaylistData>(context, listen: false);
     var player = Provider.of<Player>(context, listen: false);
     if (vibrations.isPlayListNullApi(context)) return;
     if (isNeedChangePlayerStatus) {
-      player.updateIsPlaying(flag: !player.isPlayign);
+      player.updateIsPlaying(flag: !player.isPlaying);
     }
-    if (player.isPlayign) refreshState();
-    if (player.isPlayign) {
+    if (player.isPlaying) refreshState();
+    if (player.isPlaying) {
       player.startVibrate(
         vibrations: vibrations.getCurrentPlaylistModelApi(context).data,
         startPosition: player.pausePosition,
@@ -977,7 +977,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         .parentPlaylistId,
               )
               .titleEn;
-      print('name = ' + name);
+      //print('name = ' + name);
       return name;
     } catch (error) {
       return '';
@@ -992,7 +992,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
         x: 0,
         barRods: [
           BarChartRodData(
-            y: Provider.of<Player>(context).isPlayign
+            y: Provider.of<Player>(context).isPlaying
                 ? Random().nextInt(255).toDouble()
                 : Random().nextInt(55).toDouble(),
             colors: [kWelcomButtonDarkColor],
@@ -1009,7 +1009,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
     setState(() {});
     await Future<dynamic>.delayed(/*animDuration +*/
         Duration(milliseconds: 100));
-    if (Provider.of<Player>(context, listen: false).isPlayign) {
+    if (Provider.of<Player>(context, listen: false).isPlaying) {
       refreshState();
     }
   }
@@ -1035,7 +1035,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   Provider.of<PlaylistNameData>(context, listen: false)
                       .getPlaylistNameByIDApi(id: model.parentPlaylistId));
 
-          if (Provider.of<Player>(context, listen: false).isPlayign) {
+          if (Provider.of<Player>(context, listen: false).isPlaying) {
             Future.delayed(Duration(milliseconds: 500), () {
               playOrPause(isNeedChangePlayerStatus: false);
             });

@@ -138,7 +138,7 @@ class _MyPlaylistScreenState extends State<MyPlaylistScreen> {
                           if (player.currentPlayListModel != null &&
                               player.currentPlayListModel ==
                                   playlistData.vibrosByPlayListIdApi[index]) {
-                            if (player.isPlayign) {
+                            if (player.isPlaying) {
                               player.stopVibrations();
                               return;
                             }

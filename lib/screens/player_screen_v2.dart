@@ -1,12 +1,22 @@
+import 'dart:math';
+
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/models/PlaylistNameData.dart';
 import 'package:sofy_new/models/api_playlist_model.dart';
 import 'package:sofy_new/models/api_vibration_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
+import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
+
+import 'bloc/analytics.dart';
+import 'bloc/player_screen_v2/player_bloc.dart';
 
 class PlayerScreenV2 extends StatelessWidget {
   @override
@@ -14,6 +24,7 @@ class PlayerScreenV2 extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return BlocBuilder<PlayerScreenBloc, PlayerScreenState>(
+      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         if (state is VibrationLoading)
           return Container(
@@ -47,7 +58,8 @@ class PlayerScreenV2 extends StatelessWidget {
                     path: data.path,
                     list: data.playlist,
                   ),
-                  _EqualizeLines(),
+                  //_EqualizeLines(),
+                  Equalizer(),
                   _PowerAndFireButton(),
                   SizedBox(
                     height: 100,
@@ -513,6 +525,57 @@ class _VibrationList extends StatelessWidget {
   }
 }
 
+class Equalizer extends StatelessWidget {
+  const Equalizer({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PlayerBloc, PlayerState>(
+      builder: (context, state) {
+        return Expanded(
+          child: Container(
+            padding: EdgeInsets.only(top: 10.0, bottom: 3.0),
+            child: BarChart(
+              BarChartData(
+                backgroundColor: Colors.transparent,
+                alignment: BarChartAlignment.spaceAround,
+                maxY: 255,
+                barTouchData: BarTouchData(enabled: false),
+                titlesData: FlTitlesData(show: false),
+                axisTitleData: FlAxisTitleData(show: false),
+                borderData: FlBorderData(show: false),
+                groupsSpace: 10,
+                barGroups: getBarChartGroupData(26, context),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  List<BarChartGroupData> getBarChartGroupData(int count, context) {
+    List<BarChartGroupData> list = [];
+    for (int i = 0; i < count; i++) {
+      list.add(BarChartGroupData(
+        barsSpace: 1,
+        x: 0,
+        barRods: [
+          BarChartRodData(
+            y: Provider.of<Player>(context).isPlaying
+                ? Random().nextInt(255).toDouble()
+                : Random().nextInt(55).toDouble(),
+            colors: [kWelcomButtonDarkColor],
+            width: 5,
+          ),
+        ],
+        showingTooltipIndicators: [],
+      ));
+    }
+    return list;
+  }
+}
+
 class _VibrationList2 extends StatelessWidget {
   const _VibrationList2({Key key, @required this.list, @required this.path})
       : super(key: key);
@@ -523,32 +586,92 @@ class _VibrationList2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return Container(
-      height: height / 3 ,
-      child: GridView.builder(
-        itemCount: list.length,
-        itemBuilder: (BuildContext context, int index) {
-          return CircleSelectableButton(
-            onTap: () {},
-            model: list[index],
-            iconPath: path[index],
-          );
-        },
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-        ),
-        // children: List<Widget>.generate(6, (index) {
-        //   return CircleSelectableButton(
-        //     onTap: () {},
-        //     model: list[index],
-        //     iconPath: path[index],
-        //   );
-        // }),
-      ),
+    return BlocBuilder<PlayerBloc, PlayerState>(
+      builder: (context, state) {
+        return Consumer<Player>(
+          builder: (context, provider, child) {
+            //print('ras');
+            return Container(
+              height: height / 3,
+              child: GridView.builder(
+                itemCount: list.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CircleSelectableButton(
+                    selected:
+                        list[index].id == state?.model?.id ?? -1 ? true : false,
+                    onTap: () async {
+                      if (state?.model?.id == list[index].id) {
+                        BlocProvider.of<PlayerBloc>(context)
+                            .add(StopVibration());
+                        pause(context: context, model: list[index]);
+                      } else {
+                        provider.stopVibrations();
+                        await Future.delayed(
+                            Duration(milliseconds: 200), () {});
+                        BlocProvider.of<PlayerBloc>(context)
+                            .add(SelectVibration(vibrationModel: list[index]));
+                        provider.updateCurrentPlayListModel(model: list[index]);
+                        // provider.updateIsPlaying(flag: true);
+                        // provider.startVibrate(
+                        //   vibrations: list[index].data,
+                        //   startPosition: provider.pausePosition,
+                        // );
+                        play(context: context, model: list[index]);
+                      }
+                    },
+                    model: list[index],
+                    iconPath: path[index],
+                  );
+                },
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
+}
+
+void play({@required context, ApiVibrationModel model}) {
+  var player = Provider.of<Player>(context, listen: false);
+  player.updateIsPlaying(flag: true);
+  player.startVibrate(
+    vibrations: model.data,
+    startPosition: player.pausePosition,
+  );
+  Analytics().sendEventReports(
+    event: vibration_play,
+    attr: {
+      'vibration_id': model.id,
+      'playlist_id': 'playlist_' +
+          Provider.of<PlaylistNameData>(context, listen: false)
+              .getCurrentPlaylistNameApi()
+              .titleEn
+              .replaceAll(' ', '_'),
+    },
+  );
+}
+
+void pause({@required context, ApiVibrationModel model}) {
+  var player = Provider.of<Player>(context, listen: false);
+  player.updateIsPlaying(flag: false);
+  player.pauseVibrations();
+  Analytics().sendEventReports(
+    event: vibration_pause,
+    attr: {
+      'vibration_id': model.id,
+      'playlist_id': 'playlist_' +
+          Provider.of<PlaylistNameData>(context, listen: false)
+              .getCurrentPlaylistNameApi()
+              .titleEn
+              .replaceAll(' ', '_'),
+    },
+  );
 }
 
 class _PowerAndFireButton extends StatelessWidget {
@@ -556,6 +679,7 @@ class _PowerAndFireButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final player = Provider.of<Player>(context, listen: false);
     return Expanded(
       child: Row(
         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -566,7 +690,18 @@ class _PowerAndFireButton extends StatelessWidget {
           ),
           Expanded(
             flex: 3,
-            child: PowerButton(),
+            child: PowerButton(
+              onTap: () {
+                BlocProvider.of<PlayerBloc>(context).add(StopVibration());
+                if(player.isPlaying) {
+                  player.updateIsPlaying(flag: false);
+                  player.pauseVibrations();
+                  player.stopVibrations();
+                }
+                //pause(context: context);
+                //stop(context: context);
+              },
+            ),
           ),
           Expanded(
             flex: 2,
@@ -582,12 +717,13 @@ class _PowerAndFireButton extends StatelessWidget {
 }
 
 class PowerButton extends StatelessWidget {
-  const PowerButton({Key key}) : super(key: key);
+  const PowerButton({Key key, this.onTap}) : super(key: key);
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         width: 125,
         height: 125,

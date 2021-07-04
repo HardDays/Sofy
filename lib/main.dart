@@ -13,8 +13,8 @@ import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
+import 'package:sofy_new/screens/bloc/player_screen_v2/player_bloc.dart';
 import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
-import 'package:sofy_new/screens/player_screen_v2.dart';
 import 'package:sofy_new/screens/splash_screen.dart';
 import 'package:tenjin_sdk/tenjin_sdk.dart';
 
@@ -71,12 +71,13 @@ class MyApp extends StatelessWidget {
             create: (context) => PlayerScreenBloc()
               ..add(
                 LoadVibrations(
-                  id: 5,
-                  playlist: playlistData.getAllPlaylist(),
-                  playlistNames: playlistNameData.apiPlaylistsForRecomendScreen
-                ),
+                    id: 5,
+                    playlist: playlistData.getAllPlaylist(),
+                    playlistNames:
+                        playlistNameData.apiPlaylistsForRecomendScreen),
               ),
           ),
+          BlocProvider<PlayerBloc>(create: (context) => PlayerBloc()),
         ],
         child: MaterialApp(
           supportedLocales: [
@@ -94,9 +95,9 @@ class MyApp extends StatelessWidget {
           home: SplashScreen(),
           theme: ThemeData(
               pageTransitionsTheme: PageTransitionsTheme(builders: {
-                TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-                TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-              })),
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          })),
         ),
       ),
     );
