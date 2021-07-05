@@ -14,11 +14,9 @@ class ArticleVote extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SofyDivider(icon: Icons.done),
         Container(
-            color: ArticleDetailsColors.BgColor,
-            child: SofyDivider(icon: Icons.done)),
-        Container(
-          padding: EdgeInsets.only(bottom: 100, left: 21, right: 21),
+          padding: EdgeInsets.symmetric(horizontal: 21),
           color: ArticleDetailsColors.BgColor,
           child: Column(
             children: [

@@ -220,13 +220,11 @@ const List<Color> kRecovPassLinearGrdColor = kSubscrScrLinearGradColor;
 const kRecovPassShadowColor = kUserAuthShadowColor;
 const kRecovPassRedBrColor = Color(0x40836771);
 
-
 const List<Color> kUserRegLinearGrdColor = kSubscrScrLinear2GradColor;
 const List<Color> kUserRegLinearGrd2Color = kSubscrScrLinearGradColor;
 const kUserRegShadowColor = kUserAuthShadowColor;
 const kUserRegCreateAnAccSubtColor = Color(0xff38394F);
 const kUserRegCreateAnAccRedBrColor = kRecovPassRedBrColor;
-
 
 const kAppListViewGreyColor = Color(0x85C4C4C4);
 const kAppListViewNotColor = Color(0x25242424);
@@ -244,9 +242,9 @@ const kArticlesTextColor = Colors.white;
 const kArticlesBgColor = Colors.white;
 const kArticleCardTextColor = Color(0xFF725E5C);
 const kArticlesHeaderTextColor = Color(0xFF38394F);
-const kArticlesDividerColor = Color.fromARGB(102,237, 195, 237);
+const kArticlesDividerColor = Color.fromARGB(102, 237, 195, 237);
 const kArticlesPopCatBgColor = Color(0xFFFFE1E8);
-const kArticlePopCatListTextColor = Color.fromARGB (201, 77, 59, 55);
+const kArticlePopCatListTextColor = Color.fromARGB(201, 77, 59, 55);
 const kArticlePopCatIconBgColor = Color(0xFFFDB0C1);
 const kArticlePopCatIconBorderColor = [
   Colors.white,
@@ -261,9 +259,9 @@ class ArticlesColors {
   static const BgColor = Colors.white;
   static const CardTextColor = Color(0xFF725E5C);
   static const HeaderTextColor = Color(0xFF38394F);
-  static const DividerColor = Color.fromARGB(102,237, 195, 237);
+  static const DividerColor = Color.fromARGB(102, 237, 195, 237);
   static const PopCatBgColor = Color(0xFFFFE1E8);
-  static const PopCatListTextColor = Color.fromARGB (201, 77, 59, 55);
+  static const PopCatListTextColor = Color.fromARGB(201, 77, 59, 55);
   static const PopCatIconBgColor = Color(0xFFFDB0C1);
   static const PopCatIconBorderColor = [
     Colors.white,
@@ -294,8 +292,16 @@ class SofyVoteButtonColors {
   static const NotSelectedRoundedColor = Color(0xFFFFF5F9);
   static const SelectedRoundedColor = Color(0xFFFF96AD);
 }
+
 class SofyVoteColors {
   static const Text = Color(0xFF2F2E41);
 }
 
-
+class SofyQuestionColors {
+  static const Text = Color(0xFF836771);
+  static const FormBgColor = Color(0xFFFAEBF8);
+  static const FormShadowColor = Color.fromRGBO(165, 106, 130, 0.15);
+  static const InputBgColor = Color(0xFFF9D9F4);
+  static const InputHintColor = Color.fromARGB(127, 131, 103, 113);
+  static const InputShadowColor = Color.fromRGBO(236,209,232, 0.6);
+}

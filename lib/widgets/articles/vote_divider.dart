@@ -11,8 +11,9 @@ class SofyDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: EdgeInsets.only(top: 28, bottom: 28, left: 20.0, right: 20.0),
+    return Container(
+      color: ArticleDetailsColors.BgColor,
+      padding: EdgeInsets.only(top: 20, bottom: 20, left: 20.0, right: 20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

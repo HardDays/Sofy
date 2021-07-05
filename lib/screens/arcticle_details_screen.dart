@@ -10,6 +10,7 @@ import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/bloc/article_detales_screen_bloc.dart';
 import 'package:sofy_new/widgets/articles/article_author_desciption.dart';
 import 'package:sofy_new/widgets/articles/article_details_skeletion.dart';
+import 'package:sofy_new/widgets/articles/article_question.dart';
 import 'package:sofy_new/widgets/articles/article_vote.dart';
 import 'package:sofy_new/widgets/articles/sofy_button.dart';
 
@@ -337,7 +338,15 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                   ),
                                 ],
                               ),
-                              ArticleVote(poll:state.articleDetails.article.apiArticlePollModel),
+                              ArticleVote(
+                                  poll: state.articleDetails.article
+                                      .apiArticlePollModel),
+                              ArticleQuestion(
+                                  question: state.articleDetails.article
+                                      .apiArticleQuestionModel),
+                              Container(
+                                  color: ArticleDetailsColors.BgColor,
+                                  padding: EdgeInsets.only(bottom: 100))
                             ],
                           ),
                         ),
@@ -511,7 +520,6 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
     );
   }
 }
-
 
 //
 // // ignore: must_be_immutable
