@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/models/api_article_topic_model.dart';
+import 'package:sofy_new/screens/articles_categories_details_screen.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
+import 'package:sofy_new/widgets/material_page_route.dart';
 
 class ArticlesCategoriesWithHeader extends StatelessWidget {
   const ArticlesCategoriesWithHeader({
@@ -63,16 +66,20 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
                         onTap: () {
                           print(listOfTopics[index].id);
 
-                          // Analytics().sendEventReports(
-                          //   event: 'article_${listOfTopics[index].id}_click'
-                          //       .replaceAll(' ', '_'),
-                          // );
-                          // Navigator.push(
-                          //   context,
-                          //   CustomMaterialPageRoute(
-                          //       builder: (context) => ArticleDetailsScreen(
-                          //           articleId: listOfTopics[index].id)),
-                          // );
+                          Analytics().sendEventReports(
+                            event:
+                                'articles_popular_categories_details_${listOfTopics[index].id}_click'
+                                    .replaceAll(' ', '_'),
+                          );
+                          Navigator.push(
+                            context,
+                            CustomMaterialPageRoute(
+                                builder: (context) =>
+                                    ArticlesCategoriesDetailsScreen(
+                                      categoryId: listOfTopics[index].id,
+                                      screenTitle: listOfTopics[index].name,
+                                    )),
+                          );
                         },
                         child: Column(
                           children: [

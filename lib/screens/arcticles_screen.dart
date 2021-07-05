@@ -8,16 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
-import 'package:sofy_new/screens/arcticle_details_screen.dart';
-import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/bloc/articles_screen_bloc.dart';
 import 'package:sofy_new/widgets/articles/article_skeletion.dart';
-import 'package:sofy_new/widgets/articles/article_card.dart';
-import 'package:sofy_new/widgets/articles/articles_cards_header_button.dart';
+import 'package:sofy_new/widgets/articles/articles_cards_horizontal_list.dart';
 import 'package:sofy_new/widgets/articles/articles_categories_with_header.dart';
 import 'package:sofy_new/widgets/articles/articles_list_with_header.dart';
 import 'package:sofy_new/widgets/articles/sofy_button.dart';
-import 'package:sofy_new/widgets/material_page_route.dart';
 
 import '../rest_api.dart';
 
@@ -108,59 +104,14 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                               ),
                             ),
                           ),
-                          Container(
-                            height: 293,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: state.listOfArticles.length,
-                                itemBuilder:
-                                    (BuildContext context, int index) {
-                                  return Row(
-                                    children: [
-                                      index == 0
-                                          ? SizedBox(width: 22)
-                                          : SizedBox(width: 7.5),
-                                      InkWell(
-                                        child: ArticleCard(
-                                          title: state
-                                              .listOfArticles[index].title,
-                                          path: state
-                                              .listOfArticles[index].coverImg,
-                                          height: 293,
-                                          width: 242,
-                                          frozenHeight: 81,
-                                          fontSize: 17,
-                                          textColor: kArticleCardTextColor,
-                                          radius: 27,
-                                        ),
-                                        onTap: () {
-                                          print(
-                                              state.listOfArticles[index].id);
-
-                                          Analytics().sendEventReports(
-                                            event:
-                                                'article_${state.listOfArticles[index].id}_click'
-                                                    .replaceAll(' ', '_'),
-                                          );
-                                          Navigator.push(
-                                            context,
-                                            CustomMaterialPageRoute(
-                                                builder: (context) =>
-                                                    ArticleDetailsScreen(
-                                                        articleId: state
-                                                            .listOfArticles[
-                                                                index]
-                                                            .id)),
-                                          );
-                                        },
-                                      ),
-                                      index == state.listOfArticles.length - 1
-                                          ? SizedBox(width: 22)
-                                          : SizedBox(width: 7.5),
-                                    ],
-                                  );
-                                }),
-                          )
+                          ArticlesCardsHorizontalList(
+                              listOfArticles: state.listOfArticles,
+                              cardHeight: 293,
+                              cardRadius: 27,
+                              cardWidth: 242,
+                              frozenCardFontSize: 14,
+                              frozenCardHeight: 57,
+                              titleFontSize: 24),
                         ],
                       ),
                     ),
@@ -186,7 +137,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                       color: ArticlesColors.BgColor,
                       child: Column(
                         children: [
-                          ArticlesCardsHeaderButton(
+                          ArticlesCardsHorizontalList(
                               listOfArticles: state.femaleSexuality,
                               callback: () {
                                 print('header femaleSexuality clicker');
@@ -199,7 +150,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                               frozenCardFontSize: 14,
                               frozenCardHeight: 57,
                               titleFontSize: 24),
-                          ArticlesCardsHeaderButton(
+                          ArticlesCardsHorizontalList(
                               listOfArticles: state.interestingAboutSex,
                               callback: () {
                                 print('header interesting_about_sex clicker');
@@ -219,7 +170,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                     .translate('popular'),
                                 listOfArticles: state.listOfPopularArticles),
                           ),
-                          ArticlesCardsHeaderButton(
+                          ArticlesCardsHorizontalList(
                               listOfArticles: state.orgasms,
                               callback: () {
                                 print('header orgasms clicker');
@@ -244,6 +195,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                             child: SofyButton(
                               label: AppLocalizations.of(context)
                                   .translate('view_all'),
+                              callback: () {},
                             ),
                           ),
                           SizedBox(height: height / 8.54),
