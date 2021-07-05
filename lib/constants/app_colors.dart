@@ -272,4 +272,12 @@ class ArticlesColors {
   ];
 }
 
-const kArticleDetailsBgColor = Color(0xFFFFFFFF);
+class ArticleDetailsColors {
+  static const BgColor = Color(0xFFFFFFFF);
+  static const TransparentColor = Colors.transparent;
+  static const ShareButtonColor = Colors.white;
+  static const BackButtonColor = Colors.white;
+  static const TextColorTransparentColor = Colors.transparent;
+  static const DividerColorTransparentColor = Colors.transparent;
+}
+

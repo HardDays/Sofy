@@ -8,13 +8,19 @@ class ArticleDetailsSkeletion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    return Center(
-      child: Container(
-        child: CircularProgressIndicator(
-          color: kAppPinkDarkColor,
+    double width = MediaQuery.of(context).size.width;
+    return Container(
+      height: height,
+      width: width,
+      color: ArticleDetailsColors.BgColor,
+      child: Center(
+        child: Container(
+          child: CircularProgressIndicator(
+            color: kAppPinkDarkColor,
+          ),
+          height: height / 10,
+          width: height / 10,
         ),
-        height: height / 10,
-        width: height / 10,
       ),
     );
     return SingleChildScrollView(
