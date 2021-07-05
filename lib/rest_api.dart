@@ -4,14 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/models/api_articles_answer_model.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
-import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
 import 'package:sofy_new/screens/user_profile.dart';
 
 import 'constants/app_colors.dart';

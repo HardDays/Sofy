@@ -23,17 +23,17 @@ class ArticleDetailsSkeletion extends StatelessWidget {
         ),
       ),
     );
-    return SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                SizedBox(height: 200),
-                Center(child: Text('I INSERT SHIMMER HERE')),
-              ],
-            )
-          ],
-        ));
+    // return SingleChildScrollView(
+    //     physics: NeverScrollableScrollPhysics(),
+    //     child: Stack(
+    //       children: [
+    //         Column(
+    //           children: [
+    //             SizedBox(height: 200),
+    //             Center(child: Text('I INSERT SHIMMER HERE')),
+    //           ],
+    //         )
+    //       ],
+    //     ));
   }
 }

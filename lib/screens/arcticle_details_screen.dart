@@ -17,29 +17,15 @@ import 'package:sofy_new/widgets/articles/sofy_button.dart';
 
 import 'dart:ui';
 
-import 'package:badges/badges.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/style.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:flutter_simple_rating_bar/flutter_simple_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:sofy_new/models/api_article_model.dart';
 import 'package:sofy_new/models/api_article_poll_model.dart';
-import 'package:sofy_new/models/api_article_replies.dart';
-import 'package:sofy_new/models/api_article_variants_model.dart';
-import 'package:sofy_new/providers/preferences_provider.dart';
-import 'package:sofy_new/widgets/articles/sofy_vote_button.dart';
-import 'package:sofy_new/widgets/neumorph_button.dart';
-import 'package:sofy_new/widgets/neumorphic/neumorphic_button.dart';
 
 import '../rest_api.dart';
-import 'article_answer_screen.dart';
-import 'article_answers_stories_screen.dart';
 import 'bloc/analytics.dart';
 import 'bloc/setting_bloc.dart';
 
@@ -142,10 +128,6 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
         child: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
           builder: (context, state) {
             if (state is ArticleDetailsStateResult) {
-              double fontSize = 38 / height * 926;
-              double bottom = 522 - 161 - fontSize;
-              double fontSize2 = 46 / height * 926;
-              double bottom2 = 522 - 42 - fontSize2 * 2;
               return NotificationListener<ScrollNotification>(
                   onNotification: scrollListener,
                   child: Stack(

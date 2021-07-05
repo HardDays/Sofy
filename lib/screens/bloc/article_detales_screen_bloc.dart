@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:sofy_new/models/api_article_articles_model.dart';
 import 'package:sofy_new/models/api_article_details_info_model.dart';
-import 'package:sofy_new/models/api_article_topic_model.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
-import 'package:sofy_new/models/favortes/api_fav_topics_answer_model.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/rest_api.dart';
 

@@ -19,7 +19,7 @@ class RemoteConfigHelper {
   }
 
   Future<RemoteConfig> setupRemoteConfig() async {
-    remoteConfig = await RemoteConfig.instance;
+    remoteConfig = RemoteConfig.instance;
     await remoteConfig.setConfigSettings(RemoteConfigSettings(fetchTimeout: Duration(seconds: 5), minimumFetchInterval: Duration(seconds: 5)));
     try {
       // Using default duration to force fetching from remote server.

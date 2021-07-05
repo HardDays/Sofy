@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/models/api_article_topic_model.dart';
-import 'package:sofy_new/screens/arcticle_details_screen.dart';
-import 'package:sofy_new/screens/bloc/analytics.dart';
-import 'package:sofy_new/widgets/material_page_route.dart';
 
 class ArticlesCategoriesWithHeader extends StatelessWidget {
   const ArticlesCategoriesWithHeader({

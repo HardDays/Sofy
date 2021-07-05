@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
-import 'package:sofy_new/models/api_article_details_info_model.dart';
 import 'package:sofy_new/models/api_article_model.dart';
-import 'package:sofy_new/models/api_article_poll_model.dart';
-import 'package:sofy_new/models/api_article_variants_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
-import 'package:sofy_new/widgets/articles/sofy_button.dart';
-import 'package:sofy_new/widgets/articles/sofy_vote_button.dart';
 import 'package:sofy_new/widgets/articles/vote_divider.dart';
 
 class ArticleLike extends StatelessWidget {
@@ -15,7 +10,6 @@ class ArticleLike extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Column(
       children: [
