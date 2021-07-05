@@ -10,6 +10,7 @@ import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/bloc/article_detales_screen_bloc.dart';
 import 'package:sofy_new/widgets/articles/article_author_desciption.dart';
 import 'package:sofy_new/widgets/articles/article_details_skeletion.dart';
+import 'package:sofy_new/widgets/articles/article_like.dart';
 import 'package:sofy_new/widgets/articles/article_question.dart';
 import 'package:sofy_new/widgets/articles/article_vote.dart';
 import 'package:sofy_new/widgets/articles/sofy_button.dart';
@@ -344,6 +345,8 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                               ArticleQuestion(
                                   question: state.articleDetails.article
                                       .apiArticleQuestionModel),
+                              ArticleLike(
+                                  article: state.articleDetails.article),
                               Container(
                                   color: ArticleDetailsColors.BgColor,
                                   padding: EdgeInsets.only(bottom: 100))

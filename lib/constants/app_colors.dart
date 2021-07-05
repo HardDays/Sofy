@@ -305,3 +305,6 @@ class SofyQuestionColors {
   static const InputHintColor = Color.fromARGB(127, 131, 103, 113);
   static const InputShadowColor = Color.fromRGBO(236,209,232, 0.6);
 }
+class SofyLikeColors {
+  static const StarColor = Color(0xFFEDC3ED);
+}
