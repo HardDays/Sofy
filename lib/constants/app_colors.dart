@@ -281,3 +281,21 @@ class ArticleDetailsColors {
   static const DividerColorTransparentColor = Colors.transparent;
 }
 
+class SvgColors {
+  static const Done1Color = Color(0xFFEDC3ED);
+  static const Done2Color = Color(0xFFE0347A);
+}
+
+class SofyVoteButtonColors {
+  static const BorderColor = Color(0xFFFF96AD);
+  static const TextColor = Color(0xFF836771);
+  static const BgColor = Color.fromARGB(153, 255, 225, 232);
+  static const SelectedBgColor = Color(0xFFFFE1E8);
+  static const NotSelectedRoundedColor = Color(0xFFFFF5F9);
+  static const SelectedRoundedColor = Color(0xFFFF96AD);
+}
+class SofyVoteColors {
+  static const Text = Color(0xFF2F2E41);
+}
+
+
