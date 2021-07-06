@@ -121,7 +121,6 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
     double width = MediaQuery.of(context).size.width;
     _initializeLocale(context);
     return Scaffold(
-      // backgroundColor: kMainScreenScaffoldBackColor,
       backgroundColor: ArticleDetailsColors.TransparentColor,
       body: BlocProvider.value(
         value: _articleDetailsBloc,
@@ -188,12 +187,6 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                                 CrossAxisAlignment.start,
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              // Padding(
-                                              //   padding:
-                                              //       const EdgeInsets.only(bottom: 26),
-                                              //   child: ArticleAuthorDescription(
-                                              //       author: state.author),
-                                              // ),
                                               Text(
                                                 state.articleDetails.article
                                                     .title,

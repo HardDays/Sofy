@@ -13,7 +13,6 @@ import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/widgets/articles/article_card.dart';
-import 'package:sofy_new/widgets/playlist_lead_widget.dart';
 
 import '../rest_api.dart';
 import 'arcticle_details_screen.dart';

@@ -319,3 +319,10 @@ class SofyBadgeColors {
   static const IconColor = Color(0xFFE0347A);
   static const TextColor = Color(0xFF2F2E41);
 }
+
+class SofyVoteProgressColors {
+  static const BgColor = Color(0xFFFFF5F9);
+  static const ActiveColor = Color(0xFFFF96AD);
+  static const CardBgColor = Color(0xFFFFE1E8);
+  static const TextColor = Color(0xFF836771);
+}
