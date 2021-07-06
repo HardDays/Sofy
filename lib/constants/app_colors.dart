@@ -306,7 +306,8 @@ class SofyQuestionColors {
   static const InputShadowColor = Color.fromRGBO(236,209,232, 0.6);
 }
 class SofyLikeColors {
-  static const StarColor = Color(0xFFEDC3ED);
+  static const SelectedStarColor = Color(0xFFE0347A);
+  static const UnselectedStarColor = Color(0xFFEDC3ED);
 }
 class SofyTextButtonColors {
   static const LabelColor = Color(0xFFE0347A);

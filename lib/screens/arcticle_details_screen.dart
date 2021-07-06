@@ -328,7 +328,7 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                   question: state.articleDetails.article
                                       .apiArticleQuestionModel),
                               ArticleRating(
-                                  article: state.articleDetails.article),
+                                  article: state.articleDetails.article, articleId: widget.articleId),
                               Container(
                                   color: ArticleDetailsColors.BgColor,
                                   padding: EdgeInsets.only(bottom: 100))
