@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/models/api_article_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
+import 'package:sofy_new/screens/bloc/setting_bloc.dart';
+import 'package:sofy_new/widgets/articles/sofy_badge.dart';
+import 'package:sofy_new/widgets/articles/sofy_info.dart';
+import 'package:sofy_new/widgets/articles/sofy_text_button.dart';
 import 'package:sofy_new/widgets/articles/vote_divider.dart';
 
-class ArticleLike extends StatelessWidget {
-  const ArticleLike({Key key, this.article}) : super(key: key);
+class ArticleRating extends StatelessWidget {
+  ArticleRating({Key key, this.article}) : super(key: key);
   final ApiArticleModel article;
+  SettingBloc _settingBloc = SettingBloc();
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+
     return Column(
       children: [
         SofyDivider(icon: Icons.done),
@@ -50,7 +56,7 @@ class ArticleLike extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 25,bottom: 32),
+                padding: EdgeInsets.only(top: 25),
                 child: Container(
                   height: width / 10 < 24 ? width / 10 : 24,
                   child: ListView.builder(
@@ -63,12 +69,53 @@ class ArticleLike extends StatelessWidget {
                       double size = width / 10;
                       return Padding(
                         padding: const EdgeInsets.all(4),
-                        child: Icon(Icons.star_border, size: size < 24 ? size : 24, color:SofyLikeColors.StarColor),
+                        child: Icon(Icons.star_border,
+                            size: size < 24 ? size : 24,
+                            color: SofyLikeColors.StarColor),
                       );
                     },
                   ),
                 ),
               ),
+              /*
+  "no_answers" : "Sorry, everyone is silent :(",
+               */
+              article.rating < 0
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 41),
+                      child: SofyTextButton(
+                        callback: () {
+                          print('like it');
+                        },
+                        label: AppLocalizations.of(context).translate('done'),
+                      ),
+                    )
+                  : SofyInfo(
+                      text: AppLocalizations.of(context)
+                          .translate('thank_you_for_your_answer')),
+              Padding(
+                padding: const EdgeInsets.only(top: 56),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SofyBadge(
+                      text: article.likesCount,
+                      path: 'assets/svg/article_likes.svg',
+                    ),
+                    SofyBadge(
+                      text: article.repliesCount,
+                      path: 'assets/svg/article_comments.svg',
+                    ),
+                    InkWell(
+                      child: SofyBadge(path: 'assets/svg/article_share.svg'),
+                      onTap: () {
+                        _settingBloc.shareArticle(article.title,
+                            context: context);
+                      },
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

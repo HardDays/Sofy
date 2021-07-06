@@ -308,3 +308,13 @@ class SofyQuestionColors {
 class SofyLikeColors {
   static const StarColor = Color(0xFFEDC3ED);
 }
+class SofyTextButtonColors {
+  static const LabelColor = Color(0xFFE0347A);
+}
+class SofyBadgeColors {
+  static const BgColor = Color(0xFFFCEFFC);
+  static const PositiveShadowColor = Color.fromRGBO(219, 196, 219, 0.41);
+  static const NagativeShadowColor = Color.fromRGBO(255, 255, 255, 0.6);
+  static const IconColor = Color(0xFFE0347A);
+  static const TextColor = Color(0xFF2F2E41);
+}
