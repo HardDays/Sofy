@@ -43,10 +43,11 @@ class ArticleVote extends StatelessWidget {
                       ..add(ArticleVoteEventInit()),
                 child: BlocBuilder<ArticleVoteBloc, ArticleVoteState>(
                   builder: (context, state) {
-                    bool isResult = state.variants
-                            .where((element) => !element.selected)
-                            .length !=
-                        state.variants.length;
+                    bool isResult = state is ArticleVoteStatePostedVote ||
+                        (poll.variants
+                                .where((element) => !element.selected)
+                                .length !=
+                            poll.variants.length);
                     return Column(
                       children: [
                         ListView.builder(
@@ -58,43 +59,44 @@ class ArticleVote extends StatelessWidget {
                             ApiArticleVariantsModel variant =
                                 state.variants[index];
                             // результаты
-                            return isResult
+                            if ((isResult && state is ArticleVoteStateInit) ||
+                                state is ArticleVoteStatePostedVote)
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: SofyVoteResult(
+                                  variant: variant,
+                                ),
+                              );
+
+                            // варианты
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              child: SofyVoteButton(
+                                  label: variant.content,
+                                  callback: () {
+                                    BlocProvider.of<ArticleVoteBloc>(context)
+                                        .add(ArticleVoteEventSetVote(
+                                            variantId: variant.id));
+                                  },
+                                  isBordered: variant.selected),
+                            );
+                          },
+                        ),
+                        isResult && state is ArticleVoteStateInit
+                            ? Container()
+                            : state is ArticleVoteStateSettedVote
                                 ? Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 16.0),
-                                    child: SofyVoteResult(
-                                      variant: variant,
-                                    ),
-                                  )
-                                :
-                                // варианты
-                                Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 6),
-                                    child: SofyVoteButton(
-                                        label: variant.content,
+                                    padding: const EdgeInsets.only(
+                                        top: 14, bottom: 30),
+                                    child: SofyButton(
+                                        label: poll.buttonName,
                                         callback: () {
                                           BlocProvider.of<ArticleVoteBloc>(
                                                   context)
-                                              .add(ArticleVoteEventSetVote(
-                                                  variantId: variant.id));
-                                        },
-                                        isBordered: variant.selected),
-                                  );
-                          },
-                        ),
-                        isResult
-                            ? Container()
-                            : Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 14, bottom: 30),
-                                child: SofyButton(
-                                    label: poll.buttonName,
-                                    callback: () {
-                                      BlocProvider.of<ArticleVoteBloc>(context)
-                                          .add(ArticleVoteEventVote());
-                                    }),
-                              ),
+                                              .add(ArticleVoteEventVote());
+                                        }),
+                                  )
+                                : Container(),
                       ],
                     );
                   },
