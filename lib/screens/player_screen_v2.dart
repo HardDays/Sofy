@@ -11,6 +11,7 @@ import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/models/PlaylistNameData.dart';
 import 'package:sofy_new/models/api_playlist_model.dart';
 import 'package:sofy_new/models/api_vibration_model.dart';
+import 'package:sofy_new/models/subscribe_data.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
@@ -204,10 +205,20 @@ class _CustomSlider extends StatelessWidget {
                     child: Slider(
                       divisions: 40,
                       min: 0,
-                      max: 100,
-                      value: 20,
+                      max: 78,
+                      value: Provider.of<Player>(context).sliderSpeedValue.roundToDouble(),
+                      // Provider.of<SubscribeData>(context)
+                      //     .isAppPurchase
+                      //     ? Provider.of<Player>(context)
+                      //     .sliderSpeedValue
+                      //     .roundToDouble()
+                      //     : 39,
                       onChanged: (value) {
-                        value = value;
+                        Provider.of<Player>(context,
+                            listen: false)
+                            .updateSliderSpeedValue(
+                            value: value.round());
+                        //value = value;
                       },
                     ),
                   ),
