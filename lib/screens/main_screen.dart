@@ -1,15 +1,16 @@
 import 'dart:io';
 
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
+import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
-
 import 'package:sofy_new/models/playlist_data.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
@@ -20,7 +21,6 @@ import 'package:sofy_new/screens/playlist_screen.dart';
 import 'package:sofy_new/screens/recomendation_screen.dart';
 import 'package:sofy_new/screens/setting_screen.dart';
 import 'package:sofy_new/widgets/bottom_bar.dart';
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 
 import 'arcticles_screen.dart';
 
@@ -142,128 +142,239 @@ class _MainScreenState extends State<MainScreen> {
                 children: screensList,
               ),
               Align(
-                  alignment: Alignment.bottomCenter,
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  color: Colors.transparent,
+                  height: height / 9.5, //112px
                   child: Container(
-                      color: Colors.transparent,
-                      height: height / 9.5, //112px
-                      child: Container(
-                        height: height / 9.5, //86px
-                        padding: EdgeInsets.only(
-                            left: 15.0,
-                            right: 15.0,
-                            bottom: _isIPhoneX(MediaQuery.of(context))
-                                ? 20.0
-                                : 0.0),
-                        decoration: BoxDecoration(
-                            color: kMainBottomBArBackColor,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(0.0)),
-                            border: Border.all(color: kWelcomButtonLightColor)),
-                        child: Center(
-                            child: SalomonBottomBar(
-                          currentIndex: SelectedTab.values.indexOf(selectedTab),
-                          onTap: _handleIndexChanged,
-                          selectedItemColor: kArticlesWhiteColor,
-                          unselectedItemColor: kNavigBarInactiveColor,
-                          curve: Curves.decelerate,
-                          items: [
-                            SalomonBottomBarItem(
-                              icon: SvgPicture.asset(
-                                'assets/svg/modes.svg',
-                                height: 21,
-                                width: 19,
-                                color: selectedTab == SelectedTab.patterns
-                                    ? kArticlesWhiteColor
-                                    : kNavigBarInactiveColor,
-                              ),
-                              title: Text(
-                                AppLocalizations.of(context)
-                                    .translate('patterns'),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: kArticlesWhiteColor,
-                                  fontFamily: kFontFamilyGilroy,
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              selectedColor: kNavigBarInactiveColor,
-                              unselectedColor: Colors.transparent,
+                    height: height / 9.5, //86px
+                    padding: EdgeInsets.only(
+                        left: 15.0,
+                        right: 15.0,
+                        bottom:
+                            _isIPhoneX(MediaQuery.of(context)) ? 20.0 : 0.0),
+                    decoration: BoxDecoration(
+                        color: kMainBottomBArBackColor,
+                        borderRadius: BorderRadius.all(Radius.circular(0.0)),
+                        border: Border.all(color: kWelcomButtonLightColor)),
+                    child: Center(
+                      child: SalomonBottomBar(
+                        currentIndex: SelectedTab.values.indexOf(selectedTab),
+                        onTap: _handleIndexChanged,
+                        selectedItemColor: kArticlesWhiteColor,
+                        unselectedItemColor: kNavigBarInactiveColor,
+                        curve: Curves.decelerate,
+                        items: [
+                          SalomonBottomBarItem(
+                            icon: SvgPicture.asset(
+                              'assets/svg/modes.svg',
+                              height: 21,
+                              width: 19,
+                              color: selectedTab == SelectedTab.patterns
+                                  ? kArticlesWhiteColor
+                                  : kNavigBarInactiveColor,
                             ),
-                            SalomonBottomBarItem(
-                              icon: SvgPicture.asset(
-                                'assets/svg/player.svg',
-                                height: 20,
-                                width: 32,
-                                color: selectedTab == SelectedTab.player
-                                    ? kArticlesWhiteColor
-                                    : kNavigBarInactiveColor,
+                            title: Text(
+                              AppLocalizations.of(context)
+                                  .translate('patterns'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: kArticlesWhiteColor,
+                                fontFamily: kFontFamilyGilroy,
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.bold,
                               ),
-                              title: Text(
-                                AppLocalizations.of(context)
-                                    .translate('player'),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: kArticlesWhiteColor,
-                                  fontFamily: kFontFamilyGilroy,
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              selectedColor: kNavigBarInactiveColor,
-                              unselectedColor: Colors.transparent,
                             ),
-                            SalomonBottomBarItem(
-                              icon: SvgPicture.asset(
-                                'assets/svg/articles.svg',
-                                height: 20,
-                                width: 18,
-                                color: selectedTab == SelectedTab.article
-                                    ? kArticlesWhiteColor
-                                    : kNavigBarInactiveColor,
-                              ),
-                              title: Text(
-                                AppLocalizations.of(context)
-                                    .translate('articles'),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: kArticlesWhiteColor,
-                                  fontFamily: kFontFamilyGilroy,
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              selectedColor: kNavigBarInactiveColor,
-                              unselectedColor: Colors.transparent,
+                            selectedColor: kNavigBarInactiveColor,
+                            unselectedColor: Colors.transparent,
+                          ),
+                          SalomonBottomBarItem(
+                            icon: SvgPicture.asset(
+                              'assets/svg/player.svg',
+                              height: 20,
+                              width: 32,
+                              color: selectedTab == SelectedTab.player
+                                  ? kArticlesWhiteColor
+                                  : kNavigBarInactiveColor,
                             ),
-                            SalomonBottomBarItem(
-                              icon: SvgPicture.asset(
-                                'assets/svg/settings.svg',
-                                height: 21,
-                                width: 21,
-                                color: selectedTab == SelectedTab.settings
-                                    ? kArticlesWhiteColor
-                                    : kNavigBarInactiveColor,
+                            title: Text(
+                              AppLocalizations.of(context).translate('player'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: kArticlesWhiteColor,
+                                fontFamily: kFontFamilyGilroy,
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.bold,
                               ),
-                              title: Text(
-                                AppLocalizations.of(context)
-                                    .translate('settings'),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: kArticlesWhiteColor,
-                                  fontFamily: kFontFamilyGilroy,
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              selectedColor: kNavigBarInactiveColor,
-                              unselectedColor: Colors.transparent,
                             ),
-                          ],
-                        )),
-                      ))),
+                            selectedColor: kNavigBarInactiveColor,
+                            unselectedColor: Colors.transparent,
+                          ),
+                          SalomonBottomBarItem(
+                            icon: SvgPicture.asset(
+                              'assets/svg/articles.svg',
+                              height: 20,
+                              width: 18,
+                              color: selectedTab == SelectedTab.article
+                                  ? kArticlesWhiteColor
+                                  : kNavigBarInactiveColor,
+                            ),
+                            title: Text(
+                              AppLocalizations.of(context)
+                                  .translate('articles'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: kArticlesWhiteColor,
+                                fontFamily: kFontFamilyGilroy,
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            selectedColor: kNavigBarInactiveColor,
+                            unselectedColor: Colors.transparent,
+                          ),
+                          SalomonBottomBarItem(
+                            icon: SvgPicture.asset(
+                              'assets/svg/settings.svg',
+                              height: 21,
+                              width: 21,
+                              color: selectedTab == SelectedTab.settings
+                                  ? kArticlesWhiteColor
+                                  : kNavigBarInactiveColor,
+                            ),
+                            title: Text(
+                              AppLocalizations.of(context)
+                                  .translate('settings'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: kArticlesWhiteColor,
+                                fontFamily: kFontFamilyGilroy,
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            selectedColor: kNavigBarInactiveColor,
+                            unselectedColor: Colors.transparent,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
+          // bottomNavigationBar: FluidNavBar(
+          //   // currentIndex: SelectedTab.values.indexOf(selectedTab),
+          //   // onTap: _handleIndexChanged,
+          //   // selectedItemColor: kArticlesWhiteColor,
+          //   // unselectedItemColor: kNavigBarInactiveColor,
+          //   // curve: Curves.decelerate,
+          //   style: FluidNavBarStyle(
+          //     iconUnselectedForegroundColor: Color(0xFFE1D2D5),
+          //     iconSelectedForegroundColor: Color(0xFFF1849F)
+          //   ),
+          //   icons: [
+          //     FluidNavBarIcon(
+          //         svgPath: "assets/svg/articles.svg",),
+          //     FluidNavBarIcon(
+          //         svgPath: "assets/svg/player.svg",),
+          //     FluidNavBarIcon(
+          //         svgPath: "assets/svg/settings.svg",),
+          //     // SalomonBottomBarItem(
+          //     //   icon: SvgPicture.asset(
+          //     //     'assets/svg/modes.svg',
+          //     //     height: 21,
+          //     //     width: 19,
+          //     //     color: selectedTab == SelectedTab.patterns
+          //     //         ? kArticlesWhiteColor
+          //     //         : kNavigBarInactiveColor,
+          //     //   ),
+          //     //   title: Text(
+          //     //     AppLocalizations.of(context)
+          //     //         .translate('patterns'),
+          //     //     textAlign: TextAlign.center,
+          //     //     style: TextStyle(
+          //     //       color: kArticlesWhiteColor,
+          //     //       fontFamily: kFontFamilyGilroy,
+          //     //       fontSize: 13.0,
+          //     //       fontWeight: FontWeight.bold,
+          //     //     ),
+          //     //   ),
+          //     //   selectedColor: kNavigBarInactiveColor,
+          //     //   unselectedColor: Colors.transparent,
+          //     // ),
+          //     // SalomonBottomBarItem(
+          //     //   icon: SvgPicture.asset(
+          //     //     'assets/svg/player.svg',
+          //     //     height: 20,
+          //     //     width: 32,
+          //     //     color: selectedTab == SelectedTab.player
+          //     //         ? kArticlesWhiteColor
+          //     //         : kNavigBarInactiveColor,
+          //     //   ),
+          //     //   title: Text(
+          //     //     AppLocalizations.of(context)
+          //     //         .translate('player'),
+          //     //     textAlign: TextAlign.center,
+          //     //     style: TextStyle(
+          //     //       color: kArticlesWhiteColor,
+          //     //       fontFamily: kFontFamilyGilroy,
+          //     //       fontSize: 13.0,
+          //     //       fontWeight: FontWeight.bold,
+          //     //     ),
+          //     //   ),
+          //     //   selectedColor: kNavigBarInactiveColor,
+          //     //   unselectedColor: Colors.transparent,
+          //     // ),
+          //     // SalomonBottomBarItem(
+          //     //   icon: SvgPicture.asset(
+          //     //     'assets/svg/articles.svg',
+          //     //     height: 20,
+          //     //     width: 18,
+          //     //     color: selectedTab == SelectedTab.article
+          //     //         ? kArticlesWhiteColor
+          //     //         : kNavigBarInactiveColor,
+          //     //   ),
+          //     //   title: Text(
+          //     //     AppLocalizations.of(context)
+          //     //         .translate('articles'),
+          //     //     textAlign: TextAlign.center,
+          //     //     style: TextStyle(
+          //     //       color: kArticlesWhiteColor,
+          //     //       fontFamily: kFontFamilyGilroy,
+          //     //       fontSize: 13.0,
+          //     //       fontWeight: FontWeight.bold,
+          //     //     ),
+          //     //   ),
+          //     //   selectedColor: kNavigBarInactiveColor,
+          //     //   unselectedColor: Colors.transparent,
+          //     // ),
+          //     // SalomonBottomBarItem(
+          //     //   icon: SvgPicture.asset(
+          //     //     'assets/svg/settings.svg',
+          //     //     height: 21,
+          //     //     width: 21,
+          //     //     color: selectedTab == SelectedTab.settings
+          //     //         ? kArticlesWhiteColor
+          //     //         : kNavigBarInactiveColor,
+          //     //   ),
+          //     //   title: Text(
+          //     //     AppLocalizations.of(context)
+          //     //         .translate('settings'),
+          //     //     textAlign: TextAlign.center,
+          //     //     style: TextStyle(
+          //     //       color: kArticlesWhiteColor,
+          //     //       fontFamily: kFontFamilyGilroy,
+          //     //       fontSize: 13.0,
+          //     //       fontWeight: FontWeight.bold,
+          //     //     ),
+          //     //   ),
+          //     //   selectedColor: kNavigBarInactiveColor,
+          //     //   unselectedColor: Colors.transparent,
+          //     // ),
+          //   ],
+          // ),
         );
       },
       rateMyApp: RateMyApp(
