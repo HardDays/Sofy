@@ -11,9 +11,11 @@ import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/models/PlaylistNameData.dart';
 import 'package:sofy_new/models/api_playlist_model.dart';
 import 'package:sofy_new/models/api_vibration_model.dart';
+import 'package:sofy_new/models/subscribe_data.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
+import 'package:sofy_new/screens/subscribe_screen.dart';
 
 import 'bloc/analytics.dart';
 import 'bloc/player_screen_v2/player_bloc.dart';
@@ -204,12 +206,60 @@ class _CustomSlider extends StatelessWidget {
                     child: Slider(
                       divisions: 40,
                       min: 0,
-                      max: 100,
-                      value: 20,
+                      max: 78,
+                      value: //Provider.of<Player>(context).sliderSpeedValue.roundToDouble(),
+                          Provider.of<SubscribeData>(context).isAppPurchase
+                              ? Provider.of<Player>(context)
+                                  .sliderSpeedValue
+                                  .roundToDouble()
+                              : 39,
                       onChanged: (value) {
-                        value = value;
+                        if (Provider.of<SubscribeData>(context, listen: false)
+                            .isAppPurchase) {
+                          Provider.of<Player>(context, listen: false)
+                              .updateSliderSpeedValue(value: value.round());
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  SubscribeScreen(isFromSplash: false),
+                            ),
+                          );
+                        }
                       },
                     ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Visibility(
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            FadeRoute(
+                              builder: (BuildContext context) =>
+                                  SubscribeScreen(isFromSplash: false),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          height: 32.0,
+                          width: 32.0,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/lock_vibra.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    visible: Provider.of<SubscribeData>(context).isAppPurchase
+                        ? false
+                        : true,
                   ),
                 ),
               ],
@@ -415,71 +465,102 @@ class CircleSelectableButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final bool isAppPurchase =
+        Provider.of<SubscribeData>(context).isAppPurchase;
     return InkWell(
       onTap: onTap,
-      child: Column(
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          Container(
-            height: width / 6,
-            width: width / 6,
-            decoration: BoxDecoration(
-              gradient: selected
-                  ? RadialGradient(
-                      center: Alignment(0.07, 0.12),
-                      stops: [0.0, 0.7, 1],
+          Column(
+            children: [
+              Container(
+                height: width / 6,
+                width: width / 6,
+                decoration: BoxDecoration(
+                  gradient: selected
+                      ? RadialGradient(
+                          center: Alignment(0.07, 0.12),
+                          stops: [0.0, 0.7, 1],
+                          colors: [
+                            Color(0xFFffe1e8),
+                            Color(0xFFffe1e8),
+                            Color(0xFFffcfda)
+                          ],
+                        )
+                      : null,
+                  color: selected ? Color(0xFFFFE1E8) : Color(0xFFFFFFFF),
+                  //borderRadius: BorderRadius.circular(width / 12),
+                  shape: BoxShape.circle,
+                  boxShadow: selected
+                      ? null
+                      : [
+                          BoxShadow(
+                            offset: Offset(1, 4),
+                            color: Color(0xFFE2BED8),
+                            blurRadius: 8,
+                            //spreadRadius: 0.1,
+                          ),
+                        ],
+                ),
+                child: ShaderMask(
+                  shaderCallback: (Rect image) {
+                    if (selected) {
+                      return LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [Color(0xFFFFD2DC), Color(0xFFF95C8F)],
+                        stops: [0.3, 1],
+                      ).createShader(image);
+                    }
+                    return LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                       colors: [
-                        Color(0xFFffe1e8),
-                        Color(0xFFffe1e8),
-                        Color(0xFFffcfda)
+                        Color(0xFFFFBBCA).withOpacity(0.5),
+                        Color(0xFFFFBBCA).withOpacity(0.5)
                       ],
-                    )
-                  : null,
-              color: selected ? Color(0xFFFFE1E8) : Color(0xFFFFFFFF),
-              //borderRadius: BorderRadius.circular(width / 12),
-              shape: BoxShape.circle,
-              boxShadow: selected
-                  ? null
-                  : [
-                      BoxShadow(
-                        offset: Offset(1, 4),
-                        color: Color(0xFFE2BED8),
-                        blurRadius: 8,
-                        //spreadRadius: 0.1,
-                      ),
-                    ],
-            ),
-            child: ShaderMask(
-              shaderCallback: (Rect image) {
-                if (selected) {
-                  return LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [Color(0xFFFFD2DC), Color(0xFFF95C8F)],
-                    stops: [0.45, 0.65],
-                  ).createShader(image);
-                }
-                return LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFFFFBBCA).withOpacity(0.5),
-                    Color(0xFFFFBBCA).withOpacity(0.5)
-                  ],
-                ).createShader(image);
-              },
-              child: Image.asset(
-                iconPath,
-                scale: 1.5,
+                    ).createShader(image);
+                  },
+                  child: Image.asset(
+                    iconPath,
+                    scale: 1.5,
+                  ),
+                ),
               ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                //model.titleEn,
+                AppLocalizations.of(context).translate(model.titleEn),
+                style: TextStyle(color: Color(0xFFFDAABC)),
+              )
+            ],
+          ),
+          //Positioned(child: Container(width: 10,height: 10,color: Colors.red,)),
+          Visibility(
+            // ignore: null_aware_in_logical_operator
+            visible: model.isTrial ? false : true,
+            child: Positioned(
+              right: 15,
+              top: 0,
+              child: Container(
+                  height: Provider.of<SubscribeData>(context).isAppPurchase
+                      ? 0.0
+                      : 50,
+                  width: Provider.of<SubscribeData>(context).isAppPurchase
+                      ? 0.0
+                      : 50,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage('assets/new_lock.png'),
+                      fit: BoxFit.fill,
+                    ),
+                  )),
             ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Text(
-            //model.titleEn,
-            AppLocalizations.of(context).translate(model.titleEn),
-            style: TextStyle(color: Color(0xFFFDAABC)),
           )
         ],
       ),
@@ -564,7 +645,8 @@ class Equalizer extends StatelessWidget {
           BarChartRodData(
             y: Provider.of<Player>(context).isPlaying
                 ? Random().nextInt(255).toDouble()
-                : Random().nextInt(55).toDouble(),
+                : 15,
+            //Random().nextInt(55).toDouble(),
             colors: [kWelcomButtonDarkColor],
             width: 5,
           ),
@@ -586,6 +668,7 @@ class _VibrationList2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final isAppPurchase = Provider.of<SubscribeData>(context).isAppPurchase;
     return BlocBuilder<PlayerBloc, PlayerState>(
       builder: (context, state) {
         return Consumer<Player>(
@@ -600,23 +683,35 @@ class _VibrationList2 extends StatelessWidget {
                     selected:
                         list[index].id == state?.model?.id ?? -1 ? true : false,
                     onTap: () async {
-                      if (state?.model?.id == list[index].id) {
-                        BlocProvider.of<PlayerBloc>(context)
-                            .add(StopVibration());
-                        pause(context: context, model: list[index]);
+                      if (isAppPurchase ||
+                          !isAppPurchase && list[index].isTrial) {
+                        if (state?.model?.id == list[index].id) {
+                          BlocProvider.of<PlayerBloc>(context)
+                              .add(StopVibration());
+                          pause(context: context, model: list[index]);
+                        } else {
+                          provider.stopVibrations();
+                          await Future.delayed(
+                              Duration(milliseconds: 200), () {});
+                          BlocProvider.of<PlayerBloc>(context).add(
+                              SelectVibration(vibrationModel: list[index]));
+                          provider.updateCurrentPlayListModel(
+                              model: list[index]);
+                          // provider.updateIsPlaying(flag: true);
+                          // provider.startVibrate(
+                          //   vibrations: list[index].data,
+                          //   startPosition: provider.pausePosition,
+                          // );
+                          play(context: context, model: list[index]);
+                        }
                       } else {
-                        provider.stopVibrations();
-                        await Future.delayed(
-                            Duration(milliseconds: 200), () {});
-                        BlocProvider.of<PlayerBloc>(context)
-                            .add(SelectVibration(vibrationModel: list[index]));
-                        provider.updateCurrentPlayListModel(model: list[index]);
-                        // provider.updateIsPlaying(flag: true);
-                        // provider.startVibrate(
-                        //   vibrations: list[index].data,
-                        //   startPosition: provider.pausePosition,
-                        // );
-                        play(context: context, model: list[index]);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                SubscribeScreen(isFromSplash: false),
+                          ),
+                        );
                       }
                     },
                     model: list[index],
@@ -693,7 +788,7 @@ class _PowerAndFireButton extends StatelessWidget {
             child: PowerButton(
               onTap: () {
                 BlocProvider.of<PlayerBloc>(context).add(StopVibration());
-                if(player.isPlaying) {
+                if (player.isPlaying) {
                   player.updateIsPlaying(flag: false);
                   player.pauseVibrations();
                   player.stopVibrations();

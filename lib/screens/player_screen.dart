@@ -145,6 +145,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         ),
                       ),
                       SizedBox(width: 15.0),
+                      //Slider
                       Stack(
                         alignment: Alignment.center,
                         children: <Widget>[
