@@ -24,6 +24,7 @@ import 'package:flutter_html/style.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/models/api_article_poll_model.dart';
+import 'package:sofy_new/widgets/comments.dart';
 
 import '../rest_api.dart';
 import 'bloc/analytics.dart';
@@ -134,198 +135,208 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                       Scrollbar(
                         child: SingleChildScrollView(
                           physics: const ClampingScrollPhysics(),
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  Container(
-                                    height: 390,
-                                    width: width,
-                                    child: ExtendedImage.network(
-                                      state.articleDetails.article.coverImg,
-                                      fit: BoxFit.cover,
-                                      cache: true,
+                          child: Container(
+                            color: ArticleDetailsColors.BgColor,
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    Container(
+                                      height: 390,
+                                      width: width,
+                                      child: ExtendedImage.network(
+                                        state.articleDetails.article.coverImg,
+                                        fit: BoxFit.cover,
+                                        cache: true,
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 366),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(radius),
-                                          topRight: Radius.circular(radius)),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 366),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(radius),
+                                            topRight: Radius.circular(radius)),
+                                        child: Stack(
+                                          alignment: Alignment.topCenter,
+                                          children: [
+                                            Container(
+                                              height: 60,
+                                              width: width,
+                                              color:
+                                                  ArticleDetailsColors.BgColor,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      21, 21, 21, 0),
+                                              child: ArticleAuthorDescription(
+                                                  author: state.author),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 426),
                                       child: Stack(
                                         alignment: Alignment.topCenter,
                                         children: [
                                           Container(
-                                            height: 60,
-                                            width: width,
                                             color: ArticleDetailsColors.BgColor,
-                                          ),
-                                          Padding(
                                             padding: const EdgeInsets.fromLTRB(
-                                                21, 21, 21, 0),
-                                            child: ArticleAuthorDescription(
-                                                author: state.author),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 426),
-                                    child: Stack(
-                                      alignment: Alignment.topCenter,
-                                      children: [
-                                        Container(
-                                          color: ArticleDetailsColors.BgColor,
-                                          padding: const EdgeInsets.fromLTRB(
-                                              21, 26, 21, 0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Text(
-                                                state.articleDetails.article
-                                                    .title,
-                                                style: TextStyle(
-                                                    fontFamily: 'Roboto',
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize: 24,
-                                                    color: ArticlesColors
-                                                        .HeaderTextColor),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 25, bottom: 8),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    SofyButton(
-                                                      width: width / 2 - 30,
-                                                      label: AppLocalizations
-                                                              .of(context)
-                                                          .translate(
-                                                              'questions_btn'),
-                                                      callback: () {
-                                                        print('111');
-                                                      },
-                                                    ),
-                                                    SofyButton(
+                                                21, 26, 21, 0),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Text(
+                                                  state.articleDetails.article
+                                                      .title,
+                                                  style: TextStyle(
+                                                      fontFamily: 'Roboto',
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 24,
+                                                      color: ArticlesColors
+                                                          .HeaderTextColor),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 25, bottom: 8),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      SofyButton(
                                                         width: width / 2 - 30,
                                                         label: AppLocalizations
                                                                 .of(context)
                                                             .translate(
-                                                                'comments_btn'),
+                                                                'questions_btn'),
                                                         callback: () {
-                                                          print('222');
-                                                        }),
-                                                  ],
+                                                          print('111');
+                                                        },
+                                                      ),
+                                                      SofyButton(
+                                                          width: width / 2 - 30,
+                                                          label: AppLocalizations
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'comments_btn'),
+                                                          callback: () {
+                                                            print('222');
+                                                          }),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                              Html(
-                                                style: {
-                                                  "p": Style(
-                                                      wordSpacing: 5,
-                                                      lineHeight:
-                                                          LineHeight.number(
-                                                              1.5),
-                                                      fontFamily:
-                                                          kFontFamilyMontserrat,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: FontSize(
-                                                          height / 57.73),
-                                                      color:
-                                                          kArticlesDetailsScreenColor),
-                                                  "strong": Style(
-                                                      wordSpacing: 5,
-                                                      lineHeight:
-                                                          LineHeight.number(
-                                                              1.6),
-                                                      fontFamily:
-                                                          kFontFamilyMontserratBold,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: FontSize(
-                                                          height / 50.7),
-                                                      color:
-                                                          kArticlesDetailsScreenColor),
-                                                  "h1": Style(
-                                                      wordSpacing: 5,
-                                                      lineHeight:
-                                                          LineHeight.number(
-                                                              1.6),
-                                                      fontFamily:
-                                                          kFontFamilyMontserrat,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: FontSize(
-                                                          height / 50.7),
-                                                      color:
-                                                          kArticlesDetailsScreenColor),
-                                                  "li": Style(
-                                                      wordSpacing: 5,
-                                                      lineHeight:
-                                                          LineHeight.number(
-                                                              1.5),
-                                                      fontFamily:
-                                                          kFontFamilyMontserrat,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: FontSize(
-                                                          height / 57.73),
-                                                      color:
-                                                          kArticlesDetailsScreenColor),
-                                                  "u": Style(
-                                                      wordSpacing: 5,
-                                                      lineHeight:
-                                                          LineHeight.number(
-                                                              1.5),
-                                                      fontFamily:
-                                                          kFontFamilyMontserrat,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: FontSize(
-                                                          height / 57.73),
-                                                      color:
-                                                          kArticlesDetailsScreenColor),
-                                                },
-                                                data: state.articleDetails
-                                                            .article.content !=
-                                                        null
-                                                    ? state.articleDetails
-                                                        .article.content
-                                                    : '',
-                                              ),
-                                            ],
+                                                Html(
+                                                  style: {
+                                                    "p": Style(
+                                                        wordSpacing: 5,
+                                                        lineHeight:
+                                                            LineHeight.number(
+                                                                1.5),
+                                                        fontFamily:
+                                                            kFontFamilyMontserrat,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: FontSize(
+                                                            height / 57.73),
+                                                        color:
+                                                            kArticlesDetailsScreenColor),
+                                                    "strong": Style(
+                                                        wordSpacing: 5,
+                                                        lineHeight:
+                                                            LineHeight.number(
+                                                                1.6),
+                                                        fontFamily:
+                                                            kFontFamilyMontserratBold,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: FontSize(
+                                                            height / 50.7),
+                                                        color:
+                                                            kArticlesDetailsScreenColor),
+                                                    "h1": Style(
+                                                        wordSpacing: 5,
+                                                        lineHeight:
+                                                            LineHeight.number(
+                                                                1.6),
+                                                        fontFamily:
+                                                            kFontFamilyMontserrat,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: FontSize(
+                                                            height / 50.7),
+                                                        color:
+                                                            kArticlesDetailsScreenColor),
+                                                    "li": Style(
+                                                        wordSpacing: 5,
+                                                        lineHeight:
+                                                            LineHeight.number(
+                                                                1.5),
+                                                        fontFamily:
+                                                            kFontFamilyMontserrat,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: FontSize(
+                                                            height / 57.73),
+                                                        color:
+                                                            kArticlesDetailsScreenColor),
+                                                    "u": Style(
+                                                        wordSpacing: 5,
+                                                        lineHeight:
+                                                            LineHeight.number(
+                                                                1.5),
+                                                        fontFamily:
+                                                            kFontFamilyMontserrat,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: FontSize(
+                                                            height / 57.73),
+                                                        color:
+                                                            kArticlesDetailsScreenColor),
+                                                  },
+                                                  data: state
+                                                              .articleDetails
+                                                              .article
+                                                              .content !=
+                                                          null
+                                                      ? state.articleDetails
+                                                          .article.content
+                                                      : '',
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              ArticleVote(
-                                  poll: state.articleDetails.article
-                                      .apiArticlePollModel),
-                              ArticleQuestion(
-                                  question: state.articleDetails.article
-                                      .apiArticleQuestionModel),
-                              ArticleRating(
-                                  article: state.articleDetails.article, articleId: widget.articleId),
-                              Container(
-                                  color: ArticleDetailsColors.BgColor,
-                                  padding: EdgeInsets.only(bottom: 100))
-                            ],
+                                  ],
+                                ),
+                                ArticleVote(
+                                    poll: state.articleDetails.article
+                                        .apiArticlePollModel),
+                                ArticleQuestion(
+                                    question: state.articleDetails.article
+                                        .apiArticleQuestionModel),
+                                ArticleRating(
+                                    article: state.articleDetails.article,
+                                    articleId: widget.articleId),
+                                Comments(
+                                  articleId: widget.articleId,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

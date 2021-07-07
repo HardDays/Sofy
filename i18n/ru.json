@@ -258,6 +258,9 @@
   "Medium ": "Сильный",
   "Hard": "Жесткий",
   "questions_btn": "Вопросы",
-  "comments_btn": "Комментарии"
+  "comments_btn": "Комментарии",
+  "reply": "Ответить",
+  "most_interesting": "Самое интересное",
+  "no_comments": "Комментариев нет"
 
 }

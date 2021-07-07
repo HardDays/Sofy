@@ -1,7 +1,7 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
+import 'package:sofy_new/widgets/avatar.dart';
 
 class ArticleAuthorDescription extends StatelessWidget {
   const ArticleAuthorDescription({Key key, this.author}) : super(key: key);
@@ -16,40 +16,7 @@ class ArticleAuthorDescription extends StatelessWidget {
           author.coverImg != null
               ? Row(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(38)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xffCFB2CD),
-                            spreadRadius: 4,
-                            offset: Offset(4, 4),
-                            blurRadius: 10,
-                          ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(38)),
-                        child: Stack(
-                          children: [
-                            Container(
-                              height: 38,
-                              width: 38,
-                              child: ExtendedImage.network(
-                                author.coverImg,
-                                fit: BoxFit.cover,
-                                cache: true,
-                              ),
-                              // ExtendedImage.network(
-                              //                       'https://www.wikihow.com/images/thumb/4/45/Install-Windows-XP-on-an-ASUS-Eee-PC-Using-a-USB-Drive-Step-2-Version-2.jpg/v4-728px-Install-Windows-XP-on-an-ASUS-Eee-PC-Using-a-USB-Drive-Step-2-Version-2.jpg.webp',
-                              //                       fit: BoxFit.cover,
-                              //                       cache: true,
-                              //                     ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    Avatar(coverImgUrl: author.coverImg),
                     SizedBox(width: 12),
                   ],
                 )
