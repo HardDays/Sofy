@@ -976,14 +976,11 @@ class RestApi {
         '&sort=' +
         sort.toString() +
         parent;
-    print(url);
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
     dio.interceptors
         .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
     Response response = await dio.get(url);
-    print(response);
-
     Replies replies = Replies.fromJson(response.data);
     return replies;
   }

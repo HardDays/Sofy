@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
 import 'package:sofy_new/screens/arcticle_details_screen.dart';
@@ -35,7 +36,7 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    double width = SizeConfig.screenWidth;
     return Column(
       children: [
         title == ''

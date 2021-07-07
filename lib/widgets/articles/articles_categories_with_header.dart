@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_topic_model.dart';
 import 'package:sofy_new/screens/articles_categories_details_screen.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
@@ -33,7 +34,7 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    double width = SizeConfig.screenWidth;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,

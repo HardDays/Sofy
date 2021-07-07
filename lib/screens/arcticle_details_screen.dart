@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/bloc/article_detales_screen_bloc.dart';
@@ -39,7 +40,6 @@ class ArticleDetailsScreen extends StatefulWidget {
 }
 
 class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
-  ArticleDetailsBloc _articleDetailsBloc;
   double radius = 25;
   final SettingBloc _bloc = SettingBloc();
 
@@ -58,11 +58,8 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
   ApiArticlePollModel apiArticlePollModel;
 
   bool scrollListener(ScrollNotification scrollNotification) {
-    double height = MediaQuery.of(context).size.height;
-
-    scroll.value = scrollNotification.metrics.pixels /
-        (height * MediaQuery.of(context).devicePixelRatio);
-    //print(scroll);
+    double height = SizeConfig.screenHeight;
+    scroll.value = scrollNotification.metrics.pixels/height/SizeConfig.blockSizeHorizontal;
     if (scrollNotification.metrics.pixels > height / 8.21) {
       if (appBar == Colors.transparent) {
         appBar = kArticlesDetailsAppBarColor;
@@ -108,23 +105,19 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
     super.dispose();
   }
 
-  void _initializeLocale(BuildContext context) {
-    final String systemLang = AppLocalizations.of(context).locale.languageCode;
-    _articleDetailsBloc =
-        ArticleDetailsBloc(restApi: RestApi(systemLang: systemLang));
-    _articleDetailsBloc
-        .add(ArticleDetailsEventLoad(articleId: widget.articleId));
-  }
+  final GlobalKey commentsKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    _initializeLocale(context);
+    double height = SizeConfig.screenHeight;
+    double width = SizeConfig.screenWidth;
     return Scaffold(
       backgroundColor: ArticleDetailsColors.TransparentColor,
       body: BlocProvider.value(
-        value: _articleDetailsBloc,
+        value: ArticleDetailsBloc(
+            restApi: RestApi(
+                systemLang: AppLocalizations.of(context).locale.languageCode))
+          ..add(ArticleDetailsEventLoad(articleId: widget.articleId)),
         child: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
           builder: (context, state) {
             if (state is ArticleDetailsStateResult) {
@@ -334,6 +327,7 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                     articleId: widget.articleId),
                                 Comments(
                                   articleId: widget.articleId,
+                                  key: commentsKey,
                                 ),
                               ],
                             ),

@@ -1,13 +1,14 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/helper/size_config.dart';
 
 class SofyInfo extends StatelessWidget {
   const SofyInfo({Key key, this.text}) : super(key: key);
 final String text;
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    double height = SizeConfig.screenHeight;
 
     return Padding(
       padding: EdgeInsets.only(

@@ -4,6 +4,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
 
 class ArticleCard extends StatelessWidget {
@@ -33,7 +34,8 @@ class ArticleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
+    double screenHeight = SizeConfig.screenHeight;
+
     return InkWell(
       onTap: callback,
       child: Container(

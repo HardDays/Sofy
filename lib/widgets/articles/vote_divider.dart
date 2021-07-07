@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/helper/size_config.dart';
 
 class SofyDivider extends StatelessWidget {
   const SofyDivider({Key key, this.icon = const IconData(1)}) : super(key: key);
@@ -9,7 +10,7 @@ class SofyDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    double width = SizeConfig.screenWidth;
     return Container(
       padding: EdgeInsets.only(top: 20, bottom: 20, left: 20.0, right: 20.0),
       child: Row(
