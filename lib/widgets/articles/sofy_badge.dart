@@ -54,7 +54,7 @@ class SofyBadge extends StatelessWidget {
                         style: TextStyle(fontSize: 13, color: SofyBadgeColors.TextColor),
                       ),
                   )
-                  : Container(width: 0),
+                  : SizedBox(width: 10.5),
             ],
           ),
         ),

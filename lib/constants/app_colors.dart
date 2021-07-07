@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-//const kTitleColor = Color(0xff38394F);
-//const kSubtitleColor = Color(0xffB2B1B7);
 const kAppBarTransparentColor = Colors.transparent;
 const kShareButtonWhiteColor = Colors.white;
 const kBackButtonWhiteColor = Colors.white;
@@ -305,6 +303,7 @@ class SofyQuestionColors {
   static const InputHintColor = Color.fromARGB(127, 131, 103, 113);
   static const InputShadowColor = Color.fromRGBO(236,209,232, 0.6);
 }
+
 class SofyLikeColors {
   static const SelectedStarColor = Color(0xFFE0347A);
   static const UnselectedStarColor = Color(0xFFEDC3ED);
@@ -325,4 +324,12 @@ class SofyVoteProgressColors {
   static const ActiveColor = Color(0xFFFF96AD);
   static const CardBgColor = Color(0xFFFFE1E8);
   static const TextColor = Color(0xFF836771);
+}
+
+class CommentsColors {
+  static const PreloaderColor = Color(0xffFF96AD);
+  static const BgColor = Color(0xFFFFFFFF);
+  static const ReplyColor = Color(0xFFE0347A);
+  static const DateColor = Color(0xFFA09EBA);
+
 }

@@ -27,7 +27,6 @@ class ArticleRating extends StatelessWidget {
         SofyDivider(icon: Icons.done),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 21),
-          color: ArticleDetailsColors.BgColor,
           child: Column(
             children: [
               Center(
@@ -61,8 +60,8 @@ class ArticleRating extends StatelessWidget {
                 ),
               ),
               BlocProvider<ArticleRatingBloc>(
-                create: (BuildContext context) =>
-                    ArticleRatingBloc(restApi: RestApi(), articleId: articleId),
+                create: (BuildContext context) => ArticleRatingBloc(
+                    restApi: RestApi(), articleId: articleId),
                 child: BlocBuilder<ArticleRatingBloc, ArticleRatingState>(
                     builder: (context, state) {
                   return Column(
@@ -85,7 +84,8 @@ class ArticleRating extends StatelessWidget {
                                   if (!(state
                                           is ArticleRatingStatePostedRating ||
                                       article.rating > 0))
-                                    BlocProvider.of<ArticleRatingBloc>(context)
+                                    BlocProvider.of<ArticleRatingBloc>(
+                                            context)
                                         .add(ArticleRatingEventSetRating(
                                             rating: index + 1));
                                 },
@@ -113,7 +113,8 @@ class ArticleRating extends StatelessWidget {
                                                 padding:
                                                     const EdgeInsets.all(4),
                                                 child: Icon(Icons.star,
-                                                    size: size < 24 ? size : 24,
+                                                    size:
+                                                        size < 24 ? size : 24,
                                                     color: SofyLikeColors
                                                         .SelectedStarColor),
                                               )
@@ -121,7 +122,8 @@ class ArticleRating extends StatelessWidget {
                                                 padding:
                                                     const EdgeInsets.all(4),
                                                 child: Icon(Icons.star_border,
-                                                    size: size < 24 ? size : 24,
+                                                    size:
+                                                        size < 24 ? size : 24,
                                                     color: SofyLikeColors
                                                         .UnselectedStarColor),
                                               )

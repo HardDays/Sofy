@@ -33,7 +33,7 @@ class RestApi {
   RestApi({this.systemLang});
 
   //домен сервера
-  String serverUrl = 'https://api.enjoysofy.com/v1';
+  static String serverUrl = 'https://api.enjoysofy.com/v1';
 
   //метод авторизации
   String userAuthUrl = '/auth/email';
@@ -90,7 +90,7 @@ class RestApi {
   String getListFavCategoryUrl = '/article-topic/list-favorite';
 
   //фото профиля
-  String userProfilePhotoUrl = '/profile/avatar';
+  static String userProfilePhotoUrl = '/profile/avatar';
 
   //метод авторизации
   String userProfileUrl = '/profile/view';
@@ -946,6 +946,29 @@ class RestApi {
       BuildContext context, String articleId, int sort, String parentId,
       {String token}) async {
     String parent = parentId != null ? '&parent_id=$parentId' : '';
+    String url = serverUrl +
+        getArticleRepliesUrl +
+        '?id=' +
+        articleId +
+        '&sort=' +
+        sort.toString() +
+        parent;
+    print(url);
+    Dio dio = new Dio();
+    dio.options.headers["X-Api-Key"] = token;
+    dio.interceptors
+        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url);
+    print(response);
+
+    Replies replies = Replies.fromJson(response.data);
+    return replies;
+  }
+
+  //Список сообщений
+  Future<Replies> getArticleRepliesWithoutCtx(String articleId, int sort,
+      {String parentId, String token}) async {
+    String parent = parentId != '' ? '&parent_id=$parentId' : '';
     String url = serverUrl +
         getArticleRepliesUrl +
         '?id=' +

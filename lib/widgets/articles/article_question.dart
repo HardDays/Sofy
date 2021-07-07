@@ -19,7 +19,6 @@ class ArticleQuestion extends StatelessWidget {
         SofyDivider(icon: Icons.help),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 21),
-          color: ArticleDetailsColors.BgColor,
           child: Column(
             children: [
               Padding(

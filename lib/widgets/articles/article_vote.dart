@@ -16,12 +16,11 @@ class ArticleVote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return poll.variants.length > 0 ? Column(
       children: [
         SofyDivider(icon: Icons.done),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 21),
-          color: ArticleDetailsColors.BgColor,
           child: Column(
             children: [
               Padding(
@@ -106,6 +105,6 @@ class ArticleVote extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ) : Container();
   }
 }

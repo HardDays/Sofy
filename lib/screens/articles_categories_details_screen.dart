@@ -45,6 +45,8 @@ class _ArticlesCategoriesDetailsScreen
     getArticles();
   }
 
+  bool isLoading = true;
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -52,139 +54,151 @@ class _ArticlesCategoriesDetailsScreen
     PCProvider pcProvider = Provider.of<PCProvider>(context, listen: false);
 
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: kLinearGradResultColor,
-          ),
+        body: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: kLinearGradResultColor,
         ),
-        child: Padding(
-          padding: EdgeInsets.only(left: 0.0, right: 0.0, top: height / 20.83),
-          child: Stack(
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      ),
+      child: !isLoading
+          ? Padding(
+              padding:
+                  EdgeInsets.only(left: 0.0, right: 0.0, top: height / 20.83),
+              child: Stack(
                 children: <Widget>[
-                  Container(
-                      width: width,
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                            borderRadius: BorderRadius.circular(60),
-                            focusColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            splashColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            radius: 25,
-                            child: Row(
-                              children: <Widget>[
-                                Container(
-                                  width: 50.0,
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(12.0),
-                                    child: Container(
-                                      child: SvgPicture.asset(
-                                        'assets/svg/back_vector.svg',
-                                        color: kNavigBarInactiveColor,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  padding:
-                                      EdgeInsets.only(bottom: height / 179.2),
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    widget.screenTitle,
-                                    style: TextStyle(
-                                        fontFamily: kFontFamilyExo2,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: height / 37.3, //24
-                                        color: kNavigBarInactiveColor),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            onTap: () {
-                              Navigator.pop(context);
-                            }),
-                      )),
-                  Expanded(
-                    child: GridView.count(
-                      childAspectRatio: 0.85,
-                      physics: BouncingScrollPhysics(),
-                      crossAxisCount: 2,
-                      padding: EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          top: height / 44.8,
-                          bottom: height / 44.8),
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      children: List<Widget>.generate(
-                        articlesList.length,
-                        (index) {
-                          return InkWell(
-                            child: ArticleCard(
-                                title: articlesList[index].title,
-                                path: articlesList[index].coverImg,
-                                width: height / 4.42,
-                                height: height / 3.82,
-                                frozenHeight: height / 3.82 * 0.25,
-                                fontSize: 14,
-                                textColor: kArticleCardTextColor,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                          width: width,
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                                borderRadius: BorderRadius.circular(60),
+                                focusColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                splashColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
                                 radius: 25,
-                                isPaid: articlesList[index].isPaid),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12.0)),
-                            onTap: () {
-                              bool isAppPurchase = Provider.of<SubscribeData>(
-                                      context,
-                                      listen: false)
-                                  .isAppPurchase;
-                              if (articlesList[index].isPaid == 1) {
-                                if (isAppPurchase) {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          ArticleDetailsScreen(
-                                        articleId: articlesList[index].id,
+                                child: Row(
+                                  children: <Widget>[
+                                    Container(
+                                      width: 50.0,
+                                      alignment: Alignment.center,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(12.0),
+                                        child: Container(
+                                          child: SvgPicture.asset(
+                                            'assets/svg/back_vector.svg',
+                                            color: kNavigBarInactiveColor,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  );
-                                } else {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          SubscribeScreen(isFromSplash: false),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          bottom: height / 179.2),
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        widget.screenTitle,
+                                        style: TextStyle(
+                                            fontFamily: kFontFamilyExo2,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: height / 37.3, //24
+                                            color: kNavigBarInactiveColor),
+                                      ),
                                     ),
-                                  );
-                                }
-                              } else {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        ArticleDetailsScreen(
-                                      articleId: articlesList[index].id,
-                                    ),
-                                  ),
-                                );
-                              }
+                                  ],
+                                ),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                }),
+                          )),
+                      Expanded(
+                        child: GridView.count(
+                          childAspectRatio: 0.85,
+                          physics: BouncingScrollPhysics(),
+                          crossAxisCount: 2,
+                          padding: EdgeInsets.only(
+                              left: 20,
+                              right: 20,
+                              top: height / 44.8,
+                              bottom: height / 44.8),
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          children: List<Widget>.generate(
+                            articlesList.length,
+                            (index) {
+                              return InkWell(
+                                child: ArticleCard(
+                                    title: articlesList[index].title,
+                                    path: articlesList[index].coverImg,
+                                    width: height / 4.42,
+                                    height: height / 3.82,
+                                    frozenHeight: height / 3.82 * 0.25,
+                                    fontSize: 14,
+                                    textColor: kArticleCardTextColor,
+                                    radius: 25,
+                                    isPaid: articlesList[index].isPaid),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12.0)),
+                                onTap: () {
+                                  bool isAppPurchase =
+                                      Provider.of<SubscribeData>(context,
+                                              listen: false)
+                                          .isAppPurchase;
+                                  if (articlesList[index].isPaid == 1) {
+                                    if (isAppPurchase) {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              ArticleDetailsScreen(
+                                            articleId: articlesList[index].id,
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SubscribeScreen(
+                                              isFromSplash: false),
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            ArticleDetailsScreen(
+                                          articleId: articlesList[index].id,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                },
+                              );
                             },
-                          );
-                        },
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            )
+          : Container(
+              child: Container(
+                child: Center(
+                  child: Container(
+                    child: CircularProgressIndicator(
+                      color: CommentsColors.PreloaderColor,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+    ));
   }
 
   Future<void> getArticles() async {
@@ -193,6 +207,7 @@ class _ArticlesCategoriesDetailsScreen
         .getArticles(context, widget.categoryId, token: userToken)
         .then((values) {
       setState(() {
+        isLoading = false;
         articlesList = values;
       });
     });
