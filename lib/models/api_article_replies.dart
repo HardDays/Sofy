@@ -16,7 +16,7 @@ class Reply {
   final String parentId;
   final String content;
   final String dateCreated;
-  final String likesCount;
+  String likesCount;
   final String userName;
   final String coverImg;
   String isLiked;

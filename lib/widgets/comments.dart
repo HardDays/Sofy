@@ -5,24 +5,50 @@ import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
-import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/bloc/comments_bloc.dart';
 import 'package:sofy_new/widgets/comment_item.dart';
 
-class Comments extends StatelessWidget {
-  const Comments({Key key, this.articleId = 1}) : super(key: key);
+class Comments extends StatefulWidget {
+  Comments({Key key, this.articleId = 1}) : super(key: key);
   final int articleId;
 
-@override
+  @override
+  _CommentsState createState() => _CommentsState();
+}
+
+class _CommentsState extends State<Comments> {
+  showLoaderDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(
+            child: CircularProgressIndicator(
+                valueColor:
+                    new AlwaysStoppedAnimation<Color>(kAppPinkDarkColor),
+                strokeWidth: 2.0),
+          );
+        });
+  }
+
+  final TextEditingController _textController = TextEditingController();
+
+  List<Sort> users = [
+    Sort(name: 'Android', val: 0),
+    Sort(name: 'Flutter', val: 1),
+    Sort(name: 'ReactNative', val: 2),
+    Sort(name: 'iOS', val: 3)
+  ];
+
+  Sort selectedUser = Sort(name: 'Android', val: 0);
+
+  @override
   Widget build(BuildContext context) {
-  double width = SizeConfig.screenWidth;
-    TextEditingController controller = TextEditingController();
+    double width = SizeConfig.screenWidth;
 
     return BlocBuilder<CommentsBloc, CommentsState>(
-      bloc: CommentsBloc(
-          restApi: RestApi(
-              systemLang: AppLocalizations.of(context).locale.languageCode))
-        ..add(CommentsEventLoad(articleId: articleId)),
+      bloc: BlocProvider.of<CommentsBloc>(context)
+        ..add(CommentsEventLoad(articleId: widget.articleId)),
       builder: (context, state) {
         if (state is CommentsStateResult) {
           return Column(
@@ -31,7 +57,7 @@ class Comments extends StatelessWidget {
                   ? Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(21,21,21,0),
+                          padding: const EdgeInsets.fromLTRB(21, 21, 21, 0),
                           child: Column(
                             children: [
                               Padding(
@@ -44,7 +70,8 @@ class Comments extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 20),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       '${state.replies.length} ${AppLocalizations.of(context).translate('comments')}',
@@ -53,26 +80,42 @@ class Comments extends StatelessWidget {
                                         fontFamily: 'Abhaya Libre ExtraBold',
                                       ),
                                     ),
-                                    InkWell(
-                                      onTap: () {
-                                        print('like pressed');
+                                    DropdownButton<Sort>(
+                                      hint: Text("Select item"),
+                                      value: selectedUser,
+                                      onChanged: (Sort sort) {
+                                        setState(() {
+                                          selectedUser = sort;
+                                        });
                                       },
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            '${AppLocalizations.of(context).translate('most_interesting')}',
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              fontFamily: 'Abhaya Libre ExtraBold',
-                                            ),
-                                          ),
-                                          SizedBox(width: 9),
-                                          SvgPicture.asset(
-                                            'assets/svg/article_comments_sort.svg',
-                                          ),
-                                        ],
-                                      ),
+                                      items: users.map((Sort sort) {
+                                        return DropdownMenuItem<Sort>(
+                                          value: sort,
+                                          child: Text(sort.name),
+                                        );
+                                      }).toList(),
                                     ),
+                                    // InkWell(
+                                    //   onTap: () {
+                                    //     print('like pressed');
+                                    //   },
+                                    //   child: Row(
+                                    //     children: [
+                                    //       Text(
+                                    //         '${AppLocalizations.of(context).translate('most_interesting')}',
+                                    //         style: TextStyle(
+                                    //           fontSize: 13,
+                                    //           fontFamily:
+                                    //               'Abhaya Libre ExtraBold',
+                                    //         ),
+                                    //       ),
+                                    //       SizedBox(width: 9),
+                                    //       SvgPicture.asset(
+                                    //         'assets/svg/article_comments_sort.svg',
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -85,7 +128,8 @@ class Comments extends StatelessWidget {
                                     ApiProfileModel profile = state.profiles
                                         .firstWhere((element) =>
                                             element.id.toString() ==
-                                            state.replies[index].userId.toString());
+                                            state.replies[index].userId
+                                                .toString());
                                     return CommentItem(
                                         reply: state.replies[index],
                                         profile: profile);
@@ -104,7 +148,8 @@ class Comments extends StatelessWidget {
                       ),
                       width: width,
                       height: width / 6,
-                    ),                    Container(
+                    ),
+              Container(
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -131,22 +176,20 @@ class Comments extends StatelessWidget {
                     children: [
                       Container(
                         height: 42,
-                        width: width-42-12-42,
+                        width: width - 42 - 12 - 42,
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                              color:
-                              CommentsColors.NegativeInputShadowColor,
+                              color: CommentsColors.NegativeInputShadowColor,
                               offset: Offset(-4, -4),
                               blurRadius: 10,
                             ),
                           ],
                         ),
                         child: TextField(
-                          controller: controller,
+                          controller: _textController,
                           textAlign: TextAlign.left,
-                          textCapitalization:
-                          TextCapitalization.characters,
+                          textCapitalization: TextCapitalization.characters,
                           style: TextStyle(
                               fontFamily: 'Gilroy',
                               fontSize: 14,
@@ -166,7 +209,7 @@ class Comments extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             contentPadding:
-                            EdgeInsets.only(left: 16.0, bottom: 7.0),
+                                EdgeInsets.only(left: 16.0, bottom: 7.0),
                             hintStyle: TextStyle(
                                 fontFamily: 'Gilroy',
                                 fontSize: 14,
@@ -176,12 +219,21 @@ class Comments extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SendButton(callback: () {print('send');}),
+                      SendButton(callback: () {
+                        if (_textController.value.text != '' &&
+                            widget.articleId > 0)
+                          BlocProvider.of<CommentsBloc>(context)
+                            ..add(CommentsEventSend(
+                                text: _textController.value.text,
+                                articleId: widget.articleId,
+                                parentId: 0));
+
+                        print(_textController.value.text);
+                      }),
                     ],
                   ),
                 ),
               ),
-
             ],
           );
         }
@@ -208,11 +260,9 @@ class Comments extends StatelessWidget {
 }
 
 class SendButton extends StatelessWidget {
-  const SendButton({
-    Key key,
-    this.callback
-  }) : super(key: key);
-final VoidCallback callback;
+  const SendButton({Key key, this.callback}) : super(key: key);
+  final VoidCallback callback;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -229,15 +279,20 @@ final VoidCallback callback;
             ),
           ],
           borderRadius: BorderRadius.circular(10),
-
           color: CommentsColors.ReplyColor,
         ),
-          padding: EdgeInsets.all(12),
-          child:
-          SvgPicture.asset(
-            'assets/svg/article_send_comment.svg',
-          ),
+        padding: EdgeInsets.all(12),
+        child: SvgPicture.asset(
+          'assets/svg/article_send_comment.svg',
+        ),
       ),
     );
   }
+}
+
+class Sort {
+  Sort({this.name, this.val});
+
+  final String name;
+  final int val;
 }

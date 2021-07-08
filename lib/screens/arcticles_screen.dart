@@ -137,52 +137,62 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                       color: ArticlesColors.BgColor,
                       child: Column(
                         children: [
-                          ArticlesCardsHorizontalList(
-                              listOfArticles: state.femaleSexuality,
-                              callback: () {
-                                print('header femaleSexuality clicker');
-                              },
-                              title: AppLocalizations.of(context)
-                                  .translate('female_sexuality'),
-                              cardHeight: 220,
-                              cardRadius: 20,
-                              cardWidth: 170,
-                              frozenCardFontSize: 14,
-                              frozenCardHeight: 57,
-                              titleFontSize: 24),
-                          ArticlesCardsHorizontalList(
-                              listOfArticles: state.interestingAboutSex,
-                              callback: () {
-                                print('header interesting_about_sex clicker');
-                              },
-                              title: AppLocalizations.of(context)
-                                  .translate('interesting_about_sex'),
-                              cardHeight: 220,
-                              cardRadius: 20,
-                              cardWidth: 170,
-                              frozenCardFontSize: 14,
-                              frozenCardHeight: 57,
-                              titleFontSize: 24),
-                          Padding(
-                            padding: const EdgeInsets.all(22),
-                            child: ArticlesListWithHeader(
-                                title: AppLocalizations.of(context)
-                                    .translate('popular'),
-                                listOfArticles: state.listOfPopularArticles),
-                          ),
-                          ArticlesCardsHorizontalList(
-                              listOfArticles: state.orgasms,
-                              callback: () {
-                                print('header orgasms clicker');
-                              },
-                              title: AppLocalizations.of(context)
-                                  .translate('orgasms'),
-                              cardHeight: 220,
-                              cardRadius: 20,
-                              cardWidth: 170,
-                              frozenCardFontSize: 14,
-                              frozenCardHeight: 57,
-                              titleFontSize: 24),
+                          state.femaleSexuality.length > 0
+                              ? ArticlesCardsHorizontalList(
+                                  listOfArticles: state.femaleSexuality,
+                                  callback: () {
+                                    print('header femaleSexuality clicker');
+                                  },
+                                  title: AppLocalizations.of(context)
+                                      .translate('female_sexuality'),
+                                  cardHeight: 220,
+                                  cardRadius: 20,
+                                  cardWidth: 170,
+                                  frozenCardFontSize: 14,
+                                  frozenCardHeight: 57,
+                                  titleFontSize: 24)
+                              : Container(),
+                          state.interestingAboutSex.length > 0
+                              ? ArticlesCardsHorizontalList(
+                                  listOfArticles: state.interestingAboutSex,
+                                  callback: () {
+                                    print(
+                                        'header interesting_about_sex clicker');
+                                  },
+                                  title: AppLocalizations.of(context)
+                                      .translate('interesting_about_sex'),
+                                  cardHeight: 220,
+                                  cardRadius: 20,
+                                  cardWidth: 170,
+                                  frozenCardFontSize: 14,
+                                  frozenCardHeight: 57,
+                                  titleFontSize: 24)
+                              : Container(),
+                          state.listOfPopularArticles.length > 0
+                              ? Padding(
+                                  padding: const EdgeInsets.all(22),
+                                  child: ArticlesListWithHeader(
+                                      title: AppLocalizations.of(context)
+                                          .translate('popular'),
+                                      listOfArticles:
+                                          state.listOfPopularArticles),
+                                )
+                              : Container(),
+                          state.orgasms.length > 0
+                              ? ArticlesCardsHorizontalList(
+                                  listOfArticles: state.orgasms,
+                                  callback: () {
+                                    print('header orgasms clicker');
+                                  },
+                                  title: AppLocalizations.of(context)
+                                      .translate('orgasms'),
+                                  cardHeight: 220,
+                                  cardRadius: 20,
+                                  cardWidth: 170,
+                                  frozenCardFontSize: 14,
+                                  frozenCardHeight: 57,
+                                  titleFontSize: 24)
+                              : Container(),
                           Padding(
                             padding: const EdgeInsets.all(22),
                             child: ArticlesCategoriesWithHeader(

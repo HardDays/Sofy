@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
@@ -6,6 +8,7 @@ import 'package:sofy_new/helper/time_ago.dart';
 import 'package:sofy_new/models/api_article_replies.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
+import 'package:sofy_new/screens/bloc/comments_bloc.dart';
 import 'package:sofy_new/widgets/avatar.dart';
 
 class CommentItem extends StatelessWidget {
@@ -35,7 +38,7 @@ class CommentItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  reply.userName,
+                  reply.userName.contains('Anonim') ? 'Anonim' : reply.userName,
                   style: TextStyle(
                       fontFamily: kFontFamilyGilroy,
                       fontStyle: FontStyle.normal,
@@ -77,7 +80,7 @@ class CommentItem extends StatelessWidget {
                                 fontSize: 12,
                                 color: CommentsColors.ReplyColor),
                           ),
-                          onTap: (){
+                          onTap: () {
                             print('replreplrepl');
                           },
                         )
@@ -87,11 +90,19 @@ class CommentItem extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
-                            print('like pressed');
+                            int.parse(reply.isLiked) > 0
+                                ? BlocProvider.of<CommentsBloc>(context)
+                                    .add(CommentsEventDislike(id: int.parse(reply.id), articleId: int.parse(reply.articleId), parentId: int.parse(reply.parentId)))
+                                : BlocProvider.of<CommentsBloc>(context)
+                                    .add(CommentsEventLike(id: int.parse(reply.id), articleId: int.parse(reply.articleId), parentId: int.parse(reply.parentId)));
                           },
-                          child: SvgPicture.asset(
-                            'assets/svg/article_likes.svg',
-                          ),
+                          child: int.parse(reply.isLiked) > 0 ?                           Icon(CupertinoIcons.heart_fill, color: CommentsColors.ReplyColor) :
+                          Icon(CupertinoIcons.heart, color: CommentsColors.PreloaderColor)
+    // SvgPicture.asset(
+    //                         'assets/svg/article_likes.svg',
+    //                         color: CommentsColors.ReplyColor,
+    //                       )
+    ,
                         ),
                         SizedBox(width: 6),
                         Text('${reply.likesCount}',

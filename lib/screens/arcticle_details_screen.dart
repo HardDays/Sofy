@@ -9,6 +9,7 @@ import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/bloc/article_detales_screen_bloc.dart';
+import 'package:sofy_new/screens/bloc/comments_bloc.dart';
 import 'package:sofy_new/widgets/articles/article_author_desciption.dart';
 import 'package:sofy_new/widgets/articles/article_details_skeletion.dart';
 import 'package:sofy_new/widgets/articles/article_rating.dart';
@@ -59,7 +60,9 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
 
   bool scrollListener(ScrollNotification scrollNotification) {
     double height = SizeConfig.screenHeight;
-    scroll.value = scrollNotification.metrics.pixels/height/SizeConfig.blockSizeHorizontal;
+    scroll.value = scrollNotification.metrics.pixels /
+        height /
+        SizeConfig.blockSizeHorizontal;
     if (scrollNotification.metrics.pixels > height / 8.21) {
       if (appBar == Colors.transparent) {
         appBar = kArticlesDetailsAppBarColor;
@@ -105,7 +108,9 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
     super.dispose();
   }
 
-  final GlobalKey commentsKey = GlobalKey();
+  final _commentsKey = GlobalKey();
+  final _questionsKey = GlobalKey();
+  final _controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +132,7 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                     children: [
                       Scrollbar(
                         child: SingleChildScrollView(
+                          controller: _controller,
                           physics: const ClampingScrollPhysics(),
                           child: Container(
                             color: ArticleDetailsColors.BgColor,
@@ -212,7 +218,23 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                                             .translate(
                                                                 'questions_btn'),
                                                         callback: () {
-                                                          print('111');
+                                                          final RenderBox
+                                                              questions =
+                                                              _questionsKey
+                                                                  .currentContext
+                                                                  .findRenderObject();
+                                                          final sizeQuestions =
+                                                              questions
+                                                                  .localToGlobal(
+                                                                      Offset
+                                                                          .zero);
+                                                          _controller.animateTo(
+                                                              sizeQuestions.dy,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      350),
+                                                              curve:
+                                                                  Curves.ease);
                                                         },
                                                       ),
                                                       SofyButton(
@@ -222,8 +244,24 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                                               .translate(
                                                                   'comments_btn'),
                                                           callback: () {
-                                                            print('222');
-                                                          }),
+                                                            final RenderBox
+                                                                comments =
+                                                                _commentsKey
+                                                                    .currentContext
+                                                                    .findRenderObject();
+                                                            final sizeComments =
+                                                                comments
+                                                                    .localToGlobal(
+                                                                        Offset
+                                                                            .zero);
+                                                            _controller.animateTo(
+                                                                sizeComments.dy,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        350),
+                                                                curve: Curves
+                                                                    .ease);
+                                                          })
                                                     ],
                                                   ),
                                                 ),
@@ -320,14 +358,23 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                     poll: state.articleDetails.article
                                         .apiArticlePollModel),
                                 ArticleQuestion(
+                                    key: _questionsKey,
                                     question: state.articleDetails.article
                                         .apiArticleQuestionModel),
                                 ArticleRating(
                                     article: state.articleDetails.article,
                                     articleId: widget.articleId),
-                                Comments(
-                                  articleId: widget.articleId,
-                                  key: commentsKey,
+                                BlocProvider(
+                                  create: (_) => CommentsBloc(
+                                      restApi: RestApi(
+                                          systemLang:
+                                              AppLocalizations.of(context)
+                                                  .locale
+                                                  .languageCode)),
+                                  child: Comments(
+                                    articleId: widget.articleId,
+                                    key: _commentsKey,
+                                  ),
                                 ),
                               ],
                             ),

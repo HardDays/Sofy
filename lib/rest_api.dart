@@ -1026,6 +1026,33 @@ class RestApi {
     }
   }
 
+  //отправка сообщения
+  Future<bool> postReplyWithoutCtx(
+      {String content, int parentId, int articleId, String token}) async {
+    String url = serverUrl + sendArticleReplyUrl;
+
+    Response response = await Dio(BaseOptions(
+      contentType: Headers.jsonContentType,
+      responseType: ResponseType.json,
+      validateStatus: (_) => true,
+    )).post(url,
+        data: {
+          "content": content,
+          "parent_id": parentId,
+          "article_id": articleId
+        },
+        options: Options(
+          headers: {"X-Api-Key": token},
+        ));
+    Map<String, dynamic> responseJson = json.decode(response.toString());
+    String result = responseJson['result'].toString();
+    if (result != 'error') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   //лайк сообщения
   Future<bool> likeReply(BuildContext context, int commentId) async {
     showLoaderDialog(context);
@@ -1056,6 +1083,28 @@ class RestApi {
     } else {
       return false;
     }
+  }//лайк сообщения
+  Future<bool> likeReplyWithoutCtx({int commentId, String token}) async {
+    String url =
+        serverUrl + likeArticleReplyUrl + '?id=' + commentId.toString();
+
+    Response response = await Dio(BaseOptions(
+      contentType: Headers.jsonContentType,
+      responseType: ResponseType.json,
+      validateStatus: (_) => true,
+    )).post(url,
+        options: Options(
+          headers: {"X-Api-Key": token},
+        ));
+
+    Map<String, dynamic> responseJson = json.decode(response.toString());
+    String result = responseJson['result'].toString();
+
+    if (result != 'error') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   //удалить лайк
@@ -1077,6 +1126,30 @@ class RestApi {
         ));
 
     Navigator.pop(context);
+
+    Map<String, dynamic> responseJson = json.decode(response.toString());
+    String result = responseJson['result'].toString();
+
+    if (result != 'error') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  //удалить лайк
+  Future<bool> deleteLikeReplyWithoutCtx({int commentId, String token}) async {
+    String url =
+        serverUrl + likeArticleReplyUrl + '?id=' + commentId.toString();
+
+    Response response = await Dio(BaseOptions(
+      contentType: Headers.jsonContentType,
+      responseType: ResponseType.json,
+      validateStatus: (_) => true,
+    )).delete(url,
+        options: Options(
+          headers: {"X-Api-Key": token},
+        ));
 
     Map<String, dynamic> responseJson = json.decode(response.toString());
     String result = responseJson['result'].toString();
