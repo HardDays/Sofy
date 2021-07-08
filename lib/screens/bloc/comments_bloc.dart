@@ -31,7 +31,7 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
                   .length >
               0))
             _profiles.add(await restApi.getUserProfile(
-                token: userToken, id: _replies[0].userId));
+                token: userToken, id: _replies[i].userId));
         }
 
         yield CommentsStateResult(replies: _replies, profiles: _profiles);
