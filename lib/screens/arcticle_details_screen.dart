@@ -26,7 +26,7 @@ import 'package:flutter_html/style.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/models/api_article_poll_model.dart';
-import 'package:sofy_new/widgets/comments.dart';
+import 'package:sofy_new/widgets/comments/comments.dart';
 
 import '../rest_api.dart';
 import 'bloc/analytics.dart';

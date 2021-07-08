@@ -1,23 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/screens/bloc/comments_bloc.dart';
-import 'package:sofy_new/widgets/comment_item.dart';
+import 'package:sofy_new/widgets/comments/comment_field.dart';
+import 'package:sofy_new/widgets/comments/comment_item.dart';
 
-class Comments extends StatefulWidget {
+class Comments extends StatelessWidget {
   Comments({Key key, this.articleId = 1}) : super(key: key);
   final int articleId;
 
-  @override
-  _CommentsState createState() => _CommentsState();
-}
-
-class _CommentsState extends State<Comments> {
   showLoaderDialog(BuildContext context) {
     showDialog(
         context: context,
@@ -34,7 +29,6 @@ class _CommentsState extends State<Comments> {
 
   final TextEditingController _textController = TextEditingController();
 
-
   var _value = 1;
 
   @override
@@ -42,32 +36,40 @@ class _CommentsState extends State<Comments> {
     double width = SizeConfig.screenWidth;
 
     List<Sort> sort = [
-      Sort(name: AppLocalizations.of(context).translate('comments_most_interesting'), val: 1),
-      Sort(name: AppLocalizations.of(context).translate('comments_sort_by_old'), val: 2),
-      Sort(name: AppLocalizations.of(context).translate('comments_sort_by_new'), val: 0),
+      Sort(
+          name: AppLocalizations.of(context)
+              .translate('comments_most_interesting'),
+          val: 1),
+      Sort(
+          name: AppLocalizations.of(context).translate('comments_sort_by_old'),
+          val: 2),
+      Sort(
+          name: AppLocalizations.of(context).translate('comments_sort_by_new'),
+          val: 0),
     ];
 
     return BlocBuilder<CommentsBloc, CommentsState>(
       bloc: BlocProvider.of<CommentsBloc>(context)
-        ..add(CommentsEventLoad(articleId: widget.articleId, sortBy: _value)),
+        ..add(CommentsEventLoad(articleId: articleId, sortBy: _value)),
       builder: (context, state) {
         if (state is CommentsStateResult) {
           return Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.all(21),
+                child: Container(
+                  height: 1,
+                  color: CommentsColors.DividerColor,
+                ),
+              ),
               state.replies.length > 0
                   ? Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(21, 21, 21, 0),
+                          padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
                           child: Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 21.0),
-                                child: Container(
-                                  height: 1,
-                                  color: CommentsColors.DividerColor,
-                                ),
-                              ),
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 20),
                                 child: Row(
@@ -83,7 +85,9 @@ class _CommentsState extends State<Comments> {
                                     ),
                                     DropdownButton(
                                       icon: Icon(
-                                          Icons.keyboard_arrow_down_rounded, color: CommentsColors.DividerColor,),
+                                        Icons.keyboard_arrow_down_rounded,
+                                        color: CommentsColors.DividerColor,
+                                      ),
                                       value: _value,
                                       items: sort
                                           .map((e) => DropdownMenuItem(
@@ -93,9 +97,11 @@ class _CommentsState extends State<Comments> {
                                           .toList(),
                                       onChanged: (value) {
                                         // setState(() {
-                                          _value = value;
-                                          BlocProvider.of<CommentsBloc>(context)
-                                            ..add(CommentsEventLoad(articleId: widget.articleId, sortBy: _value));
+                                        _value = value;
+                                        BlocProvider.of<CommentsBloc>(context)
+                                          ..add(CommentsEventLoad(
+                                              articleId: articleId,
+                                              sortBy: _value));
                                         // });
                                       },
                                       elevation: 1,
@@ -137,8 +143,7 @@ class _CommentsState extends State<Comments> {
                           style: TextStyle(fontSize: 15),
                         ),
                       ),
-                      width: width,
-                      height: width / 6,
+                padding: EdgeInsets.only(bottom: 21),
                     ),
               Container(
                 decoration: BoxDecoration(
@@ -161,65 +166,11 @@ class _CommentsState extends State<Comments> {
                         topLeft: Radius.circular(25))),
                 child: Container(
                   padding: EdgeInsets.fromLTRB(21, 0, 21, 38),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 42,
-                        width: width - 42 - 12 - 42,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: CommentsColors.NegativeInputShadowColor,
-                              offset: Offset(-4, -4),
-                              blurRadius: 10,
-                            ),
-                          ],
-                        ),
-                        child: TextField(
-                          controller: _textController,
-                          textAlign: TextAlign.left,
-                          textCapitalization: TextCapitalization.characters,
-                          style: TextStyle(
-                              fontFamily: 'Gilroy',
-                              fontSize: 14,
-                              color: CommentsColors.Text),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            filled: true,
-                            fillColor: CommentsColors.InputBgColor,
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: CommentsColors.InputBgColor),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: CommentsColors.InputBgColor),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            contentPadding:
-                                EdgeInsets.only(left: 16.0, bottom: 7.0),
-                            hintStyle: TextStyle(
-                                fontFamily: 'Gilroy',
-                                fontSize: 14,
-                                color: CommentsColors.HintText),
-                            hintText: AppLocalizations.of(context)
-                                .translate('add_comment'),
-                          ),
-                        ),
-                      ),
-                      SendButton(callback: () {
-                        if (_textController.value.text != '' &&
-                            widget.articleId > 0)
-                          BlocProvider.of<CommentsBloc>(context)
-                            ..add(CommentsEventSend(
-                                text: _textController.value.text,
-                                articleId: widget.articleId,
-                                parentId: 0));
-                      }),
-                    ],
+                  child: CommentField(
+                    textController: _textController,
+                    articleId: articleId,
+                    parentId: 0,
+                    width: SizeConfig.screenWidth - 42 - 12 - 42,
                   ),
                 ),
               ),
@@ -244,37 +195,6 @@ class _CommentsState extends State<Comments> {
           );
         return Container();
       },
-    );
-  }
-}
-
-class SendButton extends StatelessWidget {
-  const SendButton({Key key, this.callback}) : super(key: key);
-  final VoidCallback callback;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: callback,
-      child: Container(
-        width: 42,
-        height: 42,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: CommentsColors.SendShadowColor,
-              offset: Offset(4, 4),
-              blurRadius: 10,
-            ),
-          ],
-          borderRadius: BorderRadius.circular(10),
-          color: CommentsColors.ReplyColor,
-        ),
-        padding: EdgeInsets.all(12),
-        child: SvgPicture.asset(
-          'assets/svg/article_send_comment.svg',
-        ),
-      ),
     );
   }
 }

@@ -4,23 +4,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/helper/time_ago.dart';
 import 'package:sofy_new/models/api_article_replies.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/screens/bloc/comments_bloc.dart';
 import 'package:sofy_new/widgets/avatar.dart';
+import 'package:sofy_new/widgets/comments/comment_field.dart';
 
-class CommentItem extends StatelessWidget {
-  const CommentItem({Key key, @required this.reply, @required this.profile})
+class CommentItem extends StatefulWidget {
+  CommentItem({Key key, @required this.reply, @required this.profile})
       : super(key: key);
   final Reply reply;
   final ApiProfileModel profile;
 
   @override
+  _CommentItemState createState() => _CommentItemState();
+}
+
+class _CommentItemState extends State<CommentItem> {
+  final TextEditingController _textController = TextEditingController();
+
+bool _visivble = false;
+
+  @override
   Widget build(BuildContext context) {
     double space = 12;
     double side = 33;
+    double commentFieldWidth =  SizeConfig.screenWidth - space - side - 96;
     return Padding(
       padding: const EdgeInsets.only(bottom: 24.0),
       child: Stack(
@@ -28,7 +40,7 @@ class CommentItem extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: space),
             child: Avatar(
-              coverImgUrl: profile.coverImg,
+              coverImgUrl: widget.profile.coverImg,
               side: side,
             ),
           ),
@@ -38,7 +50,7 @@ class CommentItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  reply.userName.contains('Anonim') ? 'Anonim' : reply.userName,
+                  widget.reply.userName.contains('Anonim') ? 'Anonim' : widget.reply.userName,
                   style: TextStyle(
                       fontFamily: kFontFamilyGilroy,
                       fontStyle: FontStyle.normal,
@@ -46,7 +58,7 @@ class CommentItem extends StatelessWidget {
                       fontSize: 13),
                 ),
                 Text(
-                  reply.content,
+                  widget.reply.content,
                   style: TextStyle(
                       fontFamily: kFontFamilyGilroy,
                       fontStyle: FontStyle.normal,
@@ -61,7 +73,7 @@ class CommentItem extends StatelessWidget {
                         Text(
                           TimeAgo.timeAgoSinceDate(
                               DateTime.fromMillisecondsSinceEpoch(
-                                  int.parse(reply.dateCreated) * 1000)),
+                                  int.parse(widget.reply.dateCreated) * 1000)),
                           style: TextStyle(
                               fontFamily: kFontFamilyGilroy,
                               fontStyle: FontStyle.normal,
@@ -81,7 +93,9 @@ class CommentItem extends StatelessWidget {
                                 color: CommentsColors.ReplyColor),
                           ),
                           onTap: () {
-                            print('replreplrepl');
+                            setState(() {
+                              _visivble = !_visivble;
+                            });
                           },
                         )
                       ],
@@ -90,22 +104,31 @@ class CommentItem extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
-                            int.parse(reply.isLiked) > 0
-                                ? BlocProvider.of<CommentsBloc>(context)
-                                    .add(CommentsEventDislike(id: int.parse(reply.id), articleId: int.parse(reply.articleId), parentId: int.parse(reply.parentId)))
-                                : BlocProvider.of<CommentsBloc>(context)
-                                    .add(CommentsEventLike(id: int.parse(reply.id), articleId: int.parse(reply.articleId), parentId: int.parse(reply.parentId)));
+                            int.parse(widget.reply.isLiked) > 0
+                                ? BlocProvider.of<CommentsBloc>(context).add(
+                                    CommentsEventDislike(
+                                        id: int.parse(widget.reply.id),
+                                        articleId: int.parse(widget.reply.articleId),
+                                        parentId: int.parse(widget.reply.parentId)))
+                                : BlocProvider.of<CommentsBloc>(context).add(
+                                    CommentsEventLike(
+                                        id: int.parse(widget.reply.id),
+                                        articleId: int.parse(widget.reply.articleId),
+                                        parentId: int.parse(widget.reply.parentId)));
                           },
-                          child: int.parse(reply.isLiked) > 0 ?                           Icon(CupertinoIcons.heart_fill, color: CommentsColors.ReplyColor) :
-                          Icon(CupertinoIcons.heart, color: CommentsColors.PreloaderColor)
-    // SvgPicture.asset(
-    //                         'assets/svg/article_likes.svg',
-    //                         color: CommentsColors.ReplyColor,
-    //                       )
-    ,
+                          child: int.parse(widget.reply.isLiked) > 0
+                              ? Icon(CupertinoIcons.heart_fill,
+                                  color: CommentsColors.ReplyColor)
+                              : Icon(CupertinoIcons.heart,
+                                  color: CommentsColors.PreloaderColor)
+                          // SvgPicture.asset(
+                          //                         'assets/svg/article_likes.svg',
+                          //                         color: CommentsColors.ReplyColor,
+                          //                       )
+                          ,
                         ),
                         SizedBox(width: 6),
-                        Text('${reply.likesCount}',
+                        Text('${widget.reply.likesCount}',
                             style: TextStyle(
                                 fontFamily: kFontFamilyGilroy,
                                 fontStyle: FontStyle.normal,
@@ -115,6 +138,15 @@ class CommentItem extends StatelessWidget {
                     )
                   ],
                 ),
+                Visibility(
+                  visible: _visivble,
+                  child: CommentField(
+                    textController: _textController,
+                    articleId: int.parse(widget.reply.articleId),
+                    parentId: int.parse(widget.reply.parentId),
+                    width: commentFieldWidth,
+                  ),
+                )
               ],
             ),
           ),
