@@ -229,7 +229,7 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                                                       Offset
                                                                           .zero);
                                                           _controller.animateTo(
-                                                              sizeQuestions.dy,
+                                                              sizeQuestions.dy-height/8.21,
                                                               duration: Duration(
                                                                   milliseconds:
                                                                       350),
@@ -255,7 +255,7 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                                                         Offset
                                                                             .zero);
                                                             _controller.animateTo(
-                                                                sizeComments.dy,
+                                                                sizeComments.dy-height/8.21,
                                                                 duration: Duration(
                                                                     milliseconds:
                                                                         350),
@@ -360,7 +360,10 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                 ArticleQuestion(
                                     key: _questionsKey,
                                     question: state.articleDetails.article
-                                        .apiArticleQuestionModel),
+                                        .apiArticleQuestionModel,
+                                    articleId: widget.articleId
+
+                                ),
                                 ArticleRating(
                                     article: state.articleDetails.article,
                                     articleId: widget.articleId),

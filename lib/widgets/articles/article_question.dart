@@ -4,12 +4,17 @@ import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_question_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
+import 'package:sofy_new/screens/article_answer_screen.dart';
+import 'package:sofy_new/screens/article_answers_stories_screen.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/widgets/articles/sofy_button.dart';
 import 'package:sofy_new/widgets/articles/vote_divider.dart';
+import 'package:sofy_new/widgets/material_page_route.dart';
 
 class ArticleQuestion extends StatelessWidget {
-  const ArticleQuestion({Key key, this.question}) : super(key: key);
+  const ArticleQuestion({Key key, this.question, this.articleId}) : super(key: key);
   final ApiArticleQuestionModel question;
+  final int articleId;
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +134,23 @@ class ArticleQuestion extends StatelessWidget {
                   label:
                   AppLocalizations.of(context)
                       .translate('show_answers'),
+
+
+
+                  callback: (){
+                    // Analytics().sendEventReports(
+                    //   event:
+                    //   'articles_orgasms_categories_details_${13}_click'
+                    //       .replaceAll(' ', '_'),
+                    // );
+                    Navigator.push(
+                      context,
+                      CustomMaterialPageRoute(
+                          builder: (context) =>
+                              // ArticleAnswerScreen(articleId: articleId.toString(),articleTitle:question.message,questionId:question.id)),
+                    ArticleAnswersStoriesScreen(articleId: articleId.toString(),coverUrl: question.coverImg,question: question.message.toString(),)),
+                    );
+                  },
                 ),
               )
             ],

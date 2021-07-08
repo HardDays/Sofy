@@ -253,6 +253,7 @@
   "female_sexuality": "Female Sexuality",
   "interesting_about_sex": "Interesting about sex",
   "popular": "Popular",
+  "popular_categories": "Popular ctegories",
   "comments": "comments",
   "orgasms": "Orgasms",
   "view_all": "View all",
@@ -265,6 +266,9 @@
   "reply": "Reply",
   "most_interesting": "Most interesting",
   "no_comments": "No comments",
-  "add_comment": "Comments"
+  "add_comment": "Comments",
+  "comments_most_interesting": "Most interesting",
+  "comments_sort_by_old": "Old first",
+  "comments_sort_by_new": "New first"
 
 }

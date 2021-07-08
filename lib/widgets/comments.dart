@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -33,22 +34,22 @@ class _CommentsState extends State<Comments> {
 
   final TextEditingController _textController = TextEditingController();
 
-  List<Sort> users = [
-    Sort(name: 'Android', val: 0),
-    Sort(name: 'Flutter', val: 1),
-    Sort(name: 'ReactNative', val: 2),
-    Sort(name: 'iOS', val: 3)
-  ];
 
-  Sort selectedUser = Sort(name: 'Android', val: 0);
+  var _value = 1;
 
   @override
   Widget build(BuildContext context) {
     double width = SizeConfig.screenWidth;
 
+    List<Sort> sort = [
+      Sort(name: AppLocalizations.of(context).translate('comments_most_interesting'), val: 1),
+      Sort(name: AppLocalizations.of(context).translate('comments_sort_by_old'), val: 2),
+      Sort(name: AppLocalizations.of(context).translate('comments_sort_by_new'), val: 0),
+    ];
+
     return BlocBuilder<CommentsBloc, CommentsState>(
       bloc: BlocProvider.of<CommentsBloc>(context)
-        ..add(CommentsEventLoad(articleId: widget.articleId)),
+        ..add(CommentsEventLoad(articleId: widget.articleId, sortBy: _value)),
       builder: (context, state) {
         if (state is CommentsStateResult) {
           return Column(
@@ -80,42 +81,32 @@ class _CommentsState extends State<Comments> {
                                         fontFamily: 'Abhaya Libre ExtraBold',
                                       ),
                                     ),
-                                    DropdownButton<Sort>(
-                                      hint: Text("Select item"),
-                                      value: selectedUser,
-                                      onChanged: (Sort sort) {
-                                        setState(() {
-                                          selectedUser = sort;
-                                        });
+                                    DropdownButton(
+                                      icon: Icon(
+                                          Icons.keyboard_arrow_down_rounded, color: CommentsColors.DividerColor,),
+                                      value: _value,
+                                      items: sort
+                                          .map((e) => DropdownMenuItem(
+                                                child: Text(e.name),
+                                                value: e.val,
+                                              ))
+                                          .toList(),
+                                      onChanged: (value) {
+                                        // setState(() {
+                                          _value = value;
+                                          BlocProvider.of<CommentsBloc>(context)
+                                            ..add(CommentsEventLoad(articleId: widget.articleId, sortBy: _value));
+                                        // });
                                       },
-                                      items: users.map((Sort sort) {
-                                        return DropdownMenuItem<Sort>(
-                                          value: sort,
-                                          child: Text(sort.name),
-                                        );
-                                      }).toList(),
+                                      elevation: 1,
+                                      style: TextStyle(
+                                          color: CommentsColors.SelectorText,
+                                          fontSize: 13.0),
+                                      underline: Container(
+                                        height: 1,
+                                        color: ArticleDetailsColors.BgColor,
+                                      ),
                                     ),
-                                    // InkWell(
-                                    //   onTap: () {
-                                    //     print('like pressed');
-                                    //   },
-                                    //   child: Row(
-                                    //     children: [
-                                    //       Text(
-                                    //         '${AppLocalizations.of(context).translate('most_interesting')}',
-                                    //         style: TextStyle(
-                                    //           fontSize: 13,
-                                    //           fontFamily:
-                                    //               'Abhaya Libre ExtraBold',
-                                    //         ),
-                                    //       ),
-                                    //       SizedBox(width: 9),
-                                    //       SvgPicture.asset(
-                                    //         'assets/svg/article_comments_sort.svg',
-                                    //       ),
-                                    //     ],
-                                    //   ),
-                                    // ),
                                   ],
                                 ),
                               ),
@@ -227,8 +218,6 @@ class _CommentsState extends State<Comments> {
                                 text: _textController.value.text,
                                 articleId: widget.articleId,
                                 parentId: 0));
-
-                        print(_textController.value.text);
                       }),
                     ],
                   ),

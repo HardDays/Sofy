@@ -251,6 +251,7 @@
   "female_sexuality": "Женская сексуальность",
   "interesting_about_sex": "Интересно о сексе",
   "popular": "Популярное",
+  "popular_categories": "Популярные категории",
   "comments": "коментариев",
   "orgasms": "Оргазмы",
   "view_all": "Посмотреть все",
@@ -262,6 +263,9 @@
   "reply": "Ответить",
   "most_interesting": "Самое интересное",
   "no_comments": "Комментариев нет",
-  "add_comment": "Комментарий"
+  "add_comment": "Комментарий",
+  "comments_most_interesting": "Самые интересные",
+  "comments_sort_by_old": "Сначала старые",
+  "comments_sort_by_new": "Сначала новые"
 
 }

@@ -12,7 +12,7 @@ import 'package:sofy_new/widgets/material_page_route.dart';
 class ArticlesCategoriesWithHeader extends StatelessWidget {
   const ArticlesCategoriesWithHeader({
     Key key,
-    this.title,
+    this.title = '',
     this.listOfTopics,
     this.textColor = kArticlesHeaderTextColor,
     this.fontTitleSize = 24,
@@ -39,7 +39,7 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
+        title != '' ? Text(
           title,
           textAlign: TextAlign.left,
           style: TextStyle(
@@ -48,8 +48,8 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
             fontSize: fontTitleSize,
             letterSpacing: -0.065 * fontTitleSize,
           ),
-        ),
-        SizedBox(height: 14),
+        ) : Container(),
+        title != '' ? SizedBox(height: 14) : Container(),
         ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(12)),
           child: Stack(

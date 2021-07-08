@@ -77,10 +77,6 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
                         event: 'article_${listOfArticles[index].id}_click'
                             .replaceAll(' ', '_'),
                       );
-                      Analytics().sendEventReports(
-                        event: 'article_${listOfArticles[index].id}_click'
-                            .replaceAll(' ', '_'),
-                      );
 
                       bool isAppPurchase =
                           Provider.of<SubscribeData>(context, listen: false)

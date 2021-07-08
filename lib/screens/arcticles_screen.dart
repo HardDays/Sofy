@@ -8,12 +8,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
+import 'package:sofy_new/screens/articles_categories_details_screen.dart';
+import 'package:sofy_new/screens/articles_categories_screen.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/bloc/articles_screen_bloc.dart';
 import 'package:sofy_new/widgets/articles/article_skeletion.dart';
 import 'package:sofy_new/widgets/articles/articles_cards_horizontal_list.dart';
 import 'package:sofy_new/widgets/articles/articles_categories_with_header.dart';
 import 'package:sofy_new/widgets/articles/articles_list_with_header.dart';
 import 'package:sofy_new/widgets/articles/sofy_button.dart';
+import 'package:sofy_new/widgets/material_page_route.dart';
 
 import '../rest_api.dart';
 
@@ -53,9 +57,9 @@ class _ArticlesScreenState extends State<ArticlesScreen>
       child: BlocBuilder<ArticlesBloc, ArticlesState>(
         builder: (context, state) {
           if (state is ArticlesStateResult) {
-            double fontSize = 38 / height * 926;
+            double fontSize = 34 / height * 926;
             double bottom = 522 - 161 - fontSize;
-            double fontSize2 = 46 / height * 926;
+            double fontSize2 = 42 / height * 926;
             double bottom2 = 522 - 42 - fontSize2 * 2;
             return Container(
               color: ArticlesColors.NewBgColor,
@@ -141,7 +145,23 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                               ? ArticlesCardsHorizontalList(
                                   listOfArticles: state.femaleSexuality,
                                   callback: () {
-                                    print('header femaleSexuality clicker');
+                                    Analytics().sendEventReports(
+                                      event:
+                                          'articles_female_sexuality_categories_details_${21}_click'
+                                              .replaceAll(' ', '_'),
+                                    );
+                                    Navigator.push(
+                                      context,
+                                      CustomMaterialPageRoute(
+                                          builder: (context) =>
+                                              ArticlesCategoriesDetailsScreen(
+                                                categoryId: 21,
+                                                screenTitle:
+                                                    AppLocalizations.of(context)
+                                                        .translate(
+                                                            'female_sexuality'),
+                                              )),
+                                    );
                                   },
                                   title: AppLocalizations.of(context)
                                       .translate('female_sexuality'),
@@ -156,8 +176,23 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                               ? ArticlesCardsHorizontalList(
                                   listOfArticles: state.interestingAboutSex,
                                   callback: () {
-                                    print(
-                                        'header interesting_about_sex clicker');
+                                    Analytics().sendEventReports(
+                                      event:
+                                          'articles_interesting_about_sex_categories_details_${11}_click'
+                                              .replaceAll(' ', '_'),
+                                    );
+                                    Navigator.push(
+                                      context,
+                                      CustomMaterialPageRoute(
+                                          builder: (context) =>
+                                              ArticlesCategoriesDetailsScreen(
+                                                categoryId: 11,
+                                                screenTitle: AppLocalizations
+                                                        .of(context)
+                                                    .translate(
+                                                        'interesting_about_sex'),
+                                              )),
+                                    );
                                   },
                                   title: AppLocalizations.of(context)
                                       .translate('interesting_about_sex'),
@@ -182,7 +217,22 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                               ? ArticlesCardsHorizontalList(
                                   listOfArticles: state.orgasms,
                                   callback: () {
-                                    print('header orgasms clicker');
+                                    Analytics().sendEventReports(
+                                      event:
+                                          'articles_orgasms_categories_details_${13}_click'
+                                              .replaceAll(' ', '_'),
+                                    );
+                                    Navigator.push(
+                                      context,
+                                      CustomMaterialPageRoute(
+                                          builder: (context) =>
+                                              ArticlesCategoriesDetailsScreen(
+                                                categoryId: 13,
+                                                screenTitle:
+                                                    AppLocalizations.of(context)
+                                                        .translate('orgasms'),
+                                              )),
+                                    );
                                   },
                                   title: AppLocalizations.of(context)
                                       .translate('orgasms'),
@@ -197,7 +247,8 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                             padding: const EdgeInsets.all(22),
                             child: ArticlesCategoriesWithHeader(
                               listOfTopics: state.listOfTopicsPopular,
-                              title: 'Популярные категории',
+                              title: AppLocalizations.of(context)
+                                  .translate('popular_categories'),
                             ),
                           ),
                           Padding(
@@ -205,7 +256,18 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                             child: SofyButton(
                               label: AppLocalizations.of(context)
                                   .translate('view_all'),
-                              callback: () {},
+                              callback: () {
+                                Analytics().sendEventReports(
+                                  event: 'articles_categories_screen_click'
+                                      .replaceAll(' ', '_'),
+                                );
+                                Navigator.push(
+                                  context,
+                                  CustomMaterialPageRoute(
+                                      builder: (context) =>
+                                          ArticlesCategoriesScreen()),
+                                );
+                              },
                             ),
                           ),
                           SizedBox(height: height / 8.54),
