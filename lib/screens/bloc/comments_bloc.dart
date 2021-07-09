@@ -24,9 +24,19 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
       try {
         _replies = (await restApi.getArticleRepliesWithoutCtx(
                 event.articleId.toString(), event.sortBy,
-                parentId: event.parentId > 0 ? event.parentId.toString() : '',
+                parentId: '0',
+                // parentId: event.parentId > 0 ? event.parentId.toString() : '',
                 token: userToken))
             .replies;
+        // for(int i = 0; i < _replies.length; i++) {
+        //   List<Reply> r = (await restApi.getArticleRepliesWithoutCtx(
+        //       event.articleId.toString(), event.sortBy,
+        //       parentId: _replies[i].id,
+        //       token: userToken))
+        //       .replies;
+        //   if(r.length > 0)
+        //   print(r);
+        // }
         for (int i = 0; i < _replies.length; i++) {
           if (!(_profiles
                   .where((element) =>
