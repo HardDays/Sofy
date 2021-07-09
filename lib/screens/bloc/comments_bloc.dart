@@ -8,32 +8,79 @@ import 'package:sofy_new/rest_api.dart';
 class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
   CommentsBloc({this.restApi}) : super(CommentsStateLoading());
   final RestApi restApi;
+  int _sortBy;
+  List<Reply> _replies = [];
+  List<ApiProfileModel> _profiles = [];
 
   @override
   Stream<CommentsState> mapEventToState(CommentsEvent event) async* {
+    String userToken = await PreferencesProvider().getAnonToken();
     if (event is CommentsEventLoad) {
+      _sortBy = event.sortBy;
       yield CommentsStateLoading();
       try {
-        String userToken = await PreferencesProvider().getAnonToken();
-        List<Reply> replies = (await restApi.getArticleRepliesWithoutCtx(
+        _replies = (await restApi.getArticleRepliesWithoutCtx(
                 event.articleId.toString(), event.sortBy,
                 parentId: event.parentId > 0 ? event.parentId.toString() : '',
                 token: userToken))
             .replies;
-        List<ApiProfileModel> profiles = [];
-        for (int i = 0; i < replies.length; i++) {
-          if (!(profiles
-                  .where((element) => element.id.toString() == replies[i].userId.toString())
+        for (int i = 0; i < _replies.length; i++) {
+          if (!(_profiles
+                  .where((element) =>
+                      element.id.toString() == _replies[i].userId.toString())
                   .length >
               0))
-            profiles.add(await restApi.getUserProfile(
-                token: userToken, id: replies[0].userId));
+            _profiles.add(await restApi.getUserProfile(
+                token: userToken, id: _replies[i].userId));
         }
 
-        yield CommentsStateResult(replies: replies, profiles: profiles);
+        yield CommentsStateResult(replies: _replies, profiles: _profiles);
       } catch (e) {
         yield CommentsStateError(error: 'Ошибка загрузки');
       }
+    }
+    if (event is CommentsEventSend) {
+      if (event.text != '' && event.articleId > 0) {
+        yield CommentsStateLoading();
+        bool wasSended = await restApi.postReplyWithoutCtx(
+            articleId: event.articleId,
+            content: event.text,
+            parentId: event.parentId >= 0 ? event.parentId : 0,
+            token: userToken);
+        if (wasSended)
+          this.add(CommentsEventLoad(
+              articleId: event.articleId,
+              parentId: event.parentId,
+              sortBy: event.sortBy));
+        else
+          yield CommentsStateResult(replies: _replies, profiles: _profiles);
+      }
+    }
+    if (event is CommentsEventLike) {
+      bool wasSended = await restApi.likeReplyWithoutCtx(
+          commentId: event.id, token: userToken);
+      if (wasSended)
+        for (int i = 0; i < _replies.length; i++) {
+          if (_replies[i].id == event.id.toString()) {
+            _replies[i].isLiked = "1";
+            _replies[i].likesCount =
+                (int.parse(_replies[i].likesCount) + 1).toString();
+          }
+        }
+      yield CommentsStateResult(replies: _replies, profiles: _profiles);
+    }
+    if (event is CommentsEventDislike) {
+      bool wasSended = await restApi.deleteLikeReplyWithoutCtx(
+          commentId: event.id, token: userToken);
+      if (wasSended)
+        for (int i = 0; i < _replies.length; i++) {
+          if (_replies[i].id == event.id.toString()) {
+            _replies[i].isLiked = "0";
+            _replies[i].likesCount =
+                (int.parse(_replies[i].likesCount) - 1).toString();
+          }
+        }
+      yield CommentsStateResult(replies: _replies, profiles: _profiles);
     }
     return;
   }
@@ -63,5 +110,31 @@ class CommentsEventLoad extends CommentsEvent {
 
   final int articleId;
   final int sortBy;
+  final int parentId;
+}
+
+class CommentsEventSend extends CommentsEvent {
+  CommentsEventSend(
+      {this.articleId = 1, this.text = '', this.parentId = 0, this.sortBy = 0});
+
+  final int articleId;
+  final String text;
+  final int parentId;
+  final int sortBy;
+}
+
+class CommentsEventLike extends CommentsEvent {
+  CommentsEventLike({this.articleId = 1, this.parentId = 0, this.id = 0});
+
+  final int id;
+  final int articleId;
+  final int parentId;
+}
+
+class CommentsEventDislike extends CommentsEvent {
+  CommentsEventDislike({this.articleId = 1, this.parentId = 0, this.id = 0});
+
+  final int id;
+  final int articleId;
   final int parentId;
 }

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_topic_model.dart';
 import 'package:sofy_new/screens/articles_categories_details_screen.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
@@ -11,7 +12,7 @@ import 'package:sofy_new/widgets/material_page_route.dart';
 class ArticlesCategoriesWithHeader extends StatelessWidget {
   const ArticlesCategoriesWithHeader({
     Key key,
-    this.title,
+    this.title = '',
     this.listOfTopics,
     this.textColor = kArticlesHeaderTextColor,
     this.fontTitleSize = 24,
@@ -33,12 +34,12 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    double width = SizeConfig.screenWidth;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
+        title != '' ? Text(
           title,
           textAlign: TextAlign.left,
           style: TextStyle(
@@ -47,8 +48,8 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
             fontSize: fontTitleSize,
             letterSpacing: -0.065 * fontTitleSize,
           ),
-        ),
-        SizedBox(height: 14),
+        ) : Container(),
+        title != '' ? SizedBox(height: 14) : Container(),
         ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(12)),
           child: Stack(

@@ -162,9 +162,6 @@
   "You like this app" : "Тебе нравится это приложение? Тогда потрать немного времени, чтобы оставить рейтинг:",
 
   "all_categories" : "Все категории",
-  "female_sexuality" : "Сексуальность",
-  "interesting_about_sex" : "Interesting about Sex",
-  "orgasms" : "Orgasms",
   "blow_job" : "Blow Job",
   "masturbation" : "Masturbation",
   "sexual_problems" : "Sexual Problems",
@@ -172,11 +169,7 @@
   "sexual_massage" : "Sexual Massage",
   "sexual_positions" : "Sexual Positions",
   "new_topics" : "Новые статьи",
-  "popular" : "Популярное",
-  "popular_categories" : "Популярные категории",
-  "view_all" : "Открыть все",
   "questions" : "Истории",
-  "comments" : "Комментарии",
   "vote" : "Голосовать",
   "share_answer" : "Пожалуйста, поделитесь вашим ответом",
   "answer_hint" : "Начать ввод...",
@@ -251,7 +244,8 @@
   "female_sexuality": "Женская сексуальность",
   "interesting_about_sex": "Интересно о сексе",
   "popular": "Популярное",
-  "comments": "коментариев",
+  "popular_categories": "Популярные категории",
+  "comments": "комментариев",
   "orgasms": "Оргазмы",
   "view_all": "Посмотреть все",
   "Soft": "Мягкий",
@@ -261,6 +255,10 @@
   "comments_btn": "Комментарии",
   "reply": "Ответить",
   "most_interesting": "Самое интересное",
-  "no_comments": "Комментариев нет"
+  "no_comments": "Комментариев нет",
+  "add_comment": "Комментарий",
+  "comments_most_interesting": "Самые интересные",
+  "comments_sort_by_old": "Сначала старые",
+  "comments_sort_by_new": "Сначала новые"
 
 }

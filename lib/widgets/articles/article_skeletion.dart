@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/helper/size_config.dart';
 
 class ArticleSkeletion extends StatelessWidget {
   const ArticleSkeletion({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    double height = SizeConfig.screenHeight;
     return Center(
       child: Container(
         child: CircularProgressIndicator(

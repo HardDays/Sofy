@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/helper/size_config.dart';
 
 class ArticleDetailsSkeletion extends StatelessWidget {
   const ArticleDetailsSkeletion({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    double height = SizeConfig.screenHeight;
+    double width = SizeConfig.screenWidth;
     return Container(
       height: height,
       width: width,

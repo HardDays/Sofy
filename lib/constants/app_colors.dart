@@ -260,7 +260,7 @@ class ArticlesColors {
   static const CardBgColor = Color(0xffFFBFCD);
   static const NewBgColor = Color(0xffFEA9BB);
   static const TextColor = Colors.white;
-  static const BgColor = Colors.white;
+  static const BgColor = Color(0xFFFDF3FF);
   static const CardTextColor = Color(0xFF725E5C);
   static const HeaderTextColor = Color(0xFF38394F);
   static const DividerColor = Color.fromARGB(102, 237, 195, 237);
@@ -272,10 +272,12 @@ class ArticlesColors {
     Color(0xFFFDB0C1),
     Color(0xFFBF7786)
   ];
+  static final GreyColor = Color.fromARGB(130, 56, 57, 79);
 }
 
+
 class ArticleDetailsColors {
-  static const BgColor = Color(0xFFFFFFFF);
+  static const BgColor = Color(0xFFFDF3FF);
   static const TransparentColor = Colors.transparent;
   static const ShareButtonColor = Colors.white;
   static const BackButtonColor = Colors.white;
@@ -307,16 +309,18 @@ class SofyQuestionColors {
   static const FormShadowColor = Color.fromRGBO(165, 106, 130, 0.15);
   static const InputBgColor = Color(0xFFF9D9F4);
   static const InputHintColor = Color.fromARGB(127, 131, 103, 113);
-  static const InputShadowColor = Color.fromRGBO(236,209,232, 0.6);
+  static const InputShadowColor = Color.fromRGBO(236, 209, 232, 0.6);
 }
 
 class SofyLikeColors {
   static const SelectedStarColor = Color(0xFFE0347A);
   static const UnselectedStarColor = Color(0xFFEDC3ED);
 }
+
 class SofyTextButtonColors {
   static const LabelColor = Color(0xFFE0347A);
 }
+
 class SofyBadgeColors {
   static const BgColor = Color(0xFFFCEFFC);
   static const PositiveShadowColor = Color.fromRGBO(219, 196, 219, 0.41);
@@ -337,5 +341,13 @@ class CommentsColors {
   static const BgColor = Color(0xFFFFFFFF);
   static const ReplyColor = Color(0xFFE0347A);
   static const DateColor = Color(0xFFA09EBA);
-
+  static const DividerColor = Color(0xFFFDB0C1);
+  static const NegativeInputShadowColor = Color.fromRGBO(255, 255, 255, 153);
+  static const InputCardShadow1Color = Color.fromRGBO(249, 217, 244, 0.26);
+  static const InputCardShadow2Color = Color.fromRGBO(165, 106, 130, 0.04);
+  static const SendShadowColor = Color.fromRGBO(211, 173, 206, 0.56);
+  static const InputBgColor = Color(0xFFF9D9F4);
+  static const HintText = Color.fromARGB(76, 56, 57, 79);
+  static const Text = Color(0xFF836771);
+  static const SelectorText = Color(0xFF2F2E41);
 }

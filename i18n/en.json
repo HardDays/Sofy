@@ -163,9 +163,6 @@
   "You like this app" : "You like this app? Then take a little bit of your time to leave a rating:",
 
   "all_categories" : "All categories",
-  "female_sexuality" : "Female Sexuality",
-  "interesting_about_sex" : "Interesting about Sex",
-  "orgasms" : "Orgasms",
   "blow_job" : "Blow Job",
   "masturbation" : "Masturbation",
   "sexual_problems" : "Sexual Problems",
@@ -173,11 +170,7 @@
   "sexual_massage" : "Sexual Massage",
   "sexual_positions" : "Sexual Positions",
   "new_topics" : "New Articles",
-  "popular" : "Popular",
-  "popular_categories" : "Popular categories",
-  "view_all" : "View all",
   "questions" : "Stories",
-  "comments" : "Comments",
   "vote" : "Vote",
   "share_answer" : "Please share with us your answer",
   "answer_hint" : "Start typing...",
@@ -253,6 +246,7 @@
   "female_sexuality": "Female Sexuality",
   "interesting_about_sex": "Interesting about sex",
   "popular": "Popular",
+  "popular_categories": "Popular ctegories",
   "comments": "comments",
   "orgasms": "Orgasms",
   "view_all": "View all",
@@ -264,6 +258,10 @@
   "Hard": "Hard",
   "reply": "Reply",
   "most_interesting": "Most interesting",
-  "no_comments": "No comments"
+  "no_comments": "No comments",
+  "add_comment": "Comments",
+  "comments_most_interesting": "Most interesting",
+  "comments_sort_by_old": "Old first",
+  "comments_sort_by_new": "New first"
 
 }

@@ -5,9 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/bloc/article_detales_screen_bloc.dart';
+import 'package:sofy_new/screens/bloc/comments_bloc.dart';
 import 'package:sofy_new/widgets/articles/article_author_desciption.dart';
 import 'package:sofy_new/widgets/articles/article_details_skeletion.dart';
 import 'package:sofy_new/widgets/articles/article_rating.dart';
@@ -24,7 +26,7 @@ import 'package:flutter_html/style.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/models/api_article_poll_model.dart';
-import 'package:sofy_new/widgets/comments.dart';
+import 'package:sofy_new/widgets/comments/comments.dart';
 
 import '../rest_api.dart';
 import 'bloc/analytics.dart';
@@ -39,7 +41,6 @@ class ArticleDetailsScreen extends StatefulWidget {
 }
 
 class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
-  ArticleDetailsBloc _articleDetailsBloc;
   double radius = 25;
   final SettingBloc _bloc = SettingBloc();
 
@@ -58,11 +59,10 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
   ApiArticlePollModel apiArticlePollModel;
 
   bool scrollListener(ScrollNotification scrollNotification) {
-    double height = MediaQuery.of(context).size.height;
-
+    double height = SizeConfig.screenHeight;
     scroll.value = scrollNotification.metrics.pixels /
-        (height * MediaQuery.of(context).devicePixelRatio);
-    //print(scroll);
+        height /
+        SizeConfig.blockSizeHorizontal;
     if (scrollNotification.metrics.pixels > height / 8.21) {
       if (appBar == Colors.transparent) {
         appBar = kArticlesDetailsAppBarColor;
@@ -108,23 +108,21 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
     super.dispose();
   }
 
-  void _initializeLocale(BuildContext context) {
-    final String systemLang = AppLocalizations.of(context).locale.languageCode;
-    _articleDetailsBloc =
-        ArticleDetailsBloc(restApi: RestApi(systemLang: systemLang));
-    _articleDetailsBloc
-        .add(ArticleDetailsEventLoad(articleId: widget.articleId));
-  }
+  final _commentsKey = GlobalKey();
+  final _questionsKey = GlobalKey();
+  final _controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    _initializeLocale(context);
+    double height = SizeConfig.screenHeight;
+    double width = SizeConfig.screenWidth;
     return Scaffold(
       backgroundColor: ArticleDetailsColors.TransparentColor,
       body: BlocProvider.value(
-        value: _articleDetailsBloc,
+        value: ArticleDetailsBloc(
+            restApi: RestApi(
+                systemLang: AppLocalizations.of(context).locale.languageCode))
+          ..add(ArticleDetailsEventLoad(articleId: widget.articleId)),
         child: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
           builder: (context, state) {
             if (state is ArticleDetailsStateResult) {
@@ -134,6 +132,7 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                     children: [
                       Scrollbar(
                         child: SingleChildScrollView(
+                          controller: _controller,
                           physics: const ClampingScrollPhysics(),
                           child: Container(
                             color: ArticleDetailsColors.BgColor,
@@ -219,7 +218,23 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                                             .translate(
                                                                 'questions_btn'),
                                                         callback: () {
-                                                          print('111');
+                                                          final RenderBox
+                                                              questions =
+                                                              _questionsKey
+                                                                  .currentContext
+                                                                  .findRenderObject();
+                                                          final sizeQuestions =
+                                                              questions
+                                                                  .localToGlobal(
+                                                                      Offset
+                                                                          .zero);
+                                                          _controller.animateTo(
+                                                              sizeQuestions.dy-height/8.21,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      350),
+                                                              curve:
+                                                                  Curves.ease);
                                                         },
                                                       ),
                                                       SofyButton(
@@ -229,8 +244,24 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                                               .translate(
                                                                   'comments_btn'),
                                                           callback: () {
-                                                            print('222');
-                                                          }),
+                                                            final RenderBox
+                                                                comments =
+                                                                _commentsKey
+                                                                    .currentContext
+                                                                    .findRenderObject();
+                                                            final sizeComments =
+                                                                comments
+                                                                    .localToGlobal(
+                                                                        Offset
+                                                                            .zero);
+                                                            _controller.animateTo(
+                                                                sizeComments.dy-height/8.21,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        350),
+                                                                curve: Curves
+                                                                    .ease);
+                                                          })
                                                     ],
                                                   ),
                                                 ),
@@ -327,13 +358,26 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                                     poll: state.articleDetails.article
                                         .apiArticlePollModel),
                                 ArticleQuestion(
+                                    key: _questionsKey,
                                     question: state.articleDetails.article
-                                        .apiArticleQuestionModel),
+                                        .apiArticleQuestionModel,
+                                    articleId: widget.articleId
+
+                                ),
                                 ArticleRating(
                                     article: state.articleDetails.article,
                                     articleId: widget.articleId),
-                                Comments(
-                                  articleId: widget.articleId,
+                                BlocProvider(
+                                  create: (_) => CommentsBloc(
+                                      restApi: RestApi(
+                                          systemLang:
+                                              AppLocalizations.of(context)
+                                                  .locale
+                                                  .languageCode)),
+                                  child: Comments(
+                                    articleId: widget.articleId,
+                                    key: _commentsKey,
+                                  ),
                                 ),
                               ],
                             ),

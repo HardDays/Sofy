@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/config/remote_config_helper.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
 import 'package:sofy_new/providers/application_data_provider.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
@@ -46,7 +47,6 @@ class _SplashScreenState extends State<SplashScreen> {
       _openScreen();
     });
 
-
     super.initState();
   }
 
@@ -77,6 +77,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    SizeConfig().init(context);
     return Scaffold(
         body:
         Container(
