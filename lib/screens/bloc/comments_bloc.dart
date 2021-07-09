@@ -11,6 +11,9 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
   int _sortBy;
   List<Reply> _replies = [];
   List<ApiProfileModel> _profiles = [];
+  // double _scrollPosition = 0;
+  // double get scrollPosition => _scrollPosition;
+  // set scrollPosition(double val) => _scrollPosition = scrollPosition;
 
   @override
   Stream<CommentsState> mapEventToState(CommentsEvent event) async* {
