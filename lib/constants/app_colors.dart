@@ -125,6 +125,12 @@ const List<Color> kPlayerScrV2LinearGradientColor = [
   Color(0xFFFFFFFF),
   Color(0xFFF9EAF7)
 ];
+
+const List<Color> kSettingScreenLinearGradientColor = [
+  Color(0xFFFEFEFE),
+  Color(0xFFFAEDF8),
+];
+
 const List<Color> kPlayerScrV2ButtonGradientColor = [
   Color(0xFFFDB0C1),
   Color(0xFFFF95AC),
