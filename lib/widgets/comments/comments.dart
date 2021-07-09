@@ -19,10 +19,7 @@ class Comments extends StatelessWidget {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return Center(
-            child: CircularProgressIndicator(
-                valueColor:
-                    new AlwaysStoppedAnimation<Color>(kAppPinkDarkColor),
-                strokeWidth: 2.0),
+            child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(kAppPinkDarkColor), strokeWidth: 2.0),
           );
         });
   }
@@ -36,21 +33,13 @@ class Comments extends StatelessWidget {
     double width = SizeConfig.screenWidth;
 
     List<Sort> sort = [
-      Sort(
-          name: AppLocalizations.of(context)
-              .translate('comments_most_interesting'),
-          val: 1),
-      Sort(
-          name: AppLocalizations.of(context).translate('comments_sort_by_old'),
-          val: 2),
-      Sort(
-          name: AppLocalizations.of(context).translate('comments_sort_by_new'),
-          val: 0),
+      Sort(name: AppLocalizations.of(context).translate('comments_most_interesting'), val: 1),
+      Sort(name: AppLocalizations.of(context).translate('comments_sort_by_old'), val: 2),
+      Sort(name: AppLocalizations.of(context).translate('comments_sort_by_new'), val: 0),
     ];
 
     return BlocBuilder<CommentsBloc, CommentsState>(
-      bloc: BlocProvider.of<CommentsBloc>(context)
-        ..add(CommentsEventLoad(articleId: articleId, sortBy: _value)),
+      bloc: BlocProvider.of<CommentsBloc>(context)..add(CommentsEventLoad(articleId: articleId, sortBy: _value)),
       builder: (context, state) {
         if (state is CommentsStateResult) {
           return Column(
@@ -64,7 +53,7 @@ class Comments extends StatelessWidget {
               ),
               state.replies.length > 0
                   ? Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
@@ -73,8 +62,7 @@ class Comments extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 20),
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       '${state.replies.length} ${AppLocalizations.of(context).translate('comments')}',
@@ -98,16 +86,11 @@ class Comments extends StatelessWidget {
                                       onChanged: (value) {
                                         // setState(() {
                                         _value = value;
-                                        BlocProvider.of<CommentsBloc>(context)
-                                          ..add(CommentsEventLoad(
-                                              articleId: articleId,
-                                              sortBy: _value));
+                                        BlocProvider.of<CommentsBloc>(context)..add(CommentsEventLoad(articleId: articleId, sortBy: _value));
                                         // });
                                       },
                                       elevation: 1,
-                                      style: TextStyle(
-                                          color: CommentsColors.SelectorText,
-                                          fontSize: 13.0),
+                                      style: TextStyle(color: CommentsColors.SelectorText, fontSize: 13.0),
                                       underline: Container(
                                         height: 1,
                                         color: ArticleDetailsColors.BgColor,
@@ -122,14 +105,8 @@ class Comments extends StatelessWidget {
                                   physics: NeverScrollableScrollPhysics(),
                                   itemCount: state.replies.length,
                                   itemBuilder: (context, index) {
-                                    ApiProfileModel profile = state.profiles
-                                        .firstWhere((element) =>
-                                            element.id.toString() ==
-                                            state.replies[index].userId
-                                                .toString());
-                                    return CommentItem(
-                                        reply: state.replies[index],
-                                        profile: profile);
+                                    ApiProfileModel profile = state.profiles.firstWhere((element) => element.id.toString() == state.replies[index].userId.toString());
+                                    return CommentItem(reply: state.replies[index], profile: profile);
                                   }),
                             ],
                           ),
@@ -143,7 +120,7 @@ class Comments extends StatelessWidget {
                           style: TextStyle(fontSize: 15),
                         ),
                       ),
-                padding: EdgeInsets.only(bottom: 21),
+                      padding: EdgeInsets.only(bottom: 21),
                     ),
               Container(
                 decoration: BoxDecoration(
@@ -161,9 +138,7 @@ class Comments extends StatelessWidget {
                       ),
                     ],
                     // color: Colors.red,
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(25),
-                        topLeft: Radius.circular(25))),
+                    borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25))),
                 child: Container(
                   padding: EdgeInsets.fromLTRB(21, 0, 21, 38),
                   child: CommentField(

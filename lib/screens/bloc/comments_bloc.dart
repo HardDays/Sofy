@@ -70,7 +70,7 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
                 (int.parse(_replies[i].likesCount) + 1).toString();
           }
         }
-      yield CommentsStateResult(replies: _replies, profiles: _profiles);
+      yield CommentsStateResult(replies: _replies, profiles: _profiles, afterLikeDislike: true);
     }
     if (event is CommentsEventDislike) {
       bool wasSended = await restApi.deleteLikeReplyWithoutCtx(
@@ -83,7 +83,7 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
                 (int.parse(_replies[i].likesCount) - 1).toString();
           }
         }
-      yield CommentsStateResult(replies: _replies, profiles: _profiles);
+      yield CommentsStateResult(replies: _replies, profiles: _profiles, afterLikeDislike: true);
     }
     return;
   }
@@ -94,10 +94,11 @@ abstract class CommentsState {}
 class CommentsStateLoading extends CommentsState {}
 
 class CommentsStateResult extends CommentsState {
-  CommentsStateResult({this.replies = const [], this.profiles = const []});
+  CommentsStateResult({this.replies = const [], this.profiles = const [], this.afterLikeDislike = false});
 
   final List<Reply> replies;
   final List<ApiProfileModel> profiles;
+  final bool afterLikeDislike;
 }
 
 class CommentsStateError extends CommentsState {

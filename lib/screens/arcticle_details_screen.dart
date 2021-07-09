@@ -38,6 +38,7 @@ class ArticleDetailsScreen extends StatelessWidget {
   final int articleId;
 
   double radius = 25;
+
   final SettingBloc _bloc = SettingBloc();
 
   var linearGradientColors = const [
@@ -48,17 +49,20 @@ class ArticleDetailsScreen extends StatelessWidget {
   final scroll = ValueNotifier<double>(0);
 
   Color appBar = ArticleDetailsColors.TransparentColor;
+
   Color shareButton = ArticleDetailsColors.ShareButtonColor;
+
   Color backButton = ArticleDetailsColors.BackButtonColor;
+
   Color textColor = ArticleDetailsColors.TextColorTransparentColor;
+
   Color dividerColor = ArticleDetailsColors.DividerColorTransparentColor;
+
   ApiArticlePollModel apiArticlePollModel;
 
   bool scrollListener(ScrollNotification scrollNotification) {
     double height = SizeConfig.screenHeight;
-    scroll.value = scrollNotification.metrics.pixels /
-        height /
-        SizeConfig.blockSizeHorizontal;
+    scroll.value = scrollNotification.metrics.pixels / height / SizeConfig.blockSizeHorizontal;
     if (scrollNotification.metrics.pixels > height / 8.21) {
       if (appBar == Colors.transparent) {
         appBar = kArticlesDetailsAppBarColor;
@@ -94,11 +98,14 @@ class ArticleDetailsScreen extends StatelessWidget {
   }
 
   final _commentsKey = GlobalKey();
+
   final _commentsKeyVisibilityDetector = GlobalKey();
+
   final _questionsKey = GlobalKey();
-  final _controller = ScrollController();
-  WidgetSysInfo _widgetSysInfo =
-      WidgetSysInfo(sizeWidth: 0, sizeHeight: 0, visiblePercentage: 0);
+
+  ScrollController _controller = ScrollController(initialScrollOffset: 0);
+
+  WidgetSysInfo _widgetSysInfo = WidgetSysInfo();
 
   @override
   Widget build(BuildContext context) {
@@ -107,10 +114,7 @@ class ArticleDetailsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ArticleDetailsColors.TransparentColor,
       body: BlocProvider.value(
-        value: ArticleDetailsBloc(
-            restApi: RestApi(
-                systemLang: AppLocalizations.of(context).locale.languageCode))
-          ..add(ArticleDetailsEventLoad(articleId: articleId)),
+        value: ArticleDetailsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode))..add(ArticleDetailsEventLoad(articleId: articleId)),
         child: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
           builder: (context, state) {
             if (state is ArticleDetailsStateResult) {
@@ -140,24 +144,18 @@ class ArticleDetailsScreen extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 366),
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(radius),
-                                            topRight: Radius.circular(radius)),
+                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(radius), topRight: Radius.circular(radius)),
                                         child: Stack(
                                           alignment: Alignment.topCenter,
                                           children: [
                                             Container(
                                               height: 60,
                                               width: width,
-                                              color:
-                                                  ArticleDetailsColors.BgColor,
+                                              color: ArticleDetailsColors.BgColor,
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      21, 21, 21, 0),
-                                              child: ArticleAuthorDescription(
-                                                  author: state.author),
+                                              padding: const EdgeInsets.fromLTRB(21, 21, 21, 0),
+                                              child: ArticleAuthorDescription(author: state.author),
                                             ),
                                           ],
                                         ),
@@ -170,89 +168,37 @@ class ArticleDetailsScreen extends StatelessWidget {
                                         children: [
                                           Container(
                                             color: ArticleDetailsColors.BgColor,
-                                            padding: const EdgeInsets.fromLTRB(
-                                                21, 26, 21, 0),
+                                            padding: const EdgeInsets.fromLTRB(21, 26, 21, 0),
                                             child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Text(
-                                                  state.articleDetails.article
-                                                      .title,
-                                                  style: TextStyle(
-                                                      fontFamily: 'Roboto',
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 24,
-                                                      color: ArticlesColors
-                                                          .HeaderTextColor),
+                                                  state.articleDetails.article.title,
+                                                  style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w700, fontSize: 24, color: ArticlesColors.HeaderTextColor),
                                                 ),
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 25, bottom: 8),
+                                                  padding: const EdgeInsets.only(top: 25, bottom: 8),
                                                   child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
                                                       SofyButton(
                                                         width: width / 2 - 30,
-                                                        label: AppLocalizations
-                                                                .of(context)
-                                                            .translate(
-                                                                'questions_btn'),
+                                                        label: AppLocalizations.of(context).translate('questions_btn'),
                                                         callback: () {
-                                                          final RenderBox
-                                                              questions =
-                                                              _questionsKey
-                                                                  .currentContext
-                                                                  .findRenderObject();
-                                                          final sizeQuestions =
-                                                              questions
-                                                                  .localToGlobal(
-                                                                      Offset
-                                                                          .zero);
-                                                          _controller.animateTo(
-                                                              sizeQuestions.dy -
-                                                                  height / 8.21,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      350),
-                                                              curve:
-                                                                  Curves.ease);
+                                                          final RenderBox questions = _questionsKey.currentContext.findRenderObject();
+                                                          final sizeQuestions = questions.localToGlobal(Offset.zero);
+                                                          _controller.animateTo(sizeQuestions.dy - height / 8.21, duration: Duration(milliseconds: 350), curve: Curves.ease);
                                                         },
                                                       ),
                                                       SofyButton(
                                                           width: width / 2 - 30,
-                                                          label: AppLocalizations
-                                                                  .of(context)
-                                                              .translate(
-                                                                  'comments_btn'),
+                                                          label: AppLocalizations.of(context).translate('comments_btn'),
                                                           callback: () {
-                                                            final RenderBox
-                                                                comments =
-                                                                _commentsKey
-                                                                    .currentContext
-                                                                    .findRenderObject();
-                                                            final sizeComments =
-                                                                comments
-                                                                    .localToGlobal(
-                                                                        Offset
-                                                                            .zero);
-                                                            _controller.animateTo(
-                                                                sizeComments
-                                                                        .dy -
-                                                                    height /
-                                                                        8.21,
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        350),
-                                                                curve: Curves
-                                                                    .ease);
+                                                            final RenderBox comments = _commentsKey.currentContext.findRenderObject();
+                                                            final sizeComments = comments.localToGlobal(Offset.zero);
+                                                            _controller.animateTo(sizeComments.dy - height / 8.21, duration: Duration(milliseconds: 350), curve: Curves.ease);
                                                           })
                                                     ],
                                                   ),
@@ -261,82 +207,43 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                   style: {
                                                     "p": Style(
                                                         wordSpacing: 5,
-                                                        lineHeight:
-                                                            LineHeight.number(
-                                                                1.5),
-                                                        fontFamily:
-                                                            kFontFamilyMontserrat,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: FontSize(
-                                                            height / 57.73),
-                                                        color:
-                                                            kArticlesDetailsScreenColor),
+                                                        lineHeight: LineHeight.number(1.5),
+                                                        fontFamily: kFontFamilyMontserrat,
+                                                        fontStyle: FontStyle.normal,
+                                                        fontSize: FontSize(height / 57.73),
+                                                        color: kArticlesDetailsScreenColor),
                                                     "strong": Style(
                                                         wordSpacing: 5,
-                                                        lineHeight:
-                                                            LineHeight.number(
-                                                                1.6),
-                                                        fontFamily:
-                                                            kFontFamilyMontserratBold,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: FontSize(
-                                                            height / 50.7),
-                                                        color:
-                                                            kArticlesDetailsScreenColor),
+                                                        lineHeight: LineHeight.number(1.6),
+                                                        fontFamily: kFontFamilyMontserratBold,
+                                                        fontWeight: FontWeight.w600,
+                                                        fontStyle: FontStyle.normal,
+                                                        fontSize: FontSize(height / 50.7),
+                                                        color: kArticlesDetailsScreenColor),
                                                     "h1": Style(
                                                         wordSpacing: 5,
-                                                        lineHeight:
-                                                            LineHeight.number(
-                                                                1.6),
-                                                        fontFamily:
-                                                            kFontFamilyMontserrat,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: FontSize(
-                                                            height / 50.7),
-                                                        color:
-                                                            kArticlesDetailsScreenColor),
+                                                        lineHeight: LineHeight.number(1.6),
+                                                        fontFamily: kFontFamilyMontserrat,
+                                                        fontWeight: FontWeight.w600,
+                                                        fontStyle: FontStyle.normal,
+                                                        fontSize: FontSize(height / 50.7),
+                                                        color: kArticlesDetailsScreenColor),
                                                     "li": Style(
                                                         wordSpacing: 5,
-                                                        lineHeight:
-                                                            LineHeight.number(
-                                                                1.5),
-                                                        fontFamily:
-                                                            kFontFamilyMontserrat,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: FontSize(
-                                                            height / 57.73),
-                                                        color:
-                                                            kArticlesDetailsScreenColor),
+                                                        lineHeight: LineHeight.number(1.5),
+                                                        fontFamily: kFontFamilyMontserrat,
+                                                        fontStyle: FontStyle.normal,
+                                                        fontSize: FontSize(height / 57.73),
+                                                        color: kArticlesDetailsScreenColor),
                                                     "u": Style(
                                                         wordSpacing: 5,
-                                                        lineHeight:
-                                                            LineHeight.number(
-                                                                1.5),
-                                                        fontFamily:
-                                                            kFontFamilyMontserrat,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: FontSize(
-                                                            height / 57.73),
-                                                        color:
-                                                            kArticlesDetailsScreenColor),
+                                                        lineHeight: LineHeight.number(1.5),
+                                                        fontFamily: kFontFamilyMontserrat,
+                                                        fontStyle: FontStyle.normal,
+                                                        fontSize: FontSize(height / 57.73),
+                                                        color: kArticlesDetailsScreenColor),
                                                   },
-                                                  data: state
-                                                              .articleDetails
-                                                              .article
-                                                              .content !=
-                                                          null
-                                                      ? state.articleDetails
-                                                          .article.content
-                                                      : '',
+                                                  data: state.articleDetails.article.content != null ? state.articleDetails.article.content : '',
                                                 ),
                                               ],
                                             ),
@@ -346,53 +253,45 @@ class ArticleDetailsScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                ArticleVote(
-                                    poll: state.articleDetails.article
-                                        .apiArticlePollModel),
-                                ArticleQuestion(
-                                    key: _questionsKey,
-                                    question: state.articleDetails.article
-                                        .apiArticleQuestionModel,
-                                    articleId: articleId),
-                                ArticleRating(
-                                    article: state.articleDetails.article,
-                                    articleId: articleId),
+                                ArticleVote(poll: state.articleDetails.article.apiArticlePollModel),
+                                ArticleQuestion(key: _questionsKey, question: state.articleDetails.article.apiArticleQuestionModel, articleId: articleId),
+                                ArticleRating(article: state.articleDetails.article, articleId: articleId),
                                 VisibilityDetector(
                                   key: _commentsKeyVisibilityDetector,
                                   onVisibilityChanged: (visibilityInfo) {
-                                    _widgetSysInfo.visiblePercentage =
-                                        visibilityInfo.visibleFraction * 100;
-                                    _widgetSysInfo.sizeWidth =
-                                        visibilityInfo.size.width;
-                                    sizeHeight:
-                                    _widgetSysInfo.sizeHeight =
-                                        visibilityInfo.size.height;
-                                    // debugPrint(
-                                    //     'Widget ${visibilityInfo.key} is ${_commentsVisiblePercentage}% visible');
+                                    try {
+                                      if(_controller.hasClients) {
+                                        _widgetSysInfo.visibleFraction = visibilityInfo.visibleFraction;
+                                        _widgetSysInfo.sizeWidth = visibilityInfo.size.width;
+                                        _widgetSysInfo.sizeHeight = visibilityInfo.size.height;
+                                        _widgetSysInfo.positionPixels = _controller.position.pixels;
+                                        debugPrint('Widget ${visibilityInfo.key} is ${_widgetSysInfo.visibleFraction} visible, pp ${_controller.position.pixels}');
+                                      }
+                                    } catch (e) {
+                                      print('возникла вот такая вот ошибка: $e не знаю как ее решить но работает');
+                                    }
                                   },
                                   child: BlocProvider(
-                                    create: (_) => CommentsBloc(
-                                        restApi: RestApi(
-                                            systemLang:
-                                                AppLocalizations.of(context)
-                                                    .locale
-                                                    .languageCode)),
-                                    child: BlocListener<CommentsBloc,
-                                        CommentsState>(
+                                    create: (_) => CommentsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode)),
+                                    child: BlocListener<CommentsBloc, CommentsState>(
                                       listener: (context, state) {
-                                        if (state
-                                            is CommentsStateLoading) if (_widgetSysInfo
-                                                .visiblePercentage >
-                                            0)
-                                          BlocProvider.of<ArticleDetailsBloc>(
-                                                  context)
-                                              .widgetSysInfo = _widgetSysInfo;
-                                        if (state is CommentsStateResult)
-                                          print(BlocProvider.of<
-                                                  ArticleDetailsBloc>(context)
-                                              .widgetSysInfo);
-                                        print(
-                                            '${state.toString()} ${BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.visiblePercentage}');
+                                        debugPrint(
+                                            'start $state, bloc ${BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.visibleFraction}, local ${_widgetSysInfo.visibleFraction} visible, pp ${_controller.position.pixels}');
+
+                                        if (state is CommentsStateLoading && _widgetSysInfo.visibleFraction > 0 && BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.visibleFraction == 0) {
+                                          BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.visibleFraction = _widgetSysInfo.visibleFraction;
+                                          BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.sizeHeight = _widgetSysInfo.sizeHeight;
+                                          BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.sizeWidth = _widgetSysInfo.sizeWidth;
+                                          BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.positionPixels = _widgetSysInfo.positionPixels;
+                                        }
+                                        if (state is CommentsStateResult && _widgetSysInfo.visibleFraction > 0 && !state.afterLikeDislike) {
+                                          WidgetSysInfo wsi = BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo;
+                                          _controller.jumpTo(wsi.positionPixels);
+                                          BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo = WidgetSysInfo();
+                                        }
+
+                                        debugPrint(
+                                            'end $state, bloc ${BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.visibleFraction}, local ${_widgetSysInfo.visibleFraction} visible, pp ${_controller.position.pixels}');
                                       },
                                       child: Comments(
                                         articleId: articleId,
@@ -418,10 +317,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                             children: [
                               Align(
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
                                           child: Stack(
@@ -438,16 +335,11 @@ class ArticleDetailsScreen extends StatelessWidget {
                                             child: Material(
                                               color: Colors.transparent,
                                               child: InkWell(
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  borderRadius:
-                                                      BorderRadius.circular(60),
+                                                  focusColor: Colors.transparent,
+                                                  highlightColor: Colors.transparent,
+                                                  splashColor: Colors.transparent,
+                                                  hoverColor: Colors.transparent,
+                                                  borderRadius: BorderRadius.circular(60),
                                                   radius: 25,
                                                   onTap: () {
                                                     //Analytics().sendEventReports(event: subscription_splash_close_click);
@@ -460,25 +352,16 @@ class ArticleDetailsScreen extends StatelessWidget {
                                       Expanded(
                                         child: AnimatedOpacity(
                                           duration: Duration(milliseconds: 350),
-                                          opacity:
-                                              textColor == Colors.transparent
-                                                  ? 0.0
-                                                  : 1.0,
+                                          opacity: textColor == Colors.transparent ? 0.0 : 1.0,
                                           curve: Curves.fastOutSlowIn,
                                           child: Container(
                                             child: Text(
-                                              state.articleDetails.article
-                                                          .title !=
-                                                      null
-                                                  ? state.articleDetails.article
-                                                      .title
-                                                  : '',
+                                              state.articleDetails.article.title != null ? state.articleDetails.article.title : '',
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                fontFamily:
-                                                    kFontFamilyMontserratSemi,
+                                                fontFamily: kFontFamilyMontserratSemi,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: height / 59.73,
@@ -503,33 +386,20 @@ class ArticleDetailsScreen extends StatelessWidget {
                                               child: Material(
                                                 color: Colors.transparent,
                                                 child: InkWell(
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  borderRadius:
-                                                      BorderRadius.circular(60),
+                                                  focusColor: Colors.transparent,
+                                                  highlightColor: Colors.transparent,
+                                                  splashColor: Colors.transparent,
+                                                  hoverColor: Colors.transparent,
+                                                  borderRadius: BorderRadius.circular(60),
                                                   radius: 25,
                                                   onTap: () {
-                                                    Analytics()
-                                                        .sendEventReports(
-                                                      event:
-                                                          share_article_click,
+                                                    Analytics().sendEventReports(
+                                                      event: share_article_click,
                                                       attr: {
-                                                        'article_name': state
-                                                            .articleDetails
-                                                            .article
-                                                            .title,
+                                                        'article_name': state.articleDetails.article.title,
                                                       },
                                                     );
-                                                    _bloc.shareArticle(
-                                                        state.articleDetails
-                                                            .article.title,
-                                                        context: context);
+                                                    _bloc.shareArticle(state.articleDetails.article.title, context: context);
                                                   },
                                                 ),
                                               ),
@@ -547,8 +417,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                   color: dividerColor,
                                   child: LinearProgressIndicator(
                                     backgroundColor: dividerColor,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        kAlwaysStoppedAnimation),
+                                    valueColor: AlwaysStoppedAnimation<Color>(kAlwaysStoppedAnimation),
                                     value: scroll.value,
                                   ),
                                 ),
@@ -577,9 +446,10 @@ class ArticleDetailsScreen extends StatelessWidget {
 }
 
 class WidgetSysInfo {
-  WidgetSysInfo({this.sizeWidth =0, this.sizeHeight=0, this.visiblePercentage=0});
+  WidgetSysInfo({this.sizeWidth = 0, this.sizeHeight = 0, this.visibleFraction = 0, this.positionPixels = 0});
 
-  double visiblePercentage;
+  double visibleFraction;
   double sizeWidth;
   double sizeHeight;
+  double positionPixels;
 }
