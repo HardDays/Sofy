@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
 class PCProvider extends ChangeNotifier {
-  final PageController _pageController = PageController(initialPage: 0);
-  int _pageIndex = 0;
-  int _prevPageIndex = 0;
+  final PageController _pageController = PageController(initialPage: 1);
+  int _pageIndex = 1;
+  int _prevPageIndex = 1;
 
   PageController get pageController => _pageController;
 

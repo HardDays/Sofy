@@ -71,7 +71,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    PCProvider pcProvider = Provider.of<PCProvider>(context, listen: false);
 
     user = Provider.of<User>(context, listen: true);
 

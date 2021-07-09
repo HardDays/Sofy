@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
-import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,15 +15,15 @@ import 'package:sofy_new/models/playlist_data.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
+import 'package:sofy_new/screens/main_screen_copy.dart';
 import 'package:sofy_new/screens/my_playlist_screen.dart';
 import 'package:sofy_new/screens/player_screen_v2.dart';
 import 'package:sofy_new/screens/playlist_screen.dart';
 import 'package:sofy_new/screens/recomendation_screen.dart';
 import 'package:sofy_new/screens/setting_screen.dart';
-import 'package:sofy_new/widgets/bottom_bar.dart';
 
 import 'arcticles_screen.dart';
-
+int selectedItemBar = 1;
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -31,8 +31,22 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   double height, width;
-  List<Widget> screensList = [];
+  List<Widget> screensList = [
+    ArticlesScreen(),
+    PlayerScreenV2(),
+    SettingsScreen(),
+  ];
   var selectedTab = SelectedTab.player;
+  List<String> svgImagePath = [
+    'assets/svg/articles.svg',
+    'assets/svg/player.svg',
+    'assets/svg/settings.svg'
+  ];
+  List<String> title = [
+    'articles',
+    'player',
+    'settings',
+  ];
 
   PCProvider pcProvider;
 
@@ -42,13 +56,6 @@ class _MainScreenState extends State<MainScreen> {
     });
     print(selectedTab);
     switch (selectedTab) {
-      case SelectedTab.patterns:
-        if (!Provider.of<PlaylistData>(context, listen: false)
-            .isPlayListNullApi(context))
-          pcProvider.animateToPage(
-            index: RecommendationScreen_PAGE_INDEX,
-          );
-        break;
       case SelectedTab.player:
         pcProvider.animateToPage(
           index: PlayerScreen_PAGE_INDEX,
@@ -74,7 +81,6 @@ class _MainScreenState extends State<MainScreen> {
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
-    initScreenLists();
     getIDFA();
   }
 
@@ -86,17 +92,6 @@ class _MainScreenState extends State<MainScreen> {
 
   Future<void> getIDFA() async {
     await AppTrackingTransparency.requestTrackingAuthorization();
-  }
-
-  void initScreenLists() {
-    screensList = [
-      PlayerScreenV2(),
-      RecommendationScreen(),
-      PlayListScreen(),
-      MyPlaylistScreen(),
-      SettingsScreen(),
-      ArticlesScreen(),
-    ];
   }
 
   @override
@@ -116,265 +111,44 @@ class _MainScreenState extends State<MainScreen> {
                 controller: Provider.of<PCProvider>(context).pageController,
                 physics: NeverScrollableScrollPhysics(),
                 onPageChanged: (index) {
-                  //stop when screen is change
-                  //Provider.of<Player>(context, listen: false).stopVibrations();
+                  // //stop when screen is change
+                  // //Provider.of<Player>(context, listen: false).stopVibrations();
                   pcProvider.updatePageIndex(index: index);
+                  selectedTab = SelectedTab.values[index];
+                  // print('index = ' + index.toString());
 
-                  print('index = ' + index.toString());
-                  setState(() {
-                    if (index == 0) {
-                      selectedTab = SelectedTab.player;
-                    }
-                    if (index == 1) {
-                      selectedTab = SelectedTab.patterns;
-                    }
-                    if (index == 3) {
-                      selectedTab = SelectedTab.player;
-                    }
-                    if (index == 4) {
-                      selectedTab = SelectedTab.settings;
-                    }
-                    if (index == 5) {
-                      selectedTab = SelectedTab.article;
-                    }
-                  });
                 },
                 children: screensList,
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
+              Positioned(
+                bottom: 0,
+                right: 0,
                 child: Container(
-                  color: Colors.transparent,
-                  height: height / 9.5, //112px
-                  child: Container(
-                    height: height / 9.5, //86px
-                    padding: EdgeInsets.only(
-                        left: 15.0,
-                        right: 15.0,
-                        bottom:
-                            _isIPhoneX(MediaQuery.of(context)) ? 20.0 : 0.0),
-                    decoration: BoxDecoration(
-                        color: kMainBottomBArBackColor,
-                        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                        border: Border.all(color: kWelcomButtonLightColor)),
-                    child: Center(
-                      child: SalomonBottomBar(
-                        currentIndex: SelectedTab.values.indexOf(selectedTab),
-                        onTap: _handleIndexChanged,
-                        selectedItemColor: kArticlesWhiteColor,
-                        unselectedItemColor: kNavigBarInactiveColor,
-                        curve: Curves.decelerate,
-                        items: [
-                          SalomonBottomBarItem(
-                            icon: SvgPicture.asset(
-                              'assets/svg/modes.svg',
-                              height: 21,
-                              width: 19,
-                              color: selectedTab == SelectedTab.patterns
-                                  ? kArticlesWhiteColor
-                                  : kNavigBarInactiveColor,
-                            ),
-                            title: Text(
-                              AppLocalizations.of(context)
-                                  .translate('patterns'),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: kArticlesWhiteColor,
-                                fontFamily: kFontFamilyGilroy,
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            selectedColor: kNavigBarInactiveColor,
-                            unselectedColor: Colors.transparent,
-                          ),
-                          SalomonBottomBarItem(
-                            icon: SvgPicture.asset(
-                              'assets/svg/player.svg',
-                              height: 20,
-                              width: 32,
-                              color: selectedTab == SelectedTab.player
-                                  ? kArticlesWhiteColor
-                                  : kNavigBarInactiveColor,
-                            ),
-                            title: Text(
-                              AppLocalizations.of(context).translate('player'),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: kArticlesWhiteColor,
-                                fontFamily: kFontFamilyGilroy,
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            selectedColor: kNavigBarInactiveColor,
-                            unselectedColor: Colors.transparent,
-                          ),
-                          SalomonBottomBarItem(
-                            icon: SvgPicture.asset(
-                              'assets/svg/articles.svg',
-                              height: 20,
-                              width: 18,
-                              color: selectedTab == SelectedTab.article
-                                  ? kArticlesWhiteColor
-                                  : kNavigBarInactiveColor,
-                            ),
-                            title: Text(
-                              AppLocalizations.of(context)
-                                  .translate('articles'),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: kArticlesWhiteColor,
-                                fontFamily: kFontFamilyGilroy,
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            selectedColor: kNavigBarInactiveColor,
-                            unselectedColor: Colors.transparent,
-                          ),
-                          SalomonBottomBarItem(
-                            icon: SvgPicture.asset(
-                              'assets/svg/settings.svg',
-                              height: 21,
-                              width: 21,
-                              color: selectedTab == SelectedTab.settings
-                                  ? kArticlesWhiteColor
-                                  : kNavigBarInactiveColor,
-                            ),
-                            title: Text(
-                              AppLocalizations.of(context)
-                                  .translate('settings'),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: kArticlesWhiteColor,
-                                fontFamily: kFontFamilyGilroy,
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            selectedColor: kNavigBarInactiveColor,
-                            unselectedColor: Colors.transparent,
-                          ),
-                        ],
-                      ),
-                    ),
+                  // margin: EdgeInsets.symmetric(horizontal: 10),
+                  height: 80,
+                  width: width,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        topLeft: Radius.circular(10)),
+                  ),
+                  child: CurvedNavigationBar(
+                    height: 75,
+                    animationDuration: Duration(milliseconds: 300),
+                    backgroundColor: Colors.transparent,
+                    index: selectedItemBar,
+                    items:List.generate(3, (index) => CurvedNavBarItem(svgAsset: svgImagePath[index], title: title[index], selected: index == selectedItemBar ? true : false,)),
+                    onTap: (index) {
+                      print('dadada $index');
+                      selectedItemBar = index;
+                      _handleIndexChanged(index);
+                    },
                   ),
                 ),
               ),
             ],
           ),
-          // bottomNavigationBar: FluidNavBar(
-          //   // currentIndex: SelectedTab.values.indexOf(selectedTab),
-          //   // onTap: _handleIndexChanged,
-          //   // selectedItemColor: kArticlesWhiteColor,
-          //   // unselectedItemColor: kNavigBarInactiveColor,
-          //   // curve: Curves.decelerate,
-          //   style: FluidNavBarStyle(
-          //     iconUnselectedForegroundColor: Color(0xFFE1D2D5),
-          //     iconSelectedForegroundColor: Color(0xFFF1849F)
-          //   ),
-          //   icons: [
-          //     FluidNavBarIcon(
-          //         svgPath: "assets/svg/articles.svg",),
-          //     FluidNavBarIcon(
-          //         svgPath: "assets/svg/player.svg",),
-          //     FluidNavBarIcon(
-          //         svgPath: "assets/svg/settings.svg",),
-          //     // SalomonBottomBarItem(
-          //     //   icon: SvgPicture.asset(
-          //     //     'assets/svg/modes.svg',
-          //     //     height: 21,
-          //     //     width: 19,
-          //     //     color: selectedTab == SelectedTab.patterns
-          //     //         ? kArticlesWhiteColor
-          //     //         : kNavigBarInactiveColor,
-          //     //   ),
-          //     //   title: Text(
-          //     //     AppLocalizations.of(context)
-          //     //         .translate('patterns'),
-          //     //     textAlign: TextAlign.center,
-          //     //     style: TextStyle(
-          //     //       color: kArticlesWhiteColor,
-          //     //       fontFamily: kFontFamilyGilroy,
-          //     //       fontSize: 13.0,
-          //     //       fontWeight: FontWeight.bold,
-          //     //     ),
-          //     //   ),
-          //     //   selectedColor: kNavigBarInactiveColor,
-          //     //   unselectedColor: Colors.transparent,
-          //     // ),
-          //     // SalomonBottomBarItem(
-          //     //   icon: SvgPicture.asset(
-          //     //     'assets/svg/player.svg',
-          //     //     height: 20,
-          //     //     width: 32,
-          //     //     color: selectedTab == SelectedTab.player
-          //     //         ? kArticlesWhiteColor
-          //     //         : kNavigBarInactiveColor,
-          //     //   ),
-          //     //   title: Text(
-          //     //     AppLocalizations.of(context)
-          //     //         .translate('player'),
-          //     //     textAlign: TextAlign.center,
-          //     //     style: TextStyle(
-          //     //       color: kArticlesWhiteColor,
-          //     //       fontFamily: kFontFamilyGilroy,
-          //     //       fontSize: 13.0,
-          //     //       fontWeight: FontWeight.bold,
-          //     //     ),
-          //     //   ),
-          //     //   selectedColor: kNavigBarInactiveColor,
-          //     //   unselectedColor: Colors.transparent,
-          //     // ),
-          //     // SalomonBottomBarItem(
-          //     //   icon: SvgPicture.asset(
-          //     //     'assets/svg/articles.svg',
-          //     //     height: 20,
-          //     //     width: 18,
-          //     //     color: selectedTab == SelectedTab.article
-          //     //         ? kArticlesWhiteColor
-          //     //         : kNavigBarInactiveColor,
-          //     //   ),
-          //     //   title: Text(
-          //     //     AppLocalizations.of(context)
-          //     //         .translate('articles'),
-          //     //     textAlign: TextAlign.center,
-          //     //     style: TextStyle(
-          //     //       color: kArticlesWhiteColor,
-          //     //       fontFamily: kFontFamilyGilroy,
-          //     //       fontSize: 13.0,
-          //     //       fontWeight: FontWeight.bold,
-          //     //     ),
-          //     //   ),
-          //     //   selectedColor: kNavigBarInactiveColor,
-          //     //   unselectedColor: Colors.transparent,
-          //     // ),
-          //     // SalomonBottomBarItem(
-          //     //   icon: SvgPicture.asset(
-          //     //     'assets/svg/settings.svg',
-          //     //     height: 21,
-          //     //     width: 21,
-          //     //     color: selectedTab == SelectedTab.settings
-          //     //         ? kArticlesWhiteColor
-          //     //         : kNavigBarInactiveColor,
-          //     //   ),
-          //     //   title: Text(
-          //     //     AppLocalizations.of(context)
-          //     //         .translate('settings'),
-          //     //     textAlign: TextAlign.center,
-          //     //     style: TextStyle(
-          //     //       color: kArticlesWhiteColor,
-          //     //       fontFamily: kFontFamilyGilroy,
-          //     //       fontSize: 13.0,
-          //     //       fontWeight: FontWeight.bold,
-          //     //     ),
-          //     //   ),
-          //     //   selectedColor: kNavigBarInactiveColor,
-          //     //   unselectedColor: Colors.transparent,
-          //     // ),
-          //   ],
-          // ),
         );
       },
       rateMyApp: RateMyApp(
@@ -468,4 +242,31 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-enum SelectedTab { patterns, player, article, settings }
+enum SelectedTab { article, player, settings }
+
+class CurvedNavBarItem extends StatelessWidget {
+  const CurvedNavBarItem({Key key, @required this.title, @required this.svgAsset, this.selected =false}) : super(key: key);
+  final bool selected;
+  final String title;
+  final String svgAsset;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: selected ? null : EdgeInsets.only(top: 20),
+      //color: Colors.red,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SvgPicture.asset(svgAsset, color: selected ? null : Color(0xFFE1D2D5),),
+          if(!selected)
+            SizedBox(height: 10,),
+          if(!selected)
+          Text(
+            AppLocalizations.of(context).translate(title),
+            style: TextStyle(color: selected ? Color(0XFFFAA3B8) : Color(0xFFE1D2D5),),
+          ),
+        ],
+      ),
+    );
+  }
+}
