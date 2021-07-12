@@ -33,6 +33,11 @@ class CommentField extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: CommentsColors.NegativeInputShadowColor,
+                offset: Offset(4, 4),
+                blurRadius: 10,
+              ),
+              BoxShadow(
+                color: Colors.white,
                 offset: Offset(-4, -4),
                 blurRadius: 10,
               ),

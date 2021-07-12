@@ -65,7 +65,7 @@ dependencies:
 
   firebase_core: ^1.3.0
   visibility_detector: ^0.2.0
-
+  rflutter_alert: ^2.0.2
   # Analytics
   device_id: ^0.2.0
   appmetrica_sdk: ^0.0.6

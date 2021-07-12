@@ -351,3 +351,15 @@ class CommentsColors {
   static const Text = Color(0xFF836771);
   static const SelectorText = Color(0xFF2F2E41);
 }
+
+
+class SofyStoryColors {
+  static const BgColor = Color(0xFFFAEBF8);
+  static const TransparentColor = Color.fromRGBO(255, 255, 255, 0);
+  static const ProgressIndicatorColor = Color(0xffFF96AD);
+  static const CardHeaderColor = Color(0xffFEA6BA);
+  static const CardHeaderTextColor = Color(0xFFFFFFFF);
+  static const CardTextColor = Color(0xFF2F2E41);
+  static const TopPageCounterNotActiveColor = Colors.grey;
+  static const TopPageCounterActiveColor = Colors.white;
+}

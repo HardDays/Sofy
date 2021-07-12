@@ -254,13 +254,18 @@ class ArticleDetailsScreen extends StatelessWidget {
                                   ],
                                 ),
                                 ArticleVote(poll: state.articleDetails.article.apiArticlePollModel),
-                                ArticleQuestion(key: _questionsKey, question: state.articleDetails.article.apiArticleQuestionModel, articleId: articleId),
+                                ArticleQuestion(
+                                  key: _questionsKey,
+                                  question: state.articleDetails.article.apiArticleQuestionModel,
+                                  articleId: articleId,
+                                  article: state.articleDetails.article
+                                ),
                                 ArticleRating(article: state.articleDetails.article, articleId: articleId),
                                 VisibilityDetector(
                                   key: _commentsKeyVisibilityDetector,
                                   onVisibilityChanged: (visibilityInfo) {
                                     try {
-                                      if(_controller.hasClients) {
+                                      if (_controller.hasClients) {
                                         _widgetSysInfo.visibleFraction = visibilityInfo.visibleFraction;
                                         _widgetSysInfo.sizeWidth = visibilityInfo.size.width;
                                         _widgetSysInfo.sizeHeight = visibilityInfo.size.height;
