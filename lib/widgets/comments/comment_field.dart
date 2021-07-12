@@ -53,7 +53,6 @@ class CommentField extends StatelessWidget {
             },
             controller: _textController,
             textAlign: TextAlign.left,
-            textCapitalization: TextCapitalization.characters,
             style: TextStyle(fontFamily: 'Gilroy', fontSize: 14, color: CommentsColors.Text),
             decoration: InputDecoration(
               border: InputBorder.none,

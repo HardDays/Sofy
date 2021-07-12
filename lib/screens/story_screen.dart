@@ -17,19 +17,19 @@ class StoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: SofyStoryColors.BgColor,
-        body: SafeArea(
-          child: BlocBuilder<StoryBloc, StoryState>(
-              bloc: BlocProvider.of<StoryBloc>(context)
-                ..add(StoryEventChangePage(page: 1)),
-              builder: (context, state) {
-                if (state is StoryStateResult) {
-                  return Stack(
-                    children: [
-                      Padding(
+        body: BlocBuilder<StoryBloc, StoryState>(
+            bloc: BlocProvider.of<StoryBloc>(context)
+              ..add(StoryEventChangePage(page: 1)),
+            builder: (context, state) {
+              if (state is StoryStateResult) {
+                return Stack(
+                  children: [
+                    StoryBackground(coverImg: article.coverImg),
+                    SafeArea(
+                      child: Padding(
                         padding: const EdgeInsets.all(30),
                         child: Stack(
                           children: [
-                            StoryBackground(coverImg: article.coverImg),
                             state.answersInfoModel.items.length > 0
                                 ? PageView.builder(
                                 physics: NeverScrollableScrollPhysics(),
@@ -90,76 +90,76 @@ class StoryScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            child: Container(
-                              color: Color.fromRGBO(255, 255, 255, 0.001),
-                              height: SizeConfig.screenHeight,
-                              width: SizeConfig.screenWidth / 2,
-                            ),
-                            onTap: () {
-                              if (state.answersInfoModel.meta.currentPage == 1)
-                                Navigator.maybePop(context);
-                              else
-                                BlocProvider.of<StoryBloc>(context)
-                                  ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage - 1));
-                            },
-                            onHorizontalDragEnd: (det) {
-                              if (state.answersInfoModel.meta.currentPage == 1)
-                                Navigator.maybePop(context);
-                              else
-                                BlocProvider.of<StoryBloc>(context)
-                                  ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage - 1));
-                            },
-                          ),
-                          GestureDetector(
-                            child: Container(
-                              color: Color.fromRGBO(255, 255, 255, 0.001),
-                              height: SizeConfig.screenHeight,
-                              width: SizeConfig.screenWidth / 2,
-                            ),
-                            onTap: () {
-                              if (state.answersInfoModel.meta.currentPage < state.answersInfoModel.meta.pageCount) {
-                                BlocProvider.of<StoryBloc>(context)
-                                  ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage + 1));
-                              }
-                            },
-                            onHorizontalDragEnd: (det) {
-                              if (state.answersInfoModel.meta.currentPage < state.answersInfoModel.meta.pageCount) {
-                                BlocProvider.of<StoryBloc>(context)
-                                  ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage + 1));
-                              }
-                            },
-                          ),
-                        ],
-                      )
-                    ],
-                  );
-                }
-                if (state is StoryStateError) {
-                  return Stack(
-                    alignment: Alignment.center,
-                    children: [StoryBackground(coverImg: article.coverImg), Center(child: Text(state.error, textAlign: TextAlign.center))],
-                  );
-                }
-                return Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    StoryBackground(coverImg: article.coverImg),
-                    Center(
-                      child: Container(
-                        child: CircularProgressIndicator(
-                          color: SofyStoryColors.ProgressIndicatorColor,
-                        ),
-                        width: SizeConfig.screenHeight / 10,
-                        height: SizeConfig.screenHeight / 10,
-                      ),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          child: Container(
+                            color: Color.fromRGBO(255, 255, 255, 0.001),
+                            height: SizeConfig.screenHeight,
+                            width: SizeConfig.screenWidth / 2,
+                          ),
+                          onTap: () {
+                            if (state.answersInfoModel.meta.currentPage == 1)
+                              Navigator.maybePop(context);
+                            else
+                              BlocProvider.of<StoryBloc>(context)
+                                ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage - 1));
+                          },
+                          onHorizontalDragEnd: (det) {
+                            if (state.answersInfoModel.meta.currentPage == 1)
+                              Navigator.maybePop(context);
+                            else
+                              BlocProvider.of<StoryBloc>(context)
+                                ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage - 1));
+                          },
+                        ),
+                        GestureDetector(
+                          child: Container(
+                            color: Color.fromRGBO(255, 255, 255, 0.001),
+                            height: SizeConfig.screenHeight,
+                            width: SizeConfig.screenWidth / 2,
+                          ),
+                          onTap: () {
+                            if (state.answersInfoModel.meta.currentPage < state.answersInfoModel.meta.pageCount) {
+                              BlocProvider.of<StoryBloc>(context)
+                                ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage + 1));
+                            }
+                          },
+                          onHorizontalDragEnd: (det) {
+                            if (state.answersInfoModel.meta.currentPage < state.answersInfoModel.meta.pageCount) {
+                              BlocProvider.of<StoryBloc>(context)
+                                ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage + 1));
+                            }
+                          },
+                        ),
+                      ],
+                    )
                   ],
                 );
-              }),
-        ));
+              }
+              if (state is StoryStateError) {
+                return Stack(
+                  alignment: Alignment.center,
+                  children: [StoryBackground(coverImg: article.coverImg), Center(child: Text(state.error, textAlign: TextAlign.center))],
+                );
+              }
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  StoryBackground(coverImg: article.coverImg),
+                  Center(
+                    child: Container(
+                      child: CircularProgressIndicator(
+                        color: SofyStoryColors.ProgressIndicatorColor,
+                      ),
+                      width: SizeConfig.screenHeight / 10,
+                      height: SizeConfig.screenHeight / 10,
+                    ),
+                  ),
+                ],
+              );
+            }));
   }
 }

@@ -1,13 +1,13 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_model.dart';
 import 'package:sofy_new/models/api_article_question_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/rest_api.dart';
+import 'package:sofy_new/screens/article_answer_screen.dart';
 import 'package:sofy_new/screens/bloc/story_bloc.dart';
 import 'package:sofy_new/screens/story_screen.dart';
 import 'package:sofy_new/widgets/articles/sofy_button.dart';
@@ -15,7 +15,7 @@ import 'package:sofy_new/widgets/articles/vote_divider.dart';
 import 'package:sofy_new/widgets/material_page_route.dart';
 
 class ArticleQuestion extends StatelessWidget {
-  const ArticleQuestion({Key key, this.question, this.articleId, this.article}) : super(key: key);
+  ArticleQuestion({Key key, this.question, this.articleId, this.article}) : super(key: key);
   final ApiArticleQuestionModel question;
   final int articleId;
   final ApiArticleModel article;
@@ -76,32 +76,13 @@ class ArticleQuestion extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            Alert(
-                              context: context,
-                              type: AlertType.error,
-                              title: "RFLUTTER ALERT",
-                              desc: "Flutter is more awesome with RFlutter Alert.",
-                              buttons: [
-                                DialogButton(
-                                  child: Text(
-                                    "COOL",
-                                    style: TextStyle(color: Colors.white, fontSize: 20),
-                                  ),
-                                  onPressed: () => Navigator.pop(context),
-                                  width: 120,
-                                )
-                              ],
-                            ).show();
-                            // Navigator.push(
-                            //   context,
-                            //   CustomMaterialPageRoute(
-                            //     builder: (context) => ArticleAnswerScreen(
-                            //       articleId: articleId.toString(),
-                            //       articleTitle: articleTitle,
-                            //       questionId: question.id,
-                            //     ),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                opaque: false,
+                                pageBuilder: (_, __, ___) => ArticleAnswerScreen(articleId: articleId.toString(), articleTitle: article.title, questionId: question.id),
+                              ),
+                            );
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -126,7 +107,6 @@ class ArticleQuestion extends StatelessWidget {
                               ),
                               child: TextField(
                                   textAlign: TextAlign.left,
-                                  textCapitalization: TextCapitalization.characters,
                                   style: TextStyle(fontFamily: 'Hind Guntur', fontSize: height / 48.33, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
