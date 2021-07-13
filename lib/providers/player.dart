@@ -11,7 +11,9 @@ import 'package:sofy_new/constants/constants.dart';
 class Player extends ChangeNotifier {
   ApiVibrationModel _currentPlayListModel;
   List<ApiVibrationDataModel> _vibrationModel;
-  //bool isLoop = kIsLoop;
+
+  List<ApiVibrationDataModel> get vibrationModel =>
+      _vibrationModel; //bool isLoop = kIsLoop;
   bool _isPlaying = false;
   bool _isPausing = false;
 

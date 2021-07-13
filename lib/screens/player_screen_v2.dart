@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +13,7 @@ import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
-
+import 'package:sofy_new/widgets/player/player_widgets.dart';
 import 'bloc/analytics.dart';
 import 'bloc/player_screen_v2/player_bloc.dart';
 
@@ -448,216 +445,6 @@ class _SelectableButtonsItem extends StatelessWidget {
   }
 }
 
-class CircleSelectableButton extends StatelessWidget {
-  const CircleSelectableButton(
-      {Key key,
-      this.selected = false,
-      @required this.iconPath,
-      @required this.model,
-      this.onTap})
-      : super(key: key);
-
-  final ApiVibrationModel model;
-  final bool selected;
-  final String iconPath;
-  final Function onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-    final bool isAppPurchase =
-        Provider.of<SubscribeData>(context).isAppPurchase;
-    return InkWell(
-      onTap: onTap,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Column(
-            children: [
-              Container(
-                height: width / 6,
-                width: width / 6,
-                decoration: BoxDecoration(
-                  gradient: selected
-                      ? RadialGradient(
-                          center: Alignment(0.07, 0.12),
-                          stops: [0.0, 0.7, 1],
-                          colors: [
-                            Color(0xFFffe1e8),
-                            Color(0xFFffe1e8),
-                            Color(0xFFffcfda)
-                          ],
-                        )
-                      : null,
-                  color: selected ? Color(0xFFFFE1E8) : Color(0xFFFFFFFF),
-                  //borderRadius: BorderRadius.circular(width / 12),
-                  shape: BoxShape.circle,
-                  boxShadow: selected
-                      ? null
-                      : [
-                          BoxShadow(
-                            offset: Offset(1, 4),
-                            color: Color(0xFFE2BED8),
-                            blurRadius: 8,
-                            //spreadRadius: 0.1,
-                          ),
-                        ],
-                ),
-                child: ShaderMask(
-                  shaderCallback: (Rect image) {
-                    if (selected) {
-                      return LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [Color(0xFFFFD2DC), Color(0xFFF95C8F)],
-                        stops: [0.3, 1],
-                      ).createShader(image);
-                    }
-                    return LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFFFFBBCA).withOpacity(0.5),
-                        Color(0xFFFFBBCA).withOpacity(0.5)
-                      ],
-                    ).createShader(image);
-                  },
-                  child: Image.asset(
-                    iconPath,
-                    scale: 1.5,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Text(
-                //model.titleEn,
-                AppLocalizations.of(context).translate(model.titleEn),
-                style: TextStyle(color: Color(0xFFFDAABC)),
-              )
-            ],
-          ),
-          //Positioned(child: Container(width: 10,height: 10,color: Colors.red,)),
-          Visibility(
-            // ignore: null_aware_in_logical_operator
-            visible: model.isTrial ? false : true,
-            child: Positioned(
-              right: 15,
-              top: 0,
-              child: Container(
-                  height: Provider.of<SubscribeData>(context).isAppPurchase
-                      ? 0.0
-                      : 50,
-                  width: Provider.of<SubscribeData>(context).isAppPurchase
-                      ? 0.0
-                      : 50,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage('assets/new_lock.png'),
-                      fit: BoxFit.fill,
-                    ),
-                  )),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class _VibrationList extends StatelessWidget {
-  const _VibrationList({Key key, @required this.list, @required this.path})
-      : super(key: key);
-  final List<ApiVibrationModel> list;
-  final List<String> path;
-
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    return Container(
-      height: height / 3,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List<Widget>.generate(3, (index) {
-              return CircleSelectableButton(
-                model: list[index],
-                iconPath: path[index],
-              );
-            }),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List<Widget>.generate(3, (index) {
-              return CircleSelectableButton(
-                model: list[index + 3],
-                iconPath: path[index + 3],
-              );
-            }),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Equalizer extends StatelessWidget {
-  const Equalizer({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PlayerBloc, PlayerState>(
-      builder: (context, state) {
-        return Expanded(
-          child: Container(
-            padding: EdgeInsets.only(top: 10.0, bottom: 3.0),
-            child: BarChart(
-              BarChartData(
-                backgroundColor: Colors.transparent,
-                alignment: BarChartAlignment.spaceAround,
-                maxY: 255,
-                barTouchData: BarTouchData(enabled: false),
-                titlesData: FlTitlesData(show: false),
-                axisTitleData: FlAxisTitleData(show: false),
-                borderData: FlBorderData(show: false),
-                groupsSpace: 10,
-                barGroups: getBarChartGroupData(26, context),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  List<BarChartGroupData> getBarChartGroupData(int count, context) {
-    List<BarChartGroupData> list = [];
-    for (int i = 0; i < count; i++) {
-      list.add(BarChartGroupData(
-        barsSpace: 1,
-        x: 0,
-        barRods: [
-          BarChartRodData(
-            y: Provider.of<Player>(context).isPlaying
-                ? Random().nextInt(255).toDouble()
-                : 15,
-            //Random().nextInt(55).toDouble(),
-            colors: [kWelcomButtonDarkColor],
-            width: 5,
-          ),
-        ],
-        showingTooltipIndicators: [],
-      ));
-    }
-    return list;
-  }
-}
-
 class _VibrationList2 extends StatelessWidget {
   const _VibrationList2({Key key, @required this.list, @required this.path})
       : super(key: key);
@@ -688,7 +475,7 @@ class _VibrationList2 extends StatelessWidget {
                         if (state?.model?.id == list[index].id) {
                           BlocProvider.of<PlayerBloc>(context)
                               .add(StopVibration());
-                          pause(context: context, model: list[index]);
+                          pause(context: context);
                         } else {
                           provider.stopVibrations();
                           await Future.delayed(
@@ -697,11 +484,6 @@ class _VibrationList2 extends StatelessWidget {
                               SelectVibration(vibrationModel: list[index]));
                           provider.updateCurrentPlayListModel(
                               model: list[index]);
-                          // provider.updateIsPlaying(flag: true);
-                          // provider.startVibrate(
-                          //   vibrations: list[index].data,
-                          //   startPosition: provider.pausePosition,
-                          // );
                           play(context: context, model: list[index]);
                         }
                       } else {
@@ -752,14 +534,14 @@ void play({@required context, ApiVibrationModel model}) {
   );
 }
 
-void pause({@required context, ApiVibrationModel model}) {
+void pause({@required context}) {
   var player = Provider.of<Player>(context, listen: false);
   player.updateIsPlaying(flag: false);
   player.pauseVibrations();
   Analytics().sendEventReports(
     event: vibration_pause,
     attr: {
-      'vibration_id': model.id,
+      'vibration_id': player.currentPlayListModel.id,
       'playlist_id': 'playlist_' +
           Provider.of<PlaylistNameData>(context, listen: false)
               .getCurrentPlaylistNameApi()
@@ -789,12 +571,9 @@ class _PowerAndFireButton extends StatelessWidget {
               onTap: () {
                 BlocProvider.of<PlayerBloc>(context).add(StopVibration());
                 if (player.isPlaying) {
-                  player.updateIsPlaying(flag: false);
-                  player.pauseVibrations();
+                  pause(context: context);
                   player.stopVibrations();
                 }
-                //pause(context: context);
-                //stop(context: context);
               },
             ),
           ),
@@ -802,7 +581,18 @@ class _PowerAndFireButton extends StatelessWidget {
             flex: 2,
             child: Align(
               alignment: Alignment(-1, 0),
-              child: FireButton(),
+              child: FireButton(onTap: () async {
+                if(player.currentPlayListModel != null) {
+                  player.stopVibrations();
+                  await Future.delayed(
+                      Duration(milliseconds: 200), () {});
+                  BlocProvider.of<PlayerBloc>(context).add(
+                      SelectVibration(vibrationModel: player.currentPlayListModel));
+                  player.updateCurrentPlayListModel(
+                      model: player.currentPlayListModel);
+                  play(context: context, model: player.currentPlayListModel);
+                }
+              },),
             ),
           ),
         ],
@@ -811,75 +601,3 @@ class _PowerAndFireButton extends StatelessWidget {
   }
 }
 
-class PowerButton extends StatelessWidget {
-  const PowerButton({Key key, this.onTap}) : super(key: key);
-  final Function onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        width: 125,
-        height: 125,
-        decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(3, 4),
-                color: Color(0xFFdbbfd5),
-                blurRadius: 8,
-                //spreadRadius: 0.1,
-              )
-            ],
-            shape: BoxShape.circle,
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFFFFD8E1),
-                Color(0xFFFDB0C1),
-                Color(0xFFE5356F),
-              ],
-              stops: [0.0, 0.3, 0.8],
-            )),
-        padding: const EdgeInsets.all(40),
-        child: SvgPicture.asset(
-          'assets/svg/power.svg',
-          width: 40,
-          height: 40,
-          color: Colors.white,
-        ),
-      ),
-    );
-  }
-}
-
-class FireButton extends StatelessWidget {
-  const FireButton({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Color(0xffFCEFFC),
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(3, 3),
-                color: Color(0xFFdbbfd5),
-                blurRadius: 4,
-                //spreadRadius: 0.1,
-              )
-            ]),
-        width: 40,
-        height: 40,
-        child: Image.asset(
-          'assets/fire.png',
-          scale: 3,
-        ),
-      ),
-    );
-  }
-}

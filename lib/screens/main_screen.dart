@@ -6,21 +6,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
-import 'package:sofy_new/models/playlist_data.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
-import 'package:sofy_new/screens/main_screen_copy.dart';
-import 'package:sofy_new/screens/my_playlist_screen.dart';
 import 'package:sofy_new/screens/player_screen_v2.dart';
-import 'package:sofy_new/screens/playlist_screen.dart';
-import 'package:sofy_new/screens/recomendation_screen.dart';
 import 'package:sofy_new/screens/setting_screen.dart';
+import 'package:sofy_new/widgets/curved_nav_bar_item.dart';
 
 import 'arcticles_screen.dart';
 int selectedItemBar = 1;
@@ -115,8 +110,6 @@ class _MainScreenState extends State<MainScreen> {
                   // //Provider.of<Player>(context, listen: false).stopVibrations();
                   pcProvider.updatePageIndex(index: index);
                   selectedTab = SelectedTab.values[index];
-                  // print('index = ' + index.toString());
-
                 },
                 children: screensList,
               ),
@@ -124,7 +117,6 @@ class _MainScreenState extends State<MainScreen> {
                 bottom: 0,
                 right: 0,
                 child: Container(
-                  // margin: EdgeInsets.symmetric(horizontal: 10),
                   height: 80,
                   width: width,
                   decoration: BoxDecoration(
@@ -140,7 +132,6 @@ class _MainScreenState extends State<MainScreen> {
                     index: selectedItemBar,
                     items:List.generate(3, (index) => CurvedNavBarItem(svgAsset: svgImagePath[index], title: title[index], selected: index == selectedItemBar ? true : false,)),
                     onTap: (index) {
-                      print('dadada $index');
                       selectedItemBar = index;
                       _handleIndexChanged(index);
                     },
@@ -244,29 +235,3 @@ class _MainScreenState extends State<MainScreen> {
 
 enum SelectedTab { article, player, settings }
 
-class CurvedNavBarItem extends StatelessWidget {
-  const CurvedNavBarItem({Key key, @required this.title, @required this.svgAsset, this.selected =false}) : super(key: key);
-  final bool selected;
-  final String title;
-  final String svgAsset;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: selected ? null : EdgeInsets.only(top: 20),
-      //color: Colors.red,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(svgAsset, color: selected ? null : Color(0xFFE1D2D5),),
-          if(!selected)
-            SizedBox(height: 10,),
-          if(!selected)
-          Text(
-            AppLocalizations.of(context).translate(title),
-            style: TextStyle(color: selected ? Color(0XFFFAA3B8) : Color(0xFFE1D2D5),),
-          ),
-        ],
-      ),
-    );
-  }
-}
