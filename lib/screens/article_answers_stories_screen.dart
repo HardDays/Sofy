@@ -32,8 +32,8 @@ class ArticleAnswersStoriesScreen extends StatefulWidget {
 class _ArticleAnswersStoriesScreenState
     extends State<ArticleAnswersStoriesScreen>
     with SingleTickerProviderStateMixin {
-  List<Story> stories = new List<Story>();
-  List<ApiAnswersModel> answers = new List<ApiAnswersModel>();
+  List<Story> stories = [];
+  List<ApiAnswersModel> answers = [];
 
   PageController _pageController;
   AnimationController _animController;

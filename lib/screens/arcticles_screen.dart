@@ -28,8 +28,7 @@ class ArticlesScreen extends StatefulWidget {
   _ArticlesScreenState createState() => _ArticlesScreenState();
 }
 
-class _ArticlesScreenState extends State<ArticlesScreen>
-    with AutomaticKeepAliveClientMixin {
+class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -70,9 +69,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                   shrinkWrap: true,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(radius),
-                          bottomRight: Radius.circular(radius)),
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
                       child: Stack(
                         alignment: Alignment.bottomLeft,
                         children: [
@@ -84,8 +81,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                           Padding(
                             padding: EdgeInsets.only(left: 20, bottom: bottom2),
                             child: Text(
-                              AppLocalizations.of(context)
-                                  .translate('learn_and_get_inspired'),
+                              AppLocalizations.of(context).translate('learn_and_get_inspired'),
                               style: TextStyle(
                                 fontFamily: 'Roboto',
                                 letterSpacing: -0.02 * fontSize2,
@@ -98,8 +94,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                           Padding(
                             padding: EdgeInsets.only(left: 20, bottom: bottom),
                             child: Text(
-                              AppLocalizations.of(context)
-                                  .translate('new_topics'),
+                              AppLocalizations.of(context).translate('new_topics'),
                               style: TextStyle(
                                 fontFamily: 'Allerta Regular',
                                 letterSpacing: -0.065 * fontSize,
@@ -109,22 +104,14 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                             ),
                           ),
                           ArticlesCardsHorizontalList(
-                              listOfArticles: state.listOfArticles,
-                              cardHeight: 293,
-                              cardRadius: 27,
-                              cardWidth: 242,
-                              frozenCardFontSize: 14,
-                              frozenCardHeight: 57,
-                              titleFontSize: 24),
+                              listOfArticles: state.listOfArticles, cardHeight: 293, cardRadius: 27, cardWidth: 242, frozenCardFontSize: 14, frozenCardHeight: 57, titleFontSize: 24),
                         ],
                       ),
                     ),
                     Container(
                       color: ArticlesColors.BgColor,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(radius),
-                            bottomRight: Radius.circular(radius)),
+                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
                         child: Stack(
                           alignment: Alignment.bottomLeft,
                           children: [
@@ -146,25 +133,18 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                   listOfArticles: state.femaleSexuality,
                                   callback: () {
                                     Analytics().sendEventReports(
-                                      event:
-                                          'articles_female_sexuality_categories_details_${21}_click'
-                                              .replaceAll(' ', '_'),
+                                      event: 'articles_female_sexuality_categories_details_${21}_click'.replaceAll(' ', '_'),
                                     );
                                     Navigator.push(
                                       context,
                                       CustomMaterialPageRoute(
-                                          builder: (context) =>
-                                              ArticlesCategoriesDetailsScreen(
+                                          builder: (context) => ArticlesCategoriesDetailsScreen(
                                                 categoryId: 21,
-                                                screenTitle:
-                                                    AppLocalizations.of(context)
-                                                        .translate(
-                                                            'female_sexuality'),
+                                                screenTitle: AppLocalizations.of(context).translate('female_sexuality'),
                                               )),
                                     );
                                   },
-                                  title: AppLocalizations.of(context)
-                                      .translate('female_sexuality'),
+                                  title: AppLocalizations.of(context).translate('female_sexuality'),
                                   cardHeight: 220,
                                   cardRadius: 20,
                                   cardWidth: 170,
@@ -177,25 +157,18 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                   listOfArticles: state.interestingAboutSex,
                                   callback: () {
                                     Analytics().sendEventReports(
-                                      event:
-                                          'articles_interesting_about_sex_categories_details_${11}_click'
-                                              .replaceAll(' ', '_'),
+                                      event: 'articles_interesting_about_sex_categories_details_${11}_click'.replaceAll(' ', '_'),
                                     );
                                     Navigator.push(
                                       context,
                                       CustomMaterialPageRoute(
-                                          builder: (context) =>
-                                              ArticlesCategoriesDetailsScreen(
+                                          builder: (context) => ArticlesCategoriesDetailsScreen(
                                                 categoryId: 11,
-                                                screenTitle: AppLocalizations
-                                                        .of(context)
-                                                    .translate(
-                                                        'interesting_about_sex'),
+                                                screenTitle: AppLocalizations.of(context).translate('interesting_about_sex'),
                                               )),
                                     );
                                   },
-                                  title: AppLocalizations.of(context)
-                                      .translate('interesting_about_sex'),
+                                  title: AppLocalizations.of(context).translate('interesting_about_sex'),
                                   cardHeight: 220,
                                   cardRadius: 20,
                                   cardWidth: 170,
@@ -206,11 +179,7 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                           state.listOfPopularArticles.length > 0
                               ? Padding(
                                   padding: const EdgeInsets.all(22),
-                                  child: ArticlesListWithHeader(
-                                      title: AppLocalizations.of(context)
-                                          .translate('popular'),
-                                      listOfArticles:
-                                          state.listOfPopularArticles),
+                                  child: ArticlesListWithHeader(title: AppLocalizations.of(context).translate('popular'), listOfArticles: state.listOfPopularArticles),
                                 )
                               : Container(),
                           state.orgasms.length > 0
@@ -218,24 +187,18 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                                   listOfArticles: state.orgasms,
                                   callback: () {
                                     Analytics().sendEventReports(
-                                      event:
-                                          'articles_orgasms_categories_details_${13}_click'
-                                              .replaceAll(' ', '_'),
+                                      event: 'articles_orgasms_categories_details_${13}_click'.replaceAll(' ', '_'),
                                     );
                                     Navigator.push(
                                       context,
                                       CustomMaterialPageRoute(
-                                          builder: (context) =>
-                                              ArticlesCategoriesDetailsScreen(
+                                          builder: (context) => ArticlesCategoriesDetailsScreen(
                                                 categoryId: 13,
-                                                screenTitle:
-                                                    AppLocalizations.of(context)
-                                                        .translate('orgasms'),
+                                                screenTitle: AppLocalizations.of(context).translate('orgasms'),
                                               )),
                                     );
                                   },
-                                  title: AppLocalizations.of(context)
-                                      .translate('orgasms'),
+                                  title: AppLocalizations.of(context).translate('orgasms'),
                                   cardHeight: 220,
                                   cardRadius: 20,
                                   cardWidth: 170,
@@ -247,25 +210,20 @@ class _ArticlesScreenState extends State<ArticlesScreen>
                             padding: const EdgeInsets.all(22),
                             child: ArticlesCategoriesWithHeader(
                               listOfTopics: state.listOfTopicsPopular,
-                              title: AppLocalizations.of(context)
-                                  .translate('popular_categories'),
+                              title: AppLocalizations.of(context).translate('popular_categories'),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 22),
                             child: SofyButton(
-                              label: AppLocalizations.of(context)
-                                  .translate('view_all'),
+                              label: AppLocalizations.of(context).translate('view_all'),
                               callback: () {
                                 Analytics().sendEventReports(
-                                  event: 'articles_categories_screen_click'
-                                      .replaceAll(' ', '_'),
+                                  event: 'articles_categories_screen_click'.replaceAll(' ', '_'),
                                 );
                                 Navigator.push(
                                   context,
-                                  CustomMaterialPageRoute(
-                                      builder: (context) =>
-                                          ArticlesCategoriesScreen()),
+                                  CustomMaterialPageRoute(builder: (context) => ArticlesCategoriesScreen()),
                                 );
                               },
                             ),

@@ -121,10 +121,8 @@ class RestApi {
     String result = responseJson['result'].toString();
 
     if (result != 'error') {
-      await PreferencesProvider()
-          .saveAnonName(responseJson['info']['user']['username']);
-      await PreferencesProvider()
-          .saveAnonToken(responseJson['info']['token']['auth']['token']);
+      await PreferencesProvider().saveAnonName(responseJson['info']['user']['username']);
+      await PreferencesProvider().saveAnonToken(responseJson['info']['token']['auth']['token']);
       return responseJson['info']['token']['auth']['token'];
     }
   }
@@ -151,15 +149,11 @@ class RestApi {
     String result = responseJson['result'].toString();
 
     if (result != 'error') {
-      await PreferencesProvider()
-          .saveUserId(responseJson['info']['user']['id'].toString());
-      await PreferencesProvider()
-          .saveUserName(responseJson['info']['user']['username']);
-      await PreferencesProvider()
-          .saveUserMail(responseJson['info']['user']['email']);
+      await PreferencesProvider().saveUserId(responseJson['info']['user']['id'].toString());
+      await PreferencesProvider().saveUserName(responseJson['info']['user']['username']);
+      await PreferencesProvider().saveUserMail(responseJson['info']['user']['email']);
       await PreferencesProvider().saveUserPass(pass);
-      await PreferencesProvider()
-          .saveUserToken(responseJson['info']['token']['auth']['token']);
+      await PreferencesProvider().saveUserToken(responseJson['info']['token']['auth']['token']);
       if (isFromReg) {
         Navigator.pushReplacement(
           context,
@@ -189,8 +183,7 @@ class RestApi {
   }
 
   //регистрация пользователя
-  userReg(BuildContext context, String userName, String login, String pass,
-      String rePass) async {
+  userReg(BuildContext context, String userName, String login, String pass, String rePass) async {
     showLoaderDialog(context);
 
     String url = serverUrl + userRegisterUrl;
@@ -200,12 +193,7 @@ class RestApi {
       responseType: ResponseType.json,
       validateStatus: (_) => true,
     )).post(url,
-        data: {
-          "username": userName,
-          "email": login,
-          "password": pass,
-          "password_repeat": rePass
-        },
+        data: {"username": userName, "email": login, "password": pass, "password_repeat": rePass},
         options: Options(
           headers: {"Content-Type": "application/json"},
         ));
@@ -264,33 +252,21 @@ class RestApi {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return Center(
-            child: CircularProgressIndicator(
-                valueColor:
-                    new AlwaysStoppedAnimation<Color>(kAppPinkDarkColor),
-                strokeWidth: 2.0),
+            child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(kAppPinkDarkColor), strokeWidth: 2.0),
           );
         });
   }
 
   //Список плейлистов
-  Future<List<ApiPlayListModel>> getPlaylists(BuildContext context,
-      {String token}) async {
+  Future<List<ApiPlayListModel>> getPlaylists(BuildContext context, {String token}) async {
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors.add(
-        DioCacheManager(CacheConfig(baseUrl: serverUrl + getPlaylistsUrl))
-            .interceptor);
-    Response response = await dio.get(serverUrl + getPlaylistsUrl,
-        options:
-            buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
-    ApiPlayListAnswerModel apiPlayListAnswerModel =
-        ApiPlayListAnswerModel.fromJson(response.data);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: serverUrl + getPlaylistsUrl)).interceptor);
+    Response response = await dio.get(serverUrl + getPlaylistsUrl, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
+    ApiPlayListAnswerModel apiPlayListAnswerModel = ApiPlayListAnswerModel.fromJson(response.data);
     //print(response.data);
     List<ApiPlayListModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.items != null &&
-        apiPlayListAnswerModel.info.items.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
     if (temp.length == 0) {
@@ -298,34 +274,23 @@ class RestApi {
     }
 
     if (temp.length != 0) {
-      Provider.of<PlaylistNameData>(context, listen: false)
-          .updateListApi(list: temp);
+      Provider.of<PlaylistNameData>(context, listen: false).updateListApi(list: temp);
     } else {
-      Provider.of<PlaylistNameData>(context, listen: false)
-          .updateListApi(list: []);
+      Provider.of<PlaylistNameData>(context, listen: false).updateListApi(list: []);
     }
     return temp;
   }
 
   //Список вибраций
-  Future<List<ApiVibrationModel>> getVibrations(BuildContext context,
-      {String token}) async {
+  Future<List<ApiVibrationModel>> getVibrations(BuildContext context, {String token}) async {
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors.add(
-        DioCacheManager(CacheConfig(baseUrl: serverUrl + getVibrationsUrl))
-            .interceptor);
-    Response response = await dio.get(serverUrl + getVibrationsUrl,
-        options:
-            buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
-    ApiVibrationAnswerModel apiVibrationAnswerModel =
-        ApiVibrationAnswerModel.fromJson(response.data);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: serverUrl + getVibrationsUrl)).interceptor);
+    Response response = await dio.get(serverUrl + getVibrationsUrl, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
+    ApiVibrationAnswerModel apiVibrationAnswerModel = ApiVibrationAnswerModel.fromJson(response.data);
     //print(response.data);
     List<ApiVibrationModel> temp = List();
-    if (apiVibrationAnswerModel != null &&
-        apiVibrationAnswerModel.info != null &&
-        apiVibrationAnswerModel.info.items != null &&
-        apiVibrationAnswerModel.info.items.length > 0) {
+    if (apiVibrationAnswerModel != null && apiVibrationAnswerModel.info != null && apiVibrationAnswerModel.info.items != null && apiVibrationAnswerModel.info.items.length > 0) {
       for (int i = 0; i < apiVibrationAnswerModel.info.items.length; i++) {
         /*if (Platform.isAndroid) {
           if (apiVibrationAnswerModel.info.items[i].isAndroidVisible == 1 &&
@@ -347,11 +312,9 @@ class RestApi {
       return getVibrations(context, token: token);
     }
     if (temp.length != 0) {
-      Provider.of<PlaylistData>(context, listen: false)
-          .updateListApi(list: temp);
+      Provider.of<PlaylistData>(context, listen: false).updateListApi(list: temp);
       //BlocProvider.of<PlayerScreenBloc>(context);
-      Provider.of<Player>(context, listen: false)
-          .updateCurrentPlayListModel(model: temp[0]);
+      Provider.of<Player>(context, listen: false).updateCurrentPlayListModel(model: temp[0]);
     } else {
       Provider.of<PlaylistData>(context, listen: false).updateListApi(list: []);
     }
@@ -360,8 +323,7 @@ class RestApi {
   }
 
   //Список категорий
-  Future<List<ApiArticleTopicModel>> getTopicsList(BuildContext context,
-      {String token}) async {
+  Future<List<ApiArticleTopicModel>> getTopicsList(BuildContext context, {String token}) async {
     String lang = AppLocalizations.of(context).languageCode();
     if (lang == 'ru') {
       lang = 'rus';
@@ -371,173 +333,111 @@ class RestApi {
     String url = serverUrl + getTopicsListUrl + '?lang_code=' + lang;
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
-    Response response = await dio.get(url,
-        options:
-            buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
-    ApiArticleTopicAnswerModel apiPlayListAnswerModel =
-        ApiArticleTopicAnswerModel.fromJson(response.data);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
+    ApiArticleTopicAnswerModel apiPlayListAnswerModel = ApiArticleTopicAnswerModel.fromJson(response.data);
     List<ApiArticleTopicModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.items != null &&
-        apiPlayListAnswerModel.info.items.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
     return temp;
   }
 
   //Список категорий
-  Future<List<ApiArticleTopicModel>> getTopicsListWithoutCtx(
-      {String token}) async {
+  Future<List<ApiArticleTopicModel>> getTopicsListWithoutCtx({String token}) async {
     String lang = 'eng';
-    if (systemLang == 'ru')
-      lang = 'rus';
+    if (systemLang == 'ru') lang = 'rus';
     String url = serverUrl + getTopicsListUrl + '?lang_code=' + lang;
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
-    Response response = await dio.get(url,
-        options:
-            buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
-    ApiArticleTopicAnswerModel apiPlayListAnswerModel =
-        ApiArticleTopicAnswerModel.fromJson(response.data);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
+    ApiArticleTopicAnswerModel apiPlayListAnswerModel = ApiArticleTopicAnswerModel.fromJson(response.data);
     List<ApiArticleTopicModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.items != null &&
-        apiPlayListAnswerModel.info.items.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
     return temp;
   }
 
   //Список популярных категорий
-  Future<List<ApiArticleTopicModel>> getArticleTopicsPopular(
-      BuildContext context,
-      {String token}) async {
+  Future<List<ApiArticleTopicModel>> getArticleTopicsPopular(BuildContext context, {String token}) async {
     String lang = AppLocalizations.of(context).languageCode();
     if (lang == 'ru') {
       lang = 'rus';
     } else {
       lang = 'eng';
     }
-    String url =
-        serverUrl + getArticleTopicsPopularListUrl + '?lang_code=' + lang;
+    String url = serverUrl + getArticleTopicsPopularListUrl + '?lang_code=' + lang;
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
-    Response response = await dio.get(url,
-        options:
-            buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
-    ApiArticleTopicAnswerModel apiPlayListAnswerModel =
-        ApiArticleTopicAnswerModel.fromJson(response.data);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
+    ApiArticleTopicAnswerModel apiPlayListAnswerModel = ApiArticleTopicAnswerModel.fromJson(response.data);
     List<ApiArticleTopicModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.items != null &&
-        apiPlayListAnswerModel.info.items.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
     return temp;
   }
 
   //Список популярных категорий
-  Future<List<ApiArticleTopicModel>> getArticleTopicsPopularWithoutCtx(
-      {String token}) async {
+  Future<List<ApiArticleTopicModel>> getArticleTopicsPopularWithoutCtx({String token}) async {
     String lang = 'eng';
-    if (systemLang == 'ru')
-      lang = 'rus';
-    String url =
-        serverUrl + getArticleTopicsPopularListUrl + '?lang_code=' + lang;
+    if (systemLang == 'ru') lang = 'rus';
+    String url = serverUrl + getArticleTopicsPopularListUrl + '?lang_code=' + lang;
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
-    Response response = await dio.get(url,
-        options:
-            buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
-    ApiArticleTopicAnswerModel apiPlayListAnswerModel =
-        ApiArticleTopicAnswerModel.fromJson(response.data);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
+    ApiArticleTopicAnswerModel apiPlayListAnswerModel = ApiArticleTopicAnswerModel.fromJson(response.data);
     List<ApiArticleTopicModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.items != null &&
-        apiPlayListAnswerModel.info.items.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
     return temp;
   }
 
   //Список статей по категории
-  Future<List<ApiArticlesModel>> getArticles(
-      BuildContext context, int categoryId,
-      {String token}) async {
+  Future<List<ApiArticlesModel>> getArticles(BuildContext context, int categoryId, {String token}) async {
     String lang = AppLocalizations.of(context).languageCode();
     if (lang == 'ru') {
       lang = 'rus';
     } else {
       lang = 'eng';
     }
-    String url = serverUrl +
-        getArticlesListUrl +
-        '?lang_code=' +
-        lang +
-        '&topic_id=' +
-        categoryId.toString();
+    String url = serverUrl + getArticlesListUrl + '?lang_code=' + lang + '&topic_id=' + categoryId.toString();
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
     Response response = await dio.get(url);
-    ApiArticlesAnswerModel apiPlayListAnswerModel =
-        ApiArticlesAnswerModel.fromJson(response.data, false);
+    ApiArticlesAnswerModel apiPlayListAnswerModel = ApiArticlesAnswerModel.fromJson(response.data, false);
     List<ApiArticlesModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.items != null &&
-        apiPlayListAnswerModel.info.items.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
     return temp;
   }
 
   //Список статей по категории
-  Future<List<ApiArticlesModel>> getArticlesWithoutCtx(
-      int categoryId,
-      {String token}) async {
+  Future<List<ApiArticlesModel>> getArticlesWithoutCtx(int categoryId, {String token}) async {
     String lang = 'eng';
-    if (systemLang == 'ru')
-      lang = 'rus';
-    String url = serverUrl +
-        getArticlesListUrl +
-        '?lang_code=' +
-        lang +
-        '&topic_id=' +
-        categoryId.toString();
+    if (systemLang == 'ru') lang = 'rus';
+    String url = serverUrl + getArticlesListUrl + '?lang_code=' + lang + '&topic_id=' + categoryId.toString();
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
     Response response = await dio.get(url);
-    ApiArticlesAnswerModel apiPlayListAnswerModel =
-        ApiArticlesAnswerModel.fromJson(response.data, false);
+    ApiArticlesAnswerModel apiPlayListAnswerModel = ApiArticlesAnswerModel.fromJson(response.data, false);
     List<ApiArticlesModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.items != null &&
-        apiPlayListAnswerModel.info.items.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
     return temp;
   }
 
   //Список новых статей
-  Future<List<ApiArticlesModel>> getNewArticles(BuildContext context,
-      {String token}) async {
+  Future<List<ApiArticlesModel>> getNewArticles(BuildContext context, {String token}) async {
     String lang = AppLocalizations.of(context).languageCode();
     if (lang == 'ru') {
       lang = 'rus';
@@ -547,49 +447,37 @@ class RestApi {
     String url = serverUrl + getNewArticlesListUrl + '?lang_code=' + lang;
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
     Response response = await dio.get(url);
-    ApiArticlesAnswerModel apiPlayListAnswerModel =
-        ApiArticlesAnswerModel.fromJson(response.data, true);
+    ApiArticlesAnswerModel apiPlayListAnswerModel = ApiArticlesAnswerModel.fromJson(response.data, true);
     List<ApiArticlesModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.items != null &&
-        apiPlayListAnswerModel.info.items.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
     return temp;
   }
 
   String systemLang;
+
   //Список новых статей BuildContext не нужен
-  Future<List<ApiArticlesModel>> getNewArticlesWithoutCtx(
-      {String token}) async {
+  Future<List<ApiArticlesModel>> getNewArticlesWithoutCtx({String token}) async {
     String lang = 'eng';
-    if (systemLang == 'ru')
-      lang = 'rus';
+    if (systemLang == 'ru') lang = 'rus';
     String url = serverUrl + getNewArticlesListUrl + '?lang_code=' + lang;
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
     Response response = await dio.get(url);
-    ApiArticlesAnswerModel apiPlayListAnswerModel =
-        ApiArticlesAnswerModel.fromJson(response.data, true);
+    ApiArticlesAnswerModel apiPlayListAnswerModel = ApiArticlesAnswerModel.fromJson(response.data, true);
     List<ApiArticlesModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.items != null &&
-        apiPlayListAnswerModel.info.items.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
     return temp;
   }
 
   //Список новых статей
-  Future<List<ApiArticlesModel>> getPopularArticles(BuildContext context,
-      {String token}) async {
+  Future<List<ApiArticlesModel>> getPopularArticles(BuildContext context, {String token}) async {
     String lang = AppLocalizations.of(context).languageCode();
     if (lang == 'ru') {
       lang = 'rus';
@@ -599,64 +487,43 @@ class RestApi {
     String url = serverUrl + getPopularArticlesListUrl + '?lang_code=' + lang;
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
-    Response response = await dio.get(url,
-        options:
-            buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
-    ApiArticlesAnswerModel apiPlayListAnswerModel =
-        ApiArticlesAnswerModel.fromJson(response.data, true);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
+    ApiArticlesAnswerModel apiPlayListAnswerModel = ApiArticlesAnswerModel.fromJson(response.data, true);
     List<ApiArticlesModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.items != null &&
-        apiPlayListAnswerModel.info.items.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
     return temp;
   }
+
   //Список новых статей
-  Future<List<ApiArticlesModel>> getPopularArticlesWithoutCtx(
-      {String token}) async {
+  Future<List<ApiArticlesModel>> getPopularArticlesWithoutCtx({String token}) async {
     String lang = 'eng';
-    if (systemLang == 'ru')
-      lang = 'rus';
+    if (systemLang == 'ru') lang = 'rus';
     String url = serverUrl + getPopularArticlesListUrl + '?lang_code=' + lang;
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
-    Response response = await dio.get(url,
-        options:
-            buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
-    ApiArticlesAnswerModel apiPlayListAnswerModel =
-        ApiArticlesAnswerModel.fromJson(response.data, true);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
+    ApiArticlesAnswerModel apiPlayListAnswerModel = ApiArticlesAnswerModel.fromJson(response.data, true);
     List<ApiArticlesModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.items != null &&
-        apiPlayListAnswerModel.info.items.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
     return temp;
   }
 
   //Детали статьи
-  Future<ApiArticleDetailsInfoModel> getArticleDetails(
-      BuildContext context, String articleId,
-      {String token}) async {
+  Future<ApiArticleDetailsInfoModel> getArticleDetails(BuildContext context, String articleId, {String token}) async {
     String url = serverUrl + getArticleDetailsUrl + '?id=' + articleId;
 
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
-    Response response = await dio.get(url,
-        options: buildCacheOptions(Duration(days: 1),
-            maxStale: Duration(days: 7), forceRefresh: true));
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7), forceRefresh: true));
 
-    ApiArticleDetailsModel apiPlayListAnswerModel =
-        ApiArticleDetailsModel.fromJson(response.data);
+    ApiArticleDetailsModel apiPlayListAnswerModel = ApiArticleDetailsModel.fromJson(response.data);
     ApiArticleDetailsInfoModel temp = ApiArticleDetailsInfoModel();
     if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null) {
       temp = apiPlayListAnswerModel.info;
@@ -665,20 +532,15 @@ class RestApi {
   }
 
   //Детали статьи
-  Future<ApiArticleDetailsInfoModel> getArticleDetailsWithoutCtx(String articleId,
-      {String token}) async {
+  Future<ApiArticleDetailsInfoModel> getArticleDetailsWithoutCtx(String articleId, {String token}) async {
     String url = serverUrl + getArticleDetailsUrl + '?id=' + articleId;
 
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
-    Response response = await dio.get(url,
-        options: buildCacheOptions(Duration(days: 1),
-            maxStale: Duration(days: 7), forceRefresh: true));
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7), forceRefresh: true));
 
-    ApiArticleDetailsModel apiPlayListAnswerModel =
-        ApiArticleDetailsModel.fromJson(response.data);
+    ApiArticleDetailsModel apiPlayListAnswerModel = ApiArticleDetailsModel.fromJson(response.data);
     ApiArticleDetailsInfoModel temp = ApiArticleDetailsInfoModel();
     if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null) {
       temp = apiPlayListAnswerModel.info;
@@ -707,8 +569,7 @@ class RestApi {
   }
 
   //отправка ответа
-  Future<void> sendAnswer(String id, int questionId, String text,
-      {String token}) async {
+  Future<void> sendAnswer(String id, int questionId, String text, {String token}) async {
     String url = serverUrl + userAnswerAddUrl;
 
     Response response = await Dio(BaseOptions(
@@ -732,26 +593,32 @@ class RestApi {
   }
 
   //Список ответов
-  Future<ApiAnswersDetailsModel> getAnswers(
-      BuildContext context, String articleId, int page,
-      {String token}) async {
-    String url = serverUrl +
-        getAnswersUrl +
-        '?article_id=' +
-        articleId +
-        '&page=' +
-        page.toString();
+  Future<ApiAnswersDetailsModel> getAnswers(BuildContext context, String articleId, int page, {String token}) async {
+    String url = serverUrl + getAnswersUrl + '?article_id=' + articleId + '&page=' + page.toString();
 
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
-    Response response = await dio.get(url,
-        options:
-            buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
 
-    ApiAnswersDetailsModel apiPlayListAnswerModel =
-        ApiAnswersDetailsModel.fromJson(response.data);
+    ApiAnswersDetailsModel apiPlayListAnswerModel = ApiAnswersDetailsModel.fromJson(response.data);
+    ApiAnswersDetailsModel temp = ApiAnswersDetailsModel();
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null) {
+      temp = apiPlayListAnswerModel;
+    }
+    return temp;
+  }
+
+  //Список ответов
+  Future<ApiAnswersDetailsModel> getAnswersWithoutCtx({int articleId, int page, String token}) async {
+    String url = serverUrl + getAnswersUrl + '?article_id=' + articleId.toString() + '&page=' + page.toString();
+
+    Dio dio = new Dio();
+    dio.options.headers["X-Api-Key"] = token;
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    Response response = await dio.get(url, options: buildCacheOptions(Duration(days: 1), maxStale: Duration(days: 7)));
+
+    ApiAnswersDetailsModel apiPlayListAnswerModel = ApiAnswersDetailsModel.fromJson(response.data);
     ApiAnswersDetailsModel temp = ApiAnswersDetailsModel();
     if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null) {
       temp = apiPlayListAnswerModel;
@@ -824,8 +691,7 @@ class RestApi {
   }
 
   //Список новых статей
-  Future<List<ApiFavTopicsInfoModel>> getFavoritesTopics(BuildContext context,
-      {String token}) async {
+  Future<List<ApiFavTopicsInfoModel>> getFavoritesTopics(BuildContext context, {String token}) async {
     String lang = AppLocalizations.of(context).languageCode();
     if (lang == 'ru') {
       lang = 'rus';
@@ -836,49 +702,38 @@ class RestApi {
 
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
     Response response = await dio.get(url);
 
-    ApiFavTopicsAnswerModel apiPlayListAnswerModel =
-        ApiFavTopicsAnswerModel.fromJson(response.data);
+    ApiFavTopicsAnswerModel apiPlayListAnswerModel = ApiFavTopicsAnswerModel.fromJson(response.data);
     List<ApiFavTopicsInfoModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.length > 0) {
       temp = apiPlayListAnswerModel.info;
     }
     return temp;
   }
 
   //Список новых статей
-  Future<List<ApiFavTopicsInfoModel>> getFavoritesTopicsWithoutCtx(
-      {String token}) async {
+  Future<List<ApiFavTopicsInfoModel>> getFavoritesTopicsWithoutCtx({String token}) async {
     String lang = 'eng';
-    if (systemLang == 'ru')
-      lang = 'rus';
+    if (systemLang == 'ru') lang = 'rus';
     String url = serverUrl + getListFavCategoryUrl + '?lang_code=' + lang;
 
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
     Response response = await dio.get(url);
 
-    ApiFavTopicsAnswerModel apiPlayListAnswerModel =
-        ApiFavTopicsAnswerModel.fromJson(response.data);
+    ApiFavTopicsAnswerModel apiPlayListAnswerModel = ApiFavTopicsAnswerModel.fromJson(response.data);
     List<ApiFavTopicsInfoModel> temp = List();
-    if (apiPlayListAnswerModel != null &&
-        apiPlayListAnswerModel.info != null &&
-        apiPlayListAnswerModel.info.length > 0) {
+    if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.length > 0) {
       temp = apiPlayListAnswerModel.info;
     }
     return temp;
   }
 
   //именение данных профиля
-  Future<bool> setUserProfile(
-      BuildContext context, FormData image, String token) async {
+  Future<bool> setUserProfile(BuildContext context, FormData image, String token) async {
     showLoaderDialog(context);
     String url = serverUrl + userProfilePhotoUrl;
 
@@ -901,8 +756,7 @@ class RestApi {
   }
 
   //авторизация пользователя
-  Future<String> userProfile(
-      BuildContext context, String id, String token) async {
+  Future<String> userProfile(BuildContext context, String id, String token) async {
     String url = serverUrl + userProfileUrl + '?id=' + id;
 
     Response response = await Dio(BaseOptions(
@@ -918,8 +772,7 @@ class RestApi {
 
     print("response = " + response.toString());
     print("cover img = " + responseJson['info']['cover_img']);
-    await PreferencesProvider()
-        .saveUserPhoto(responseJson['info']['cover_img']);
+    await PreferencesProvider().saveUserPhoto(responseJson['info']['cover_img']);
     return responseJson['info']['cover_img'];
   }
 
@@ -942,22 +795,13 @@ class RestApi {
   }
 
   //Список сообщений
-  Future<Replies> getArticleReplies(
-      BuildContext context, String articleId, int sort, String parentId,
-      {String token}) async {
+  Future<Replies> getArticleReplies(BuildContext context, String articleId, int sort, String parentId, {String token}) async {
     String parent = parentId != null ? '&parent_id=$parentId' : '';
-    String url = serverUrl +
-        getArticleRepliesUrl +
-        '?id=' +
-        articleId +
-        '&sort=' +
-        sort.toString() +
-        parent;
+    String url = serverUrl + getArticleRepliesUrl + '?id=' + articleId + '&sort=' + sort.toString() + parent;
     print(url);
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
     Response response = await dio.get(url);
     print(response);
 
@@ -966,28 +810,19 @@ class RestApi {
   }
 
   //Список сообщений
-  Future<Replies> getArticleRepliesWithoutCtx(String articleId, int sort,
-      {String parentId, String token}) async {
+  Future<Replies> getArticleRepliesWithoutCtx(String articleId, int sort, {String parentId, String token}) async {
     String parent = parentId != '' ? '&parent_id=$parentId' : '';
-    String url = serverUrl +
-        getArticleRepliesUrl +
-        '?id=' +
-        articleId +
-        '&sort=' +
-        sort.toString() +
-        parent;
+    String url = serverUrl + getArticleRepliesUrl + '?id=' + articleId + '&sort=' + sort.toString() + parent;
     Dio dio = new Dio();
     dio.options.headers["X-Api-Key"] = token;
-    dio.interceptors
-        .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
     Response response = await dio.get(url);
     Replies replies = Replies.fromJson(response.data);
     return replies;
   }
 
   //отправка сообщения
-  Future<bool> postReply(BuildContext context, String content, String parentId,
-      String articleId) async {
+  Future<bool> postReply(BuildContext context, String content, String parentId, String articleId) async {
     showLoaderDialog(context);
 
     String token = await PreferencesProvider().getUserToken();
@@ -1003,11 +838,7 @@ class RestApi {
       responseType: ResponseType.json,
       validateStatus: (_) => true,
     )).post(url,
-        data: {
-          "content": content,
-          "parent_id": parentId,
-          "article_id": articleId
-        },
+        data: {"content": content, "parent_id": parentId, "article_id": articleId},
         options: Options(
           headers: {"X-Api-Key": token},
         ));
@@ -1027,8 +858,7 @@ class RestApi {
   }
 
   //отправка сообщения
-  Future<bool> postReplyWithoutCtx(
-      {String content, int parentId, int articleId, String token}) async {
+  Future<bool> postReplyWithoutCtx({String content, int parentId, int articleId, String token}) async {
     String url = serverUrl + sendArticleReplyUrl;
 
     Response response = await Dio(BaseOptions(
@@ -1036,11 +866,7 @@ class RestApi {
       responseType: ResponseType.json,
       validateStatus: (_) => true,
     )).post(url,
-        data: {
-          "content": content,
-          "parent_id": parentId,
-          "article_id": articleId
-        },
+        data: {"content": content, "parent_id": parentId, "article_id": articleId},
         options: Options(
           headers: {"X-Api-Key": token},
         ));
@@ -1059,8 +885,7 @@ class RestApi {
 
     String token = await PreferencesProvider().getUserToken();
 
-    String url =
-        serverUrl + likeArticleReplyUrl + '?id=' + commentId.toString();
+    String url = serverUrl + likeArticleReplyUrl + '?id=' + commentId.toString();
 
     Response response = await Dio(BaseOptions(
       contentType: Headers.jsonContentType,
@@ -1083,10 +908,10 @@ class RestApi {
     } else {
       return false;
     }
-  }//лайк сообщения
+  } //лайк сообщения
+
   Future<bool> likeReplyWithoutCtx({int commentId, String token}) async {
-    String url =
-        serverUrl + likeArticleReplyUrl + '?id=' + commentId.toString();
+    String url = serverUrl + likeArticleReplyUrl + '?id=' + commentId.toString();
 
     Response response = await Dio(BaseOptions(
       contentType: Headers.jsonContentType,
@@ -1113,8 +938,7 @@ class RestApi {
 
     String token = await PreferencesProvider().getUserToken();
 
-    String url =
-        serverUrl + likeArticleReplyUrl + '?id=' + commentId.toString();
+    String url = serverUrl + likeArticleReplyUrl + '?id=' + commentId.toString();
 
     Response response = await Dio(BaseOptions(
       contentType: Headers.jsonContentType,
@@ -1139,8 +963,7 @@ class RestApi {
 
   //удалить лайк
   Future<bool> deleteLikeReplyWithoutCtx({int commentId, String token}) async {
-    String url =
-        serverUrl + likeArticleReplyUrl + '?id=' + commentId.toString();
+    String url = serverUrl + likeArticleReplyUrl + '?id=' + commentId.toString();
 
     Response response = await Dio(BaseOptions(
       contentType: Headers.jsonContentType,

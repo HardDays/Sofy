@@ -14,8 +14,7 @@ import 'package:sofy_new/widgets/avatar.dart';
 import 'package:sofy_new/widgets/comments/comment_field.dart';
 
 class CommentItem extends StatefulWidget {
-  CommentItem({Key key, @required this.reply, @required this.profile})
-      : super(key: key);
+  CommentItem({Key key, @required this.reply, @required this.profile}) : super(key: key);
   final Reply reply;
   final ApiProfileModel profile;
 
@@ -26,15 +25,16 @@ class CommentItem extends StatefulWidget {
 class _CommentItemState extends State<CommentItem> {
   final TextEditingController _textController = TextEditingController();
 
-bool _visivble = false;
+  bool _visivble = false;
 
   @override
   Widget build(BuildContext context) {
     double space = 12;
     double side = 33;
-    double commentFieldWidth =  SizeConfig.screenWidth - space - side - 96;
+    double commentFieldWidth = SizeConfig.screenWidth - space - side - 96;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 24.0),
+      // padding: widget.reply.parentId == '0' ? EdgeInsets.only(bottom: 24.0) : EdgeInsets.only(bottom: 24.0, left: side + 96),
+      padding: EdgeInsets.only(bottom: 24.0),
       child: Stack(
         children: [
           Padding(
@@ -51,19 +51,11 @@ bool _visivble = false;
               children: [
                 Text(
                   widget.reply.userName.contains('Anonim') ? 'Anonim' : widget.reply.userName,
-                  style: TextStyle(
-                      fontFamily: kFontFamilyGilroy,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13),
+                  style: TextStyle(fontFamily: kFontFamilyGilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.w600, fontSize: 13),
                 ),
                 Text(
                   widget.reply.content,
-                  style: TextStyle(
-                      fontFamily: kFontFamilyGilroy,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14),
+                  style: TextStyle(fontFamily: kFontFamilyGilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.normal, fontSize: 14),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,26 +63,14 @@ bool _visivble = false;
                     Row(
                       children: [
                         Text(
-                          TimeAgo.timeAgoSinceDate(
-                              DateTime.fromMillisecondsSinceEpoch(
-                                  int.parse(widget.reply.dateCreated) * 1000)),
-                          style: TextStyle(
-                              fontFamily: kFontFamilyGilroy,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 12,
-                              color: CommentsColors.DateColor),
+                          TimeAgo.timeAgoSinceDate(DateTime.fromMillisecondsSinceEpoch(int.parse(widget.reply.dateCreated) * 1000)),
+                          style: TextStyle(fontFamily: kFontFamilyGilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.normal, fontSize: 12, color: CommentsColors.DateColor),
                         ),
                         SizedBox(width: 5),
                         InkWell(
                           child: Text(
                             AppLocalizations.of(context).translate('reply'),
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: CommentsColors.ReplyColor),
+                            style: TextStyle(fontFamily: 'Roboto', fontStyle: FontStyle.normal, fontWeight: FontWeight.bold, fontSize: 12, color: CommentsColors.ReplyColor),
                           ),
                           onTap: () {
                             setState(() {
@@ -107,20 +87,21 @@ bool _visivble = false;
                             int.parse(widget.reply.isLiked) > 0
                                 ? BlocProvider.of<CommentsBloc>(context).add(
                                     CommentsEventDislike(
-                                        id: int.parse(widget.reply.id),
-                                        articleId: int.parse(widget.reply.articleId),
-                                        parentId: int.parse(widget.reply.parentId)))
+                                      id: int.parse(widget.reply.id),
+                                      articleId: int.parse(widget.reply.articleId),
+                                      parentId: int.parse(widget.reply.parentId),
+                                    ),
+                                  )
                                 : BlocProvider.of<CommentsBloc>(context).add(
                                     CommentsEventLike(
-                                        id: int.parse(widget.reply.id),
-                                        articleId: int.parse(widget.reply.articleId),
-                                        parentId: int.parse(widget.reply.parentId)));
+                                      id: int.parse(widget.reply.id),
+                                      articleId: int.parse(widget.reply.articleId),
+                                      parentId: int.parse(widget.reply.parentId),
+                                    ),
+                                  );
                           },
-                          child: int.parse(widget.reply.isLiked) > 0
-                              ? Icon(CupertinoIcons.heart_fill,
-                                  color: CommentsColors.ReplyColor)
-                              : Icon(CupertinoIcons.heart,
-                                  color: CommentsColors.PreloaderColor)
+                          child:
+                              int.parse(widget.reply.isLiked) > 0 ? Icon(CupertinoIcons.heart_fill, color: CommentsColors.ReplyColor) : Icon(CupertinoIcons.heart, color: CommentsColors.PreloaderColor)
                           // SvgPicture.asset(
                           //                         'assets/svg/article_likes.svg',
                           //                         color: CommentsColors.ReplyColor,
@@ -128,12 +109,7 @@ bool _visivble = false;
                           ,
                         ),
                         SizedBox(width: 6),
-                        Text('${widget.reply.likesCount}',
-                            style: TextStyle(
-                                fontFamily: kFontFamilyGilroy,
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 13)),
+                        Text('${widget.reply.likesCount}', style: TextStyle(fontFamily: kFontFamilyGilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.normal, fontSize: 13)),
                       ],
                     )
                   ],
@@ -143,7 +119,7 @@ bool _visivble = false;
                   child: CommentField(
                     textController: _textController,
                     articleId: int.parse(widget.reply.articleId),
-                    parentId: int.parse(widget.reply.parentId),
+                    parentId: int.parse(widget.reply.id),
                     width: commentFieldWidth,
                   ),
                 )

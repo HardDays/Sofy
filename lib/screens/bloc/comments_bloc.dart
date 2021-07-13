@@ -11,6 +11,9 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
   int _sortBy;
   List<Reply> _replies = [];
   List<ApiProfileModel> _profiles = [];
+  // double _scrollPosition = 0;
+  // double get scrollPosition => _scrollPosition;
+  // set scrollPosition(double val) => _scrollPosition = scrollPosition;
 
   @override
   Stream<CommentsState> mapEventToState(CommentsEvent event) async* {
@@ -21,9 +24,19 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
       try {
         _replies = (await restApi.getArticleRepliesWithoutCtx(
                 event.articleId.toString(), event.sortBy,
-                parentId: event.parentId > 0 ? event.parentId.toString() : '',
+                parentId: '0',
+                // parentId: event.parentId > 0 ? event.parentId.toString() : '',
                 token: userToken))
             .replies;
+        // for(int i = 0; i < _replies.length; i++) {
+        //   List<Reply> r = (await restApi.getArticleRepliesWithoutCtx(
+        //       event.articleId.toString(), event.sortBy,
+        //       parentId: _replies[i].id,
+        //       token: userToken))
+        //       .replies;
+        //   if(r.length > 0)
+        //   print(r);
+        // }
         for (int i = 0; i < _replies.length; i++) {
           if (!(_profiles
                   .where((element) =>
@@ -67,7 +80,7 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
                 (int.parse(_replies[i].likesCount) + 1).toString();
           }
         }
-      yield CommentsStateResult(replies: _replies, profiles: _profiles);
+      yield CommentsStateResult(replies: _replies, profiles: _profiles, afterLikeDislike: true);
     }
     if (event is CommentsEventDislike) {
       bool wasSended = await restApi.deleteLikeReplyWithoutCtx(
@@ -80,7 +93,7 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
                 (int.parse(_replies[i].likesCount) - 1).toString();
           }
         }
-      yield CommentsStateResult(replies: _replies, profiles: _profiles);
+      yield CommentsStateResult(replies: _replies, profiles: _profiles, afterLikeDislike: true);
     }
     return;
   }
@@ -91,10 +104,11 @@ abstract class CommentsState {}
 class CommentsStateLoading extends CommentsState {}
 
 class CommentsStateResult extends CommentsState {
-  CommentsStateResult({this.replies = const [], this.profiles = const []});
+  CommentsStateResult({this.replies = const [], this.profiles = const [], this.afterLikeDislike = false});
 
   final List<Reply> replies;
   final List<ApiProfileModel> profiles;
+  final bool afterLikeDislike;
 }
 
 class CommentsStateError extends CommentsState {

@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
@@ -133,7 +134,7 @@ class _ArticlesCategoriesDetailsScreen
                                 child: ArticleCard(
                                     title: articlesList[index].title,
                                     path: articlesList[index].coverImg,
-                                    width: height / 4.42,
+                                    width: height / SizeConfig.devicePixelRatio,
                                     height: height / 3.82,
                                     frozenHeight: height / 3.82 * 0.25,
                                     fontSize: 14,

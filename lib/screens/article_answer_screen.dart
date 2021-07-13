@@ -18,12 +18,7 @@ class ArticleAnswerScreen extends StatefulWidget {
   final String articleTitle;
   final int questionId;
 
-  ArticleAnswerScreen(
-      {Key key,
-      @required this.articleId,
-      @required this.questionId,
-      @required this.articleTitle})
-      : super(key: key);
+  ArticleAnswerScreen({Key key, @required this.articleId, @required this.questionId, @required this.articleTitle}) : super(key: key);
 
   @override
   _ArticleAnswerScreenState createState() => _ArticleAnswerScreenState();
@@ -33,6 +28,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
   double height;
   double width;
   bool isAnswerSent = false;
+  bool isLoading = false;
   TextEditingController textController = TextEditingController();
   Color backColor = kArticlesBackColor;
 
@@ -105,12 +101,10 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                     ),
                                   ),
                                   Container(
-                                    padding:
-                                        EdgeInsets.only(bottom: height / 179.2),
+                                    padding: EdgeInsets.only(bottom: height / 179.2),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      AppLocalizations.of(context)
-                                          .translate('back'),
+                                      isAnswerSent ? AppLocalizations.of(context).translate('back') : AppLocalizations.of(context).translate('cancel'),
                                       style: TextStyle(
                                           fontFamily: kFontFamilyExo2,
                                           fontWeight: FontWeight.bold,
@@ -129,24 +123,19 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                       child: Stack(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(
-                                top: height / 25.6, left: 20, right: 20),
+                            margin: EdgeInsets.only(top: height / 25.6, left: 20, right: 20),
                             child: Neumorphic(
                               style: NeumorphicStyle(
-                                  boxShape: NeumorphicBoxShape.roundRect(
-                                      BorderRadius.circular(15)),
+                                  boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
                                   depth: 3,
                                   intensity: 0.65,
-                                  shadowLightColorEmboss:
-                                      kArticlesWhiteColor.withOpacity(0.5),
-                                  shadowLightColor:
-                                      kArticlesWhiteColor.withOpacity(0.5),
+                                  shadowLightColorEmboss: kArticlesWhiteColor.withOpacity(0.5),
+                                  shadowLightColor: kArticlesWhiteColor.withOpacity(0.5),
                                   shadowDarkColor: kArticlesBackColor,
                                   shadowDarkColorEmboss: kArticlesBackColor,
                                   shape: NeumorphicShape.flat,
                                   color: kNeumorphicColor2),
-                              child:
-                                  Container(width: width, height: height / 4.0),
+                              child: Container(width: width, height: height / 4.0),
                             ),
                           ),
                           Padding(
@@ -156,77 +145,60 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                 Container(
                                   width: 75.0,
                                   height: 75.0,
-                                  child: Image.asset(
-                                      'assets/answer_title_image.png'),
+                                  child: Image.asset('assets/answer_title_image.png'),
                                 ),
                                 Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 5.0, left: 20.0, right: 20.0),
+                                    padding: EdgeInsets.only(top: 5.0, left: 20.0, right: 20.0),
                                     child: Container(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        AppLocalizations.of(context)
-                                            .translate('share_answer'),
+                                        AppLocalizations.of(context).translate('share_answer'),
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                            fontFamily: kFontFamilyGilroyBold,
-                                            height: 1.5,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 16.0,
-                                            color: kWelcomDarkTextColor),
+                                            fontFamily: kFontFamilyGilroyBold, height: 1.5, fontWeight: FontWeight.bold, fontStyle: FontStyle.normal, fontSize: 16.0, color: kWelcomDarkTextColor),
                                       ),
                                     )),
                                 Container(
                                   height: height / 18.66,
-                                  margin: EdgeInsets.only(
-                                      top: height / 42.66,
-                                      left: 42.0,
-                                      right: 42.0),
+                                  margin: EdgeInsets.only(top: height / 42.66, left: 42.0, right: 42.0),
                                   child: Neumorphic(
                                     style: NeumorphicStyle(
-                                        boxShape: NeumorphicBoxShape.roundRect(
-                                            BorderRadius.circular(10)),
+                                        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
                                         depth: 3,
                                         intensity: 0.65,
-                                        shadowLightColorEmboss:
-                                            backColor == kArticlesBackTextColor
-                                                ? backColor
-                                                : kArticlesWhiteColor,
-                                        shadowLightColor:
-                                            backColor == kArticlesBackTextColor
-                                                ? backColor
-                                                : kArticlesWhiteColor,
+                                        shadowLightColorEmboss: backColor == kArticlesBackTextColor ? backColor : kArticlesWhiteColor,
+                                        shadowLightColor: backColor == kArticlesBackTextColor ? backColor : kArticlesWhiteColor,
                                         shadowDarkColor: backColor,
                                         shadowDarkColorEmboss: backColor,
                                         shape: NeumorphicShape.flat,
                                         color: kNeumorphicColor),
                                     child: TextField(
-                                      enabled: true,
+                                      enabled: !isAnswerSent,
                                       autofocus: true,
                                       textAlign: TextAlign.left,
-                                      textCapitalization:
-                                          TextCapitalization.sentences,
-                                      controller: textController,
-                                      style: TextStyle(
-                                          fontFamily: kFontFamilyGilroy,
-                                          fontSize: height / 64.0,
-                                          fontWeight: FontWeight.w600,
-                                          color: kArticleAnsTextFieldColor),
+                                      style: TextStyle(fontFamily: 'Hind Guntur', fontSize: height / 48.33, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
                                       decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.only(
-                                            left: 16.0, bottom: 7.0),
-                                        hintStyle: TextStyle(
-                                            fontFamily: kFontFamilyGilroy,
-                                            fontSize: height / 64.0,
-                                            fontWeight: FontWeight.w600,
-                                            color:
-                                                kArticleAnsTextFieldInpDecColor),
-                                        hintText: AppLocalizations.of(context)
-                                            .translate('answer_hint'),
                                         border: InputBorder.none,
+                                        filled: true,
+                                        fillColor: SofyQuestionColors.InputBgColor,
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        disabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        contentPadding: EdgeInsets.only(left: 16.0, bottom: 7.0),
+                                        hintStyle: TextStyle(fontFamily: kFontFamilyGilroy, fontSize: height / 64, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
+                                        hintText: AppLocalizations.of(context).translate('answer_hint'),
                                       ),
+                                      controller: textController,
                                     ),
                                   ),
                                 ),
@@ -239,33 +211,23 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                     ),
                                   ]),
                                   height: height / 18.66,
-                                  margin: EdgeInsets.only(
-                                      left: 40.0,
-                                      right: 40.0,
-                                      top: height / 56),
+                                  margin: EdgeInsets.only(left: 40.0, right: 40.0, top: height / 56),
                                   child: NeumorphicCustomButton(
                                     style: NeumorphicStyle(
                                         depth: !isAnswerSent ? 0 : -3,
                                         shape: NeumorphicShape.flat,
                                         intensity: 0.6,
-                                        shadowLightColorEmboss:
-                                            kADNeumorphicShadowLightColorEmboss,
-                                        shadowDarkColor:
-                                            kADNeumorphicShadowDarkColor,
-                                        shadowDarkColorEmboss:
-                                            kADNeumorphicShadowDarkColorEmboss,
+                                        shadowLightColorEmboss: kADNeumorphicShadowLightColorEmboss,
+                                        shadowDarkColor: kADNeumorphicShadowDarkColor,
+                                        shadowDarkColorEmboss: kADNeumorphicShadowDarkColorEmboss,
                                         shadowLightColor: kArticlesWhiteColor,
                                         color: kADNeumorphicColor),
-                                    boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.circular(10)),
+                                    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
                                     provideHapticFeedback: false,
                                     onClick: () {
-                                      if (textController.text.length > 0 ||
-                                          textController.text.length < 255) {
-                                        sendAnswer(
-                                            widget.articleId,
-                                            widget.questionId,
-                                            textController.text.toString());
+                                      if(isAnswerSent) return;
+                                      if (textController.text.length > 0 || textController.text.length < 255) {
+                                        sendAnswer(widget.articleId, widget.questionId, textController.text.toString());
                                       }
                                       /*Analytics().sendEventReports(
                             event: banner_click,
@@ -287,85 +249,73 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                               Radius.circular(10.0),
                                             ),
                                           ),
-                                          child: !isAnswerSent
+                                          child: !isAnswerSent && !isLoading
                                               ? Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
                                                   children: <Widget>[
                                                     Container(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      margin: EdgeInsets.only(
-                                                          right: 9.0),
+                                                      alignment: Alignment.center,
+                                                      margin: EdgeInsets.only(right: 9.0),
                                                       child: SvgPicture.asset(
                                                         'assets/svg/article_send_comment.svg',
                                                       ),
                                                     ),
                                                     Container(
-                                                      margin: EdgeInsets.only(
-                                                          bottom: 4.0),
+                                                      margin: EdgeInsets.only(bottom: 4.0),
                                                       child: Text(
-                                                        AppLocalizations.of(
-                                                                context)
-                                                            .translate('send'),
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
+                                                        AppLocalizations.of(context).translate('send'),
+                                                        overflow: TextOverflow.ellipsis,
                                                         style: TextStyle(
-                                                          fontFamily:
-                                                              kFontFamilyMontserratBold,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle:
-                                                              FontStyle.normal,
+                                                          fontFamily: kFontFamilyMontserratBold,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontStyle: FontStyle.normal,
                                                           fontSize: height / 56,
                                                           //14
                                                           height: 1.7,
-                                                          color:
-                                                              kArticlesWhiteColor,
+                                                          color: kArticlesWhiteColor,
                                                         ),
                                                       ),
                                                     ),
                                                   ],
                                                 )
-                                              : Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
+                                              : isLoading
+                                              ? Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
                                                   children: <Widget>[
                                                     Container(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      margin: EdgeInsets.only(
-                                                          right: 9.0),
+                                                      margin: EdgeInsets.only(bottom: 4.0),
+                                                      width: height / 56,
+                                                      height: height / 56,
+                                                      child: CircularProgressIndicator(color: SofyVoteProgressColors.BgColor,)
+                                                    ),
+                                                  ],
+                                                )
+                                              : Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Container(
+                                                      alignment: Alignment.center,
+                                                      margin: EdgeInsets.only(right: 9.0),
                                                       child: SvgPicture.asset(
                                                         'assets/svg/sent.svg',
                                                       ),
                                                     ),
                                                     Container(
-                                                      margin: EdgeInsets.only(
-                                                          bottom: 4.0),
+                                                      margin: EdgeInsets.only(bottom: 4.0),
                                                       child: Text(
-                                                        AppLocalizations.of(
-                                                                context)
-                                                            .translate(
-                                                                'answer_sent'),
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
+                                                        AppLocalizations.of(context).translate('answer_sent'),
+                                                        overflow: TextOverflow.ellipsis,
                                                         style: TextStyle(
-                                                          fontFamily:
-                                                              kFontFamilyMontserratBold,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle:
-                                                              FontStyle.normal,
+                                                          fontFamily: kFontFamilyMontserratBold,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontStyle: FontStyle.normal,
                                                           fontSize: height / 56,
                                                           //14
                                                           height: 1.7,
-                                                          color:
-                                                              kArticlesWhiteColor,
+                                                          color: kArticlesWhiteColor,
                                                         ),
                                                       ),
                                                     ),
@@ -393,26 +343,27 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
   }
 
   Future<void> sendAnswer(String id, int questionId, String text) async {
+    setState(() {
+      isLoading = true;
+    });
     String userToken = await PreferencesProvider().getAnonToken();
-    print(userToken);
     Analytics().sendEventReports(event: send_stories, attr: {
       'article_name': widget.articleTitle,
     });
     RestApi().sendAnswer(id, questionId, text, token: userToken).then((values) {
       setState(() {
         isAnswerSent = true;
+        isLoading = false;
       });
     });
   }
 }
 
 class FadeRoute<T> extends MaterialPageRoute<T> {
-  FadeRoute({WidgetBuilder builder, RouteSettings settings})
-      : super(builder: builder, settings: settings);
+  FadeRoute({WidgetBuilder builder, RouteSettings settings}) : super(builder: builder, settings: settings);
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return new FadeTransition(opacity: animation, child: child);
   }
 }
