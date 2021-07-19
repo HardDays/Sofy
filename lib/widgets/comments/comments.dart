@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sofy_new/constants/app_colors.dart';
@@ -84,10 +83,8 @@ class Comments extends StatelessWidget {
                                               ))
                                           .toList(),
                                       onChanged: (value) {
-                                        // setState(() {
                                         _value = value;
                                         BlocProvider.of<CommentsBloc>(context)..add(CommentsEventLoad(articleId: articleId, sortBy: _value));
-                                        // });
                                       },
                                       elevation: 1,
                                       style: TextStyle(color: CommentsColors.SelectorText, fontSize: 13.0),
@@ -101,13 +98,17 @@ class Comments extends StatelessWidget {
                               ),
                               ListView.builder(
                                   padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
                                   itemCount: state.replies.length,
                                   itemBuilder: (context, index) {
                                     ApiProfileModel profile = state.profiles.firstWhere((element) => element.id.toString() == state.replies[index].userId.toString());
                                     return CommentItem(reply: state.replies[index], profile: profile);
                                   }),
+                              Visibility(visible: state.sending,child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(AppLocalizations.of(context).translate('comment_sending')),
+                              ))
                             ],
                           ),
                         ),
@@ -152,15 +153,6 @@ class Comments extends StatelessWidget {
             ],
           );
         }
-        if (state is CommentsStateLoading)
-          return Center(
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 36),
-              child: CircularProgressIndicator(
-                color: CommentsColors.PreloaderColor,
-              ),
-            ),
-          );
         if (state is CommentsStateError)
           return Container(
             child: Center(

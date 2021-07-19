@@ -27,7 +27,6 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/models/api_article_poll_model.dart';
 import 'package:sofy_new/widgets/comments/comments.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 import '../rest_api.dart';
 import 'bloc/analytics.dart';
@@ -99,20 +98,16 @@ class ArticleDetailsScreen extends StatelessWidget {
 
   final _commentsKey = GlobalKey();
 
-  final _commentsKeyVisibilityDetector = GlobalKey();
-
   final _questionsKey = GlobalKey();
 
-  ScrollController _controller = ScrollController(initialScrollOffset: 0);
-
-  WidgetSysInfo _widgetSysInfo = WidgetSysInfo();
+  ScrollController _controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     double height = SizeConfig.screenHeight;
     double width = SizeConfig.screenWidth;
     return Scaffold(
-      backgroundColor: ArticleDetailsColors.TransparentColor,
+      backgroundColor: ArticleDetailsColors.BgColor,
       body: BlocProvider.value(
         value: ArticleDetailsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode))..add(ArticleDetailsEventLoad(articleId: articleId)),
         child: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
@@ -254,57 +249,15 @@ class ArticleDetailsScreen extends StatelessWidget {
                                   ],
                                 ),
                                 ArticleVote(poll: state.articleDetails.article.apiArticlePollModel),
-                                ArticleQuestion(
-                                  key: _questionsKey,
-                                  question: state.articleDetails.article.apiArticleQuestionModel,
-                                  articleId: articleId,
-                                  article: state.articleDetails.article
-                                ),
+                                ArticleQuestion(key: _questionsKey, question: state.articleDetails.article.apiArticleQuestionModel, articleId: articleId, article: state.articleDetails.article),
                                 ArticleRating(article: state.articleDetails.article, articleId: articleId),
-                                VisibilityDetector(
-                                  key: _commentsKeyVisibilityDetector,
-                                  onVisibilityChanged: (visibilityInfo) {
-                                    try {
-                                      if (_controller.hasClients) {
-                                        _widgetSysInfo.visibleFraction = visibilityInfo.visibleFraction;
-                                        _widgetSysInfo.sizeWidth = visibilityInfo.size.width;
-                                        _widgetSysInfo.sizeHeight = visibilityInfo.size.height;
-                                        _widgetSysInfo.positionPixels = _controller.position.pixels;
-                                        debugPrint('Widget ${visibilityInfo.key} is ${_widgetSysInfo.visibleFraction} visible, pp ${_controller.position.pixels}');
-                                      }
-                                    } catch (e) {
-                                      print('возникла вот такая вот ошибка: $e не знаю как ее решить но работает');
-                                    }
-                                  },
-                                  child: BlocProvider(
-                                    create: (_) => CommentsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode)),
-                                    child: BlocListener<CommentsBloc, CommentsState>(
-                                      listener: (context, state) {
-                                        debugPrint(
-                                            'start $state, bloc ${BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.visibleFraction}, local ${_widgetSysInfo.visibleFraction} visible, pp ${_controller.position.pixels}');
-
-                                        if (state is CommentsStateLoading && _widgetSysInfo.visibleFraction > 0 && BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.visibleFraction == 0) {
-                                          BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.visibleFraction = _widgetSysInfo.visibleFraction;
-                                          BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.sizeHeight = _widgetSysInfo.sizeHeight;
-                                          BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.sizeWidth = _widgetSysInfo.sizeWidth;
-                                          BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.positionPixels = _widgetSysInfo.positionPixels;
-                                        }
-                                        if (state is CommentsStateResult && _widgetSysInfo.visibleFraction > 0 && !state.afterLikeDislike) {
-                                          WidgetSysInfo wsi = BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo;
-                                          _controller.jumpTo(wsi.positionPixels);
-                                          BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo = WidgetSysInfo();
-                                        }
-
-                                        debugPrint(
-                                            'end $state, bloc ${BlocProvider.of<ArticleDetailsBloc>(context).widgetSysInfo.visibleFraction}, local ${_widgetSysInfo.visibleFraction} visible, pp ${_controller.position.pixels}');
-                                      },
-                                      child: Comments(
-                                        articleId: articleId,
-                                        key: _commentsKey,
-                                      ),
-                                    ),
+                                BlocProvider(
+                                      create: (_) => CommentsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode)),
+                                  child: Comments(
+                                    articleId: articleId,
+                                    key: _commentsKey,
                                   ),
-                                ),
+                                )
                               ],
                             ),
                           ),
@@ -457,4 +410,42 @@ class WidgetSysInfo {
   double sizeWidth;
   double sizeHeight;
   double positionPixels;
+}
+
+
+typedef void OnWidgetSizeChange(Size size);
+
+class MeasureSizeRenderObject extends RenderProxyBox {
+  Size oldSize;
+  final OnWidgetSizeChange onChange;
+
+  MeasureSizeRenderObject(this.onChange);
+
+  @override
+  void performLayout() {
+    super.performLayout();
+
+    Size newSize = child.size;
+    if (oldSize == newSize) return;
+
+    oldSize = newSize;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      onChange(newSize);
+    });
+  }
+}
+
+class MeasureSize extends SingleChildRenderObjectWidget {
+  final OnWidgetSizeChange onChange;
+
+  const MeasureSize({
+    Key key,
+    @required this.onChange,
+    @required Widget child,
+  }) : super(key: key, child: child);
+
+  @override
+  RenderObject createRenderObject(BuildContext context) {
+    return MeasureSizeRenderObject(onChange);
+  }
 }

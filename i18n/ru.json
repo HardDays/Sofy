@@ -259,6 +259,7 @@
   "add_comment": "Комментарий",
   "comments_most_interesting": "Самые интересные",
   "comments_sort_by_old": "Сначала старые",
-  "comments_sort_by_new": "Сначала новые"
+  "comments_sort_by_new": "Сначала новые",
+  "comment_sending": "Отправка"
 
 }

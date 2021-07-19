@@ -47,7 +47,7 @@ dependencies:
   flutter_simple_rating_bar: ^0.0.3
   fluttertoast: ^8.0.7
   focus_detector: ^2.0.0
-  image_picker: ^0.7.4 # todo не обновлял надо разбираться: для андроида есть легаси права в нашем коде, для иос все ок, но требуется версия 14+
+  image_picker: ^0.7.4
   image_fade: ^0.2.1
   shimmer: ^2.0.0
   auto_size_text: ^3.0.0-nullsafety.0
@@ -56,11 +56,11 @@ dependencies:
   bloc: ^7.0.0
   extended_image: ^4.1.0
 
-  qonversion_flutter: ^3.2.1 # todo непонятно работает ли это вообще даже под андроид
+  qonversion_flutter: ^3.2.1
 
   flutter_html: ^2.1.0
 
-  flutter_local_notifications: ^7.0.0-dev.1 # todo надо тестить - не нашел нигде в коде использование разработанного сервиса
+  flutter_local_notifications: ^7.0.0-dev.1
   firebase_messaging: ^10.0.2
 
   firebase_core: ^1.3.0
