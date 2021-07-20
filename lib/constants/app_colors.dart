@@ -312,7 +312,7 @@ class SofyVoteColors {
 }
 
 class SofyQuestionColors {
-  static const Text = Color(0xFF836771);
+  static const Text = Color(0xFF2F2E41);
   static const FormBgColor = Color(0xFFFAEBF8);
   static const FormShadowColor = Color.fromRGBO(165, 106, 130, 0.15);
   static const InputBgColor = Color(0xFFF9D9F4);
@@ -349,7 +349,7 @@ class CommentsColors {
   static const BgColor = Color(0xFFFFFFFF);
   static const ReplyColor = Color(0xFFE0347A);
   static const DateColor = Color(0xFFA09EBA);
-  static const DividerColor = Color(0xFFFDB0C1);
+  static const DividerColor = Color.fromARGB(110, 253, 176, 193);
   static const NegativeInputShadowColor = Color.fromRGBO(255, 255, 255, 153);
   static const InputCardShadow1Color = Color.fromRGBO(249, 217, 244, 0.26);
   static const InputCardShadow2Color = Color.fromRGBO(165, 106, 130, 0.04);

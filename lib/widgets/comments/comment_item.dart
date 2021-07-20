@@ -9,6 +9,7 @@ import 'package:sofy_new/helper/time_ago.dart';
 import 'package:sofy_new/models/api_article_replies.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/bloc/comments_bloc.dart';
 import 'package:sofy_new/widgets/avatar.dart';
 import 'package:sofy_new/widgets/comments/comment_field.dart';
@@ -84,21 +85,38 @@ class _CommentItemState extends State<CommentItem> {
                       children: [
                         InkWell(
                           onTap: () {
-                            int.parse(widget.reply.isLiked) > 0
-                                ? BlocProvider.of<CommentsBloc>(context).add(
-                                    CommentsEventDislike(
-                                      id: int.parse(widget.reply.id),
-                                      articleId: int.parse(widget.reply.articleId),
-                                      parentId: int.parse(widget.reply.parentId),
-                                    ),
-                                  )
-                                : BlocProvider.of<CommentsBloc>(context).add(
-                                    CommentsEventLike(
-                                      id: int.parse(widget.reply.id),
-                                      articleId: int.parse(widget.reply.articleId),
-                                      parentId: int.parse(widget.reply.parentId),
-                                    ),
-                                  );
+                            if(int.parse(widget.reply.isLiked) > 0)
+                                {
+                            Analytics().sendEventReports(
+                            event: EventsOfAnalytics.comment_dislike_click,
+                            attr: {
+                            'name': 'Comment dislike',
+                            },
+                            );
+                                    BlocProvider.of<CommentsBloc>(context).add(
+                                      CommentsEventDislike(
+                                        id: int.parse(widget.reply.id),
+                                        articleId: int.parse(widget.reply.articleId),
+                                        parentId: int.parse(widget.reply.parentId),
+                                      ),
+                                    );
+                                  }
+                                else {
+
+                              Analytics().sendEventReports(
+                                event: EventsOfAnalytics.comment_like_click,
+                                attr: {
+                                  'name': 'Comment like',
+                                },
+                              );
+                              BlocProvider.of<CommentsBloc>(context).add(
+                                CommentsEventLike(
+                                  id: int.parse(widget.reply.id),
+                                  articleId: int.parse(widget.reply.articleId),
+                                  parentId: int.parse(widget.reply.parentId),
+                                ),
+                              );
+                            }
                           },
                           child:
                               int.parse(widget.reply.isLiked) > 0 ? Icon(CupertinoIcons.heart_fill, color: CommentsColors.ReplyColor) : Icon(CupertinoIcons.heart, color: CommentsColors.PreloaderColor)

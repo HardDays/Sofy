@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate
           ],
           debugShowCheckedModeBanner: false,
-//        home: OnBoardingScreen(),
+       // home: OnBoardingScreen(),
           home: SplashScreen(),
           theme: ThemeData(
               pageTransitionsTheme: PageTransitionsTheme(builders: {

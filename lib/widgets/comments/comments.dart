@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/bloc/comments_bloc.dart';
 import 'package:sofy_new/widgets/comments/comment_field.dart';
 import 'package:sofy_new/widgets/comments/comment_item.dart';
@@ -83,6 +85,12 @@ class Comments extends StatelessWidget {
                                               ))
                                           .toList(),
                                       onChanged: (value) {
+                                        Analytics().sendEventReports(
+                                          event: EventsOfAnalytics.comment_order_click,
+                                          attr: {
+                                            'name': sort.firstWhere((element) => element.val == value).name,
+                                          },
+                                        );
                                         _value = value;
                                         BlocProvider.of<CommentsBloc>(context)..add(CommentsEventLoad(articleId: articleId, sortBy: _value));
                                       },
@@ -105,10 +113,12 @@ class Comments extends StatelessWidget {
                                     ApiProfileModel profile = state.profiles.firstWhere((element) => element.id.toString() == state.replies[index].userId.toString());
                                     return CommentItem(reply: state.replies[index], profile: profile);
                                   }),
-                              Visibility(visible: state.sending,child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(AppLocalizations.of(context).translate('comment_sending')),
-                              ))
+                              Visibility(
+                                  visible: state.sending,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(AppLocalizations.of(context).translate('comment_sending')),
+                                  ))
                             ],
                           ),
                         ),
@@ -123,32 +133,43 @@ class Comments extends StatelessWidget {
                       ),
                       padding: EdgeInsets.only(bottom: 21),
                     ),
-              Container(
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: CommentsColors.InputCardShadow1Color,
-                        // color: Colors.red,
-                        offset: Offset(0, -4),
-                        blurRadius: 16,
+              Column(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: CommentsColors.InputCardShadow1Color,
+                          // color: Colors.red,
+                          offset: Offset(0, -4),
+                          blurRadius: 16,
+                        ),
+                        BoxShadow(
+                          color: CommentsColors.InputCardShadow2Color,
+                          // color: Colors.red,
+
+                          offset: Offset(0, -11),
+                          blurRadius: 14,
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+                      child: Container(
+                        color: Colors.white,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.fromLTRB(21, 21, 21, 38),
+                        child: CommentField(
+                          textController: _textController,
+                          articleId: articleId,
+                          parentId: 0,
+                          width: SizeConfig.screenWidth - 42 - 12 - 42,
+                        ),
                       ),
-                      BoxShadow(
-                        color: CommentsColors.InputCardShadow2Color,
-                        offset: Offset(0, -11),
-                        blurRadius: 14,
-                      ),
-                    ],
-                    // color: Colors.red,
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25))),
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(21, 0, 21, 38),
-                  child: CommentField(
-                    textController: _textController,
-                    articleId: articleId,
-                    parentId: 0,
-                    width: SizeConfig.screenWidth - 42 - 12 - 42,
-                  ),
-                ),
+                    ),
+                  )
+                ],
               ),
             ],
           );

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -84,7 +85,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 20, bottom: bottom2),
-                              child: Text(
+                              child: AutoSizeText(
                                 AppLocalizations.of(context).translate('learn_and_get_inspired'),
                                 style: TextStyle(
                                   fontFamily: Fonts.Roboto,
@@ -97,7 +98,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 20, bottom: bottom),
-                              child: Text(
+                              child: AutoSizeText(
                                 AppLocalizations.of(context).translate('new_topics'),
                                 style: TextStyle(
                                   fontFamily: Fonts.AllertaRegular,
@@ -136,9 +137,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                 ? ArticlesCardsHorizontalList(
                                     listOfArticles: state.femaleSexuality,
                                     callback: () {
-                                      Analytics().sendEventReports(
-                                        event: 'articles_female_sexuality_categories_details_${21}_click'.replaceAll(' ', '_'),
-                                      );
+                                      Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('female_sexuality')});
                                       Navigator.push(
                                         context,
                                         CustomMaterialPageRoute(
@@ -160,9 +159,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                 ? ArticlesCardsHorizontalList(
                                     listOfArticles: state.interestingAboutSex,
                                     callback: () {
-                                      Analytics().sendEventReports(
-                                        event: 'articles_interesting_about_sex_categories_details_${11}_click'.replaceAll(' ', '_'),
-                                      );
+                                      Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('interesting_about_sex')});
                                       Navigator.push(
                                         context,
                                         CustomMaterialPageRoute(
@@ -190,9 +187,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                 ? ArticlesCardsHorizontalList(
                                     listOfArticles: state.orgasms,
                                     callback: () {
-                                      Analytics().sendEventReports(
-                                        event: 'articles_orgasms_categories_details_${13}_click'.replaceAll(' ', '_'),
-                                      );
+                                      Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('orgasms')});
                                       Navigator.push(
                                         context,
                                         CustomMaterialPageRoute(
@@ -232,9 +227,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                 child: SofyButton(
                                   label: AppLocalizations.of(context).translate('view_all'),
                                   callback: () {
-                                    Analytics().sendEventReports(
-                                      event: 'articles_categories_screen_click'.replaceAll(' ', '_'),
-                                    );
+                                    Analytics().sendEventReports(event: EventsOfAnalytics.show_all_articles_categories, attr: {});
                                     Navigator.push(
                                       context,
                                       CustomMaterialPageRoute(builder: (context) => ArticlesCategoriesScreen()),

@@ -167,13 +167,25 @@ const String rate_us_click = 'rate_us_click';
 const String send_feedback_click = 'send_feedback_click';
 const String share_click = 'share_click';
 
-const String article_show = 'article_show';
-const String share_article_click = 'share_article_click';
-const String go_to_stories_click = 'go_to_stories_click';
-const String reply_click = 'reply_click';
-const String send_stories = 'send_stories';
-const String show_stories = 'show_stories';
-const String articles_feedback = 'articles_feedback';
+
+class EventsOfAnalytics {
+  static const String article_show = 'article_show';
+  static const String share_article_click = 'share_article_click';
+  static const String go_to_stories_click = 'go_to_stories_click';
+  static const String reply_click = 'reply_click';
+  static const String send_stories = 'send_stories';
+  static const String show_stories = 'show_stories';
+  static const String articles_feedback = 'articles_feedback';
+  static const String splash_show = 'splash_show';
+  static const String show_articles_categories = 'show_articles_categories';
+  static const String show_all_articles_categories = 'show_all_articles_categories';
+  static const String comments_btn_click = 'comments_btn_click';
+  static const String questions_btn_click = 'questions_btn_click';
+  static const String comment_order_click = 'comment_order_click';
+  static const String comment_dislike_click = 'comment_dislike_click';
+  static const String comment_like_click = 'comment_like_click';
+  static const String comment_send_reply_click = 'comment_send_reply_click';
+}
 
 
 

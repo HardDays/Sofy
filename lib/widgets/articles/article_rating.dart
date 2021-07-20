@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/rest_api.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/bloc/article_rating_bloc.dart';
 import 'package:sofy_new/widgets/articles/sofy_info.dart';
 import 'package:sofy_new/widgets/articles/sofy_text_button.dart';
@@ -49,9 +51,9 @@ class ArticleRating extends StatelessWidget {
                         .translate('please_rate_this_article'),
                     style: TextStyle(
                       color: SofyQuestionColors.Text,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Hind Guntur',
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                      fontFamily: Fonts.HindGuntur,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -134,13 +136,16 @@ class ArticleRating extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 41),
                                   child: SofyTextButton(
                                     callback: () {
-                                      print('like it');
                                       if (state
-                                          is ArticleRatingStateSettedRating)
-                                        BlocProvider.of<ArticleRatingBloc>(
-                                                context)
-                                            .add(ArticleRatingEventPostRating(
-                                                rating: state.rating));
+                                          is ArticleRatingStateSettedRating) {
+                                        Analytics().sendEventReports(
+                                          event: EventsOfAnalytics.reply_click,
+                                          attr: {
+                                            'id': articleId,
+                                          },
+                                        );
+                                        BlocProvider.of<ArticleRatingBloc>(context).add(ArticleRatingEventPostRating(rating: state.rating));
+                                      }
                                     },
                                     label: AppLocalizations.of(context)
                                         .translate('done'),

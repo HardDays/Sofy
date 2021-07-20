@@ -9,15 +9,28 @@ class ArticleSkeletion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = SizeConfig.screenHeight;
-    return Center(
-      child: Container(
-        child: CircularProgressIndicator(
-          color: kAppPinkDarkColor,
+    return Stack(
+      alignment: Alignment.bottomCenter,
+        children: [
+      Container(
+        width: SizeConfig.screenWidth,
+        height: SizeConfig.screenHeight,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: ArticlesColors.BottomLg,
+          ))),
+      Center(
+        child: Container(
+          child: CircularProgressIndicator(
+            color: kAppPinkDarkColor,
+          ),
+          height: height / 10,
+          width: height / 10,
         ),
-        height: height / 10,
-        width: height / 10,
       ),
-    );
+    ]);
     // return SingleChildScrollView(
     //     physics: NeverScrollableScrollPhysics(),
     //     child: Stack(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
@@ -11,17 +12,8 @@ import 'package:sofy_new/widgets/articles/article_card.dart';
 import 'package:sofy_new/widgets/articles/header_button.dart';
 
 class ArticlesCardsHorizontalList extends StatelessWidget {
-  const ArticlesCardsHorizontalList(
-      {Key key,
-      this.listOfArticles,
-      this.callback,
-      this.title = '',
-      this.cardHeight,
-      this.cardRadius,
-      this.cardWidth,
-      this.frozenCardFontSize,
-      this.frozenCardHeight,
-        this.titleFontSize})
+  ArticlesCardsHorizontalList(
+      {Key key, this.listOfArticles, this.callback, this.title = '', this.cardHeight, this.cardRadius, this.cardWidth, this.frozenCardFontSize, this.frozenCardHeight, this.titleFontSize})
       : super(key: key);
   final List<ApiArticlesModel> listOfArticles;
   final double cardHeight;
@@ -72,38 +64,38 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
                     isPaid: listOfArticles[index].isPaid,
                     callback: () {
                       print(listOfArticles[index].id);
-                      Analytics().sendEventReports(
-                        event: 'article_${listOfArticles[index].id}_click'
-                            .replaceAll(' ', '_'),
-                      );
-
-                      bool isAppPurchase =
-                          Provider.of<SubscribeData>(context, listen: false)
-                              .isAppPurchase;
+                      bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
                       if (listOfArticles[index].isPaid == 1) {
                         if (isAppPurchase) {
+                          Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
+                            "name": listOfArticles[index].title,
+                          });
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  ArticleDetailsScreen(
+                              builder: (BuildContext context) => ArticleDetailsScreen(
                                 articleId: listOfArticles[index].id,
                               ),
                             ),
                           );
                         } else {
+                          Analytics().sendEventReports(event: EventsOfAnalytics.splash_show, attr: {
+                            "name": listOfArticles[index].title,
+                            'source': 'onboarding/speed_change/modes_screen/settings_screen',
+                          });
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  SubscribeScreen(isFromSplash: false),
+                              builder: (context) => SubscribeScreen(isFromSplash: false),
                             ),
                           );
                         }
                       } else {
+                        Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
+                          "name": listOfArticles[index].title,
+                        });
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                ArticleDetailsScreen(
+                            builder: (BuildContext context) => ArticleDetailsScreen(
                               articleId: listOfArticles[index].id,
                             ),
                           ),
@@ -111,9 +103,7 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
                       }
                     },
                   ),
-                  index == listOfArticles.length - 1
-                      ? SizedBox(width: 22)
-                      : SizedBox(width: 7.5),
+                  index == listOfArticles.length - 1 ? SizedBox(width: 22) : SizedBox(width: 7.5),
                 ],
               );
             },

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_model.dart';
+import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/screens/bloc/story_bloc.dart';
 import 'package:sofy_new/widgets/story/story_background.dart';
 import 'package:sofy_new/widgets/story/story_card.dart';
@@ -18,8 +19,7 @@ class StoryScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: SofyStoryColors.BgColor,
         body: BlocBuilder<StoryBloc, StoryState>(
-            bloc: BlocProvider.of<StoryBloc>(context)
-              ..add(StoryEventChangePage(page: 1)),
+            bloc: BlocProvider.of<StoryBloc>(context)..add(StoryEventChangePage(page: 1)),
             builder: (context, state) {
               if (state is StoryStateResult) {
                 return Stack(
@@ -32,61 +32,64 @@ class StoryScreen extends StatelessWidget {
                           children: [
                             state.answersInfoModel.items.length > 0
                                 ? PageView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: state.answersInfoModel.meta.pageCount,
-                                itemBuilder: (context, int i) {
-                                  List<Widget> top = [];
-                                  for (int j = 0; j < state.answersInfoModel.meta.pageCount; j++) {
-                                    top.add(Container(
-                                      width: (SizeConfig.screenWidth - 80) / state.answersInfoModel.meta.pageCount,
-                                      height: 2,
-                                      color: state.answersInfoModel.meta.currentPage-1 >= j ? SofyStoryColors.TopPageCounterActiveColor : SofyStoryColors.TopPageCounterNotActiveColor,
-                                    ));
-                                  }
-                                  return Stack(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: top,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: state.answersInfoModel.meta.pageCount,
+                                    itemBuilder: (context, int i) {
+                                      List<Widget> top = [];
+                                      for (int j = 0; j < state.answersInfoModel.meta.pageCount; j++) {
+                                        top.add(Container(
+                                          width: (SizeConfig.screenWidth - 80) / state.answersInfoModel.meta.pageCount,
+                                          height: 2,
+                                          color: state.answersInfoModel.meta.currentPage - 1 >= j ? SofyStoryColors.TopPageCounterActiveColor : SofyStoryColors.TopPageCounterNotActiveColor,
+                                        ));
+                                      }
+                                      return Stack(
                                         children: [
-                                          state.answersInfoModel.items.length >= 1
-                                              ? StoryCard(
-                                            content: state.answersInfoModel.items[0].content,
-                                            title: article.title,
-                                            height: SizeConfig.screenHeight / 4,
-                                          )
-                                              : Container(),
-                                          state.answersInfoModel.items.length >= 2
-                                              ? Row(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
-                                            mainAxisAlignment: MainAxisAlignment.end,
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: top,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                                             children: [
-                                              StoryCard(
-                                                content: state.answersInfoModel.items[1].content,
-                                                title: article.title,
-                                                height: SizeConfig.screenHeight / 4,
-                                              )
+                                              state.answersInfoModel.items.length >= 1
+                                                  ? StoryCard(
+                                                      content: state.answersInfoModel.items[0].content,
+                                                      title: article.title,
+                                                      height: SizeConfig.screenHeight / 4,
+                                                    )
+                                                  : Container(),
+                                              state.answersInfoModel.items.length >= 2
+                                                  ? Row(
+                                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                                      mainAxisAlignment: MainAxisAlignment.end,
+                                                      children: [
+                                                        StoryCard(
+                                                          content: state.answersInfoModel.items[1].content,
+                                                          title: article.title,
+                                                          height: SizeConfig.screenHeight / 4,
+                                                        )
+                                                      ],
+                                                    )
+                                                  : Container(),
+                                              state.answersInfoModel.items.length >= 3
+                                                  ? StoryCard(
+                                                      content: state.answersInfoModel.items[2].content,
+                                                      title: article.title,
+                                                      height: SizeConfig.screenHeight / 4,
+                                                    )
+                                                  : Container(),
                                             ],
-                                          )
-                                              : Container(),
-                                          state.answersInfoModel.items.length >= 3
-                                              ? StoryCard(
-                                            content: state.answersInfoModel.items[2].content,
-                                            title: article.title,
-                                            height: SizeConfig.screenHeight / 4,
-                                          )
-                                              : Container(),
+                                          ),
                                         ],
-                                      ),
-                                    ],
-                                  );
-                                })
+                                      );
+                                    })
                                 : Center(
-                              child: Text('nothing to show'),
-                            )
+                                    child: Text(
+                                      AppLocalizations.of(context).translate('no_stories'),
+                                      style: TextStyle(fontSize: 24),
+                                    ),
+                                  )
                           ],
                         ),
                       ),
@@ -104,15 +107,13 @@ class StoryScreen extends StatelessWidget {
                             if (state.answersInfoModel.meta.currentPage == 1)
                               Navigator.maybePop(context);
                             else
-                              BlocProvider.of<StoryBloc>(context)
-                                ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage - 1));
+                              BlocProvider.of<StoryBloc>(context)..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage - 1));
                           },
                           onHorizontalDragEnd: (det) {
                             if (state.answersInfoModel.meta.currentPage == 1)
                               Navigator.maybePop(context);
                             else
-                              BlocProvider.of<StoryBloc>(context)
-                                ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage - 1));
+                              BlocProvider.of<StoryBloc>(context)..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage - 1));
                           },
                         ),
                         GestureDetector(
@@ -123,14 +124,12 @@ class StoryScreen extends StatelessWidget {
                           ),
                           onTap: () {
                             if (state.answersInfoModel.meta.currentPage < state.answersInfoModel.meta.pageCount) {
-                              BlocProvider.of<StoryBloc>(context)
-                                ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage + 1));
+                              BlocProvider.of<StoryBloc>(context)..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage + 1));
                             }
                           },
                           onHorizontalDragEnd: (det) {
                             if (state.answersInfoModel.meta.currentPage < state.answersInfoModel.meta.pageCount) {
-                              BlocProvider.of<StoryBloc>(context)
-                                ..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage + 1));
+                              BlocProvider.of<StoryBloc>(context)..add(StoryEventChangePage(page: state.answersInfoModel.meta.currentPage + 1));
                             }
                           },
                         ),

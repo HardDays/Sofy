@@ -263,6 +263,9 @@
   "comments_most_interesting": "Most interesting",
   "comments_sort_by_old": "Old first",
   "comments_sort_by_new": "New first",
-  "comment_sending": "Sending"
+  "comment_sending": "Sending",
+
+  "no_stories": "No stories yet",
+  "comment_sended": "Comment sended"
 
 }

@@ -155,8 +155,8 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                         AppLocalizations.of(context).translate('share_answer'),
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontFamily: Fonts.GilroyBold, height: 1.5, fontWeight: FontWeight.bold, fontStyle: FontStyle.normal, fontSize: 16.0, color: kWelcomDarkTextColor),
+                                        style:
+                                            TextStyle(fontFamily: Fonts.GilroyBold, height: 1.5, fontWeight: FontWeight.bold, fontStyle: FontStyle.normal, fontSize: 16.0, color: kWelcomDarkTextColor),
                                       ),
                                     )),
                                 Container(
@@ -225,7 +225,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                     boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
                                     provideHapticFeedback: false,
                                     onClick: () {
-                                      if(isAnswerSent) return;
+                                      if (isAnswerSent) return;
                                       if (textController.text.length > 0 || textController.text.length < 255) {
                                         sendAnswer(widget.articleId, widget.questionId, textController.text.toString());
                                       }
@@ -280,47 +280,48 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                   ],
                                                 )
                                               : isLoading
-                                              ? Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Container(
-                                                      margin: EdgeInsets.only(bottom: 4.0),
-                                                      width: height / 56,
-                                                      height: height / 56,
-                                                      child: CircularProgressIndicator(color: SofyVoteProgressColors.BgColor,)
-                                                    ),
-                                                  ],
-                                                )
-                                              : Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Container(
-                                                      alignment: Alignment.center,
-                                                      margin: EdgeInsets.only(right: 9.0),
-                                                      child: SvgPicture.asset(
-                                                        'assets/svg/sent.svg',
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      margin: EdgeInsets.only(bottom: 4.0),
-                                                      child: Text(
-                                                        AppLocalizations.of(context).translate('answer_sent'),
-                                                        overflow: TextOverflow.ellipsis,
-                                                        style: TextStyle(
-                                                          fontFamily: Fonts.MontserratBold,
-                                                          fontWeight: FontWeight.bold,
-                                                          fontStyle: FontStyle.normal,
-                                                          fontSize: height / 56,
-                                                          //14
-                                                          height: 1.7,
-                                                          color: kArticlesWhiteColor,
+                                                  ? Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        Container(
+                                                            margin: EdgeInsets.only(bottom: 4.0),
+                                                            width: height / 56,
+                                                            height: height / 56,
+                                                            child: CircularProgressIndicator(
+                                                              color: SofyVoteProgressColors.BgColor,
+                                                            )),
+                                                      ],
+                                                    )
+                                                  : Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        Container(
+                                                          alignment: Alignment.center,
+                                                          margin: EdgeInsets.only(right: 9.0),
+                                                          child: SvgPicture.asset(
+                                                            'assets/svg/sent.svg',
+                                                          ),
                                                         ),
-                                                      ),
+                                                        Container(
+                                                          margin: EdgeInsets.only(bottom: 4.0),
+                                                          child: Text(
+                                                            AppLocalizations.of(context).translate('answer_sent'),
+                                                            overflow: TextOverflow.ellipsis,
+                                                            style: TextStyle(
+                                                              fontFamily: Fonts.MontserratBold,
+                                                              fontWeight: FontWeight.bold,
+                                                              fontStyle: FontStyle.normal,
+                                                              fontSize: height / 56,
+                                                              //14
+                                                              height: 1.7,
+                                                              color: kArticlesWhiteColor,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
                                         ),
                                       ],
                                     ),
@@ -347,9 +348,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
       isLoading = true;
     });
     String userToken = await PreferencesProvider().getAnonToken();
-    Analytics().sendEventReports(event: send_stories, attr: {
-      'article_name': widget.articleTitle,
-    });
+    Analytics().sendEventReports(event: EventsOfAnalytics.send_stories, attr: {'article_name': widget.articleTitle, 'id': widget.articleId});
     RestApi().sendAnswer(id, questionId, text, token: userToken).then((values) {
       setState(() {
         isAnswerSent = true;

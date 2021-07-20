@@ -49,6 +49,7 @@ class Analytics {
 
   void sendEventReports ({String event, Map<String, dynamic> attr = const {}}) async {
     print('attr: $attr');
+
     AppmetricaSdk().reportEvent(
         name: event,
         attributes: attr,

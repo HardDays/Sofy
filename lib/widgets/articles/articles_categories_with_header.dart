@@ -70,10 +70,8 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(22, 11, 22, 0),
                         child: InkWell(
                           onTap: () {
-                            print(listOfTopics[index].id);
-
                             Analytics().sendEventReports(
-                              event: 'articles_popular_categories_details_${listOfTopics[index].id}_click'.replaceAll(' ', '_'),
+                              event: EventsOfAnalytics.show_articles_categories, attr: {'name': listOfTopics[index].name},
                             );
                             Navigator.push(
                               context,

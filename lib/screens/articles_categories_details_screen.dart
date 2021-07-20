@@ -13,6 +13,7 @@ import 'package:sofy_new/models/api_article_articles_model.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/widgets/articles/article_card.dart';
 
@@ -138,6 +139,9 @@ class _ArticlesCategoriesDetailsScreen extends State<ArticlesCategoriesDetailsSc
                                   bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
                                   if (articlesList[index].isPaid == 1) {
                                     if (isAppPurchase) {
+                                      Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
+                                        "name": articlesList[index].title,
+                                      });
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (BuildContext context) => ArticleDetailsScreen(
@@ -146,6 +150,10 @@ class _ArticlesCategoriesDetailsScreen extends State<ArticlesCategoriesDetailsSc
                                         ),
                                       );
                                     } else {
+                                      Analytics().sendEventReports(event: EventsOfAnalytics.splash_show, attr: {
+                                        "name": articlesList[index].title,
+                                        'source': 'onboarding/speed_change/modes_screen/settings_screen',
+                                      });
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -154,6 +162,9 @@ class _ArticlesCategoriesDetailsScreen extends State<ArticlesCategoriesDetailsSc
                                       );
                                     }
                                   } else {
+                                    Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
+                                      "name": articlesList[index].title,
+                                    });
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (BuildContext context) => ArticleDetailsScreen(

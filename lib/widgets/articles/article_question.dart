@@ -2,12 +2,14 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_model.dart';
 import 'package:sofy_new/models/api_article_question_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/article_answer_screen.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/bloc/story_bloc.dart';
 import 'package:sofy_new/screens/story_screen.dart';
 import 'package:sofy_new/widgets/articles/sofy_button.dart';
@@ -107,7 +109,7 @@ class ArticleQuestion extends StatelessWidget {
                               ),
                               child: TextField(
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(fontFamily: 'Hind Guntur', fontSize: height / 48.33, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
+                                  style: TextStyle(fontFamily: Fonts.HindGuntur, fontSize: height / 48.33, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     filled: true,
@@ -124,8 +126,8 @@ class ArticleQuestion extends StatelessWidget {
                                       borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                    contentPadding: EdgeInsets.only(left: 16.0, bottom: 7.0),
-                                    hintStyle: TextStyle(fontFamily: 'Hind Guntur', fontSize: height / 64, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
+                                    contentPadding: EdgeInsets.only(left: 16.0),
+                                    hintStyle: TextStyle(fontFamily: Fonts.HindGuntur, fontSize: height / 64, fontWeight: FontWeight.w600, color: SofyQuestionColors.InputHintColor),
                                     hintText: AppLocalizations.of(context).translate('answer_hint'),
                                   ),
                                   enabled: false),
@@ -147,11 +149,12 @@ class ArticleQuestion extends StatelessWidget {
                 child: SofyButton(
                   label: AppLocalizations.of(context).translate('show_answers'),
                   callback: () {
-                    // Analytics().sendEventReports(
-                    //   event:
-                    //   'articles_orgasms_categories_details_${13}_click'
-                    //       .replaceAll(' ', '_'),
-                    // );
+                    Analytics().sendEventReports(
+                      event: EventsOfAnalytics.go_to_stories_click,
+                      attr: {
+                        'id': articleId,
+                      },
+                    );
                     Navigator.push(
                       context,
                       CustomMaterialPageRoute(

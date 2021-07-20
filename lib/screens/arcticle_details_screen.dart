@@ -107,7 +107,7 @@ class ArticleDetailsScreen extends StatelessWidget {
     double height = SizeConfig.screenHeight;
     double width = SizeConfig.screenWidth;
     return Scaffold(
-      backgroundColor:ArticleDetailsColors.BgColor,
+      backgroundColor: Colors.white,
       body: BlocProvider.value(
         value: ArticleDetailsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode))..add(ArticleDetailsEventLoad(articleId: articleId)),
         child: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
@@ -122,7 +122,6 @@ class ArticleDetailsScreen extends StatelessWidget {
                           controller: _controller,
                           physics: const ClampingScrollPhysics(),
                           child: Container(
-                            color: ArticleDetailsColors.BgColor,
                             child: Column(
                               children: [
                                 Stack(
@@ -146,7 +145,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                             Container(
                                               height: 60,
                                               width: width,
-                                              color: ArticleDetailsColors.BgColor,
+                                              color: Colors.white,
                                             ),
                                             Padding(
                                               padding: const EdgeInsets.fromLTRB(21, 21, 21, 0),
@@ -162,7 +161,6 @@ class ArticleDetailsScreen extends StatelessWidget {
                                         alignment: Alignment.topCenter,
                                         children: [
                                           Container(
-                                            color: ArticleDetailsColors.BgColor,
                                             padding: const EdgeInsets.fromLTRB(21, 26, 21, 0),
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
@@ -182,6 +180,12 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                         width: width / 2 - 30,
                                                         label: AppLocalizations.of(context).translate('questions_btn'),
                                                         callback: () {
+                                                          Analytics().sendEventReports(
+                                                            event: EventsOfAnalytics.questions_btn_click,
+                                                            attr: {
+                                                              'name': AppLocalizations.of(context).translate('questions_btn'),
+                                                            },
+                                                          );
                                                           final RenderBox questions = _questionsKey.currentContext.findRenderObject();
                                                           final sizeQuestions = questions.localToGlobal(Offset.zero);
                                                           _controller.animateTo(sizeQuestions.dy - height / 8.21, duration: Duration(milliseconds: 350), curve: Curves.ease);
@@ -191,6 +195,13 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                           width: width / 2 - 30,
                                                           label: AppLocalizations.of(context).translate('comments_btn'),
                                                           callback: () {
+
+                                                            Analytics().sendEventReports(
+                                                              event: EventsOfAnalytics.comments_btn_click,
+                                                              attr: {
+                                                                'name': AppLocalizations.of(context).translate('comments_btn'),
+                                                              },
+                                                            );
                                                             final RenderBox comments = _commentsKey.currentContext.findRenderObject();
                                                             final sizeComments = comments.localToGlobal(Offset.zero);
                                                             _controller.animateTo(sizeComments.dy - height / 8.21, duration: Duration(milliseconds: 350), curve: Curves.ease);
@@ -252,7 +263,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                 ArticleQuestion(key: _questionsKey, question: state.articleDetails.article.apiArticleQuestionModel, articleId: articleId, article: state.articleDetails.article),
                                 ArticleRating(article: state.articleDetails.article, articleId: articleId),
                                 BlocProvider(
-                                      create: (_) => CommentsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode)),
+                                  create: (_) => CommentsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode)),
                                   child: Comments(
                                     articleId: articleId,
                                     key: _commentsKey,
@@ -300,7 +311,6 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                   borderRadius: BorderRadius.circular(60),
                                                   radius: 25,
                                                   onTap: () {
-                                                    //Analytics().sendEventReports(event: subscription_splash_close_click);
                                                     Navigator.pop(context);
                                                   }),
                                             ),
@@ -352,9 +362,9 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                   radius: 25,
                                                   onTap: () {
                                                     Analytics().sendEventReports(
-                                                      event: share_article_click,
+                                                      event: EventsOfAnalytics.share_article_click,
                                                       attr: {
-                                                        'article_name': state.articleDetails.article.title,
+                                                        'name': state.articleDetails.article.title,
                                                       },
                                                     );
                                                     _bloc.shareArticle(state.articleDetails.article.title, context: context);
@@ -411,7 +421,6 @@ class WidgetSysInfo {
   double sizeHeight;
   double positionPixels;
 }
-
 
 typedef void OnWidgetSizeChange(Size size);
 
