@@ -258,7 +258,7 @@ class _CircularPercentIndicatorState extends State<CircularPercentIndicator>
                   ? Center(child: new Text(
                 (_percent * 100).toStringAsFixed(0) + "%",
                 style: new TextStyle(
-                    fontFamily: kFontFamilyExo2,
+                    fontFamily: Fonts.Exo2,
                     fontSize: MediaQuery.of(context).size.height / 20.36,
                     color: kArticlesWhiteColor),
               ))

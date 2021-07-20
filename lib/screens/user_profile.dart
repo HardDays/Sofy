@@ -94,7 +94,7 @@ class _UserProfileScreen extends State<UserProfileScreen> {
                                       AppLocalizations.of(context)
                                           .translate('back'),
                                       style: TextStyle(
-                                          fontFamily: kFontFamilyExo2,
+                                          fontFamily: Fonts.Exo2,
                                           fontWeight: FontWeight.bold,
                                           fontSize: height / 37.3, //24
                                           color: kNavigBarInactiveColor),
@@ -261,7 +261,7 @@ class _UserProfileScreen extends State<UserProfileScreen> {
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          fontFamily: kFontFamilyGilroyBold,
+                                          fontFamily: Fonts.GilroyBold,
                                           fontWeight: FontWeight.bold,
                                           fontStyle: FontStyle.normal,
                                           fontSize: height / 64,

@@ -84,7 +84,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                                       AppLocalizations.of(context)
                                           .translate('back'),
                                       style: TextStyle(
-                                          fontFamily: kFontFamilyExo2,
+                                          fontFamily: Fonts.Exo2,
                                           fontWeight: FontWeight.bold,
                                           fontSize: height / 37.3, //24
                                           color: kNavigBarInactiveColor),
@@ -104,7 +104,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                         child: Text(
                           AppLocalizations.of(context).translate('create_new_pass'),
                           style: TextStyle(
-                              fontFamily: kFontFamilyExo2,
+                              fontFamily: Fonts.Exo2,
                               fontWeight: FontWeight.bold,
                               fontSize: height / 37.33,
                               color: onBoardingTitleColor),
@@ -119,7 +119,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                               .translate('create_new_pass_hint'),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontFamily: kFontFamilyGilroy,
+                              fontFamily: Fonts.Gilroy,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize: height / 64,
@@ -191,7 +191,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                fontFamily: kFontFamilyGilroyBold,
+                                                fontFamily: Fonts.GilroyBold,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: height / 64,
@@ -237,7 +237,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                           AppLocalizations.of(context)
                               .translate('success'),
                           style: TextStyle(
-                              fontFamily: kFontFamilyExo2,
+                              fontFamily: Fonts.Exo2,
                               fontWeight: FontWeight.bold,
                               fontSize: height / 37.33,
                               color: onBoardingTitleColor),
@@ -252,7 +252,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                               .translate('pass_has_been_changed'),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontFamily: kFontFamilyGilroy,
+                              fontFamily: Fonts.Gilroy,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize: height / 64,
@@ -317,7 +317,7 @@ class _UserChangePassScreen extends State<UserChangePassScreen> {
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
-                                            fontFamily: kFontFamilyGilroyBold,
+                                            fontFamily: Fonts.GilroyBold,
                                             fontWeight: FontWeight.bold,
                                             fontStyle: FontStyle.normal,
                                             fontSize: height / 64,

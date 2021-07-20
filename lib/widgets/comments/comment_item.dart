@@ -51,11 +51,11 @@ class _CommentItemState extends State<CommentItem> {
               children: [
                 Text(
                   widget.reply.userName.contains('Anonim') ? 'Anonim' : widget.reply.userName,
-                  style: TextStyle(fontFamily: kFontFamilyGilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.w600, fontSize: 13),
+                  style: TextStyle(fontFamily: Fonts.Gilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.w600, fontSize: 13),
                 ),
                 Text(
                   widget.reply.content,
-                  style: TextStyle(fontFamily: kFontFamilyGilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.normal, fontSize: 14),
+                  style: TextStyle(fontFamily: Fonts.Gilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.normal, fontSize: 14),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,7 +64,7 @@ class _CommentItemState extends State<CommentItem> {
                       children: [
                         Text(
                           TimeAgo.timeAgoSinceDate(DateTime.fromMillisecondsSinceEpoch(int.parse(widget.reply.dateCreated) * 1000)),
-                          style: TextStyle(fontFamily: kFontFamilyGilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.normal, fontSize: 12, color: CommentsColors.DateColor),
+                          style: TextStyle(fontFamily: Fonts.Gilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.normal, fontSize: 12, color: CommentsColors.DateColor),
                         ),
                         SizedBox(width: 5),
                         InkWell(
@@ -109,7 +109,7 @@ class _CommentItemState extends State<CommentItem> {
                           ,
                         ),
                         SizedBox(width: 6),
-                        Text('${widget.reply.likesCount}', style: TextStyle(fontFamily: kFontFamilyGilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.normal, fontSize: 13)),
+                        Text('${widget.reply.likesCount}', style: TextStyle(fontFamily: Fonts.Gilroy, fontStyle: FontStyle.normal, fontWeight: FontWeight.normal, fontSize: 13)),
                       ],
                     )
                   ],

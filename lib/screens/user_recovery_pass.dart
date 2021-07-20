@@ -85,7 +85,7 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                                       AppLocalizations.of(context)
                                           .translate('back'),
                                       style: TextStyle(
-                                          fontFamily: kFontFamilyExo2,
+                                          fontFamily: Fonts.Exo2,
                                           fontWeight: FontWeight.bold,
                                           fontSize: height / 37.3, //24
                                           color: kNavigBarInactiveColor),
@@ -108,7 +108,7 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                               AppLocalizations.of(context)
                                   .translate('reset_pass'),
                               style: TextStyle(
-                                  fontFamily: kFontFamilyExo2,
+                                  fontFamily: Fonts.Exo2,
                                   fontWeight: FontWeight.bold,
                                   fontSize: height / 37.33,
                                   color: onBoardingTitleColor),
@@ -123,7 +123,7 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                                   .translate('reset_pass_hint'),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontFamily: kFontFamilyGilroy,
+                                  fontFamily: Fonts.Gilroy,
                                   fontWeight: FontWeight.normal,
                                   fontStyle: FontStyle.normal,
                                   fontSize: height / 64,
@@ -189,7 +189,7 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
-                                                    fontFamily: kFontFamilyGilroyBold,
+                                                    fontFamily: Fonts.GilroyBold,
                                                     fontWeight: FontWeight.bold,
                                                     fontStyle: FontStyle.normal,
                                                     fontSize: height / 64,
@@ -242,7 +242,7 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                               AppLocalizations.of(context)
                                   .translate('check_mail'),
                               style: TextStyle(
-                                  fontFamily: kFontFamilyExo2,
+                                  fontFamily: Fonts.Exo2,
                                   fontWeight: FontWeight.bold,
                                   fontSize: height / 37.33,
                                   color: onBoardingTitleColor),
@@ -257,7 +257,7 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                                   .translate('check_mail_title'),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontFamily: kFontFamilyGilroy,
+                                  fontFamily: Fonts.Gilroy,
                                   fontWeight: FontWeight.normal,
                                   fontStyle: FontStyle.normal,
                                   fontSize: height / 64,
@@ -322,7 +322,7 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                fontFamily: kFontFamilyGilroyBold,
+                                                fontFamily: Fonts.GilroyBold,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: height / 64,
@@ -369,7 +369,7 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                                 text: AppLocalizations.of(context)
                                     .translate('did_not_receive_mail'),
                                 style: TextStyle(
-                                  fontFamily: kFontFamilyGilroyBold,
+                                  fontFamily: Fonts.GilroyBold,
                                   fontWeight: FontWeight.bold,
                                   fontStyle: FontStyle.normal,
                                   fontSize: height / 74.66,
@@ -381,7 +381,7 @@ class _UserRecoveryPassScreen extends State<UserRecoveryPassScreen> {
                                       text: AppLocalizations.of(context)
                                           .translate('try_another_mail'),
                                       style: TextStyle(
-                                        fontFamily: kFontFamilyGilroyBold,
+                                        fontFamily: Fonts.GilroyBold,
                                         fontWeight: FontWeight.bold,
                                         fontStyle: FontStyle.normal,
                                         fontSize: height / 74.66,

@@ -124,9 +124,6 @@ flutter:
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   fonts:
-    - family: Allerta Regular
-      fonts:
-        - asset: fonts/Allerta-Regular.ttf
     - family: Exo 2
       fonts:
         - asset: fonts/Roboto-Bold.ttf
@@ -151,3 +148,16 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: fonts/Montserrat-Regular.ttf
+  # New main page fonts
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+    - family: Hind Guntur
+      fonts:
+        - asset: fonts/HindGuntur-Regular.ttf
+    - family: Allerta
+      fonts:
+        - asset: fonts/Allerta-Regular.ttf
+    - family: Allerta Regular
+      fonts:
+        - asset: fonts/Allerta-Regular.ttf

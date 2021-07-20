@@ -86,7 +86,7 @@ class _NeumorphButton extends State<NeumorphButton> {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              fontFamily: kFontFamilyMontserratBold,
+                              fontFamily: Fonts.MontserratBold,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.normal,
                               fontSize: widget.height / 56,

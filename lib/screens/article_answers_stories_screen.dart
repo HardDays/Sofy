@@ -145,7 +145,7 @@ class _ArticleAnswersStoriesScreenState
                                             overflow: TextOverflow.clip,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                                fontFamily: kFontFamilyGilroyBold,
+                                                fontFamily: Fonts.GilroyBold,
                                                 height: 1.40,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle: FontStyle.normal,
@@ -166,7 +166,7 @@ class _ArticleAnswersStoriesScreenState
                                             overflow: TextOverflow.clip,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                                fontFamily: kFontFamilyGilroy,
+                                                fontFamily: Fonts.Gilroy,
                                                 height: 1.50,
                                                 fontWeight: FontWeight.normal,
                                                 fontStyle: FontStyle.normal,

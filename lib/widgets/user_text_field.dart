@@ -72,7 +72,7 @@ class _UserTextField extends State<UserTextField> {
                     enabled: widget.enable,
                       maxLines: 1,
                       style: TextStyle(
-                          fontFamily: kFontFamilyGilroyBold,
+                          fontFamily: Fonts.GilroyBold,
                           fontWeight: FontWeight.bold,
                           fontStyle: FontStyle.normal,
                           fontSize: widget.height / 59.73,
@@ -82,7 +82,7 @@ class _UserTextField extends State<UserTextField> {
                       keyboardType: widget.textInputType,
                       decoration: InputDecoration(
                           labelStyle: TextStyle(
-                              fontFamily: kFontFamilyGilroyBold,
+                              fontFamily: Fonts.GilroyBold,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.normal,
                               fontSize: widget.height / 64,

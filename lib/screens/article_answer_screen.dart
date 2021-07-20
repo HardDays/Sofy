@@ -106,7 +106,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                     child: Text(
                                       isAnswerSent ? AppLocalizations.of(context).translate('back') : AppLocalizations.of(context).translate('cancel'),
                                       style: TextStyle(
-                                          fontFamily: kFontFamilyExo2,
+                                          fontFamily: Fonts.Exo2,
                                           fontWeight: FontWeight.bold,
                                           fontSize: height / 37.3, //24
                                           color: kNavigBarInactiveColor),
@@ -156,7 +156,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                            fontFamily: kFontFamilyGilroyBold, height: 1.5, fontWeight: FontWeight.bold, fontStyle: FontStyle.normal, fontSize: 16.0, color: kWelcomDarkTextColor),
+                                            fontFamily: Fonts.GilroyBold, height: 1.5, fontWeight: FontWeight.bold, fontStyle: FontStyle.normal, fontSize: 16.0, color: kWelcomDarkTextColor),
                                       ),
                                     )),
                                 Container(
@@ -177,7 +177,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                       enabled: !isAnswerSent,
                                       autofocus: true,
                                       textAlign: TextAlign.left,
-                                      style: TextStyle(fontFamily: 'Hind Guntur', fontSize: height / 48.33, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
+                                      style: TextStyle(fontFamily: Fonts.HindGuntur, fontSize: height / 48.33, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
                                         filled: true,
@@ -195,7 +195,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                           borderRadius: BorderRadius.circular(10),
                                         ),
                                         contentPadding: EdgeInsets.only(left: 16.0, bottom: 7.0),
-                                        hintStyle: TextStyle(fontFamily: kFontFamilyGilroy, fontSize: height / 64, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
+                                        hintStyle: TextStyle(fontFamily: Fonts.Gilroy, fontSize: height / 64, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
                                         hintText: AppLocalizations.of(context).translate('answer_hint'),
                                       ),
                                       controller: textController,
@@ -267,7 +267,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                         AppLocalizations.of(context).translate('send'),
                                                         overflow: TextOverflow.ellipsis,
                                                         style: TextStyle(
-                                                          fontFamily: kFontFamilyMontserratBold,
+                                                          fontFamily: Fonts.MontserratBold,
                                                           fontWeight: FontWeight.bold,
                                                           fontStyle: FontStyle.normal,
                                                           fontSize: height / 56,
@@ -309,7 +309,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                         AppLocalizations.of(context).translate('answer_sent'),
                                                         overflow: TextOverflow.ellipsis,
                                                         style: TextStyle(
-                                                          fontFamily: kFontFamilyMontserratBold,
+                                                          fontFamily: Fonts.MontserratBold,
                                                           fontWeight: FontWeight.bold,
                                                           fontStyle: FontStyle.normal,
                                                           fontSize: height / 56,

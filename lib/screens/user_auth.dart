@@ -88,7 +88,7 @@ class _UserAuthScreen extends State<UserAuthScreen> {
                                         AppLocalizations.of(context)
                                             .translate('back'),
                                         style: TextStyle(
-                                            fontFamily: kFontFamilyExo2,
+                                            fontFamily: Fonts.Exo2,
                                             fontWeight: FontWeight.bold,
                                             fontSize: height / 37.3, //24
                                             color: kNavigBarInactiveColor),
@@ -107,7 +107,7 @@ class _UserAuthScreen extends State<UserAuthScreen> {
                         child: Text(
                           AppLocalizations.of(context).translate('welcome_back'),
                           style: TextStyle(
-                              fontFamily: kFontFamilyExo2,
+                              fontFamily: Fonts.Exo2,
                               fontWeight: FontWeight.bold,
                               fontSize: height / 37.33,
                               color: onBoardingTitleColor),
@@ -122,7 +122,7 @@ class _UserAuthScreen extends State<UserAuthScreen> {
                               .translate('create_an_account_sub'),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontFamily: kFontFamilyGilroy,
+                              fontFamily: Fonts.Gilroy,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize: height / 64,
@@ -195,7 +195,7 @@ class _UserAuthScreen extends State<UserAuthScreen> {
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                fontFamily: kFontFamilyGilroyBold,
+                                                fontFamily: Fonts.GilroyBold,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: height / 64,
@@ -240,7 +240,7 @@ class _UserAuthScreen extends State<UserAuthScreen> {
                             text: AppLocalizations.of(context)
                                 .translate('forgot_pass'),
                             style: TextStyle(
-                              fontFamily: kFontFamilyGilroyBold,
+                              fontFamily: Fonts.GilroyBold,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.normal,
                               fontSize: height / 74.66,

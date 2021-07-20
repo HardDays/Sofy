@@ -96,7 +96,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 .translate('settings'),
 //                  'Настройки',
                             style: TextStyle(
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontWeight: FontWeight.bold,
                                 fontSize: height / 37.33, //24
                                 color: kNavigBarInactiveColor),
@@ -164,7 +164,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
-                                            fontFamily: kFontFamilyGilroyBold,
+                                            fontFamily: Fonts.GilroyBold,
                                             fontWeight: FontWeight.bold,
                                             fontStyle: FontStyle.normal,
                                             fontSize: height / 64.0,

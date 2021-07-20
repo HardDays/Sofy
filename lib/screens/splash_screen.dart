@@ -129,7 +129,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Color(0xffE5356F),
-                            fontFamily: kFontFamilyExo2,
+                            fontFamily: Fonts.Exo2,
                             fontSize:
                             MediaQuery.of(context).size.height / 13.78,
                             letterSpacing: 0.015)),*/

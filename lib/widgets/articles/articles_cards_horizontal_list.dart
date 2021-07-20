@@ -21,7 +21,7 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
       this.cardWidth,
       this.frozenCardFontSize,
       this.frozenCardHeight,
-      this.titleFontSize})
+        this.titleFontSize})
       : super(key: key);
   final List<ApiArticlesModel> listOfArticles;
   final double cardHeight;
@@ -29,7 +29,6 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
   final double frozenCardHeight;
   final double frozenCardFontSize;
   final double cardRadius;
-
   final String title;
   final VoidCallback callback;
   final double titleFontSize;

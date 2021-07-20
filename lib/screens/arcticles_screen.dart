@@ -7,6 +7,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/screens/articles_categories_details_screen.dart';
 import 'package:sofy_new/screens/articles_categories_screen.dart';
@@ -51,202 +53,215 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     _initializeLocale(context);
-    return BlocProvider.value(
-      value: _articlesBloc,
-      child: BlocBuilder<ArticlesBloc, ArticlesState>(
-        builder: (context, state) {
-          if (state is ArticlesStateResult) {
-            double fontSize = 34 / height * 926;
-            double bottom = 522 - 161 - fontSize;
-            double fontSize2 = 42 / height * 926;
-            double bottom2 = 522 - 42 - fontSize2 * 2;
-            return Container(
-              color: ArticlesColors.NewBgColor,
-              child: SafeArea(
-                top: false,
-                child: ListView(
-                  physics: const ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
-                      child: Stack(
-                        alignment: Alignment.bottomLeft,
-                        children: [
-                          Container(
-                            height: 508,
-                            width: width,
-                            color: kArticlesNewBgColor,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 20, bottom: bottom2),
-                            child: Text(
-                              AppLocalizations.of(context).translate('learn_and_get_inspired'),
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                letterSpacing: -0.02 * fontSize2,
-                                fontWeight: FontWeight.bold,
-                                fontSize: fontSize2,
-                                color: kArticlesTextColor,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 20, bottom: bottom),
-                            child: Text(
-                              AppLocalizations.of(context).translate('new_topics'),
-                              style: TextStyle(
-                                fontFamily: 'Allerta Regular',
-                                letterSpacing: -0.065 * fontSize,
-                                fontSize: fontSize,
-                                color: kArticlesTextColor,
-                              ),
-                            ),
-                          ),
-                          ArticlesCardsHorizontalList(
-                              listOfArticles: state.listOfArticles, cardHeight: 293, cardRadius: 27, cardWidth: 242, frozenCardFontSize: 14, frozenCardHeight: 57, titleFontSize: 24),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      color: ArticlesColors.BgColor,
-                      child: ClipRRect(
+    return Container(
+      color: Colors.white,
+      child: BlocProvider.value(
+        value: _articlesBloc,
+        child: BlocBuilder<ArticlesBloc, ArticlesState>(
+          builder: (context, state) {
+            if (state is ArticlesStateResult) {
+              double fontSize = 34 / height * 926;
+              double bottom = 522 - 161 - fontSize;
+              double fontSize2 = 42 / height * 926;
+              double bottom2 = 522 - 42 - fontSize2 * 2;
+              return Container(
+                color: ArticlesColors.NewBgColor,
+                child: SafeArea(
+                  top: false,
+                  child: ListView(
+                    physics: const ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    children: [
+                      ClipRRect(
                         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
                         child: Stack(
                           alignment: Alignment.bottomLeft,
                           children: [
                             Container(
-                              height: 22,
+                              height: 508,
                               width: width,
-                              color: ArticlesColors.NewBgColor,
+                              color: kArticlesNewBgColor,
                             ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20, bottom: bottom2),
+                              child: Text(
+                                AppLocalizations.of(context).translate('learn_and_get_inspired'),
+                                style: TextStyle(
+                                  fontFamily: Fonts.Roboto,
+                                  letterSpacing: -0.02 * fontSize2,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: fontSize2,
+                                  color: kArticlesTextColor,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20, bottom: bottom),
+                              child: Text(
+                                AppLocalizations.of(context).translate('new_topics'),
+                                style: TextStyle(
+                                  fontFamily: Fonts.AllertaRegular,
+                                  letterSpacing: -0.065,
+                                  fontSize: fontSize,
+                                  color: kArticlesTextColor,
+                                ),
+                              ),
+                            ),
+                            ArticlesCardsHorizontalList(
+                                listOfArticles: state.listOfArticles, cardHeight: 293, cardRadius: 27, cardWidth: 242, frozenCardFontSize: 17, frozenCardHeight: 81, titleFontSize: 24),
                           ],
                         ),
                       ),
-                    ),
-                    Container(
-                      color: ArticlesColors.BgColor,
-                      child: Column(
-                        children: [
-                          state.femaleSexuality.length > 0
-                              ? ArticlesCardsHorizontalList(
-                                  listOfArticles: state.femaleSexuality,
-                                  callback: () {
-                                    Analytics().sendEventReports(
-                                      event: 'articles_female_sexuality_categories_details_${21}_click'.replaceAll(' ', '_'),
-                                    );
-                                    Navigator.push(
-                                      context,
-                                      CustomMaterialPageRoute(
-                                          builder: (context) => ArticlesCategoriesDetailsScreen(
-                                                categoryId: 21,
-                                                screenTitle: AppLocalizations.of(context).translate('female_sexuality'),
-                                              )),
-                                    );
-                                  },
-                                  title: AppLocalizations.of(context).translate('female_sexuality'),
-                                  cardHeight: 220,
-                                  cardRadius: 20,
-                                  cardWidth: 170,
-                                  frozenCardFontSize: 14,
-                                  frozenCardHeight: 57,
-                                  titleFontSize: 24)
-                              : Container(),
-                          state.interestingAboutSex.length > 0
-                              ? ArticlesCardsHorizontalList(
-                                  listOfArticles: state.interestingAboutSex,
-                                  callback: () {
-                                    Analytics().sendEventReports(
-                                      event: 'articles_interesting_about_sex_categories_details_${11}_click'.replaceAll(' ', '_'),
-                                    );
-                                    Navigator.push(
-                                      context,
-                                      CustomMaterialPageRoute(
-                                          builder: (context) => ArticlesCategoriesDetailsScreen(
-                                                categoryId: 11,
-                                                screenTitle: AppLocalizations.of(context).translate('interesting_about_sex'),
-                                              )),
-                                    );
-                                  },
-                                  title: AppLocalizations.of(context).translate('interesting_about_sex'),
-                                  cardHeight: 220,
-                                  cardRadius: 20,
-                                  cardWidth: 170,
-                                  frozenCardFontSize: 14,
-                                  frozenCardHeight: 57,
-                                  titleFontSize: 24)
-                              : Container(),
-                          state.listOfPopularArticles.length > 0
-                              ? Padding(
-                                  padding: const EdgeInsets.all(22),
-                                  child: ArticlesListWithHeader(title: AppLocalizations.of(context).translate('popular'), listOfArticles: state.listOfPopularArticles),
-                                )
-                              : Container(),
-                          state.orgasms.length > 0
-                              ? ArticlesCardsHorizontalList(
-                                  listOfArticles: state.orgasms,
-                                  callback: () {
-                                    Analytics().sendEventReports(
-                                      event: 'articles_orgasms_categories_details_${13}_click'.replaceAll(' ', '_'),
-                                    );
-                                    Navigator.push(
-                                      context,
-                                      CustomMaterialPageRoute(
-                                          builder: (context) => ArticlesCategoriesDetailsScreen(
-                                                categoryId: 13,
-                                                screenTitle: AppLocalizations.of(context).translate('orgasms'),
-                                              )),
-                                    );
-                                  },
-                                  title: AppLocalizations.of(context).translate('orgasms'),
-                                  cardHeight: 220,
-                                  cardRadius: 20,
-                                  cardWidth: 170,
-                                  frozenCardFontSize: 14,
-                                  frozenCardHeight: 57,
-                                  titleFontSize: 24)
-                              : Container(),
-                          Padding(
-                            padding: const EdgeInsets.all(22),
-                            child: ArticlesCategoriesWithHeader(
-                              listOfTopics: state.listOfTopicsPopular,
-                              title: AppLocalizations.of(context).translate('popular_categories'),
-                            ),
+                      Container(
+                        color: ArticlesColors.BgColor,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
+                          child: Stack(
+                            alignment: Alignment.bottomLeft,
+                            children: [
+                              Container(
+                                height: 22,
+                                width: width,
+                                color: ArticlesColors.NewBgColor,
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 22),
-                            child: SofyButton(
-                              label: AppLocalizations.of(context).translate('view_all'),
-                              callback: () {
-                                Analytics().sendEventReports(
-                                  event: 'articles_categories_screen_click'.replaceAll(' ', '_'),
-                                );
-                                Navigator.push(
-                                  context,
-                                  CustomMaterialPageRoute(builder: (context) => ArticlesCategoriesScreen()),
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(height: height / 8.54),
-                        ],
+                        ),
                       ),
-                    )
-                  ],
+                      Container(
+                        color: ArticlesColors.BgColor,
+                        child: Column(
+                          children: [
+                            state.femaleSexuality.length > 0
+                                ? ArticlesCardsHorizontalList(
+                                    listOfArticles: state.femaleSexuality,
+                                    callback: () {
+                                      Analytics().sendEventReports(
+                                        event: 'articles_female_sexuality_categories_details_${21}_click'.replaceAll(' ', '_'),
+                                      );
+                                      Navigator.push(
+                                        context,
+                                        CustomMaterialPageRoute(
+                                            builder: (context) => ArticlesCategoriesDetailsScreen(
+                                                  categoryId: 21,
+                                                  screenTitle: AppLocalizations.of(context).translate('female_sexuality'),
+                                                )),
+                                      );
+                                    },
+                                    title: AppLocalizations.of(context).translate('female_sexuality'),
+                                    cardHeight: 220,
+                                    cardRadius: 20,
+                                    cardWidth: 170,
+                                    frozenCardFontSize: 14,
+                                    frozenCardHeight: 57,
+                                    titleFontSize: 24)
+                                : Container(),
+                            state.interestingAboutSex.length > 0
+                                ? ArticlesCardsHorizontalList(
+                                    listOfArticles: state.interestingAboutSex,
+                                    callback: () {
+                                      Analytics().sendEventReports(
+                                        event: 'articles_interesting_about_sex_categories_details_${11}_click'.replaceAll(' ', '_'),
+                                      );
+                                      Navigator.push(
+                                        context,
+                                        CustomMaterialPageRoute(
+                                            builder: (context) => ArticlesCategoriesDetailsScreen(
+                                                  categoryId: 11,
+                                                  screenTitle: AppLocalizations.of(context).translate('interesting_about_sex'),
+                                                )),
+                                      );
+                                    },
+                                    title: AppLocalizations.of(context).translate('interesting_about_sex'),
+                                    cardHeight: 220,
+                                    cardRadius: 20,
+                                    cardWidth: 170,
+                                    frozenCardFontSize: 14,
+                                    frozenCardHeight: 57,
+                                    titleFontSize: 24)
+                                : Container(),
+                            state.listOfPopularArticles.length > 0
+                                ? Padding(
+                                    padding: const EdgeInsets.all(22),
+                                    child: ArticlesListWithHeader(title: AppLocalizations.of(context).translate('popular'), listOfArticles: state.listOfPopularArticles),
+                                  )
+                                : Container(),
+                            state.orgasms.length > 0
+                                ? ArticlesCardsHorizontalList(
+                                    listOfArticles: state.orgasms,
+                                    callback: () {
+                                      Analytics().sendEventReports(
+                                        event: 'articles_orgasms_categories_details_${13}_click'.replaceAll(' ', '_'),
+                                      );
+                                      Navigator.push(
+                                        context,
+                                        CustomMaterialPageRoute(
+                                            builder: (context) => ArticlesCategoriesDetailsScreen(
+                                                  categoryId: 13,
+                                                  screenTitle: AppLocalizations.of(context).translate('orgasms'),
+                                                )),
+                                      );
+                                    },
+                                    title: AppLocalizations.of(context).translate('orgasms'),
+                                    cardHeight: 220,
+                                    cardRadius: 20,
+                                    cardWidth: 170,
+                                    frozenCardFontSize: 14,
+                                    frozenCardHeight: 57,
+                                    titleFontSize: 24)
+                                : Container(),
+                            Padding(
+                              padding: const EdgeInsets.all(22),
+                              child: ArticlesCategoriesWithHeader(
+                                listOfTopics: state.listOfTopicsPopular,
+                                title: AppLocalizations.of(context).translate('popular_categories'),
+                              ),
+                            ),
+                            Stack(children: [
+                              Container(
+                                  height: height / 7,
+                                  width: SizeConfig.screenWidth,
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: ArticlesColors.BottomLg,
+                                  ))),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 22),
+                                child: SofyButton(
+                                  label: AppLocalizations.of(context).translate('view_all'),
+                                  callback: () {
+                                    Analytics().sendEventReports(
+                                      event: 'articles_categories_screen_click'.replaceAll(' ', '_'),
+                                    );
+                                    Navigator.push(
+                                      context,
+                                      CustomMaterialPageRoute(builder: (context) => ArticlesCategoriesScreen()),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ]),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }
-          if (state is ArticlesStateError) {
-            return Padding(
-              padding: const EdgeInsets.all(22),
-              child: Center(
-                child: Container(child: Text(state.error)),
-              ),
-            );
-          }
-          return ArticleSkeletion();
-        },
+              );
+            }
+            if (state is ArticlesStateError) {
+              return Padding(
+                padding: const EdgeInsets.all(22),
+                child: Center(
+                  child: Container(child: Text(state.error)),
+                ),
+              );
+            }
+            return ArticleSkeletion();
+          },
+        ),
       ),
     );
   }

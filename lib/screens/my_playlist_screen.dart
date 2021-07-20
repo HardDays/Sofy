@@ -70,7 +70,7 @@ class _MyPlaylistScreenState extends State<MyPlaylistScreen> {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: TextStyle(
-                        fontFamily: kFontFamilyExo2,
+                        fontFamily: Fonts.Exo2,
                         color: kListviewTitleColor,
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.normal,
@@ -202,7 +202,7 @@ class _MyPlaylistScreenState extends State<MyPlaylistScreen> {
                               : AppLocalizations.of(context).translate(
                                   '${Provider.of<PlaylistData>(context).vibrosByPlayListIdApi[index].titleEn}'),
                           style: TextStyle(
-                            fontFamily: kFontFamilyGilroyBold,
+                            fontFamily: Fonts.GilroyBold,
                             fontSize: height / 52.71,
                             //17
                             fontWeight: FontWeight.bold,

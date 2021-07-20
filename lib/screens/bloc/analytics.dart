@@ -26,6 +26,8 @@ class Analytics {
     String userId = await DeviceId.getID;
     _amplitude.init(kAmplitudeFlutterApiKey, userId: userId);
     firebaseAnalytics.setUserId(userId);
+
+    print('Analytics use user id: $userId');
   }
 
   void sendUserProperty ({Map<String, dynamic> attr}) async {

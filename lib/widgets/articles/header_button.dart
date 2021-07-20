@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sofy_new/constants/constants.dart';
 
 class HeaderButton extends StatelessWidget {
   const HeaderButton(
@@ -18,9 +19,11 @@ class HeaderButton extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
+            fontFamily: Fonts.Allerta,
             color: textColor,
             fontSize: fontSize,
-            letterSpacing: -0.065 * fontSize,
+            letterSpacing: -0.065,
+            fontWeight: FontWeight.normal
           ),
         ),
         // InkWell(

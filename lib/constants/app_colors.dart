@@ -260,7 +260,8 @@ class ArticlesColors {
   static const CardBgColor = Color(0xffFFBFCD);
   static const NewBgColor = Color(0xffFEA9BB);
   static const TextColor = Colors.white;
-  static const BgColor = Color(0xFFFDF3FF);
+  static const BgColor = Colors.white;
+  // static const BgColor = Color(0xFFFDF3FF);
   static const CardTextColor = Color(0xFF725E5C);
   static const HeaderTextColor = Color(0xFF38394F);
   static const DividerColor = Color.fromARGB(102, 237, 195, 237);
@@ -273,6 +274,13 @@ class ArticlesColors {
     Color(0xFFBF7786)
   ];
   static final GreyColor = Color.fromARGB(130, 56, 57, 79);
+  static final Divider = Color.fromARGB(170, 255, 242, 245);
+  static const TextColorCat = Color(0xFF836771);
+  static const BottomLg = [
+    Colors.white,
+    Color(0xffF9EBF8)
+  ];
+
 }
 
 

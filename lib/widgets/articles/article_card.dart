@@ -1,9 +1,11 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
 
@@ -76,12 +78,16 @@ class ArticleCard extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: Text(
+                              padding: EdgeInsets.all(2),
+                              child: AutoSizeText(
                                 title,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: textColor, fontSize: fontSize),
+                                  color: textColor,
+                                  fontSize: fontSize,
+                                  fontFamily: Fonts.Roboto,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           ),
@@ -94,12 +100,8 @@ class ArticleCard extends StatelessWidget {
                   // ignore: null_aware_in_logical_operator
                   visible: isPaid == 1 ? true : false,
                   child: Container(
-                    height: Provider.of<SubscribeData>(context).isAppPurchase
-                        ? 0.0
-                        : screenHeight,
-                    width: Provider.of<SubscribeData>(context).isAppPurchase
-                        ? 0.0
-                        : screenHeight,
+                    height: Provider.of<SubscribeData>(context).isAppPurchase ? 0.0 : screenHeight,
+                    width: Provider.of<SubscribeData>(context).isAppPurchase ? 0.0 : screenHeight,
                     decoration: BoxDecoration(
                       //color: Color(0x75C4C4C4),
                       borderRadius: BorderRadius.all(Radius.circular(20)),

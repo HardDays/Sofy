@@ -182,7 +182,7 @@ class _MainScreenState extends State<MainScreen> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: kArticlesWhiteColor,
-                                  fontFamily: kFontFamilyGilroy,
+                                  fontFamily: Fonts.Gilroy,
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -205,7 +205,7 @@ class _MainScreenState extends State<MainScreen> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: kArticlesWhiteColor,
-                                  fontFamily: kFontFamilyGilroy,
+                                  fontFamily: Fonts.Gilroy,
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -228,7 +228,7 @@ class _MainScreenState extends State<MainScreen> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: kArticlesWhiteColor,
-                                  fontFamily: kFontFamilyGilroy,
+                                  fontFamily: Fonts.Gilroy,
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -251,7 +251,7 @@ class _MainScreenState extends State<MainScreen> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: kArticlesWhiteColor,
-                                  fontFamily: kFontFamilyGilroy,
+                                  fontFamily: Fonts.Gilroy,
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.bold,
                                 ),

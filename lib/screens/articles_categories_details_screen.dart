@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -22,17 +23,13 @@ class ArticlesCategoriesDetailsScreen extends StatefulWidget {
   final String screenTitle;
   final int categoryId;
 
-  ArticlesCategoriesDetailsScreen(
-      {Key key, @required this.screenTitle, @required this.categoryId})
-      : super(key: key);
+  ArticlesCategoriesDetailsScreen({Key key, @required this.screenTitle, @required this.categoryId}) : super(key: key);
 
   @override
-  _ArticlesCategoriesDetailsScreen createState() =>
-      _ArticlesCategoriesDetailsScreen();
+  _ArticlesCategoriesDetailsScreen createState() => _ArticlesCategoriesDetailsScreen();
 }
 
-class _ArticlesCategoriesDetailsScreen
-    extends State<ArticlesCategoriesDetailsScreen> {
+class _ArticlesCategoriesDetailsScreen extends State<ArticlesCategoriesDetailsScreen> {
   List<ApiArticlesModel> articlesList = [];
 
   double width, height;
@@ -63,8 +60,7 @@ class _ArticlesCategoriesDetailsScreen
       ),
       child: !isLoading
           ? Padding(
-              padding:
-                  EdgeInsets.only(left: 0.0, right: 0.0, top: height / 20.83),
+              padding: EdgeInsets.only(left: 0.0, right: 0.0, top: height / 20.83),
               child: Stack(
                 children: <Widget>[
                   Column(
@@ -82,6 +78,7 @@ class _ArticlesCategoriesDetailsScreen
                                 hoverColor: Colors.transparent,
                                 radius: 25,
                                 child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     Container(
                                       width: 50.0,
@@ -97,17 +94,16 @@ class _ArticlesCategoriesDetailsScreen
                                       ),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.only(
-                                          bottom: height / 179.2),
-                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.only(bottom: height / 179.2),
                                       child: Text(
                                         widget.screenTitle,
                                         style: TextStyle(
-                                            fontFamily: kFontFamilyExo2,
+                                            fontFamily: Fonts.Exo2,
                                             fontWeight: FontWeight.bold,
                                             fontSize: height / 37.3, //24
                                             color: kNavigBarInactiveColor),
                                       ),
+                                      width: SizeConfig.screenWidth * 0.75,
                                     ),
                                   ],
                                 ),
@@ -120,11 +116,7 @@ class _ArticlesCategoriesDetailsScreen
                           childAspectRatio: 0.85,
                           physics: BouncingScrollPhysics(),
                           crossAxisCount: 2,
-                          padding: EdgeInsets.only(
-                              left: 20,
-                              right: 20,
-                              top: height / 44.8,
-                              bottom: height / 44.8),
+                          padding: EdgeInsets.only(left: 20, right: 20, top: height / 44.8, bottom: height / 44.8),
                           crossAxisSpacing: 16,
                           mainAxisSpacing: 16,
                           children: List<Widget>.generate(
@@ -141,19 +133,14 @@ class _ArticlesCategoriesDetailsScreen
                                     textColor: kArticleCardTextColor,
                                     radius: 25,
                                     isPaid: articlesList[index].isPaid),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12.0)),
+                                borderRadius: BorderRadius.all(Radius.circular(12.0)),
                                 onTap: () {
-                                  bool isAppPurchase =
-                                      Provider.of<SubscribeData>(context,
-                                              listen: false)
-                                          .isAppPurchase;
+                                  bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
                                   if (articlesList[index].isPaid == 1) {
                                     if (isAppPurchase) {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              ArticleDetailsScreen(
+                                          builder: (BuildContext context) => ArticleDetailsScreen(
                                             articleId: articlesList[index].id,
                                           ),
                                         ),
@@ -162,16 +149,14 @@ class _ArticlesCategoriesDetailsScreen
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => SubscribeScreen(
-                                              isFromSplash: false),
+                                          builder: (context) => SubscribeScreen(isFromSplash: false),
                                         ),
                                       );
                                     }
                                   } else {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            ArticleDetailsScreen(
+                                        builder: (BuildContext context) => ArticleDetailsScreen(
                                           articleId: articlesList[index].id,
                                         ),
                                       ),
@@ -204,9 +189,7 @@ class _ArticlesCategoriesDetailsScreen
 
   Future<void> getArticles() async {
     String userToken = await PreferencesProvider().getAnonToken();
-    RestApi()
-        .getArticles(context, widget.categoryId, token: userToken)
-        .then((values) {
+    RestApi().getArticles(context, widget.categoryId, token: userToken).then((values) {
       setState(() {
         isLoading = false;
         articlesList = values;
@@ -216,12 +199,10 @@ class _ArticlesCategoriesDetailsScreen
 }
 
 class FadeRoute<T> extends MaterialPageRoute<T> {
-  FadeRoute({WidgetBuilder builder, RouteSettings settings})
-      : super(builder: builder, settings: settings);
+  FadeRoute({WidgetBuilder builder, RouteSettings settings}) : super(builder: builder, settings: settings);
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return new FadeTransition(opacity: animation, child: child);
   }
 }

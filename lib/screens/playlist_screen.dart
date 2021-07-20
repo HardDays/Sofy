@@ -119,7 +119,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
                     .titleEn,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontFamily: kFontFamilyGilroyBold,
+                  fontFamily: Fonts.GilroyBold,
                   color: kListviewTitleColor,
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.normal,

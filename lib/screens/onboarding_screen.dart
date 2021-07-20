@@ -302,7 +302,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -317,7 +317,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .translate('new_on_boarding_with_sofy'),
                             style: TextStyle(
                               color: onBoardingTitleColor,
-                              fontFamily: kFontFamilyKalam,
+                              fontFamily: Fonts.Kalam,
                               fontSize: MediaQuery.of(context).size.height / 32,
                             )),
                       ),
@@ -335,7 +335,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: onBoardingSubTitleColor,
-                              fontFamily: kFontFamilyGilroyBold,
+                              fontFamily: Fonts.GilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               height: 1.3,
@@ -398,7 +398,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                         color: press1
                                             ? kArticlesWhiteColor.withOpacity(0.7)
                                             : kArticlesWhiteColor,
-                                        fontFamily: kFontFamilyGilroyBold,
+                                        fontFamily: Fonts.GilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -470,7 +470,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: kArticlesWhiteColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -485,7 +485,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 .translate('new_on_boarding_with_sofy'),
                             style: TextStyle(
                               color: kArticlesWhiteColor,
-                              fontFamily: kFontFamilyKalam,
+                              fontFamily: Fonts.Kalam,
                               fontSize: MediaQuery.of(context).size.height / 32,
                             )),
                       ),
@@ -503,7 +503,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: kArticlesWhiteColor,
-                              fontFamily: kFontFamilyGilroyBold,
+                              fontFamily: Fonts.GilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               height: 1.3,
@@ -567,7 +567,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                           ? kWelcomDarkTextColor
                                               .withOpacity(0.7)
                                           : kWelcomDarkTextColor,
-                                      fontFamily: kFontFamilyGilroyBold,
+                                      fontFamily: Fonts.GilroyBold,
                                       fontSize:
                                           MediaQuery.of(context).size.height /
                                               49.78,
@@ -648,7 +648,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             maxLines: 2,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 22.88,
                                 letterSpacing: 0.015)),
@@ -669,7 +669,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             style: TextStyle(
                               color: onBoardingSubTitleColor,
                               height: 1.3,
-                              fontFamily: kFontFamilyGilroyBold,
+                              fontFamily: Fonts.GilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize:
@@ -732,7 +732,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: kFontFamilyGilroyBold,
+                                        fontFamily: Fonts.GilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -869,7 +869,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                                     style: TextStyle(
                                                       color:
                                                           kWelcomDarkTextColor,
-                                                      fontFamily: kFontFamilyGilroyBold,
+                                                      fontFamily: Fonts.GilroyBold,
                                                       fontSize: height / 56.0,
                                                       height: 1.343,
                                                       fontWeight:
@@ -919,7 +919,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 26.35,
                                 letterSpacing: 0.015)),
@@ -934,7 +934,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 47.15,
                                 letterSpacing: 0.015)),
@@ -998,7 +998,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: kFontFamilyGilroyBold,
+                                        fontFamily: Fonts.GilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -1089,7 +1089,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             maxLines: 2,
                             style: TextStyle(
                                 color: kArticlesWhiteColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -1104,7 +1104,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: kArticlesWhiteColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                 MediaQuery.of(context).size.height / 36.35,
                                 letterSpacing: 0.015)),
@@ -1125,7 +1125,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             style: TextStyle(
                               color: kArticlesWhiteColor,
                               height: 1.3,
-                              fontFamily: kFontFamilyGilroyBold,
+                              fontFamily: Fonts.GilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize:
@@ -1188,7 +1188,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: kFontFamilyGilroyBold,
+                                        fontFamily: Fonts.GilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -1295,7 +1295,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -1310,7 +1310,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 36.35,
                                 letterSpacing: 0.015)),
@@ -1331,7 +1331,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             style: TextStyle(
                               color: onBoardingSubTitleColor,
                               height: 1.3,
-                              fontFamily: kFontFamilyGilroyBold,
+                              fontFamily: Fonts.GilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize:
@@ -1420,7 +1420,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: kFontFamilyGilroyBold,
+                                        fontFamily: Fonts.GilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -1493,7 +1493,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: onBoardingTitleColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 26.35,
                                 letterSpacing: 0.015)),
@@ -1514,7 +1514,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             style: TextStyle(
                               color: onBoardingSubTitleColor,
                               height: 1.3,
-                              fontFamily: kFontFamilyGilroyBold,
+                              fontFamily: Fonts.GilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize:
@@ -1596,7 +1596,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: kFontFamilyGilroyBold,
+                                        fontFamily: Fonts.GilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -1662,7 +1662,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: kArticlesWhiteColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -1683,7 +1683,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             style: TextStyle(
                               color: kArticlesWhiteColor,
                               height: 1.3,
-                              fontFamily: kFontFamilyGilroyBold,
+                              fontFamily: Fonts.GilroyBold,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize:
@@ -1763,7 +1763,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             ? kWelcomDarkTextColor
                                                 .withOpacity(0.7)
                                             : kWelcomDarkTextColor,
-                                        fontFamily: kFontFamilyGilroyBold,
+                                        fontFamily: Fonts.GilroyBold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
                                                 49.78,
@@ -1830,7 +1830,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   center: new Text(
                     "100%",
                     style: new TextStyle(
-                        fontFamily: kFontFamilyExo2,
+                        fontFamily: Fonts.Exo2,
                         fontSize: MediaQuery.of(context).size.height / 20.36,
                         color: Colors.black),
                   ),
@@ -1894,7 +1894,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: kArticlesWhiteColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 24.88,
                                 letterSpacing: 0.015)),
@@ -1909,7 +1909,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: kArticlesWhiteColor,
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontSize:
                                     MediaQuery.of(context).size.height / 36.35,
                                 letterSpacing: 0.015)),
@@ -1938,7 +1938,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 brightness: Brightness.light,
                 textTheme: CupertinoTextThemeData(
                     pickerTextStyle: TextStyle(
-                        fontFamily: kFontFamilyGilroy,
+                        fontFamily: Fonts.Gilroy,
                         fontSize: MediaQuery.of(context).size.height / 38.95,
                         color: onBoardingSubTitleColor))),
             child: CupertinoDatePicker(

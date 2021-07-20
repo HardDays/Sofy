@@ -196,7 +196,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                           .translate('restore'),
                                       style: TextStyle(
                                         color: kSubscrScrRestoreColor,
-                                        fontFamily: kFontFamilyExo2,
+                                        fontFamily: Fonts.Exo2,
                                         fontWeight: FontWeight.bold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
@@ -218,7 +218,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                     child: Text(AppLocalizations.of(context).translate('enjoy'),
                         style: TextStyle(
                             color: onBoardingTitleColor,
-                            fontFamily: kFontFamilyExo2,
+                            fontFamily: Fonts.Exo2,
                             fontSize:
                                 MediaQuery.of(context).size.height / 24.88,
                             fontStyle: FontStyle.normal,
@@ -232,7 +232,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                             .translate('your_full_access'),
                         style: TextStyle(
                           color: onBoardingTitleColor,
-                          fontFamily: kFontFamilyExo2,
+                          fontFamily: Fonts.Exo2,
                           fontSize: MediaQuery.of(context).size.height / 34.46,
                           fontStyle: FontStyle.normal,
                         )),
@@ -319,7 +319,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                       color: isFree
                                           ? kSubscrScrTextColor
                                           : kSubscrScrNotTextColor,
-                                      fontFamily: kFontFamilyGilroyBold,
+                                      fontFamily: Fonts.GilroyBold,
                                       fontSize: height / 52,
                                       fontWeight: FontWeight.normal,
                                       fontStyle: FontStyle.normal,
@@ -333,7 +333,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                       color: isFree
                                           ? kSubscrScrTextColor
                                           : kSubscrScrNotTextColor,
-                                      fontFamily: kFontFamilyGilroy,
+                                      fontFamily: Fonts.Gilroy,
                                       fontSize: height / 74.6,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -364,7 +364,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: kArticlesWhiteColor,
-                              fontFamily: kFontFamilyProximaNova,
+                              fontFamily: Fonts.ProximaNova,
                               fontSize: 10.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -426,7 +426,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                     color: isByMonth
                                         ? kSubscrScrTextColor
                                         : kSubscrScrNotTextColor,
-                                    fontFamily: kFontFamilyGilroyBold,
+                                    fontFamily: Fonts.GilroyBold,
                                     fontSize: height / 52,
                                     fontWeight: FontWeight.normal,
                                     fontStyle: FontStyle.normal,
@@ -440,7 +440,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                     color: isByMonth
                                         ? kSubscrScrTextColor
                                         : kSubscrScrNotTextColor,
-                                    fontFamily: kFontFamilyGilroy,
+                                    fontFamily: Fonts.Gilroy,
                                     fontSize: height / 74.6,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -531,7 +531,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                     color: press
                                         ? kArticlesWhiteColor.withOpacity(0.7)
                                         : kArticlesWhiteColor,
-                                    fontFamily: kFontFamilyGilroyBold,
+                                    fontFamily: Fonts.GilroyBold,
                                     fontSize:
                                         MediaQuery.of(context).size.height /
                                             49.78,
@@ -556,7 +556,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: kSubscrScrText2Color,
-                        fontFamily: kFontFamilyGilroy,
+                        fontFamily: Fonts.Gilroy,
                         fontSize: 10.0,
                         fontWeight: FontWeight.normal,
                       ),
@@ -590,7 +590,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Color.fromRGBO(56, 57, 79, 0.55),
-                                        fontFamily: kFontFamilyGilroy,
+                                        fontFamily: Fonts.Gilroy,
                                         fontSize: 10.0,
                                         decoration: TextDecoration.underline,
                                       ),
@@ -619,7 +619,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Color.fromRGBO(56, 57, 79, 0.55),
-                                        fontFamily: kFontFamilyGilroy,
+                                        fontFamily: Fonts.Gilroy,
                                         fontSize: 10.0,
                                         decoration: TextDecoration.underline,
                                       ),
@@ -680,7 +680,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: kSubscrScrTextColor,
-                fontFamily: kFontFamilyProximaNova,
+                fontFamily: Fonts.ProximaNova,
                 fontSize: height / 50.71,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.normal,
@@ -725,7 +725,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
               child: Text(text,
                   style: TextStyle(
                     color: kSubscrScrTextColor,
-                    fontFamily: kFontFamilyGilroyBold,
+                    fontFamily: Fonts.GilroyBold,
                     fontSize: height / 40.72,
                     fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.normal,

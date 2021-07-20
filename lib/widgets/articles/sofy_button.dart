@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sofy_new/constants/constants.dart';
 
 class SofyButton extends StatelessWidget {
   const SofyButton({
@@ -50,7 +51,7 @@ class SofyButton extends StatelessWidget {
                 color: labelColor,
                 fontSize: labelFontSize,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'Hind Guntur'),
+                fontFamily: Fonts.HindGuntur),
           ),
         ),
         onTap: callback,

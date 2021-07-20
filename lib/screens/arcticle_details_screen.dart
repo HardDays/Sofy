@@ -107,7 +107,7 @@ class ArticleDetailsScreen extends StatelessWidget {
     double height = SizeConfig.screenHeight;
     double width = SizeConfig.screenWidth;
     return Scaffold(
-      backgroundColor: ArticleDetailsColors.BgColor,
+      backgroundColor:ArticleDetailsColors.BgColor,
       body: BlocProvider.value(
         value: ArticleDetailsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode))..add(ArticleDetailsEventLoad(articleId: articleId)),
         child: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
@@ -171,7 +171,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   state.articleDetails.article.title,
-                                                  style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w700, fontSize: 24, color: ArticlesColors.HeaderTextColor),
+                                                  style: TextStyle(fontFamily: Fonts.Roboto, fontWeight: FontWeight.w700, fontSize: 24, color: ArticlesColors.HeaderTextColor),
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsets.only(top: 25, bottom: 8),
@@ -203,14 +203,14 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                     "p": Style(
                                                         wordSpacing: 5,
                                                         lineHeight: LineHeight.number(1.5),
-                                                        fontFamily: kFontFamilyMontserrat,
+                                                        fontFamily: Fonts.Montserrat,
                                                         fontStyle: FontStyle.normal,
                                                         fontSize: FontSize(height / 57.73),
                                                         color: kArticlesDetailsScreenColor),
                                                     "strong": Style(
                                                         wordSpacing: 5,
                                                         lineHeight: LineHeight.number(1.6),
-                                                        fontFamily: kFontFamilyMontserratBold,
+                                                        fontFamily: Fonts.MontserratBold,
                                                         fontWeight: FontWeight.w600,
                                                         fontStyle: FontStyle.normal,
                                                         fontSize: FontSize(height / 50.7),
@@ -218,7 +218,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                     "h1": Style(
                                                         wordSpacing: 5,
                                                         lineHeight: LineHeight.number(1.6),
-                                                        fontFamily: kFontFamilyMontserrat,
+                                                        fontFamily: Fonts.Montserrat,
                                                         fontWeight: FontWeight.w600,
                                                         fontStyle: FontStyle.normal,
                                                         fontSize: FontSize(height / 50.7),
@@ -226,14 +226,14 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                     "li": Style(
                                                         wordSpacing: 5,
                                                         lineHeight: LineHeight.number(1.5),
-                                                        fontFamily: kFontFamilyMontserrat,
+                                                        fontFamily: Fonts.Montserrat,
                                                         fontStyle: FontStyle.normal,
                                                         fontSize: FontSize(height / 57.73),
                                                         color: kArticlesDetailsScreenColor),
                                                     "u": Style(
                                                         wordSpacing: 5,
                                                         lineHeight: LineHeight.number(1.5),
-                                                        fontFamily: kFontFamilyMontserrat,
+                                                        fontFamily: Fonts.Montserrat,
                                                         fontStyle: FontStyle.normal,
                                                         fontSize: FontSize(height / 57.73),
                                                         color: kArticlesDetailsScreenColor),
@@ -319,7 +319,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                fontFamily: kFontFamilyMontserratSemi,
+                                                fontFamily: Fonts.MontserratSemi,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: height / 59.73,

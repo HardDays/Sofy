@@ -157,7 +157,7 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                 child: Text(
                   AppLocalizations.of(context).translate('recommendations'),
                   style: TextStyle(
-                      fontFamily: kFontFamilyExo2,
+                      fontFamily: Fonts.Exo2,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.normal,
                       fontSize: height / 37.33,
@@ -184,7 +184,7 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                   AppLocalizations.of(context).translate('recommended'),
 //                  'Рекомендованные',
                   style: TextStyle(
-                    fontFamily: kFontFamilyGilroyBold,
+                    fontFamily: Fonts.GilroyBold,
                     fontWeight: FontWeight.bold,
                     fontSize: height / 68.92,
                     color: kArticlesWhiteColor,
@@ -389,7 +389,7 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     style: TextStyle(
-                      fontFamily: kFontFamilyGilroyBold,
+                      fontFamily: Fonts.GilroyBold,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.normal,
                       fontSize: height / 68.92,
@@ -571,7 +571,7 @@ class _RecommendationScreenState extends State<RecommendationScreen>
                       AppLocalizations.of(context)
                           .translate('${_apiPlayListModel.titleEn}'),
                       style: TextStyle(
-                        fontFamily: kFontFamilyGilroyBold,
+                        fontFamily: Fonts.GilroyBold,
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.normal,
                         fontSize: height / 49.77,

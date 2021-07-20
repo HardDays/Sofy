@@ -5,14 +5,28 @@ const googlePlayIdentifier = 'sofy.vibrator.app';
 const feedbackEmail = 'sofy1.app@gmail.com';
 
 
-const kFontFamilyProximaNova = 'Proxima Nova';
-const kFontFamilyKalam = 'Kalam';
-const kFontFamilyExo2 = 'Exo 2';
-const kFontFamilyGilroyBold = 'Gilroy Bold';
-const kFontFamilyGilroy = 'Gilroy';
-const kFontFamilyMontserratSemi = 'Montserrat Semi';
-const kFontFamilyMontserratBold = 'Montserrat Bold';
-const kFontFamilyMontserrat = 'Montserrat';
+// const Fonts.ProximaNova = 'Proxima Nova';
+// const Fonts.Kalam = 'Kalam';
+// const Fonts.Exo2 = 'Exo 2';
+// const Fonts.GilroyBold = 'Gilroy Bold';
+// const Fonts.Gilroy = 'Gilroy';
+// const Fonts.MontserratSemi = 'Montserrat Semi';
+// const Fonts.MontserratBold = 'Montserrat Bold';
+// const Fonts.Montserrat = 'Montserrat';
+class Fonts {
+  static const HindGuntur = 'Hind Guntur';
+  static const Roboto = 'Roboto';
+  static const Allerta = 'Allerta';
+  static const AllertaRegular = 'Allerta Regular';
+  static const ProximaNova = 'Proxima Nova';
+  static const Kalam = 'Kalam';
+  static const Exo2 = 'Exo 2';
+  static const GilroyBold = 'Gilroy Bold';
+  static const Gilroy = 'Gilroy';
+  static const MontserratSemi = 'Montserrat Semi';
+  static const MontserratBold = 'Montserrat Bold';
+  static const Montserrat = 'Montserrat';
+}
 
 const kUrlPattern = r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
 const List<double> kInitSpeedValues = [

@@ -69,7 +69,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                             AppLocalizations.of(context)
                                 .translate('all_categories'),
                             style: TextStyle(
-                                fontFamily: kFontFamilyExo2,
+                                fontFamily: Fonts.Exo2,
                                 fontWeight: FontWeight.bold,
                                 fontSize: height / 37.3, //24
                                 color: kNavigBarInactiveColor),

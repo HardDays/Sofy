@@ -83,7 +83,7 @@ class _ArticlesCategoryScreenButton
                           child: Text(
                             widget.text,
                             style: TextStyle(
-                              fontFamily: kFontFamilyGilroyBold,
+                              fontFamily: Fonts.GilroyBold,
                               fontWeight: FontWeight.bold,
                               fontSize: widget.height / 56.0,
                               color: kWelcomDarkTextColor,

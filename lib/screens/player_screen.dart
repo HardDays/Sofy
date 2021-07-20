@@ -412,7 +412,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: kFontFamilyExo2,
+                      fontFamily: Fonts.Exo2,
                       fontSize: height / 27.15,
                       color: kPlayerTextColor,
                       fontWeight: FontWeight.bold,
@@ -424,7 +424,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     getPlaylistName(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: kFontFamilyGilroy,
+                      fontFamily: Fonts.Gilroy,
                       fontSize: height / 59.73,
                       color: kPlayerTextColor,
                       fontWeight: FontWeight.normal,
@@ -463,7 +463,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  fontFamily: kFontFamilyProximaNova,
+                                  fontFamily: Fonts.ProximaNova,
                                   fontSize: 20.00,
                                   color: kListviewTitleColor,
                                 ),
@@ -503,7 +503,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 '',
                                 style: TextStyle(
                                   color: kWelcomButtonDarkColor,
-                                  fontFamily: kFontFamilyGilroy,
+                                  fontFamily: Fonts.Gilroy,
                                   fontSize: 12,
                                   fontWeight: FontWeight.normal,
                                   fontStyle: FontStyle.normal,
@@ -539,7 +539,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 //getTimeString(),
                                 '',
                                 style: TextStyle(
-                                  fontFamily: kFontFamilyGilroy,
+                                  fontFamily: Fonts.Gilroy,
                                   fontSize: 12,
                                   fontWeight: FontWeight.normal,
                                   fontStyle: FontStyle.normal,

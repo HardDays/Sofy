@@ -118,7 +118,7 @@ class AppListView extends StatelessWidget {
             title: Text(
               AppLocalizations.of(context).languageCode() == 'ru' ? playlistData.vibrosByPlayListIdApi[index].titleRu : playlistData.vibrosByPlayListIdApi[index].titleEn,
               style: TextStyle(
-                fontFamily: kFontFamilyGilroyBold,
+                fontFamily: Fonts.GilroyBold,
                 fontSize: height / 52.71,
                 //17
                 fontWeight: FontWeight.bold,
@@ -131,7 +131,7 @@ class AppListView extends StatelessWidget {
               child: Text(
                 getTimeString(vibrations: playlistData.vibrosByPlayListIdApi[index].data),
                 style: TextStyle(
-                  fontFamily: kFontFamilyGilroy,
+                  fontFamily: Fonts.Gilroy,
                   fontSize: height / 64,
                   fontWeight: FontWeight.normal,
                   fontStyle: FontStyle.normal,

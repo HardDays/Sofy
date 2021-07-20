@@ -13,7 +13,7 @@ class SettingsInfoDialog extends StatelessWidget {
       title: Text(
         AppLocalizations.of(context).translate('not_vibrating'),
         style: TextStyle(
-          fontFamily: kFontFamilyProximaNova,
+          fontFamily: Fonts.ProximaNova,
           fontWeight: FontWeight.bold,
           fontStyle: FontStyle.normal,
           fontSize: height / 52,
@@ -41,7 +41,7 @@ class SettingsInfoDialog extends StatelessWidget {
           Text(
             AppLocalizations.of(context).translate('make_sure'),
             style: TextStyle(
-              fontFamily: kFontFamilyProximaNova,
+              fontFamily: Fonts.ProximaNova,
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.normal,
               fontSize: height / 60,
@@ -62,7 +62,7 @@ class SettingsInfoDialog extends StatelessWidget {
             Text(
               AppLocalizations.of(context).translate('not_vibrating_ios_1'),
               style: TextStyle(
-                fontFamily: kFontFamilyProximaNova,
+                fontFamily: Fonts.ProximaNova,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.normal,
                 fontSize: height,
@@ -73,7 +73,7 @@ class SettingsInfoDialog extends StatelessWidget {
             Text(
               AppLocalizations.of(context).translate('not_vibrating_ios_2'),
               style: TextStyle(
-                fontFamily: kFontFamilyProximaNova,
+                fontFamily: Fonts.ProximaNova,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.normal,
                 fontSize: height,

@@ -88,7 +88,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                                     AppLocalizations.of(context)
                                         .translate('back'),
                                     style: TextStyle(
-                                        fontFamily: kFontFamilyExo2,
+                                        fontFamily: Fonts.Exo2,
                                         fontWeight: FontWeight.bold,
                                         fontSize: height / 37.33, //24
                                         color: kNavigBarInactiveColor),
@@ -109,7 +109,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                           AppLocalizations.of(context)
                               .translate('create_an_account_title'),
                           style: TextStyle(
-                              fontFamily: kFontFamilyExo2,
+                              fontFamily: Fonts.Exo2,
                               fontWeight: FontWeight.bold,
                               fontSize: height / 37.33,
                               color: onBoardingTitleColor),
@@ -124,7 +124,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                               .translate('create_an_account_sub'),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontFamily: kFontFamilyGilroy,
+                              fontFamily: Fonts.Gilroy,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,
                               fontSize: height / 64,
@@ -201,7 +201,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                fontFamily: kFontFamilyGilroyBold,
+                                                fontFamily: Fonts.GilroyBold,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: height / 64,
@@ -237,7 +237,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                               text: AppLocalizations.of(context)
                                   .translate('have_an_account'),
                               style: TextStyle(
-                                fontFamily: kFontFamilyGilroyBold,
+                                fontFamily: Fonts.GilroyBold,
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.normal,
                                 fontSize: height / 74.66,
@@ -249,7 +249,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                                     text: AppLocalizations.of(context)
                                         .translate('sign_in'),
                                     style: TextStyle(
-                                      fontFamily: kFontFamilyGilroyBold,
+                                      fontFamily: Fonts.GilroyBold,
                                       fontWeight: FontWeight.bold,
                                       fontStyle: FontStyle.normal,
                                       fontSize: height / 74.66,
