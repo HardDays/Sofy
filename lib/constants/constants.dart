@@ -185,6 +185,7 @@ class EventsOfAnalytics {
   static const String comment_dislike_click = 'comment_dislike_click';
   static const String comment_like_click = 'comment_like_click';
   static const String comment_send_reply_click = 'comment_send_reply_click';
+  static const String article_readed = 'article_readed';
 }
 
 

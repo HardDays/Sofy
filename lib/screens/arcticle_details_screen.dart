@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/config_const.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
@@ -27,6 +28,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/models/api_article_poll_model.dart';
 import 'package:sofy_new/widgets/comments/comments.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import '../rest_api.dart';
 import 'bloc/analytics.dart';
@@ -99,8 +101,11 @@ class ArticleDetailsScreen extends StatelessWidget {
   final _commentsKey = GlobalKey();
 
   final _questionsKey = GlobalKey();
+  final _questionsKeyVD = GlobalKey();
 
   ScrollController _controller = ScrollController();
+
+  bool _articleWasReaded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -135,28 +140,31 @@ class ArticleDetailsScreen extends StatelessWidget {
                                         cache: true,
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 366),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(radius), topRight: Radius.circular(radius)),
-                                        child: Stack(
-                                          alignment: Alignment.topCenter,
-                                          children: [
-                                            Container(
-                                              height: 60,
-                                              width: width,
-                                              color: Colors.white,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.fromLTRB(21, 21, 21, 0),
-                                              child: ArticleAuthorDescription(author: state.author),
-                                            ),
-                                          ],
+                                    Visibility(
+                                      visible: isAuthorEnabled,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 366),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(radius), topRight: Radius.circular(radius)),
+                                          child: Stack(
+                                            alignment: Alignment.topCenter,
+                                            children: [
+                                              Container(
+                                                height: 60,
+                                                width: width,
+                                                color: Colors.white,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.fromLTRB(21, 21, 21, 0),
+                                                child: ArticleAuthorDescription(author: state.author),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 426),
+                                      padding: const EdgeInsets.only(top: isAuthorEnabled ? 426 : 386),
                                       child: Stack(
                                         alignment: Alignment.topCenter,
                                         children: [
@@ -177,13 +185,14 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
                                                       SofyButton(
-                                                        width: width / 2 - 30,
+                                                        width: isCommentsEnabled ? width / 2 - 30 : width - 30 - 12,
                                                         label: AppLocalizations.of(context).translate('questions_btn'),
                                                         callback: () {
                                                           Analytics().sendEventReports(
                                                             event: EventsOfAnalytics.questions_btn_click,
                                                             attr: {
                                                               'name': AppLocalizations.of(context).translate('questions_btn'),
+                                                              'id': articleId,
                                                             },
                                                           );
                                                           final RenderBox questions = _questionsKey.currentContext.findRenderObject();
@@ -191,21 +200,24 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                           _controller.animateTo(sizeQuestions.dy - height / 8.21, duration: Duration(milliseconds: 350), curve: Curves.ease);
                                                         },
                                                       ),
-                                                      SofyButton(
-                                                          width: width / 2 - 30,
-                                                          label: AppLocalizations.of(context).translate('comments_btn'),
-                                                          callback: () {
-
-                                                            Analytics().sendEventReports(
-                                                              event: EventsOfAnalytics.comments_btn_click,
-                                                              attr: {
-                                                                'name': AppLocalizations.of(context).translate('comments_btn'),
-                                                              },
-                                                            );
-                                                            final RenderBox comments = _commentsKey.currentContext.findRenderObject();
-                                                            final sizeComments = comments.localToGlobal(Offset.zero);
-                                                            _controller.animateTo(sizeComments.dy - height / 8.21, duration: Duration(milliseconds: 350), curve: Curves.ease);
-                                                          })
+                                                      Visibility(
+                                                        visible: isCommentsEnabled,
+                                                        child: SofyButton(
+                                                            width: width / 2 - 30,
+                                                            label: AppLocalizations.of(context).translate('comments_btn'),
+                                                            callback: () {
+                                                              Analytics().sendEventReports(
+                                                                event: EventsOfAnalytics.comments_btn_click,
+                                                                attr: {
+                                                                  'name': AppLocalizations.of(context).translate('comments_btn'),
+                                                                  'id': articleId,
+                                                                },
+                                                              );
+                                                              final RenderBox comments = _commentsKey.currentContext.findRenderObject();
+                                                              final sizeComments = comments.localToGlobal(Offset.zero);
+                                                              _controller.animateTo(sizeComments.dy - height / 8.21, duration: Duration(milliseconds: 350), curve: Curves.ease);
+                                                            }),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
@@ -259,16 +271,58 @@ class ArticleDetailsScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                ArticleVote(poll: state.articleDetails.article.apiArticlePollModel),
+                                VisibilityDetector(
+                                  key: _questionsKeyVD,
+                                  child: ArticleVote(poll: state.articleDetails.article.apiArticlePollModel),
+                                  onVisibilityChanged: (VisibilityInfo info) {
+                                    if (info.visibleFraction > 0 && !_articleWasReaded) {
+                                      _articleWasReaded = true;
+                                      Analytics().sendEventReports(
+                                        event: EventsOfAnalytics.article_readed,
+                                        attr: {'name': state.articleDetails.article.title, 'id': articleId},
+                                      );
+                                    }
+                                  },
+                                ),
                                 ArticleQuestion(key: _questionsKey, question: state.articleDetails.article.apiArticleQuestionModel, articleId: articleId, article: state.articleDetails.article),
                                 ArticleRating(article: state.articleDetails.article, articleId: articleId),
-                                BlocProvider(
-                                  create: (_) => CommentsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode)),
-                                  child: Comments(
-                                    articleId: articleId,
-                                    key: _commentsKey,
+                                Visibility(
+                                  visible: isCommentsEnabled,
+                                  child: BlocProvider(
+                                    create: (_) => CommentsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode)),
+                                    child: Comments(
+                                      articleId: articleId,
+                                      key: _commentsKey,
+                                    ),
                                   ),
-                                )
+                                ),
+                                Visibility(
+                                  visible: !isCommentsEnabled,
+                                  child: Column(
+                                    children: <Widget>[
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: CommentsColors.InputCardShadow1Color,
+                                                // color: Colors.red,
+                                                offset: Offset(0, -4),
+                                                blurRadius: 16,
+                                              ),
+                                              BoxShadow(
+                                                color: CommentsColors.InputCardShadow2Color,
+                                                // color: Colors.red,
+
+                                                offset: Offset(0, -11),
+                                                blurRadius: 14,
+                                              ),
+                                            ],
+                                          ),
+                                          height: SizeConfig.screenWidth / 8)
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -365,6 +419,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                       event: EventsOfAnalytics.share_article_click,
                                                       attr: {
                                                         'name': state.articleDetails.article.title,
+                                                        'id': articleId,
                                                       },
                                                     );
                                                     _bloc.shareArticle(state.articleDetails.article.title, context: context);

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/config_const.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
@@ -101,11 +102,14 @@ class ArticlesListWithHeader extends StatelessWidget {
                                                 fontWeight: FontWeight.w500,
                                               )),
                                           width: SizeConfig.screenWidth * 0.7),
-                                      Text('${listOfArticles[index].repliesCount} ${AppLocalizations.of(context).translate('comments')}',
-                                          style: TextStyle(
-                                            color: ArticlesColors.GreyColor,
-                                            fontSize: 12,
-                                          )),
+                                      Visibility(
+                                        child: Text('${listOfArticles[index].repliesCount} ${AppLocalizations.of(context).translate('comments')}',
+                                            style: TextStyle(
+                                              color: ArticlesColors.GreyColor,
+                                              fontSize: 12,
+                                            )),
+                                        visible: isCommentsEnabled,
+                                      ),
                                     ],
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -8,10 +8,13 @@ class ArticleRatingBloc extends Bloc<ArticleRatingEvent, ArticleRatingState> {
       : super(ArticleRatingStateInit());
   final RestApi restApi;
   final int articleId;
+  bool voting = false;
+  int _rating;
 
   @override
   Stream<ArticleRatingState> mapEventToState(ArticleRatingEvent event) async* {
     if (event is ArticleRatingEventSetRating) {
+      _rating = event.rating;
       try {
         yield ArticleRatingStateSettedRating(rating: event.rating);
       } catch (e) {
@@ -19,9 +22,12 @@ class ArticleRatingBloc extends Bloc<ArticleRatingEvent, ArticleRatingState> {
       }
     }
     if (event is ArticleRatingEventPostRating) {
+      voting = true;
+      yield ArticleRatingStateSettedRating(rating: event.rating);
       try {
         String userToken = await PreferencesProvider().getAnonToken();
         await restApi.sendArticleRating(articleId.toString(), event.rating, token:userToken);
+        voting = false;
         yield ArticleRatingStatePostedRating(rating: event.rating);
       } catch (e) {
         yield ArticleRatingStateError('Ошибка загрузки');

@@ -174,6 +174,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                         shape: NeumorphicShape.flat,
                                         color: kNeumorphicColor),
                                     child: TextField(
+                                      maxLength: 100,
                                       enabled: !isAnswerSent,
                                       autofocus: true,
                                       textAlign: TextAlign.left,
@@ -194,8 +195,8 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                           borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
                                           borderRadius: BorderRadius.circular(10),
                                         ),
-                                        contentPadding: EdgeInsets.only(left: 16.0, bottom: 7.0),
-                                        hintStyle: TextStyle(fontFamily: Fonts.Gilroy, fontSize: height / 64, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
+                                        contentPadding: EdgeInsets.only(left: 16.0),
+                                        hintStyle: TextStyle(fontFamily: Fonts.Gilroy, fontSize: height / 64, fontWeight: FontWeight.w600, color: SofyQuestionColors.InputHintColor),
                                         hintText: AppLocalizations.of(context).translate('answer_hint'),
                                       ),
                                       controller: textController,
@@ -227,11 +228,15 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                     onClick: () {
                                       if (isAnswerSent) return;
                                       if (textController.text.length > 0 || textController.text.length < 255) {
+                                        Analytics().sendEventReports(
+                                          event: EventsOfAnalytics.send_stories,
+                                          attr: {
+                                            'name': widget.articleTitle,
+                                            'id': widget.articleId,
+                                          },
+                                        );
                                         sendAnswer(widget.articleId, widget.questionId, textController.text.toString());
                                       }
-                                      /*Analytics().sendEventReports(
-                            event: banner_click,
-                          );*/
                                     },
                                     padding: EdgeInsets.all(0.0),
                                     child: Stack(

@@ -1,6 +1,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
@@ -28,7 +29,7 @@ class ArticleQuestion extends StatelessWidget {
 
     return Column(
       children: [
-        SofyDivider(icon: Icons.help),
+        SofyDivider(icon: FontAwesomeIcons.question),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 21),
           child: Column(

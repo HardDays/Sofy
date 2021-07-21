@@ -142,7 +142,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                         context,
                                         CustomMaterialPageRoute(
                                             builder: (context) => ArticlesCategoriesDetailsScreen(
-                                                  categoryId: 21,
+                                                  categoryId: 21, // todo не соответствуют id
                                                   screenTitle: AppLocalizations.of(context).translate('female_sexuality'),
                                                 )),
                                       );
@@ -164,7 +164,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                         context,
                                         CustomMaterialPageRoute(
                                             builder: (context) => ArticlesCategoriesDetailsScreen(
-                                                  categoryId: 11,
+                                                  categoryId: 11, // todo не соответствуют id
                                                   screenTitle: AppLocalizations.of(context).translate('interesting_about_sex'),
                                                 )),
                                       );
@@ -192,7 +192,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                         context,
                                         CustomMaterialPageRoute(
                                             builder: (context) => ArticlesCategoriesDetailsScreen(
-                                                  categoryId: 13,
+                                                  categoryId: 13, // todo не соответствуют id
                                                   screenTitle: AppLocalizations.of(context).translate('orgasms'),
                                                 )),
                                       );
