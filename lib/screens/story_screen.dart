@@ -180,12 +180,19 @@ class CloseButtonMaybePop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-      decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2), borderRadius: BorderRadius.all(Radius.circular(100))),
-      child: Icon(Icons.close, color: Colors.white, )
+    return Container(
+      // decoration: BoxDecoration(color: Colors.pink[50], borderRadius: BorderRadius.all(Radius.circular(100))),
+      decoration: BoxDecoration( borderRadius: BorderRadius.all(Radius.circular(100)), boxShadow: [BoxShadow(offset: Offset(3,3), color: Color.fromRGBO(236, 209, 232, 0.7), blurRadius: 4), BoxShadow(offset: Offset(-3,-3), color: Color.fromRGBO(236, 209, 232, 0.3), blurRadius: 10),]),
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: GestureDetector(
+          child: Container(
+          decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2), borderRadius: BorderRadius.all(Radius.circular(100))),
+          child: Icon(Icons.close, color: Colors.white, )
+          ),
+          onTap:() => Navigator.maybePop(context)
+        ),
       ),
-      onTap:() => Navigator.maybePop(context)
     );
   }
 }

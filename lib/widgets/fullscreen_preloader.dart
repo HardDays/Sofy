@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/helper/size_config.dart';
 
-class ArticleSkeletion extends StatelessWidget {
-  const ArticleSkeletion({Key key}) : super(key: key);
+class FullscreenPreloader extends StatelessWidget {
+  const FullscreenPreloader({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

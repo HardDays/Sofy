@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/models/api_article_poll_model.dart';
 import 'package:sofy_new/models/api_article_variants_model.dart';
 import 'package:sofy_new/rest_api.dart';
@@ -29,7 +30,7 @@ class ArticleVote extends StatelessWidget {
                   poll.blockName,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Roboto',
+                    fontFamily: Fonts.Roboto,
                     color: SofyVoteColors.Text,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

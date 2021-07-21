@@ -15,7 +15,7 @@ import 'package:sofy_new/screens/articles_categories_details_screen.dart';
 import 'package:sofy_new/screens/articles_categories_screen.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/bloc/articles_screen_bloc.dart';
-import 'package:sofy_new/widgets/articles/article_skeletion.dart';
+import 'package:sofy_new/widgets/fullscreen_preloader.dart';
 import 'package:sofy_new/widgets/articles/articles_cards_horizontal_list.dart';
 import 'package:sofy_new/widgets/articles/articles_categories_with_header.dart';
 import 'package:sofy_new/widgets/articles/articles_list_with_header.dart';
@@ -45,14 +45,14 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
 
   void _initializeLocale(BuildContext context) {
     final String systemLang = AppLocalizations.of(context).locale.languageCode;
-    _articlesBloc = ArticlesBloc(restApi: RestApi(systemLang: systemLang));
+    _articlesBloc = ArticlesBloc(restApi: RestApi(systemLang: systemLang), languageCode: systemLang);
     _articlesBloc.add(ArticlesEventLoad());
   }
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    double height = SizeConfig.screenHeight;
+    double width = SizeConfig.screenWidth;
     _initializeLocale(context);
     return Container(
       color: Colors.white,
@@ -66,7 +66,11 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
               double fontSize2 = 42 / height * 926;
               double bottom2 = 522 - 42 - fontSize2 * 2;
               return Container(
-                color: ArticlesColors.NewBgColor,
+                decoration: BoxDecoration(gradient: new LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [ArticlesColors.NewBgColor, Colors.white,Colors.white,Colors.white,Colors.white,Colors.white,],
+                ),),
                 child: SafeArea(
                   top: false,
                   child: ListView(
@@ -76,57 +80,56 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                       ClipRRect(
                         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
                         child: Stack(
-                          alignment: Alignment.bottomLeft,
                           children: [
                             Container(
-                              height: 508,
+                              height: 59*SizeConfig.blockSizeVertical,
                               width: width,
                               color: kArticlesNewBgColor,
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 20, bottom: bottom2),
-                              child: AutoSizeText(
-                                AppLocalizations.of(context).translate('learn_and_get_inspired'),
-                                style: TextStyle(
-                                  fontFamily: Fonts.Roboto,
-                                  letterSpacing: -0.02 * fontSize2,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: fontSize2,
-                                  color: kArticlesTextColor,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: width-20,
+                                  height: 14*SizeConfig.blockSizeVertical,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 20),
+                                    child: AutoSizeText(
+                                      AppLocalizations.of(context).translate('learn_and_get_inspired'),
+                                      // 'asdfasdf asdfsdfgsdfgsdfg sdfgsdfgsdfg sdfgsdfg',
+                                      wrapWords: true,
+                                      style: TextStyle(
+                                        fontFamily: Fonts.Roboto,
+                                        letterSpacing: -0.02 * fontSize2,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: fontSize2,
+                                        color: kArticlesTextColor,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 20, bottom: bottom),
-                              child: AutoSizeText(
-                                AppLocalizations.of(context).translate('new_topics'),
-                                style: TextStyle(
-                                  fontFamily: Fonts.AllertaRegular,
-                                  letterSpacing: -0.065,
-                                  fontSize: fontSize,
-                                  color: kArticlesTextColor,
+                                Container(
+                                  width: width-20,
+                                  height: 6*SizeConfig.blockSizeVertical,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 20),
+                                    child: AutoSizeText(
+                                      AppLocalizations.of(context).translate('new_topics'),
+                                      style: TextStyle(
+                                        fontFamily: Fonts.AllertaRegular,
+                                        letterSpacing: -0.065*fontSize,
+                                        fontSize: fontSize,
+                                        color: kArticlesTextColor,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                SizedBox(height: SizeConfig.blockSizeVertical,),
+                                ArticlesCardsHorizontalList(
+                                    listOfArticles: state.listOfArticles, cardHeight: 42*242/293*SizeConfig.blockSizeVertical, cardRadius: 27, cardWidth: 42*293/242*SizeConfig.blockSizeHorizontal, frozenCardFontSize: 17, frozenCardHeight: 13*242/293*SizeConfig.blockSizeVertical, titleFontSize: 24),
+                              ],
                             ),
-                            ArticlesCardsHorizontalList(
-                                listOfArticles: state.listOfArticles, cardHeight: 293, cardRadius: 27, cardWidth: 242, frozenCardFontSize: 17, frozenCardHeight: 81, titleFontSize: 24),
                           ],
-                        ),
-                      ),
-                      Container(
-                        color: ArticlesColors.BgColor,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
-                          child: Stack(
-                            alignment: Alignment.bottomLeft,
-                            children: [
-                              Container(
-                                height: 22,
-                                width: width,
-                                color: ArticlesColors.NewBgColor,
-                              ),
-                            ],
-                          ),
                         ),
                       ),
                       Container(
@@ -142,7 +145,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                         context,
                                         CustomMaterialPageRoute(
                                             builder: (context) => ArticlesCategoriesDetailsScreen(
-                                                  categoryId: 21, // todo не соответствуют id
+                                              categoryId: AppLocalizations.of(context).locale.languageCode == 'ru' ? 21 : 22,
                                                   screenTitle: AppLocalizations.of(context).translate('female_sexuality'),
                                                 )),
                                       );
@@ -164,7 +167,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                         context,
                                         CustomMaterialPageRoute(
                                             builder: (context) => ArticlesCategoriesDetailsScreen(
-                                                  categoryId: 11, // todo не соответствуют id
+                                                  categoryId: AppLocalizations.of(context).locale.languageCode == 'ru' ? 11 : 12,
                                                   screenTitle: AppLocalizations.of(context).translate('interesting_about_sex'),
                                                 )),
                                       );
@@ -192,7 +195,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                         context,
                                         CustomMaterialPageRoute(
                                             builder: (context) => ArticlesCategoriesDetailsScreen(
-                                                  categoryId: 13, // todo не соответствуют id
+                                              categoryId: AppLocalizations.of(context).locale.languageCode == 'ru' ? 13 : 14,
                                                   screenTitle: AppLocalizations.of(context).translate('orgasms'),
                                                 )),
                                       );
@@ -214,7 +217,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                             ),
                             Stack(children: [
                               Container(
-                                  height: height / 7,
+                                  height: height / 4.6,
                                   width: SizeConfig.screenWidth,
                                   decoration: BoxDecoration(
                                       gradient: LinearGradient(
@@ -252,7 +255,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                 ),
               );
             }
-            return ArticleSkeletion();
+            return FullscreenPreloader();
           },
         ),
       ),

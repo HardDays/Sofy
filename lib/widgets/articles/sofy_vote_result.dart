@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/models/api_article_variants_model.dart';
 
 class SofyVoteResult extends StatelessWidget {
@@ -34,7 +35,7 @@ class SofyVoteResult extends StatelessWidget {
               child: Text(
                 variant.content,
                 style: TextStyle(
-                    color: SofyVoteProgressColors.TextColor, fontSize: 16),
+                    color: SofyVoteProgressColors.TextColor, fontSize: 16, fontFamily: Fonts.HindGuntur),
               ),
             ),
             Container(
@@ -56,7 +57,11 @@ class SofyVoteResult extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text('${variant.percent.toString()}%'),
+                  Text('${variant.percent.toString()}%',
+                      style: TextStyle(
+                      color: SofyVoteProgressColors.TextColor, fontSize: 16, fontFamily: Fonts.HindGuntur
+                      ),
+                  ),
                 ],
               ),
             )

@@ -38,7 +38,7 @@ class ArticleRating extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'Roboto',
+                      fontFamily: Fonts.Roboto,
                     ),
                   ),
                 ),

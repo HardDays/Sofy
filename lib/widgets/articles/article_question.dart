@@ -40,7 +40,8 @@ class ArticleQuestion extends StatelessWidget {
                   question.message,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Roboto',
+                    color: SofyQuestionColors.Text,
+                    fontFamily: Fonts.Roboto,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -69,10 +70,10 @@ class ArticleQuestion extends StatelessWidget {
                             child: Text(
                               AppLocalizations.of(context).translate('share_answer'),
                               style: TextStyle(
-                                color: SofyQuestionColors.Text,
+                                color: SofyQuestionColors.QText,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                fontFamily: 'Hind Guntur',
+                                fontFamily: Fonts.AbhayaLibreExtraBold,
                               ),
                             ),
                           ),
@@ -139,10 +140,14 @@ class ArticleQuestion extends StatelessWidget {
                     ),
                   ),
                 ),
-                ExtendedImage.asset(
-                  'assets/answer_title_image.png',
-                  height: 80,
-                  width: 80,
+                Container(
+                  width: SizeConfig.screenWidth/5,
+                  height: SizeConfig.screenWidth/5,
+                  decoration: BoxDecoration(boxShadow: [
+                    BoxShadow(color: Color.fromRGBO(255, 255, 255, 0.25), offset: Offset(-4, -4), blurRadius: 10),
+                    BoxShadow(color: Color.fromRGBO(219, 196, 219, 0.25), offset: Offset(4, 4), blurRadius: 10)
+                  ], borderRadius: BorderRadius.all(Radius.circular(100))),
+                  child: Image.asset('assets/answer_title_image.png'),
                 ),
               ]),
               Padding(

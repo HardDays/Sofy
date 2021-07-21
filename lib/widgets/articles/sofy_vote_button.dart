@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 
 class SofyVoteButton extends StatelessWidget {
   const SofyVoteButton(
@@ -43,7 +44,7 @@ class SofyVoteButton extends StatelessWidget {
                 Text(
                   label,
                   style: TextStyle(
-                      color: SofyVoteButtonColors.TextColor, fontSize: 16),
+                      color: SofyVoteButtonColors.TextColor, fontSize: 16, fontFamily: Fonts.HindGuntur, fontWeight: FontWeight.w500, fontStyle: FontStyle.normal),
                 ),
                 Stack(
                   alignment: Alignment.center,

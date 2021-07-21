@@ -155,9 +155,6 @@ flutter:
     - family: Hind Guntur
       fonts:
         - asset: fonts/HindGuntur-Regular.ttf
-    - family: Allerta
+    - family: Abhaya Libre ExtraBold
       fonts:
-        - asset: fonts/Allerta-Regular.ttf
-    - family: Allerta Regular
-      fonts:
-        - asset: fonts/Allerta-Regular.ttf
+        - asset: fonts/AbhayaLibre-ExtraBold.ttf

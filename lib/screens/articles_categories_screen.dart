@@ -9,6 +9,7 @@ import 'package:sofy_new/models/api_article_topic_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/widgets/articles/articles_categories_with_header.dart';
+import 'package:sofy_new/widgets/fullscreen_preloader.dart';
 
 import '../rest_api.dart';
 
@@ -18,7 +19,7 @@ class ArticlesCategoriesScreen extends StatefulWidget {
 }
 
 class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
-  List<ApiArticleTopicModel> topicsList = new List<ApiArticleTopicModel>();
+  List<ApiArticleTopicModel> topicsList = [];
 
   @override
   void initState() {
@@ -34,7 +35,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
     final height = SizeConfig.screenHeight;
     return Scaffold(
         backgroundColor: kMainScreenScaffoldBackColor,
-        body: Padding(
+        body: topicsList.length > 0 ? Padding(
             padding: EdgeInsets.only(left: 0.0, right: 0.0, top: height / 20.8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +88,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                   ),
                 ),
               ],
-            )));
+            )) : FullscreenPreloader());
   }
 
   Future<void> getArticleTopics() async {
