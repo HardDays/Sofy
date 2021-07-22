@@ -37,10 +37,10 @@ class ArticlesListWithHeader extends StatelessWidget {
           title,
           textAlign: TextAlign.left,
           style: TextStyle(
-            fontFamily: 'Allerta Regular',
+            fontFamily: Fonts.AllertaRegular,
             color: textColor,
-            fontSize: fontSize,
-            letterSpacing: -0.065,
+            fontSize: fontSize / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+            letterSpacing: -0.065 * fontSize / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
           ),
         ),
         SizedBox(height: 14),
@@ -52,7 +52,7 @@ class ArticlesListWithHeader extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 children: [
-                  index != 0 ? SizedBox(height: 21) : Container(),
+                  index != 0 ? SizedBox(height: 21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical) : Container(),
                   InkWell(
                     child: Stack(
                       children: [
@@ -60,7 +60,7 @@ class ArticlesListWithHeader extends StatelessWidget {
                           children: [
                             // index == 0 ? SizedBox(width: 22) : SizedBox(width: 7.5),
                             Container(
-                              height: cardHeight,
+                              height: cardHeight / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                               child: Row(
                                 children: [
                                   Stack(
@@ -89,7 +89,7 @@ class ArticlesListWithHeader extends StatelessWidget {
                                     ],
                                   ),
                                   SizedBox(
-                                    width: 20,
+                                    width: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                   ),
                                   Column(
                                     children: [
@@ -98,7 +98,7 @@ class ArticlesListWithHeader extends StatelessWidget {
                                               style: TextStyle(
                                                 fontFamily: Fonts.Allerta,
                                                 color: textColor,
-                                                fontSize: 14,
+                                                fontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                                 fontWeight: FontWeight.w500,
                                               )),
                                           width: SizeConfig.screenWidth * 0.7),
@@ -106,7 +106,7 @@ class ArticlesListWithHeader extends StatelessWidget {
                                         child: Text('${listOfArticles[index].repliesCount} ${AppLocalizations.of(context).translate('comments')}',
                                             style: TextStyle(
                                               color: ArticlesColors.GreyColor,
-                                              fontSize: 12,
+                                              fontSize: 12 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                             )),
                                         visible: isCommentsEnabled,
                                       ),
@@ -122,11 +122,7 @@ class ArticlesListWithHeader extends StatelessWidget {
                       ],
                     ),
                     onTap: () {
-                      print(listOfArticles[index].id);
-
-                      Analytics().sendEventReports(
-                        event: 'article_${listOfArticles[index].id}_click'.replaceAll(' ', '_'),
-                      );
+                      Analytics().sendEventReports(event: 'article_show', attr: {'id': listOfArticles[index].id, 'name': listOfArticles[index].title});
                       bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
                       if (listOfArticles[index].isPaid == 1) {
                         if (isAppPurchase) {
@@ -156,7 +152,7 @@ class ArticlesListWithHeader extends StatelessWidget {
                       }
                     },
                   ),
-                  index != listOfArticles.length - 1 ? SizedBox(height: 19) : Container(),
+                  index != listOfArticles.length - 1 ? SizedBox(height: 19 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical) : Container(),
                   index != listOfArticles.length - 1 ? Container(height: 1, width: width, color: kArticlesDividerColor) : Container(),
                 ],
               );

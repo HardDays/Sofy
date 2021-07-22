@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
@@ -31,7 +31,7 @@ class StoryScreen extends StatelessWidget {
                         StoryBackground(coverImg: article.coverImg),
                         SafeArea(
                           child: Padding(
-                            padding: const EdgeInsets.all(30),
+                            padding: EdgeInsets.all(30),
                             child: Stack(
                               children: [
                                 state.answersInfoModel.items.length > 0
@@ -53,37 +53,41 @@ class StoryScreen extends StatelessWidget {
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: top,
                                               ),
-                                              Column(
-                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                children: [
-                                                  state.answersInfoModel.items.length >= 1
-                                                      ? StoryCard(
-                                                          content: state.answersInfoModel.items[0].content,
-                                                          title: article.title,
-                                                          height: SizeConfig.screenHeight / 4,
-                                                        )
-                                                      : Container(),
-                                                  state.answersInfoModel.items.length >= 2
-                                                      ? Row(
-                                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                                          mainAxisAlignment: MainAxisAlignment.end,
-                                                          children: [
-                                                            StoryCard(
-                                                              content: state.answersInfoModel.items[1].content,
-                                                              title: article.title,
-                                                              height: SizeConfig.screenHeight / 4,
-                                                            )
-                                                          ],
-                                                        )
-                                                      : Container(),
-                                                  state.answersInfoModel.items.length >= 3
-                                                      ? StoryCard(
-                                                          content: state.answersInfoModel.items[2].content,
-                                                          title: article.title,
-                                                          height: SizeConfig.screenHeight / 4,
-                                                        )
-                                                      : Container(),
-                                                ],
+                                              Padding(
+                                                padding: EdgeInsets.symmetric(vertical: 20),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    state.answersInfoModel.items.length >= 1
+                                                        ? StoryCard(
+                                                            content: state.answersInfoModel.items[0].content,
+                                                            title: article.title,
+                                                            height: SizeConfig.screenHeight / 4,
+                                                          )
+                                                        : Container(),
+                                                    state.answersInfoModel.items.length >= 2
+                                                        ? Row(
+                                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                                            mainAxisAlignment: MainAxisAlignment.end,
+                                                            children: [
+                                                              StoryCard(
+                                                                content: state.answersInfoModel.items[1].content,
+                                                                title: article.title,
+                                                                height: SizeConfig.screenHeight / 4,
+                                                              )
+                                                            ],
+                                                          )
+                                                        : Container(),
+                                                    state.answersInfoModel.items.length >= 3
+                                                        ? StoryCard(
+                                                            content: state.answersInfoModel.items[2].content,
+                                                            title: article.title,
+                                                            height: SizeConfig.screenHeight / 4,
+                                                          )
+                                                        : Container(),
+                                                  ],
+                                                ),
                                               ),
                                             ],
                                           );
@@ -142,7 +146,8 @@ class StoryScreen extends StatelessWidget {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 82, right: 30),
+                      padding:
+                          EdgeInsets.only(top: 82 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, right: 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                       child: CloseButtonMaybePop(),
                     )
                   ],
@@ -182,16 +187,20 @@ class CloseButtonMaybePop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // decoration: BoxDecoration(color: Colors.pink[50], borderRadius: BorderRadius.all(Radius.circular(100))),
-      decoration: BoxDecoration( borderRadius: BorderRadius.all(Radius.circular(100)), boxShadow: [BoxShadow(offset: Offset(3,3), color: Color.fromRGBO(236, 209, 232, 0.7), blurRadius: 4), BoxShadow(offset: Offset(-3,-3), color: Color.fromRGBO(236, 209, 232, 0.3), blurRadius: 10),]),
+      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(100)), boxShadow: [
+        BoxShadow(offset: Offset(3, 3), color: Color.fromRGBO(236, 209, 232, 0.7), blurRadius: 4),
+        BoxShadow(offset: Offset(-3, -3), color: Color.fromRGBO(236, 209, 232, 0.3), blurRadius: 10),
+      ]),
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: GestureDetector(
-          child: Container(
-          decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2), borderRadius: BorderRadius.all(Radius.circular(100))),
-          child: Icon(Icons.close, color: Colors.white, )
-          ),
-          onTap:() => Navigator.maybePop(context)
-        ),
+            child: Container(
+                decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2), borderRadius: BorderRadius.all(Radius.circular(100))),
+                child: Icon(
+                  Icons.close,
+                  color: Colors.white,
+                )),
+            onTap: () => Navigator.maybePop(context)),
       ),
     );
   }

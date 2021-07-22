@@ -18,6 +18,7 @@ import 'package:sofy_new/screens/bloc/setting_bloc.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/screens/user_profile.dart';
 import 'package:sofy_new/screens/user_registration.dart';
+import 'package:sofy_new/widgets/articles/background.dart';
 import 'package:sofy_new/widgets/create_account_button.dart';
 import 'package:sofy_new/widgets/setting_screen_button.dart';
 import 'package:sofy_new/widgets/settings_info_dialog.dart';
@@ -78,7 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       key: _resumeDetectorKey,
       child: Stack(
         children: <Widget>[
-          _BackgroundLinearColor(),
+          Background(),
           Padding(
               padding: EdgeInsets.only(left: 0.0, right: 0.0, top: height / 14.50),
             child: Column(

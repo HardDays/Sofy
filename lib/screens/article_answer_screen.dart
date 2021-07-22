@@ -6,6 +6,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/widgets/neumorphic/neumorphic_button.dart';
@@ -108,7 +109,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                       style: TextStyle(
                                           fontFamily: Fonts.Exo2,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: height / 37.3, //24
+                                          fontSize: 24/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, //24
                                           color: kNavigBarInactiveColor),
                                     ),
                                   ),
@@ -270,7 +271,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                         AppLocalizations.of(context).translate('send'),
                                                         overflow: TextOverflow.ellipsis,
                                                         style: TextStyle(
-                                                          fontFamily: Fonts.AbhayaLibreExtraBold,
+                                                          fontFamily: Fonts.HindGuntur,
                                                           fontWeight: FontWeight.w800,
                                                           fontStyle: FontStyle.normal,
                                                           fontSize: height / 56,

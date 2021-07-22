@@ -36,7 +36,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
     return Scaffold(
         backgroundColor: kMainScreenScaffoldBackColor,
         body: topicsList.length > 0 ? Padding(
-            padding: EdgeInsets.only(left: 0.0, right: 0.0, top: height / 20.8),
+            padding: EdgeInsets.only(left: 0.0, right: 0.0, top: height / 20.8/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -64,7 +64,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(bottom: height / 179.2),
+                          padding: EdgeInsets.only(bottom: height / 179.2/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                           alignment: Alignment.center,
                           child: Text(
                             AppLocalizations.of(context)
@@ -72,7 +72,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                             style: TextStyle(
                                 fontFamily: Fonts.Exo2,
                                 fontWeight: FontWeight.bold,
-                                fontSize: height / 37.3, //24
+                                fontSize: 24/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, //24
                                 color: kNavigBarInactiveColor),
                           ),
                         ),
@@ -82,7 +82,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                       Navigator.pop(context);
                     }),
                 Padding(
-                  padding: EdgeInsets.only(left: 21.0, right: 21.0, top: height / 50.29),
+                  padding: EdgeInsets.only(left: 21.0/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, right: 21.0, top: height / 50.29/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                   child: ArticlesCategoriesWithHeader(
                     listOfTopics: topicsList,
                   ),

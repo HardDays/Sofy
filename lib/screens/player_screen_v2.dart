@@ -13,6 +13,7 @@ import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
+import 'package:sofy_new/widgets/articles/background.dart';
 import 'package:sofy_new/widgets/player/player_widgets.dart';
 import 'bloc/analytics.dart';
 import 'bloc/player_screen_v2/player_bloc.dart';
@@ -36,7 +37,7 @@ class PlayerScreenV2 extends StatelessWidget {
         final data = (state as VibrationsLoaded);
         return Stack(
           children: [
-            _BackgroundLinearColor(),
+            Background(),
             _BackgroundImages(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),

@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 
 class SofyVoteButton extends StatelessWidget {
-  const SofyVoteButton(
-      {Key key,
-      this.height = 60,
-      this.callback,
-      this.label = 'btn with ctar',
-      this.isBordered = false})
-      : super(key: key);
+  const SofyVoteButton({Key key, this.callback, this.label = 'btn with ctar', this.isBordered = false}) : super(key: key);
 
-  final double height;
   final bool isBordered;
   final VoidCallback callback;
   final String label;
@@ -22,17 +16,13 @@ class SofyVoteButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: InkWell(
         child: Container(
-          height: height,
           decoration: BoxDecoration(
-            color: isBordered
-                ? SofyVoteButtonColors.SelectedBgColor
-                : SofyVoteButtonColors.BgColor,
+            color: isBordered ? SofyVoteButtonColors.SelectedBgColor : SofyVoteButtonColors.BgColor,
             borderRadius: BorderRadius.circular(13),
             border: isBordered
-                ? Border.all(
-                    width: 1.5, color: SofyVoteButtonColors.BorderColor)
+                ? Border.all(width: 1.5, color: SofyVoteButtonColors.BorderColor)
                 : Border.all(
-                    width: 0,
+                    width: 1.5,
                     color: SofyVoteButtonColors.BgColor,
                   ),
           ),
@@ -41,10 +31,18 @@ class SofyVoteButton extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  label,
-                  style: TextStyle(
-                      color: SofyVoteButtonColors.TextColor, fontSize: 16, fontFamily: Fonts.HindGuntur, fontWeight: FontWeight.w500, fontStyle: FontStyle.normal),
+                ConstrainedBox(
+                  constraints: new BoxConstraints(minWidth: 0.5 * Layout.width, maxWidth: 0.7 * Layout.width, minHeight: 60),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        label,
+                        style: TextStyle(color: SofyVoteButtonColors.TextColor, fontSize: 16, fontFamily: Fonts.HindGuntur, fontWeight: FontWeight.w500, fontStyle: FontStyle.normal),
+                      ),
+                    ],
+                  ),
                 ),
                 Stack(
                   alignment: Alignment.center,
@@ -52,11 +50,7 @@ class SofyVoteButton extends StatelessWidget {
                     Container(
                       height: 18,
                       width: 18,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: isBordered
-                              ? SofyVoteButtonColors.SelectedRoundedColor
-                              : SofyVoteButtonColors.NotSelectedRoundedColor),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: isBordered ? SofyVoteButtonColors.SelectedRoundedColor : SofyVoteButtonColors.NotSelectedRoundedColor),
                       child: isBordered
                           ? Icon(
                               Icons.check,
