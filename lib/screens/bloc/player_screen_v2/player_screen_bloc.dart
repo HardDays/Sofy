@@ -25,6 +25,9 @@ class PlayerScreenBloc extends Bloc<PlayerScreenEvent, PlayerScreenState> {
         playlistNames = event.playlistNames;
         final id = event.id;
         playlist = event.playlist;
+        if(id == 5) {
+          playlist.map((e) => e.isTrial = true).toList();
+        }
         playlistNames.forEach((e) => print(e.titleEn));
         yield VibrationsLoaded(
             playlist: playlist.where((element) =>

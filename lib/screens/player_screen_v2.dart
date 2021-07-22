@@ -14,6 +14,7 @@ import 'package:sofy_new/providers/player.dart';
 import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/widgets/player/player_widgets.dart';
+
 import 'bloc/analytics.dart';
 import 'bloc/player_screen_v2/player_bloc.dart';
 
@@ -59,7 +60,10 @@ class PlayerScreenV2 extends StatelessWidget {
                   ),
                   //_EqualizeLines(),
                   Equalizer(),
-                  _PowerAndFireButton(),
+                  _PowerAndFireButton(
+                    baseModel: data.playlist[0],
+                    fireModel: data.playlist[4],
+                  ),
                   SizedBox(
                     height: 100,
                   )
@@ -105,19 +109,6 @@ class _BackgroundImages extends StatelessWidget {
           child: SvgPicture.asset('assets/svg/background4.svg'),
         ),
       ],
-    );
-  }
-}
-
-class _EqualizeLines extends StatelessWidget {
-  const _EqualizeLines({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    return Container(
-      height: height * 0.15,
-      child: SvgPicture.asset('assets/svg/equalize_lines.svg'),
     );
   }
 }
@@ -187,9 +178,6 @@ class _CustomSlider extends StatelessWidget {
                   data: SliderThemeData(
                     trackShape: CustomTrackShape(),
                     thumbColor: Colors.redAccent,
-                    //thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                    //overlayColor: Colors.red.withAlpha(32),
-                    //overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
                     thumbShape: CustomThumbShape(),
                     activeTrackColor: Colors.white.withOpacity(0),
                     inactiveTrackColor: Colors.white.withOpacity(0),
@@ -204,12 +192,11 @@ class _CustomSlider extends StatelessWidget {
                       divisions: 40,
                       min: 0,
                       max: 78,
-                      value: //Provider.of<Player>(context).sliderSpeedValue.roundToDouble(),
-                          Provider.of<SubscribeData>(context).isAppPurchase
-                              ? Provider.of<Player>(context)
-                                  .sliderSpeedValue
-                                  .roundToDouble()
-                              : 39,
+                      value: Provider.of<SubscribeData>(context).isAppPurchase
+                          ? Provider.of<Player>(context)
+                              .sliderSpeedValue
+                              .roundToDouble()
+                          : 39,
                       onChanged: (value) {
                         if (Provider.of<SubscribeData>(context, listen: false)
                             .isAppPurchase) {
@@ -368,8 +355,9 @@ class _SelectableButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final isAppPurchase = Provider.of<SubscribeData>(context).isAppPurchase;
     return Container(
-      height: height / 20 * 1.3,
+      height: height / 20 * 1.2,
       width: double.infinity,
       decoration: BoxDecoration(
         color: kPlayerScrV2ButtonThemeColor,
@@ -382,8 +370,17 @@ class _SelectableButtons extends StatelessWidget {
             selected: id == list[index].id ? true : false,
             model: list[index],
             onTap: () {
-              BlocProvider.of<PlayerScreenBloc>(context)
-                  .add(SetMode(id: list[index].id));
+              if (!isAppPurchase) {
+                BlocProvider.of<PlayerScreenBloc>(context)
+                    .add(SetMode(id: list[index].id));
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SubscribeScreen(isFromSplash: false),
+                  ),
+                );
+              }
             },
           );
         }),
@@ -411,7 +408,7 @@ class _SelectableButtonsItem extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          margin: EdgeInsets.all(4),
+          margin: EdgeInsets.symmetric(horizontal: 4.2, vertical: 5.2),
           child: Center(
             child: Text(
               //model.titleEn,
@@ -419,7 +416,10 @@ class _SelectableButtonsItem extends StatelessWidget {
               style: TextStyle(
                   color: selected
                       ? kPlayerScrV2SelectedTextColor
-                      : kPlayerScrV2UnselectedTextColor),
+                      : kPlayerScrV2UnselectedTextColor,
+                  fontWeight: selected
+                      ? FontWeight.bold
+                      : FontWeight.normal,),
             ),
           ),
           decoration: selected
@@ -460,7 +460,6 @@ class _VibrationList2 extends StatelessWidget {
       builder: (context, state) {
         return Consumer<Player>(
           builder: (context, provider, child) {
-            //print('ras');
             return Container(
               height: height / 3,
               child: GridView.builder(
@@ -552,14 +551,17 @@ void pause({@required context}) {
 }
 
 class _PowerAndFireButton extends StatelessWidget {
-  const _PowerAndFireButton({Key key}) : super(key: key);
+  const _PowerAndFireButton({Key key, this.baseModel, @required this.fireModel}) : super(key: key);
+
+  final ApiVibrationModel baseModel;
+  final ApiVibrationModel fireModel;
 
   @override
   Widget build(BuildContext context) {
     final player = Provider.of<Player>(context, listen: false);
+    final isAppPurchase = Provider.of<SubscribeData>(context).isAppPurchase;
     return Expanded(
       child: Row(
-        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             flex: 2,
@@ -568,11 +570,31 @@ class _PowerAndFireButton extends StatelessWidget {
           Expanded(
             flex: 3,
             child: PowerButton(
-              onTap: () {
+              onTap: () async {
                 BlocProvider.of<PlayerBloc>(context).add(StopVibration());
                 if (player.isPlaying) {
                   pause(context: context);
                   player.stopVibrations();
+                } else {
+                  if (player.currentPlayListModel != null) {
+                    player.stopVibrations();
+                    await Future.delayed(Duration(milliseconds: 200), () {});
+                    BlocProvider.of<PlayerBloc>(context).add(SelectVibration(
+                        vibrationModel: player.currentPlayListModel));
+                    player.updateCurrentPlayListModel(
+                        model: player.currentPlayListModel);
+                    play(
+                        context: context, model: player.currentPlayListModel);
+                  } else {
+                    player.stopVibrations();
+                    await Future.delayed(Duration(milliseconds: 200), () {});
+                    BlocProvider.of<PlayerBloc>(context).add(SelectVibration(
+                        vibrationModel: baseModel));
+                    player.updateCurrentPlayListModel(
+                        model: baseModel);
+                    play(
+                        context: context, model: baseModel);
+                  }
                 }
               },
             ),
@@ -581,18 +603,30 @@ class _PowerAndFireButton extends StatelessWidget {
             flex: 2,
             child: Align(
               alignment: Alignment(-1, 0),
-              child: FireButton(onTap: () async {
-                if(player.currentPlayListModel != null) {
-                  player.stopVibrations();
-                  await Future.delayed(
-                      Duration(milliseconds: 200), () {});
-                  BlocProvider.of<PlayerBloc>(context).add(
-                      SelectVibration(vibrationModel: player.currentPlayListModel));
-                  player.updateCurrentPlayListModel(
-                      model: player.currentPlayListModel);
-                  play(context: context, model: player.currentPlayListModel);
-                }
-              },),
+              child: FireButton(
+                onTap: () async {
+                  if (isAppPurchase) {
+                    if (player.currentPlayListModel != null) {
+                      player.stopVibrations();
+                      await Future.delayed(Duration(milliseconds: 200), () {});
+                      BlocProvider.of<PlayerBloc>(context).add(SelectVibration(
+                          vibrationModel: fireModel));
+                      player.updateCurrentPlayListModel(
+                          model: fireModel);
+                      play(
+                          context: context, model: fireModel);
+                    }
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SubscribeScreen(isFromSplash: false),
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
           ),
         ],
@@ -600,4 +634,3 @@ class _PowerAndFireButton extends StatelessWidget {
     );
   }
 }
-

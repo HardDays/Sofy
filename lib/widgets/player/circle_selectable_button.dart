@@ -95,29 +95,28 @@ class CircleSelectableButton extends StatelessWidget {
               )
             ],
           ),
-          //Positioned(child: Container(width: 10,height: 10,color: Colors.red,)),
-          Visibility(
-            // ignore: null_aware_in_logical_operator
-            visible: model.isTrial ? false : true,
-            child: Positioned(
-              right: 15,
-              top: 0,
-              child: Container(
-                  height: Provider.of<SubscribeData>(context).isAppPurchase
-                      ? 0.0
-                      : 50,
-                  width: Provider.of<SubscribeData>(context).isAppPurchase
-                      ? 0.0
-                      : 50,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage('assets/new_lock.png'),
-                      fit: BoxFit.fill,
-                    ),
-                  )),
-            ),
-          )
+          // Visibility(
+          //   // ignore: null_aware_in_logical_operator
+          //   visible: model.isTrial ? false : true,
+          //   child: Positioned(
+          //     right: 15,
+          //     top: 0,
+          //     child: Container(
+          //         height: isAppPurchase
+          //             ? 0.0
+          //             : 50,
+          //         width: isAppPurchase
+          //             ? 0.0
+          //             : 50,
+          //         decoration: BoxDecoration(
+          //           shape: BoxShape.circle,
+          //           image: DecorationImage(
+          //             image: AssetImage('assets/new_lock.png'),
+          //             fit: BoxFit.fill,
+          //           ),
+          //         )),
+          //   ),
+          // )
         ],
       ),
     );
