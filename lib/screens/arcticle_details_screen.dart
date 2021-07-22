@@ -369,7 +369,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                             child: SvgPicture.asset(
                                               'assets/svg/back_vector.svg',
                                               color: backButton,
-                                              height: height / 40.33 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                              height: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                             ),
                                           ),
                                           Positioned.fill(
@@ -406,7 +406,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                   fontFamily: Fonts.HindGuntur,
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle: FontStyle.normal,
-                                                  fontSize: height / 59.73 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                  fontSize: 15 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                                   color: kArticlesPopularColor,
                                                 ),
                                               ),

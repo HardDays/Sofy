@@ -133,7 +133,7 @@ class ArticleQuestion extends StatelessWidget {
                                     contentPadding: EdgeInsets.only(left: 16.0 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                     hintStyle: TextStyle(
                                         fontFamily: Fonts.HindGuntur,
-                                        fontSize: height / 64 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                        fontSize: 16 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                         fontWeight: FontWeight.w600,
                                         color: SofyQuestionColors.InputHintColor),
                                     hintText: AppLocalizations.of(context).translate('answer_hint'),
