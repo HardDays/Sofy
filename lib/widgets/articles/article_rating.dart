@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
@@ -24,7 +25,7 @@ class ArticleRating extends StatelessWidget {
 
     return Column(
       children: [
-        SofyDivider(icon: Icons.done),
+        SofyDivider(icon: FontAwesomeIcons.solidStar),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 21),
           child: Column(
@@ -33,12 +34,11 @@ class ArticleRating extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(8, 20, 8, 8),
                   child: Text(
-                    AppLocalizations.of(context)
-                        .translate('do_you_like_this_article'),
+                    AppLocalizations.of(context).translate('do_you_like_this_article'),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'Roboto',
+                      fontFamily: Fonts.Roboto,
                     ),
                   ),
                 ),
@@ -47,8 +47,7 @@ class ArticleRating extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(8, 10, 8, 0),
                   child: Text(
-                    AppLocalizations.of(context)
-                        .translate('please_rate_this_article'),
+                    AppLocalizations.of(context).translate('please_rate_this_article'),
                     style: TextStyle(
                       color: SofyQuestionColors.Text,
                       fontSize: 15,
@@ -60,10 +59,8 @@ class ArticleRating extends StatelessWidget {
                 ),
               ),
               BlocProvider<ArticleRatingBloc>(
-                create: (BuildContext context) =>
-                    ArticleRatingBloc(restApi: RestApi(), articleId: articleId),
-                child: BlocBuilder<ArticleRatingBloc, ArticleRatingState>(
-                    builder: (context, state) {
+                create: (BuildContext context) => ArticleRatingBloc(restApi: RestApi(), articleId: articleId),
+                child: BlocBuilder<ArticleRatingBloc, ArticleRatingState>(builder: (context, state) {
                   return Column(
                     children: [
                       Padding(
@@ -78,51 +75,30 @@ class ArticleRating extends StatelessWidget {
                             itemCount: 10,
                             itemBuilder: (BuildContext context, int index) {
                               double size = width / 10;
-                              return InkWell(
+                              return GestureDetector(
                                 onTap: () {
                                   print(index);
-                                  if (!(state
-                                          is ArticleRatingStatePostedRating ||
-                                      article.rating > 0))
-                                    BlocProvider.of<ArticleRatingBloc>(context)
-                                        .add(ArticleRatingEventSetRating(
-                                            rating: index + 1));
+                                  if (!(state is ArticleRatingStatePostedRating || article.rating > 0)) BlocProvider.of<ArticleRatingBloc>(context).add(ArticleRatingEventSetRating(rating: index + 1));
                                 },
                                 child: state is ArticleRatingStateInit
                                     ? article.rating > index
                                         ? Padding(
                                             padding: const EdgeInsets.all(4),
-                                            child: Icon(Icons.star,
-                                                size: size < 24 ? size : 24,
-                                                color: SofyLikeColors
-                                                    .SelectedStarColor),
+                                            child: Icon(Icons.star, size: size < 24 ? size : 24, color: SofyLikeColors.SelectedStarColor),
                                           )
                                         : Padding(
                                             padding: const EdgeInsets.all(4),
-                                            child: Icon(Icons.star_border,
-                                                size: size < 24 ? size : 24,
-                                                color: SofyLikeColors
-                                                    .UnselectedStarColor),
+                                            child: Icon(Icons.star_border, size: size < 24 ? size : 24, color: SofyLikeColors.UnselectedStarColor),
                                           )
-                                    : state is ArticleRatingStateSettedRating ||
-                                            state
-                                                is ArticleRatingStatePostedRating
+                                    : state is ArticleRatingStateSettedRating || state is ArticleRatingStatePostedRating
                                         ? state.rating > index
                                             ? Padding(
-                                                padding:
-                                                    const EdgeInsets.all(4),
-                                                child: Icon(Icons.star,
-                                                    size: size < 24 ? size : 24,
-                                                    color: SofyLikeColors
-                                                        .SelectedStarColor),
+                                                padding: const EdgeInsets.all(4),
+                                                child: Icon(Icons.star, size: size < 24 ? size : 24, color: SofyLikeColors.SelectedStarColor),
                                               )
                                             : Padding(
-                                                padding:
-                                                    const EdgeInsets.all(4),
-                                                child: Icon(Icons.star_border,
-                                                    size: size < 24 ? size : 24,
-                                                    color: SofyLikeColors
-                                                        .UnselectedStarColor),
+                                                padding: const EdgeInsets.all(4),
+                                                child: Icon(Icons.star_border, size: size < 24 ? size : 24, color: SofyLikeColors.UnselectedStarColor),
                                               )
                                         : Container(),
                               );
@@ -134,49 +110,61 @@ class ArticleRating extends StatelessWidget {
                           ? article.rating < 0
                               ? Padding(
                                   padding: const EdgeInsets.only(top: 41),
-                                  child: SofyTextButton(
-                                    callback: () {
-                                      if (state
-                                          is ArticleRatingStateSettedRating) {
-                                        Analytics().sendEventReports(
-                                          event: EventsOfAnalytics.reply_click,
-                                          attr: {
-                                            'id': articleId,
+                                  child: BlocProvider.of<ArticleRatingBloc>(context).voting
+                                      ? Container(
+                                          child: CircularProgressIndicator(
+                                            color: kAppPinkDarkColor,
+                                          ),
+                                          height: 16,
+                                          width: 16,
+                                        )
+                                      : SofyTextButton(
+                                          callback: () {
+                                            if (state is ArticleRatingStateSettedRating) {
+                                              Analytics().sendEventReports(
+                                                event: EventsOfAnalytics.articles_feedback,
+                                                attr: {
+                                                  'id': articleId,
+                                                  'name': article.title,
+                                                },
+                                              );
+                                              BlocProvider.of<ArticleRatingBloc>(context).add(ArticleRatingEventPostRating(rating: state.rating));
+                                            }
                                           },
-                                        );
-                                        BlocProvider.of<ArticleRatingBloc>(context).add(ArticleRatingEventPostRating(rating: state.rating));
-                                      }
-                                    },
-                                    label: AppLocalizations.of(context)
-                                        .translate('done'),
-                                  ),
+                                          label: AppLocalizations.of(context).translate('done'),
+                                        ),
                                 )
-                              : SofyInfo(
-                                  text: AppLocalizations.of(context)
-                                      .translate('thank_you_for_your_answer'))
+                              : SofyInfo(text: AppLocalizations.of(context).translate('thank_you_for_your_answer'))
                           : state is ArticleRatingStateSettedRating
                               ? Padding(
                                   padding: const EdgeInsets.only(top: 41),
-                                  child: SofyTextButton(
-                                    callback: () {
-                                      print('like it');
-                                      if (state
-                                          is ArticleRatingStateSettedRating)
-                                        BlocProvider.of<ArticleRatingBloc>(
-                                                context)
-                                            .add(ArticleRatingEventPostRating(
-                                                rating: state.rating));
-                                    },
-                                    label: AppLocalizations.of(context)
-                                        .translate('done'),
-                                  ),
+                                  child: BlocProvider.of<ArticleRatingBloc>(context).voting
+                                      ? Container(
+                                          child: CircularProgressIndicator(
+                                            color: kAppPinkDarkColor,
+                                          ),
+                                          height: 16,
+                                          width: 16,
+                                        )
+                                      : SofyTextButton(
+                                          callback: () {
+                                            print('like it');
+                                            if (state is ArticleRatingStateSettedRating) {
+                                              Analytics().sendEventReports(
+                                                event: EventsOfAnalytics.articles_feedback,
+                                                attr: {
+                                                  'id': articleId,
+                                                  'name': article.title,
+                                                },
+                                              );
+                                              BlocProvider.of<ArticleRatingBloc>(context).add(ArticleRatingEventPostRating(rating: state.rating));
+                                            }
+                                          },
+                                          label: AppLocalizations.of(context).translate('done'),
+                                        ),
                                 )
-                              : state is ArticleRatingStatePostedRating ||
-                                      article.rating < 0
-                                  ? SofyInfo(
-                                      text: AppLocalizations.of(context)
-                                          .translate(
-                                              'thank_you_for_your_answer'))
+                              : state is ArticleRatingStatePostedRating || article.rating < 0
+                                  ? SofyInfo(text: AppLocalizations.of(context).translate('thank_you_for_your_answer'))
                                   : Container(),
                     ],
                   );

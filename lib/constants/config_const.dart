@@ -18,8 +18,8 @@ const String monthTextFirstAboveButton= 'month_text_first_above_button';
 const String monthTextSecondAboveButtonKey = 'month_text_second_above_button';
 const String monthButtonNameKey = 'month_button_name';
 
-
-
+const bool isCommentsEnabled = false;
+const bool isAuthorEnabled = false;
 
 
 

@@ -51,7 +51,7 @@ class SofyBadge extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 17),
                     child: Text(
                         text,
-                        style: TextStyle(fontSize: 13, color: SofyBadgeColors.TextColor),
+                        style: TextStyle(fontSize: 13, color: SofyBadgeColors.Text),
                       ),
                   )
                   : SizedBox(width: 10.5),

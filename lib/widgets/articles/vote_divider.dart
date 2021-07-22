@@ -19,7 +19,7 @@ class SofyDivider extends StatelessWidget {
         children: [
           Container(
             height: 1.0,
-            width: width / 3 - 20,
+            width: width/3,
             color: Color.fromARGB(172, 237, 195, 237),
           ),
           icon == IconData(1) ? Container() : Container(
@@ -27,22 +27,25 @@ class SofyDivider extends StatelessWidget {
               child: Icon(
                 icon,
                 color: SvgColors.Done1Color,
+                size: 12,
               )),
           icon == IconData(1) ? Container() : Container(
               margin: EdgeInsets.only(right: 5.0, left: 5.0),
               child: Icon(
                 icon,
                 color: SvgColors.Done2Color,
+                size: 12,
               )),
           icon == IconData(1) ? Container() : Container(
               margin: EdgeInsets.only(right: 21.0),
               child: Icon(
                 icon,
                 color: SvgColors.Done1Color,
+                size: 12,
               )),
           Container(
             height: 1.0,
-            width: width / 3 - 20,
+            width: width/3,
             color: Color.fromARGB(172, 237, 195, 237),
           ),
         ],

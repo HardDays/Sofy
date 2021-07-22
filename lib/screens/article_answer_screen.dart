@@ -119,10 +119,12 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                               }),
                         )),
                     Padding(
-                      padding: EdgeInsets.only(top: height / 9),
+                      padding: EdgeInsets.only(top: height / 11),
                       child: Stack(
+                        alignment: Alignment.topCenter,
                         children: [
                           Container(
+                            padding: EdgeInsets.only(top: 15),
                             margin: EdgeInsets.only(top: height / 25.6, left: 20, right: 20),
                             child: Neumorphic(
                               style: NeumorphicStyle(
@@ -135,108 +137,109 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                   shadowDarkColorEmboss: kArticlesBackColor,
                                   shape: NeumorphicShape.flat,
                                   color: kNeumorphicColor2),
-                              child: Container(width: width, height: height / 4.0),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 0.0),
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 75.0,
-                                  height: 75.0,
-                                  child: Image.asset('assets/answer_title_image.png'),
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.only(top: 5.0, left: 20.0, right: 20.0),
-                                    child: Container(
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 36.0, left: 21, right: 21, bottom: 21),
+                                child: Column(
+                                  children: [
+                                    Container(
                                       alignment: Alignment.center,
                                       child: Text(
                                         AppLocalizations.of(context).translate('share_answer'),
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.center,
-                                        style:
-                                            TextStyle(fontFamily: Fonts.GilroyBold, height: 1.5, fontWeight: FontWeight.bold, fontStyle: FontStyle.normal, fontSize: 16.0, color: kWelcomDarkTextColor),
+                                        style: TextStyle(
+                                            fontFamily: Fonts.GilroyBold,
+                                            height: 1.5,
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 16.0,
+                                            color: kWelcomDarkTextColor),
                                       ),
-                                    )),
-                                Container(
-                                  height: height / 18.66,
-                                  margin: EdgeInsets.only(top: height / 42.66, left: 42.0, right: 42.0),
-                                  child: Neumorphic(
-                                    style: NeumorphicStyle(
+                                    ),
+                                    Container(
+                                      height: height / 18.66,
+                                      margin: EdgeInsets.only(top: height / 42.66),
+                                      child: Neumorphic(
+                                        style: NeumorphicStyle(
+                                            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
+                                            depth: 3,
+                                            intensity: 0.65,
+                                            shadowLightColorEmboss: backColor == kArticlesBackTextColor ? backColor : kArticlesWhiteColor,
+                                            shadowLightColor: backColor == kArticlesBackTextColor ? backColor : kArticlesWhiteColor,
+                                            shadowDarkColor: backColor,
+                                            shadowDarkColorEmboss: backColor,
+                                            shape: NeumorphicShape.flat,
+                                            color: kNeumorphicColor),
+                                        child: TextField(
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(fontFamily: Fonts.HindGuntur, fontSize: height / 48.33, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
+                                          decoration: InputDecoration(
+                                            counterText: '',
+                                            border: InputBorder.none,
+                                            filled: true,
+                                            fillColor: SofyQuestionColors.InputBgColor,
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            disabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            contentPadding: EdgeInsets.only(left: 16.0),
+                                            hintStyle: TextStyle(
+                                                fontFamily: Fonts.HindGuntur, fontSize: height / 64, fontWeight: FontWeight.w600, color: SofyQuestionColors.InputHintColor),
+                                            hintText: AppLocalizations.of(context).translate('answer_hint'),
+                                          ),
+                                          maxLength: 100,
+                                          maxLines: 1,
+                                          enabled: !isAnswerSent,
+                                          autofocus: true,
+                                          controller: textController,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(boxShadow: [
+                                        BoxShadow(
+                                          color: kArticlesAnsShadow,
+                                          offset: Offset(3, 3),
+                                          blurRadius: 10.0,
+                                        ),
+                                      ]),
+                                      height: height / 18.66,
+                                      margin: EdgeInsets.only(top: 21),
+                                      child: NeumorphicCustomButton(
+                                        style: NeumorphicStyle(
+                                            depth: !isAnswerSent ? 0 : -3,
+                                            shape: NeumorphicShape.flat,
+                                            intensity: 0.6,
+                                            shadowLightColorEmboss: kADNeumorphicShadowLightColorEmboss,
+                                            shadowDarkColor: kADNeumorphicShadowDarkColor,
+                                            shadowDarkColorEmboss: kADNeumorphicShadowDarkColorEmboss,
+                                            shadowLightColor: kArticlesWhiteColor,
+                                            color: kADNeumorphicColor),
                                         boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
-                                        depth: 3,
-                                        intensity: 0.65,
-                                        shadowLightColorEmboss: backColor == kArticlesBackTextColor ? backColor : kArticlesWhiteColor,
-                                        shadowLightColor: backColor == kArticlesBackTextColor ? backColor : kArticlesWhiteColor,
-                                        shadowDarkColor: backColor,
-                                        shadowDarkColorEmboss: backColor,
-                                        shape: NeumorphicShape.flat,
-                                        color: kNeumorphicColor),
-                                    child: TextField(
-                                      enabled: !isAnswerSent,
-                                      autofocus: true,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(fontFamily: Fonts.HindGuntur, fontSize: height / 48.33, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        filled: true,
-                                        fillColor: SofyQuestionColors.InputBgColor,
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        disabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        contentPadding: EdgeInsets.only(left: 16.0, bottom: 7.0),
-                                        hintStyle: TextStyle(fontFamily: Fonts.Gilroy, fontSize: height / 64, fontWeight: FontWeight.w600, color: SofyQuestionColors.Text),
-                                        hintText: AppLocalizations.of(context).translate('answer_hint'),
-                                      ),
-                                      controller: textController,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(boxShadow: [
-                                    BoxShadow(
-                                      color: kArticlesAnsShadow,
-                                      offset: Offset(3, 3),
-                                      blurRadius: 10.0,
-                                    ),
-                                  ]),
-                                  height: height / 18.66,
-                                  margin: EdgeInsets.only(left: 40.0, right: 40.0, top: height / 56),
-                                  child: NeumorphicCustomButton(
-                                    style: NeumorphicStyle(
-                                        depth: !isAnswerSent ? 0 : -3,
-                                        shape: NeumorphicShape.flat,
-                                        intensity: 0.6,
-                                        shadowLightColorEmboss: kADNeumorphicShadowLightColorEmboss,
-                                        shadowDarkColor: kADNeumorphicShadowDarkColor,
-                                        shadowDarkColorEmboss: kADNeumorphicShadowDarkColorEmboss,
-                                        shadowLightColor: kArticlesWhiteColor,
-                                        color: kADNeumorphicColor),
-                                    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
-                                    provideHapticFeedback: false,
-                                    onClick: () {
-                                      if (isAnswerSent) return;
-                                      if (textController.text.length > 0 || textController.text.length < 255) {
-                                        sendAnswer(widget.articleId, widget.questionId, textController.text.toString());
-                                      }
-                                      /*Analytics().sendEventReports(
-                            event: banner_click,
-                          );*/
-                                    },
-                                    padding: EdgeInsets.all(0.0),
-                                    child: Stack(
-                                      children: <Widget>[
-                                        Container(
+                                        provideHapticFeedback: false,
+                                        onClick: () {
+                                          if (isAnswerSent) return;
+                                          if (textController.text.length > 0 || textController.text.length < 255) {
+                                            Analytics().sendEventReports(
+                                              event: EventsOfAnalytics.send_stories,
+                                              attr: {
+                                                'name': widget.articleTitle,
+                                                'id': widget.articleId,
+                                              },
+                                            );
+                                            sendAnswer(widget.articleId, widget.questionId, textController.text.toString());
+                                          }
+                                        },
+                                        padding: EdgeInsets.all(0.0),
+                                        child: Container(
                                           height: height / 18.66,
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
@@ -267,8 +270,8 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                         AppLocalizations.of(context).translate('send'),
                                                         overflow: TextOverflow.ellipsis,
                                                         style: TextStyle(
-                                                          fontFamily: Fonts.MontserratBold,
-                                                          fontWeight: FontWeight.bold,
+                                                          fontFamily: Fonts.AbhayaLibreExtraBold,
+                                                          fontWeight: FontWeight.w800,
                                                           fontStyle: FontStyle.normal,
                                                           fontSize: height / 56,
                                                           //14
@@ -310,8 +313,8 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                             AppLocalizations.of(context).translate('answer_sent'),
                                                             overflow: TextOverflow.ellipsis,
                                                             style: TextStyle(
-                                                              fontFamily: Fonts.MontserratBold,
-                                                              fontWeight: FontWeight.bold,
+                                                              fontFamily: Fonts.AbhayaLibreExtraBold,
+                                                              fontWeight: FontWeight.w800,
                                                               fontStyle: FontStyle.normal,
                                                               fontSize: height / 56,
                                                               //14
@@ -323,12 +326,21 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                       ],
                                                     ),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
+                          ),
+                          Container(
+                            width: width / 5,
+                            height: width / 5,
+                            decoration: BoxDecoration(boxShadow: [
+                              BoxShadow(color: Color.fromRGBO(255, 255, 255, 0.25), offset: Offset(-4, -4), blurRadius: 10),
+                              BoxShadow(color: Color.fromRGBO(219, 196, 219, 0.25), offset: Offset(4, 4), blurRadius: 10)
+                            ], borderRadius: BorderRadius.all(Radius.circular(100))),
+                            child: Image.asset('assets/answer_title_image.png'),
                           ),
                         ],
                       ),

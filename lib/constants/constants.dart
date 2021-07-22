@@ -26,6 +26,7 @@ class Fonts {
   static const MontserratSemi = 'Montserrat Semi';
   static const MontserratBold = 'Montserrat Bold';
   static const Montserrat = 'Montserrat';
+  static const AbhayaLibreExtraBold = 'Abhaya Libre ExtraBold';
 }
 
 const kUrlPattern = r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
@@ -185,6 +186,7 @@ class EventsOfAnalytics {
   static const String comment_dislike_click = 'comment_dislike_click';
   static const String comment_like_click = 'comment_like_click';
   static const String comment_send_reply_click = 'comment_send_reply_click';
+  static const String article_readed = 'article_readed';
 }
 
 

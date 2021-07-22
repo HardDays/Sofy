@@ -10,7 +10,7 @@ const kAppPinkDarkColor = Color(0xffFF96AD);
 const kAppPinkLightColor = Color(0xffFCF0FC);
 const kWelcomDarkTextColor = Color(0xff836771);
 const kWelcomButtonDarkColor = Color(0xffFDB0C1);
-const kMainScreenScaffoldBackColor = Color(0xfff9eaf7);
+const kMainScreenScaffoldBackColor = Colors.white;
 const kWelcomButtonLightColor = Color(0xfffbddeb);
 const kWelcomButtonDarkTextColor = Color(0xff38394F);
 const kMainBottomBArBackColor = Color(0xffFCEFFC);
@@ -275,7 +275,7 @@ class ArticlesColors {
   ];
   static final GreyColor = Color.fromARGB(130, 56, 57, 79);
   static final Divider = Color.fromARGB(170, 255, 242, 245);
-  static const TextColorCat = Color(0xFF836771);
+  static const TextColorCat = Color.fromRGBO(77, 59, 55, 0.79);
   static const BottomLg = [
     Colors.white,
     Color(0xffF9EBF8)
@@ -308,15 +308,16 @@ class SofyVoteButtonColors {
 }
 
 class SofyVoteColors {
-  static const Text = Color(0xFF2F2E41);
+  static const Text = Color.fromRGBO(47, 46, 65, 1);
 }
 
 class SofyQuestionColors {
-  static const Text = Color(0xFF2F2E41);
+  static const Text = Color.fromRGBO(47, 46, 65, 1);
+  static const QText = Color.fromRGBO(131, 103, 113, 1);
   static const FormBgColor = Color(0xFFFAEBF8);
   static const FormShadowColor = Color.fromRGBO(165, 106, 130, 0.15);
   static const InputBgColor = Color(0xFFF9D9F4);
-  static const InputHintColor = Color.fromARGB(127, 131, 103, 113);
+  static const InputHintColor = Color.fromRGBO(131, 103, 113, 0.5);
   static const InputShadowColor = Color.fromRGBO(236, 209, 232, 0.6);
 }
 
@@ -334,7 +335,7 @@ class SofyBadgeColors {
   static const PositiveShadowColor = Color.fromRGBO(219, 196, 219, 0.41);
   static const NagativeShadowColor = Color.fromRGBO(255, 255, 255, 0.6);
   static const IconColor = Color(0xFFE0347A);
-  static const TextColor = Color(0xFF2F2E41);
+  static const Text = Color.fromRGBO(47, 46, 65, 1);
 }
 
 class SofyVoteProgressColors {
@@ -357,7 +358,7 @@ class CommentsColors {
   static const InputBgColor = Color(0xFFF9D9F4);
   static const HintText = Color.fromARGB(76, 56, 57, 79);
   static const Text = Color(0xFF836771);
-  static const SelectorText = Color(0xFF2F2E41);
+  static const SelectorText = Color.fromRGBO(47, 46, 65, 1);
 }
 
 
@@ -367,7 +368,7 @@ class SofyStoryColors {
   static const ProgressIndicatorColor = Color(0xffFF96AD);
   static const CardHeaderColor = Color(0xffFEA6BA);
   static const CardHeaderTextColor = Color(0xFFFFFFFF);
-  static const CardTextColor = Color(0xFF2F2E41);
+  static const CardTextColor = Color.fromRGBO(47, 46, 65, 1);
   static const TopPageCounterNotActiveColor = Colors.grey;
   static const TopPageCounterActiveColor = Colors.white;
 }

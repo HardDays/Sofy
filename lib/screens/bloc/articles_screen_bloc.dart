@@ -7,9 +7,9 @@ import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/rest_api.dart';
 
 class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
-  ArticlesBloc({this.restApi}) : super(ArticlesStateLoading());
+  ArticlesBloc({this.restApi, this.languageCode}) : super(ArticlesStateLoading());
   final RestApi restApi;
-
+final String languageCode;
   @override
   Stream<ArticlesState> mapEventToState(ArticlesEvent event) async* {
     if (event is ArticlesEventLoad) {
@@ -29,11 +29,11 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
         //     await restApi.getTopicsListWithoutCtx(token: userToken);
 
         List<ApiArticlesModel> femaleSexuality =
-            await restApi.getArticlesWithoutCtx(21, token: userToken);
+            await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 21 : 22, token: userToken);
         List<ApiArticlesModel> interestingAboutSex =
-            await restApi.getArticlesWithoutCtx(11, token: userToken);
+            await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 11 : 12, token: userToken);
         List<ApiArticlesModel> orgasms =
-            await restApi.getArticlesWithoutCtx(13, token: userToken);
+            await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 13 : 14, token: userToken);
 
         yield ArticlesStateResult(
           listOfArticles: listOfArticles,

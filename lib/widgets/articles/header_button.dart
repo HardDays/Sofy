@@ -22,7 +22,7 @@ class HeaderButton extends StatelessWidget {
             fontFamily: Fonts.Allerta,
             color: textColor,
             fontSize: fontSize,
-            letterSpacing: -0.065,
+            letterSpacing: -0.065*fontSize,
             fontWeight: FontWeight.normal
           ),
         ),
