@@ -13,7 +13,6 @@ class ArticleDetailsSkeletion extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      color: ArticleDetailsColors.BgColor,
       child: Center(
         child: Container(
           child: CircularProgressIndicator(

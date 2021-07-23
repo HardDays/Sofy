@@ -28,6 +28,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/models/api_article_poll_model.dart';
 import 'package:sofy_new/widgets/comments/comments.dart';
+import 'package:sofy_new/widgets/fullscreen_preloader.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../rest_api.dart';
@@ -132,7 +133,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                 Stack(
                                   children: [
                                     Container(
-                                      height: 390,
+                                      height: 390 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                       width: width,
                                       child: ExtendedImage.network(
                                         state.articleDetails.article.coverImg,
@@ -143,7 +144,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                     Visibility(
                                       visible: isAuthorEnabled,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(top: 366),
+                                        padding: EdgeInsets.only(top: 366 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.only(topLeft: Radius.circular(radius), topRight: Radius.circular(radius)),
                                           child: Stack(
@@ -155,7 +156,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                 color: Colors.white,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.fromLTRB(21, 21, 21, 0),
+                                                padding: EdgeInsets.fromLTRB(21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                    21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 0),
                                                 child: ArticleAuthorDescription(author: state.author),
                                               ),
                                             ],
@@ -164,12 +166,16 @@ class ArticleDetailsScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(top: isAuthorEnabled ? 426 : 386),
+                                      padding: EdgeInsets.only(
+                                          top: isAuthorEnabled
+                                              ? 426 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical
+                                              : 386 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                       child: Stack(
                                         alignment: Alignment.topCenter,
                                         children: [
                                           Container(
-                                            padding: const EdgeInsets.fromLTRB(21, 26, 21, 0),
+                                            padding: EdgeInsets.fromLTRB(21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                26 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal, 0),
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,15 +183,23 @@ class ArticleDetailsScreen extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   state.articleDetails.article.title,
-                                                  style: TextStyle(fontFamily: Fonts.Roboto, fontWeight: FontWeight.w700, fontSize: 24, color: ArticlesColors.HeaderTextColor),
+                                                  style: TextStyle(
+                                                      fontFamily: Fonts.Roboto,
+                                                      fontWeight: FontWeight.w700,
+                                                      fontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                      color: ArticlesColors.HeaderTextColor),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(top: 25, bottom: 8),
+                                                  padding: EdgeInsets.only(
+                                                      top: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                      bottom: 8 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                                   child: Row(
                                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
                                                       SofyButton(
-                                                        width: isCommentsEnabled ? width / 2 - 30 : width - 30 - 12,
+                                                        width: isCommentsEnabled
+                                                            ? width / 2 - 30/Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal
+                                                            : width - 42/ Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                                         label: AppLocalizations.of(context).translate('questions_btn'),
                                                         callback: () {
                                                           Analytics().sendEventReports(
@@ -197,13 +211,14 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                           );
                                                           final RenderBox questions = _questionsKey.currentContext.findRenderObject();
                                                           final sizeQuestions = questions.localToGlobal(Offset.zero);
-                                                          _controller.animateTo(sizeQuestions.dy - height / 8.21, duration: Duration(milliseconds: 350), curve: Curves.ease);
+                                                          _controller.animateTo(sizeQuestions.dy - height / 8.21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                              duration: Duration(milliseconds: 350), curve: Curves.ease);
                                                         },
                                                       ),
                                                       Visibility(
                                                         visible: isCommentsEnabled,
                                                         child: SofyButton(
-                                                            width: width / 2 - 30,
+                                                            width: width / 2 - 30/Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                                             label: AppLocalizations.of(context).translate('comments_btn'),
                                                             callback: () {
                                                               Analytics().sendEventReports(
@@ -215,7 +230,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                               );
                                                               final RenderBox comments = _commentsKey.currentContext.findRenderObject();
                                                               final sizeComments = comments.localToGlobal(Offset.zero);
-                                                              _controller.animateTo(sizeComments.dy - height / 8.21, duration: Duration(milliseconds: 350), curve: Curves.ease);
+                                                              _controller.animateTo(sizeComments.dy - height / 8.21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                                  duration: Duration(milliseconds: 350), curve: Curves.ease);
                                                             }),
                                                       )
                                                     ],
@@ -226,22 +242,22 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                     "p": Style(
                                                         wordSpacing: 5,
                                                         lineHeight: LineHeight.number(1.5),
-                                                        fontFamily: Fonts.Montserrat,
+                                                        fontFamily: Fonts.HindGuntur,
                                                         fontStyle: FontStyle.normal,
                                                         fontSize: FontSize(height / 57.73),
                                                         color: kArticlesDetailsScreenColor),
                                                     "strong": Style(
                                                         wordSpacing: 5,
                                                         lineHeight: LineHeight.number(1.6),
-                                                        fontFamily: Fonts.MontserratBold,
-                                                        fontWeight: FontWeight.w600,
+                                                        fontFamily: Fonts.HindGuntur,
+                                                        fontWeight: FontWeight.bold,
                                                         fontStyle: FontStyle.normal,
                                                         fontSize: FontSize(height / 50.7),
                                                         color: kArticlesDetailsScreenColor),
                                                     "h1": Style(
                                                         wordSpacing: 5,
-                                                        lineHeight: LineHeight.number(1.6),
-                                                        fontFamily: Fonts.Montserrat,
+                                                        lineHeight: LineHeight.number(1.7),
+                                                        fontFamily: Fonts.HindGuntur,
                                                         fontWeight: FontWeight.w600,
                                                         fontStyle: FontStyle.normal,
                                                         fontSize: FontSize(height / 50.7),
@@ -249,14 +265,14 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                     "li": Style(
                                                         wordSpacing: 5,
                                                         lineHeight: LineHeight.number(1.5),
-                                                        fontFamily: Fonts.Montserrat,
+                                                        fontFamily: Fonts.HindGuntur,
                                                         fontStyle: FontStyle.normal,
                                                         fontSize: FontSize(height / 57.73),
                                                         color: kArticlesDetailsScreenColor),
                                                     "u": Style(
                                                         wordSpacing: 5,
-                                                        lineHeight: LineHeight.number(1.5),
-                                                        fontFamily: Fonts.Montserrat,
+                                                        lineHeight: LineHeight.number(1.7),
+                                                        fontFamily: Fonts.HindGuntur,
                                                         fontStyle: FontStyle.normal,
                                                         fontSize: FontSize(height / 57.73),
                                                         color: kArticlesDetailsScreenColor),
@@ -302,7 +318,9 @@ class ArticleDetailsScreen extends StatelessWidget {
                                     children: <Widget>[
                                       Container(
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                topRight: Radius.circular(25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical)),
                                             boxShadow: [
                                               BoxShadow(
                                                 color: CommentsColors.InputCardShadow1Color,
@@ -331,8 +349,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                       ValueListenableBuilder(
                         valueListenable: scroll,
                         builder: (_, value, __) => AnimatedContainer(
-                          height: height / 9.61,
-                          padding: EdgeInsets.only(top: height / 40.66),
+                          height: height / 9.61/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          padding: EdgeInsets.only(top: height / 40.66 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                           color: appBar,
                           duration: Duration(milliseconds: 350),
                           child: Stack(
@@ -351,7 +369,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                             child: SvgPicture.asset(
                                               'assets/svg/back_vector.svg',
                                               color: backButton,
-                                              height: height / 40.33,
+                                              height: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                             ),
                                           ),
                                           Positioned.fill(
@@ -363,7 +381,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                   splashColor: Colors.transparent,
                                                   hoverColor: Colors.transparent,
                                                   borderRadius: BorderRadius.circular(60),
-                                                  radius: 25,
+                                                  radius: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                                   onTap: () {
                                                     Navigator.pop(context);
                                                   }),
@@ -377,17 +395,20 @@ class ArticleDetailsScreen extends StatelessWidget {
                                           opacity: textColor == Colors.transparent ? 0.0 : 1.0,
                                           curve: Curves.fastOutSlowIn,
                                           child: Container(
-                                            child: Text(
-                                              state.articleDetails.article.title != null ? state.articleDetails.article.title : '',
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontFamily: Fonts.MontserratSemi,
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle: FontStyle.normal,
-                                                fontSize: height / 59.73,
-                                                color: kArticlesPopularColor,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(top: 8),
+                                              child: Text(
+                                                state.articleDetails.article.title != null ? state.articleDetails.article.title : '',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontFamily: Fonts.HindGuntur,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 15 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                  color: kArticlesPopularColor,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -413,7 +434,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                   splashColor: Colors.transparent,
                                                   hoverColor: Colors.transparent,
                                                   borderRadius: BorderRadius.circular(60),
-                                                  radius: 25,
+                                                  radius: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                                   onTap: () {
                                                     Analytics().sendEventReports(
                                                       event: EventsOfAnalytics.share_article_click,
@@ -436,7 +457,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                               Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Container(
-                                  height: height / 298.6,
+                                  height: height / 298.6 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                   color: dividerColor,
                                   child: LinearProgressIndicator(
                                     backgroundColor: dividerColor,
@@ -454,13 +475,13 @@ class ArticleDetailsScreen extends StatelessWidget {
             }
             if (state is ArticleDetailsStateError) {
               return Padding(
-                padding: const EdgeInsets.all(22),
+                padding: EdgeInsets.all(22 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                 child: Center(
                   child: Container(child: Text(state.error)),
                 ),
               );
             }
-            return ArticleDetailsSkeletion();
+            return FullscreenPreloader();
           },
         ),
       ),

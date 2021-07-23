@@ -51,7 +51,7 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return Row(
                 children: [
-                  index == 0 ? SizedBox(width: 22) : SizedBox(width: 7.5),
+                  index == 0 ? SizedBox(width: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal) : SizedBox(width: 7.5 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
                   ArticleCard(
                     title: listOfArticles[index].title,
                     path: listOfArticles[index].coverImg,
@@ -62,8 +62,7 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
                     textColor: kArticleCardTextColor,
                     radius: cardRadius,
                     isPaid: listOfArticles[index].isPaid,
-                    callback: () {
-                      print(listOfArticles[index].id);
+                    callback: () async {
                       bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
                       if (listOfArticles[index].isPaid == 1) {
                         if (isAppPurchase) {

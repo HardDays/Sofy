@@ -31,25 +31,25 @@ class ArticleQuestion extends StatelessWidget {
       children: [
         SofyDivider(icon: FontAwesomeIcons.question),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 21),
+          padding: EdgeInsets.symmetric(horizontal: 21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 23.0),
+                padding: EdgeInsets.only(bottom: 23.0 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                 child: Text(
                   question.message,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: SofyQuestionColors.Text,
                     fontFamily: Fonts.Roboto,
-                    fontSize: 20,
+                    fontSize: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Stack(alignment: Alignment.topCenter, children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 40),
+                  padding: EdgeInsets.only(top: 40 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                   child: Container(
                     decoration: BoxDecoration(
                       color: SofyQuestionColors.FormBgColor,
@@ -60,20 +60,21 @@ class ArticleQuestion extends StatelessWidget {
                           blurRadius: 15.0,
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(9),
+                      borderRadius: BorderRadius.circular(9 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                     ),
                     child: Column(
                       children: [
                         Center(
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 40, 8, 8),
+                            padding: EdgeInsets.fromLTRB(8 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 40 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                8 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 8 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                             child: Text(
                               AppLocalizations.of(context).translate('share_answer'),
                               style: TextStyle(
                                 color: SofyQuestionColors.QText,
-                                fontSize: 16,
+                                fontSize: 16 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                 fontWeight: FontWeight.bold,
-                                fontFamily: Fonts.AbhayaLibreExtraBold,
+                                fontFamily: Fonts.HindGuntur,
                               ),
                             ),
                           ),
@@ -93,7 +94,8 @@ class ArticleQuestion extends StatelessWidget {
                               color: SofyQuestionColors.FormBgColor,
                               borderRadius: BorderRadius.circular(9),
                             ),
-                            padding: const EdgeInsets.fromLTRB(21, 16, 21, 24),
+                            padding: EdgeInsets.fromLTRB(21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 16 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                             child: Container(
                               decoration: BoxDecoration(
                                 boxShadow: [
@@ -118,18 +120,22 @@ class ArticleQuestion extends StatelessWidget {
                                     fillColor: SofyQuestionColors.InputBgColor,
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(10 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                     ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(10 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                     ),
                                     disabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(10 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                     ),
-                                    contentPadding: EdgeInsets.only(left: 16.0),
-                                    hintStyle: TextStyle(fontFamily: Fonts.HindGuntur, fontSize: height / 64, fontWeight: FontWeight.w600, color: SofyQuestionColors.InputHintColor),
+                                    contentPadding: EdgeInsets.only(left: 16.0 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                    hintStyle: TextStyle(
+                                        fontFamily: Fonts.HindGuntur,
+                                        fontSize: 16 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                        fontWeight: FontWeight.w600,
+                                        color: SofyQuestionColors.InputHintColor),
                                     hintText: AppLocalizations.of(context).translate('answer_hint'),
                                   ),
                                   enabled: false),
@@ -141,8 +147,8 @@ class ArticleQuestion extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: SizeConfig.screenWidth/5,
-                  height: SizeConfig.screenWidth/5,
+                  width: SizeConfig.screenWidth / 5 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                  height: SizeConfig.screenWidth / 5 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                   decoration: BoxDecoration(boxShadow: [
                     BoxShadow(color: Color.fromRGBO(255, 255, 255, 0.25), offset: Offset(-4, -4), blurRadius: 10),
                     BoxShadow(color: Color.fromRGBO(219, 196, 219, 0.25), offset: Offset(4, 4), blurRadius: 10)
@@ -151,15 +157,13 @@ class ArticleQuestion extends StatelessWidget {
                 ),
               ]),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 30),
+                padding: EdgeInsets.symmetric(vertical: 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                 child: SofyButton(
                   label: AppLocalizations.of(context).translate('show_answers'),
                   callback: () {
                     Analytics().sendEventReports(
                       event: EventsOfAnalytics.go_to_stories_click,
-                      attr: {
-                        'id': articleId,
-                      },
+                      attr: {'id': articleId, 'name': article.title},
                     );
                     Navigator.push(
                       context,

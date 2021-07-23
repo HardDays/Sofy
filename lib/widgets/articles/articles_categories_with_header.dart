@@ -49,7 +49,7 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
                   color: textColor,
                   fontSize: fontTitleSize,
                   fontWeight: FontWeight.normal,
-                  letterSpacing: -0.065,
+                  letterSpacing: -0.065*fontTitleSize,
                 ),
               )
             : Container(),

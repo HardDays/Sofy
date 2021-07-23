@@ -21,6 +21,7 @@ class ArticleCard extends StatelessWidget {
       this.textColor = const Color(0x725E5C),
       this.radius = 27,
       this.isPaid = 1,
+        this.isAppPurchase = false,
       this.callback})
       : super(key: key);
   final double radius;
@@ -33,6 +34,8 @@ class ArticleCard extends StatelessWidget {
   final String path;
   final int isPaid;
   final VoidCallback callback;
+  final bool isAppPurchase;
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +74,6 @@ class ArticleCard extends StatelessWidget {
                             sigmaY: 32.0,
                           ),
                           child: Container(
-                            width: width,
                             height: frozenHeight,
                             decoration: BoxDecoration(
                               color: Color.fromARGB(5, 255, 255, 255),
@@ -98,18 +100,18 @@ class ArticleCard extends StatelessWidget {
                 ),
                 Visibility(
                   // ignore: null_aware_in_logical_operator
-                  visible: isPaid == 1 ? true : false,
+                  visible: isPaid == 1 ? isAppPurchase ? false : true : false,
                   child: Container(
                     height: Provider.of<SubscribeData>(context).isAppPurchase ? 0.0 : screenHeight,
                     width: Provider.of<SubscribeData>(context).isAppPurchase ? 0.0 : screenHeight,
                     decoration: BoxDecoration(
                       //color: Color(0x75C4C4C4),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(Radius.circular(radius)),
                     ),
                     alignment: Alignment.topRight,
                     child: Container(
-                        height: screenHeight / 12.6,
-                        width: screenHeight / 12.6,
+                        height: screenHeight / 12.6/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                        width: screenHeight / 12.6/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage('assets/new_lock.png'),

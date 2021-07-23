@@ -52,7 +52,7 @@ const kDividerWithStarsColor = Color(0x50edc3ed);
 const kDividerWithStarsColor2 = Color(0x50edc3ed);
 
 const kCustomDivider = Color(0x40fdb0c1);
-const kArticlesDetailsScreenColor = Color(0xff2f2e41);
+const kArticlesDetailsScreenColor = Color.fromRGBO(47, 46, 65, 0.85);
 const kArticlesDetailsScreenInputColor = Color(0xff836771);
 const kArticlesDetailsScreenInput2Color = Color(0x50836771);
 const kArticlesDetailsAppBarColor = Color(0xffFCEFFC);

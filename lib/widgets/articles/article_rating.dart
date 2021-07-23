@@ -27,16 +27,17 @@ class ArticleRating extends StatelessWidget {
       children: [
         SofyDivider(icon: FontAwesomeIcons.solidStar),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 21),
+          padding: EdgeInsets.symmetric(horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
           child: Column(
             children: [
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 20, 8, 8),
+                  padding: EdgeInsets.fromLTRB(8 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal, 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                      8 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal, 8 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                   child: Text(
                     AppLocalizations.of(context).translate('do_you_like_this_article'),
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                       fontWeight: FontWeight.bold,
                       fontFamily: Fonts.Roboto,
                     ),
@@ -45,7 +46,8 @@ class ArticleRating extends StatelessWidget {
               ),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 10, 8, 0),
+                  padding: EdgeInsets.fromLTRB(8 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal, 10 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                      8 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal, 0),
                   child: Text(
                     AppLocalizations.of(context).translate('please_rate_this_article'),
                     style: TextStyle(
@@ -64,7 +66,7 @@ class ArticleRating extends StatelessWidget {
                   return Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 25),
+                        padding: EdgeInsets.only(top: 25/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                         child: Container(
                           height: width / 10 < 24 ? width / 10 : 24,
                           child: ListView.builder(
@@ -109,14 +111,14 @@ class ArticleRating extends StatelessWidget {
                       state is ArticleRatingStateInit
                           ? article.rating < 0
                               ? Padding(
-                                  padding: const EdgeInsets.only(top: 41),
+                                  padding: EdgeInsets.only(top: 41/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                   child: BlocProvider.of<ArticleRatingBloc>(context).voting
                                       ? Container(
                                           child: CircularProgressIndicator(
                                             color: kAppPinkDarkColor,
                                           ),
-                                          height: 16,
-                                          width: 16,
+                                          height: 16/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                          width: 16/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                         )
                                       : SofyTextButton(
                                           callback: () {
@@ -137,18 +139,17 @@ class ArticleRating extends StatelessWidget {
                               : SofyInfo(text: AppLocalizations.of(context).translate('thank_you_for_your_answer'))
                           : state is ArticleRatingStateSettedRating
                               ? Padding(
-                                  padding: const EdgeInsets.only(top: 41),
+                                  padding: EdgeInsets.only(top: 41/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                   child: BlocProvider.of<ArticleRatingBloc>(context).voting
                                       ? Container(
                                           child: CircularProgressIndicator(
                                             color: kAppPinkDarkColor,
                                           ),
-                                          height: 16,
-                                          width: 16,
+                                          height: 16/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                          width: 16/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                         )
                                       : SofyTextButton(
                                           callback: () {
-                                            print('like it');
                                             if (state is ArticleRatingStateSettedRating) {
                                               Analytics().sendEventReports(
                                                 event: EventsOfAnalytics.articles_feedback,

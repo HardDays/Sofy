@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 
 class SofyButton extends StatelessWidget {
   const SofyButton({
@@ -49,7 +50,7 @@ class SofyButton extends StatelessWidget {
             label,
             style: TextStyle(
                 color: labelColor,
-                fontSize: labelFontSize,
+                fontSize: labelFontSize/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                 fontWeight: FontWeight.bold,
                 fontFamily: Fonts.HindGuntur),
           ),

@@ -189,7 +189,11 @@ class EventsOfAnalytics {
   static const String article_readed = 'article_readed';
 }
 
-
+class Layout {
+  static const height = 896;
+  static const width = 416;
+  static const multiplier = 100;
+}
 
 const String monthly_purchase_key = "Monthly access";
 const String annual_purchase_key = "Annual access";

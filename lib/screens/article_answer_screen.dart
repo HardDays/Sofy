@@ -6,6 +6,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/widgets/neumorphic/neumorphic_button.dart';
@@ -108,7 +109,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                       style: TextStyle(
                                           fontFamily: Fonts.Exo2,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: height / 37.3, //24
+                                          fontSize: 24/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, //24
                                           color: kNavigBarInactiveColor),
                                     ),
                                   ),
@@ -192,7 +193,9 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                             ),
                                             contentPadding: EdgeInsets.only(left: 16.0),
                                             hintStyle: TextStyle(
-                                                fontFamily: Fonts.HindGuntur, fontSize: height / 64, fontWeight: FontWeight.w600, color: SofyQuestionColors.InputHintColor),
+                                                fontFamily: Fonts.HindGuntur,
+                                                fontSize: 16 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                fontWeight: FontWeight.w600, color: SofyQuestionColors.InputHintColor),
                                             hintText: AppLocalizations.of(context).translate('answer_hint'),
                                           ),
                                           maxLength: 100,
@@ -265,17 +268,16 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                       ),
                                                     ),
                                                     Container(
-                                                      margin: EdgeInsets.only(bottom: 4.0),
                                                       child: Text(
                                                         AppLocalizations.of(context).translate('send'),
                                                         overflow: TextOverflow.ellipsis,
+                                                        textAlign: TextAlign.center,
                                                         style: TextStyle(
-                                                          fontFamily: Fonts.AbhayaLibreExtraBold,
+                                                          fontFamily: Fonts.HindGuntur,
                                                           fontWeight: FontWeight.w800,
                                                           fontStyle: FontStyle.normal,
-                                                          fontSize: height / 56,
+                                                          fontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                                           //14
-                                                          height: 1.7,
                                                           color: kArticlesWhiteColor,
                                                         ),
                                                       ),
@@ -312,13 +314,13 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                                           child: Text(
                                                             AppLocalizations.of(context).translate('answer_sent'),
                                                             overflow: TextOverflow.ellipsis,
+                                                            textAlign: TextAlign.center,
                                                             style: TextStyle(
-                                                              fontFamily: Fonts.AbhayaLibreExtraBold,
+                                                              fontFamily: Fonts.HindGuntur,
                                                               fontWeight: FontWeight.w800,
                                                               fontStyle: FontStyle.normal,
-                                                              fontSize: height / 56,
+                                                              fontSize: 16 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                                               //14
-                                                              height: 1.7,
                                                               color: kArticlesWhiteColor,
                                                             ),
                                                           ),
