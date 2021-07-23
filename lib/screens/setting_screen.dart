@@ -75,262 +75,264 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     user = Provider.of<User>(context, listen: true);
 
-    return FocusDetector(
-      key: _resumeDetectorKey,
-      child: Stack(
-        children: <Widget>[
-          Background(),
-          Padding(
-              padding: EdgeInsets.only(left: 0.0, right: 0.0, top: height / 14.50),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.only(left: 20.0),
-                        child: Container(
-                          padding: EdgeInsets.only(bottom: 5.0),
-                          alignment: Alignment.center,
-                          child: Text(
-                            AppLocalizations.of(context)
-                                .translate('settings'),
-//                  'Настройки',
-                            style: TextStyle(
-                                fontFamily: Fonts.Exo2,
-                                fontWeight: FontWeight.bold,
-                                fontSize: height / 37.33, //24
-                                color: kNavigBarInactiveColor),
-                          ),
-                        )),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: width / 20.7,
-                      right: width / 20.7,
-                      top: height / 34.18),
-                  child: Column(
+    return Container(
+      child: FocusDetector(
+        key: _resumeDetectorKey,
+        child: Stack(
+          children: <Widget>[
+            Background(),
+            Padding(
+                padding: EdgeInsets.only(left: 0.0, right: 0.0, top: height / 14.50),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Row(
                     children: <Widget>[
-                      Visibility(
-                          visible: !Provider.of<SubscribeData>(context)
-                              .isAppPurchase,
-                          child: Stack(
-                            children: <Widget>[
-                              Container(
-                                padding: EdgeInsets.only(
-                                    top: 6.0,
-                                    bottom: 6.0,
-                                    left: 6.0,
-                                    right: 21.0),
-                                height: height / 10.41,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: kAppPinkDarkColor,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: kSettScrShadowColor,
-                                      offset: Offset(7, 7),
-                                      blurRadius: 10.0,
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      height: height / 12.10,
-                                      width: height / 12.10,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8.0)),
-                                        image: DecorationImage(
-                                          image:
-                                              AssetImage('assets/image7.png'),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(width: height / 56.0),
-                                    Expanded(
-                                      child: Container(
-                                        child: Text(
-                                          AppLocalizations.of(context)
-                                              .translate('open_all'),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontFamily: Fonts.GilroyBold,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: height / 64.0,
-                                            height: 1.50,
-                                            color: kArticlesWhiteColor,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(width: 30.0),
-                                    SvgPicture.asset(
-                                        'assets/svg/arrow_next_vector.svg',
-                                        height: 12.0),
-                                  ],
-                                ),
-                              ),
-                              Positioned.fill(
-                                child: Material(
-                                  color: Colors.transparent,
-                                  child: InkWell(
-                                      highlightColor:
-                                          kAppPinkDarkColor.withOpacity(0.20),
-                                      splashColor:
-                                          kAppPinkDarkColor.withOpacity(0.20),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0),
-                                      ),
-                                      onTap: () {
-                                        Analytics().sendEventReports(
-                                          event: banner_click,
-                                        );
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                SubscribeScreen(
-                                                    isFromSplash: false),
-                                          ),
-                                        );
-                                      }),
-                                ),
-                              ),
-                            ],
+                      Padding(
+                          padding: EdgeInsets.only(left: 20.0),
+                          child: Container(
+                            padding: EdgeInsets.only(bottom: 5.0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('settings'),
+//                  'Настройки',
+                              style: TextStyle(
+                                  fontFamily: Fonts.Exo2,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: height / 37.33, //24
+                                  color: kNavigBarInactiveColor),
+                            ),
                           )),
-                      SizedBox(
-                          height: Provider.of<SubscribeData>(context)
-                                  .isAppPurchase
-                              ? 0
-                              : height / 18.66),
-                      CreateAccountButton(
-                        iconUrl: !user.isAuth ? 'assets/create_account.png' : avaPath != null ? avaPath : 'assets/create_account.png',
-                        backColor: avaPath != null ? avaColor : kSettScrCreteAccBtnColor,
-                        height: !user.isAuth ? 1 : 0,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        text: AppLocalizations.of(context)
-                            .translate('create_an_account'),
-                        onTap: () {
-                          /*Analytics().sendEventReports(
-                          event: not_vibrating_click,
-                        );*/
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => UserRegistrationScreen(),
-                            ),
-                          );
-                        },
-                      ),
-                      SizedBox(height: !user.isAuth ? height / 42.66 : 0),
-                      CreateAccountButton(
-                        iconUrl: avaPath != null ? avaPath : 'assets/create_account.png',
-                        backColor: avaPath != null ? avaColor : kSettScrCreteAccBtnColor,
-                        height: user.isAuth ? 1 : 0,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        text: userName,
-                        onTap: () {
-                          /*Analytics().sendEventReports(
-                          event: not_vibrating_click,
-                        );*/
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => UserProfileScreen(),
-                            ),
-                          );
-                        },
-                      ),
-                      SizedBox(height: user.isAuth ? height / 42.66 : 0),
-                      SettingScreenButton(
-                        iconUrl: 'assets/svg/question_mark_vector.svg',
-                        height: 1,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10.0),
-                            topRight: Radius.circular(10.0)),
-                        text: AppLocalizations.of(context)
-                            .translate('not_vibrating'),
-                        onTap: () {
-                          Analytics().sendEventReports(
-                            event: not_vibrating_click,
-                          );
-                          showDialog(
-                            context: context,
-                            builder: (_) => SettingsInfoDialog(),
-                            barrierDismissible: true,
-                          );
-                        },
-                      ),
-                      SettingScreenButton(
-                        iconUrl: 'assets/svg/star_vector.svg',
-                        height: isRateShowing ? 1 : 0,
-                        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                        text:
-                            AppLocalizations.of(context).translate('rate_us'),
-                        onTap: () async {
-                          final InAppReview inAppReview = InAppReview.instance;
-
-                          if (await inAppReview.isAvailable()) {
-                          inAppReview.requestReview();
-                          }
-                          Analytics().sendEventReports(
-                            event: rate_us_click,
-                          );
-                        },
-                      ),
-                      SettingScreenButton(
-                        iconUrl: 'assets/svg/letter_vector.svg',
-                        height: 1,
-                        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                        text: AppLocalizations.of(context)
-                            .translate('send_feedback'),
-                        onTap: () {
-                          Analytics().sendEventReports(
-                            event: send_feedback_click,
-                          );
-                          _bloc.launchURL(feedbackEmail);
-                        },
-                      ),
-                      SettingScreenButton(
-                        iconUrl: 'assets/svg/share_vector.svg',
-                        height: 1,
-                        borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(10.0),
-                            bottomLeft: Radius.circular(10.0)),
-                        text: AppLocalizations.of(context).translate('share'),
-                        onTap: () {
-                          Analytics().sendEventReports(
-                            event: share_click,
-                          );
-                          _bloc.shareApp(context: context);
-                        },
-                      ),
                     ],
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: width / 20.7,
+                        right: width / 20.7,
+                        top: height / 34.18),
+                    child: Column(
+                      children: <Widget>[
+                        Visibility(
+                            visible: !Provider.of<SubscribeData>(context)
+                                .isAppPurchase,
+                            child: Stack(
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.only(
+                                      top: 6.0,
+                                      bottom: 6.0,
+                                      left: 6.0,
+                                      right: 21.0),
+                                  height: height / 10.41,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: kAppPinkDarkColor,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: kSettScrShadowColor,
+                                        offset: Offset(7, 7),
+                                        blurRadius: 10.0,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        height: height / 12.10,
+                                        width: height / 12.10,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8.0)),
+                                          image: DecorationImage(
+                                            image:
+                                                AssetImage('assets/image7.png'),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: height / 56.0),
+                                      Expanded(
+                                        child: Container(
+                                          child: Text(
+                                            AppLocalizations.of(context)
+                                                .translate('open_all'),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontFamily: Fonts.GilroyBold,
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: height / 64.0,
+                                              height: 1.50,
+                                              color: kArticlesWhiteColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 30.0),
+                                      SvgPicture.asset(
+                                          'assets/svg/arrow_next_vector.svg',
+                                          height: 12.0),
+                                    ],
+                                  ),
+                                ),
+                                Positioned.fill(
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                        highlightColor:
+                                            kAppPinkDarkColor.withOpacity(0.20),
+                                        splashColor:
+                                            kAppPinkDarkColor.withOpacity(0.20),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0),
+                                        ),
+                                        onTap: () {
+                                          Analytics().sendEventReports(
+                                            event: banner_click,
+                                          );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SubscribeScreen(
+                                                      isFromSplash: false),
+                                            ),
+                                          );
+                                        }),
+                                  ),
+                                ),
+                              ],
+                            )),
+                        SizedBox(
+                            height: Provider.of<SubscribeData>(context)
+                                    .isAppPurchase
+                                ? 0
+                                : height / 18.66),
+                        CreateAccountButton(
+                          iconUrl: !user.isAuth ? 'assets/create_account.png' : avaPath != null ? avaPath : 'assets/create_account.png',
+                          backColor: avaPath != null ? avaColor : kSettScrCreteAccBtnColor,
+                          height: !user.isAuth ? 1 : 0,
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          text: AppLocalizations.of(context)
+                              .translate('create_an_account'),
+                          onTap: () {
+                            /*Analytics().sendEventReports(
+                            event: not_vibrating_click,
+                          );*/
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UserRegistrationScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                        SizedBox(height: !user.isAuth ? height / 42.66 : 0),
+                        CreateAccountButton(
+                          iconUrl: avaPath != null ? avaPath : 'assets/create_account.png',
+                          backColor: avaPath != null ? avaColor : kSettScrCreteAccBtnColor,
+                          height: user.isAuth ? 1 : 0,
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          text: userName,
+                          onTap: () {
+                            /*Analytics().sendEventReports(
+                            event: not_vibrating_click,
+                          );*/
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UserProfileScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                        SizedBox(height: user.isAuth ? height / 42.66 : 0),
+                        SettingScreenButton(
+                          iconUrl: 'assets/svg/question_mark_vector.svg',
+                          height: 1,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10.0),
+                              topRight: Radius.circular(10.0)),
+                          text: AppLocalizations.of(context)
+                              .translate('not_vibrating'),
+                          onTap: () {
+                            Analytics().sendEventReports(
+                              event: not_vibrating_click,
+                            );
+                            showDialog(
+                              context: context,
+                              builder: (_) => SettingsInfoDialog(),
+                              barrierDismissible: true,
+                            );
+                          },
+                        ),
+                        SettingScreenButton(
+                          iconUrl: 'assets/svg/star_vector.svg',
+                          height: isRateShowing ? 1 : 0,
+                          borderRadius: BorderRadius.all(Radius.circular(0.0)),
+                          text:
+                              AppLocalizations.of(context).translate('rate_us'),
+                          onTap: () async {
+                            final InAppReview inAppReview = InAppReview.instance;
+
+                            if (await inAppReview.isAvailable()) {
+                            inAppReview.requestReview();
+                            }
+                            Analytics().sendEventReports(
+                              event: rate_us_click,
+                            );
+                          },
+                        ),
+                        SettingScreenButton(
+                          iconUrl: 'assets/svg/letter_vector.svg',
+                          height: 1,
+                          borderRadius: BorderRadius.all(Radius.circular(0.0)),
+                          text: AppLocalizations.of(context)
+                              .translate('send_feedback'),
+                          onTap: () {
+                            Analytics().sendEventReports(
+                              event: send_feedback_click,
+                            );
+                            _bloc.launchURL(feedbackEmail);
+                          },
+                        ),
+                        SettingScreenButton(
+                          iconUrl: 'assets/svg/share_vector.svg',
+                          height: 1,
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(10.0),
+                              bottomLeft: Radius.circular(10.0)),
+                          text: AppLocalizations.of(context).translate('share'),
+                          onTap: () {
+                            Analytics().sendEventReports(
+                              event: share_click,
+                            );
+                            _bloc.shareApp(context: context);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
+        onFocusGained: () {
+          getUserName();
+          getUserProfile();
+          print('AVA PATH = ' + avaPath.toString());
+          print('is auth = ' + user.isAuth.toString());
+        },
       ),
-      onFocusGained: () {
-        getUserName();
-        getUserProfile();
-        print('AVA PATH = ' + avaPath.toString());
-        print('is auth = ' + user.isAuth.toString());
-      },
     );
   }
 
