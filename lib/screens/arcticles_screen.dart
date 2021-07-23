@@ -24,455 +24,427 @@ import 'package:sofy_new/widgets/material_page_route.dart';
 
 import '../rest_api.dart';
 
-class ArticlesScreen extends StatefulWidget {
+class ArticlesScreen extends StatelessWidget {
   const ArticlesScreen({Key key}) : super(key: key);
 
   @override
-  _ArticlesScreenState createState() => _ArticlesScreenState();
-}
-
-class _ArticlesScreenState extends State<ArticlesScreen>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-
-  ArticlesBloc _articlesBloc;
-  double radius =
-      22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void _initializeLocale(BuildContext context) {
-    final String systemLang = AppLocalizations.of(context).locale.languageCode;
-    _articlesBloc = ArticlesBloc(
-        restApi: RestApi(systemLang: systemLang), languageCode: systemLang);
-    _articlesBloc.add(ArticlesEventLoad());
-  }
-
-  @override
   Widget build(BuildContext context) {
-    double height = SizeConfig.screenHeight;
-    double width = SizeConfig.screenWidth;
-    _initializeLocale(context);
+    final radius = 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal;
+    final height = SizeConfig.screenHeight;
+    final width = SizeConfig.screenWidth;
     return Container(
       color: Colors.white,
-      child: BlocProvider.value(
-        value: _articlesBloc,
-        child: BlocBuilder<ArticlesBloc, ArticlesState>(
-          builder: (context, state) {
-            if (state is ArticlesStateResult) {
-              return Container(
-                decoration: BoxDecoration(
-                  gradient: new LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        ArticlesColors.NewBgColor,
-                        Colors.white,
-                        Colors.white,
-                        Colors.white
-                      ],
-                      stops: [
-                        0.3,
-                        0.01,
-                        0.01,
-                        1
-                      ]),
-                ),
-                child: ListView(
-                  physics: const ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(radius),
-                          bottomRight: Radius.circular(radius)),
-                      child: Stack(
-                        children: [
-                          Container(
-                            height: 529 /
-                                Layout.height *
-                                Layout.multiplier *
-                                SizeConfig.blockSizeVertical,
-                            width: width,
-                            color: kArticlesNewBgColor,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                  height: 49 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical),
-                              Container(
-                                width: width -
-                                    20 /
-                                        Layout.width *
-                                        Layout.multiplier *
-                                        SizeConfig.blockSizeHorizontal,
-                                height: 96 /
+      child: BlocBuilder<ArticlesBloc, ArticlesState>(
+        builder: (context, state) {
+          if (state is ArticlesStateResult) {
+            return Container(
+              decoration: BoxDecoration(
+                gradient: new LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      ArticlesColors.NewBgColor,
+                      Colors.white,
+                      Colors.white,
+                      Colors.white
+                    ],
+                    stops: [
+                      0.3,
+                      0.01,
+                      0.01,
+                      1
+                    ]),
+              ),
+              child: ListView(
+                physics: const ClampingScrollPhysics(),
+                shrinkWrap: true,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(radius),
+                        bottomRight: Radius.circular(radius)),
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 529 /
+                              Layout.height *
+                              Layout.multiplier *
+                              SizeConfig.blockSizeVertical,
+                          width: width,
+                          color: kArticlesNewBgColor,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                                height: 49 /
                                     Layout.height *
                                     Layout.multiplier *
-                                    SizeConfig.blockSizeVertical,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 20 /
-                                          Layout.width *
-                                          Layout.multiplier *
-                                          SizeConfig.blockSizeHorizontal),
-                                  child: AutoSizeText(
-                                    AppLocalizations.of(context)
-                                        .translate('learn_and_get_inspired'),
-                                    wrapWords: true,
-                                    style: TextStyle(
-                                      fontFamily: Fonts.Roboto,
-                                      letterSpacing: -0.02 *
-                                          50 /
-                                          Layout.height *
-                                          Layout.multiplier *
-                                          SizeConfig.blockSizeVertical,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 50 /
-                                          Layout.height *
-                                          Layout.multiplier *
-                                          SizeConfig.blockSizeVertical,
-                                      color: kArticlesTextColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                  height: 23 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical),
-                              Container(
-                                width: width -
-                                    20 /
-                                        Layout.width *
-                                        Layout.multiplier *
-                                        SizeConfig.blockSizeHorizontal,
-                                height: 38 /
-                                    Layout.height *
-                                    Layout.multiplier *
-                                    SizeConfig.blockSizeVertical,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 20 /
-                                          Layout.width *
-                                          Layout.multiplier *
-                                          SizeConfig.blockSizeHorizontal),
-                                  child: AutoSizeText(
-                                    AppLocalizations.of(context)
-                                        .translate('new_topics'),
-                                    style: TextStyle(
-                                      fontFamily: Fonts.AllertaRegular,
-                                      letterSpacing: -0.065 *
-                                          30 /
-                                          Layout.height *
-                                          Layout.multiplier *
-                                          SizeConfig.blockSizeVertical,
-                                      fontSize: 30 /
-                                          Layout.height *
-                                          Layout.multiplier *
-                                          SizeConfig.blockSizeVertical,
-                                      color: kArticlesTextColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                  height: 9 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical),
-                              ArticlesCardsHorizontalList(
-                                  listOfArticles: state.listOfArticles,
-                                  cardHeight: 293 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  cardRadius: 27 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  cardWidth: 242 /
-                                      Layout.width *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeHorizontal,
-                                  frozenCardFontSize: 17,
-                                  frozenCardHeight: 81 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  titleFontSize: 24 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      color: ArticlesColors.BgColor,
-                      child: Column(
-                        children: [
-                          state.femaleSexuality.length > 0
-                              ? ArticlesCardsHorizontalList(
-                                  listOfArticles: state.femaleSexuality,
-                                  callback: () {
-                                    Analytics().sendEventReports(
-                                        event: EventsOfAnalytics
-                                            .show_articles_categories,
-                                        attr: {
-                                          'name': AppLocalizations.of(context)
-                                              .translate('female_sexuality')
-                                        });
-                                    Navigator.push(
-                                      context,
-                                      CustomMaterialPageRoute(
-                                          builder: (context) =>
-                                              ArticlesCategoriesDetailsScreen(
-                                                categoryId:
-                                                    AppLocalizations.of(context)
-                                                                .locale
-                                                                .languageCode ==
-                                                            'ru'
-                                                        ? 21
-                                                        : 22,
-                                                screenTitle:
-                                                    AppLocalizations.of(context)
-                                                        .translate(
-                                                            'female_sexuality'),
-                                              )),
-                                    );
-                                  },
-                                  title: AppLocalizations.of(context)
-                                      .translate('female_sexuality'),
-                                  cardHeight: 220 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  cardRadius: 20 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  cardWidth: 170 /
-                                      Layout.width *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeHorizontal,
-                                  frozenCardFontSize: 14 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  frozenCardHeight: 57 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  titleFontSize: 24 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical)
-                              : Container(),
-                          state.interestingAboutSex.length > 0
-                              ? ArticlesCardsHorizontalList(
-                                  listOfArticles: state.interestingAboutSex,
-                                  callback: () {
-                                    Analytics().sendEventReports(
-                                        event: EventsOfAnalytics
-                                            .show_articles_categories,
-                                        attr: {
-                                          'name': AppLocalizations.of(context)
-                                              .translate(
-                                                  'interesting_about_sex')
-                                        });
-                                    Navigator.push(
-                                      context,
-                                      CustomMaterialPageRoute(
-                                          builder: (context) =>
-                                              ArticlesCategoriesDetailsScreen(
-                                                categoryId:
-                                                    AppLocalizations.of(context)
-                                                                .locale
-                                                                .languageCode ==
-                                                            'ru'
-                                                        ? 11
-                                                        : 12,
-                                                screenTitle: AppLocalizations
-                                                        .of(context)
-                                                    .translate(
-                                                        'interesting_about_sex'),
-                                              )),
-                                    );
-                                  },
-                                  title: AppLocalizations.of(context)
-                                      .translate('interesting_about_sex'),
-                                  cardHeight: 220 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  cardRadius: 20 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  cardWidth: 170 /
-                                      Layout.width *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeHorizontal,
-                                  frozenCardFontSize: 14 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  frozenCardHeight: 57 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  titleFontSize: 24 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical)
-                              : Container(),
-                          state.listOfPopularArticles.length > 0
-                              ? Padding(
-                                  padding: EdgeInsets.all(22 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical),
-                                  child: ArticlesListWithHeader(
-                                      title: AppLocalizations.of(context)
-                                          .translate('popular'),
-                                      listOfArticles:
-                                          state.listOfPopularArticles),
-                                )
-                              : Container(),
-                          state.orgasms.length > 0
-                              ? ArticlesCardsHorizontalList(
-                                  listOfArticles: state.orgasms,
-                                  callback: () {
-                                    Analytics().sendEventReports(
-                                        event: EventsOfAnalytics
-                                            .show_articles_categories,
-                                        attr: {
-                                          'name': AppLocalizations.of(context)
-                                              .translate('orgasms')
-                                        });
-                                    Navigator.push(
-                                      context,
-                                      CustomMaterialPageRoute(
-                                          builder: (context) =>
-                                              ArticlesCategoriesDetailsScreen(
-                                                categoryId:
-                                                    AppLocalizations.of(context)
-                                                                .locale
-                                                                .languageCode ==
-                                                            'ru'
-                                                        ? 13
-                                                        : 14,
-                                                screenTitle:
-                                                    AppLocalizations.of(context)
-                                                        .translate('orgasms'),
-                                              )),
-                                    );
-                                  },
-                                  title: AppLocalizations.of(context)
-                                      .translate('orgasms'),
-                                  cardHeight: 220 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  cardRadius: 20 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  cardWidth: 170 /
-                                      Layout.width *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeHorizontal,
-                                  frozenCardFontSize: 14 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  frozenCardHeight: 57 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical,
-                                  titleFontSize: 24 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical)
-                              : Container(),
-                          Padding(
-                            padding: EdgeInsets.all(22 /
-                                Layout.height *
-                                Layout.multiplier *
-                                SizeConfig.blockSizeVertical),
-                            child: ArticlesCategoriesWithHeader(
-                              listOfTopics: state.listOfTopicsPopular,
-                              title: AppLocalizations.of(context)
-                                  .translate('popular_categories'),
-                            ),
-                          ),
-                          Stack(children: [
+                                    SizeConfig.blockSizeVertical),
                             Container(
-                                height: height /
-                                    4.6 /
+                              width: width -
+                                  20 /
+                                      Layout.width *
+                                      Layout.multiplier *
+                                      SizeConfig.blockSizeHorizontal,
+                              height: 96 /
+                                  Layout.height *
+                                  Layout.multiplier *
+                                  SizeConfig.blockSizeVertical,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 20 /
+                                        Layout.width *
+                                        Layout.multiplier *
+                                        SizeConfig.blockSizeHorizontal),
+                                child: AutoSizeText(
+                                  AppLocalizations.of(context)
+                                      .translate('learn_and_get_inspired'),
+                                  wrapWords: true,
+                                  style: TextStyle(
+                                    fontFamily: Fonts.Roboto,
+                                    letterSpacing: -0.02 *
+                                        50 /
+                                        Layout.height *
+                                        Layout.multiplier *
+                                        SizeConfig.blockSizeVertical,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 50 /
+                                        Layout.height *
+                                        Layout.multiplier *
+                                        SizeConfig.blockSizeVertical,
+                                    color: kArticlesTextColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                                height: 23 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical),
+                            Container(
+                              width: width -
+                                  20 /
+                                      Layout.width *
+                                      Layout.multiplier *
+                                      SizeConfig.blockSizeHorizontal,
+                              height: 38 /
+                                  Layout.height *
+                                  Layout.multiplier *
+                                  SizeConfig.blockSizeVertical,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 20 /
+                                        Layout.width *
+                                        Layout.multiplier *
+                                        SizeConfig.blockSizeHorizontal),
+                                child: AutoSizeText(
+                                  AppLocalizations.of(context)
+                                      .translate('new_topics'),
+                                  style: TextStyle(
+                                    fontFamily: Fonts.AllertaRegular,
+                                    letterSpacing: -0.065 *
+                                        30 /
+                                        Layout.height *
+                                        Layout.multiplier *
+                                        SizeConfig.blockSizeVertical,
+                                    fontSize: 30 /
+                                        Layout.height *
+                                        Layout.multiplier *
+                                        SizeConfig.blockSizeVertical,
+                                    color: kArticlesTextColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                                height: 9 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical),
+                            ArticlesCardsHorizontalList(
+                                listOfArticles: state.listOfArticles,
+                                cardHeight: 293 /
                                     Layout.height *
                                     Layout.multiplier *
                                     SizeConfig.blockSizeVertical,
-                                width: SizeConfig.screenWidth,
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: ArticlesColors.BottomLg,
-                                ))),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 22 /
-                                      Layout.height *
-                                      Layout.multiplier *
-                                      SizeConfig.blockSizeVertical),
-                              child: SofyButton(
-                                label: AppLocalizations.of(context)
-                                    .translate('view_all'),
+                                cardRadius: 27 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                cardWidth: 242 /
+                                    Layout.width *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeHorizontal,
+                                frozenCardFontSize: 17,
+                                frozenCardHeight: 81 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                titleFontSize: 24 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    color: ArticlesColors.BgColor,
+                    child: Column(
+                      children: [
+                        state.femaleSexuality.length > 0
+                            ? ArticlesCardsHorizontalList(
+                                listOfArticles: state.femaleSexuality,
                                 callback: () {
                                   Analytics().sendEventReports(
                                       event: EventsOfAnalytics
-                                          .show_all_articles_categories,
-                                      attr: {});
+                                          .show_articles_categories,
+                                      attr: {
+                                        'name': AppLocalizations.of(context)
+                                            .translate('female_sexuality')
+                                      });
                                   Navigator.push(
                                     context,
                                     CustomMaterialPageRoute(
                                         builder: (context) =>
-                                            ArticlesCategoriesScreen()),
+                                            ArticlesCategoriesDetailsScreen(
+                                              categoryId:
+                                                  AppLocalizations.of(context)
+                                                              .locale
+                                                              .languageCode ==
+                                                          'ru'
+                                                      ? 21
+                                                      : 22,
+                                              screenTitle:
+                                                  AppLocalizations.of(context)
+                                                      .translate(
+                                                          'female_sexuality'),
+                                            )),
                                   );
                                 },
-                              ),
+                                title: AppLocalizations.of(context)
+                                    .translate('female_sexuality'),
+                                cardHeight: 220 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                cardRadius: 20 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                cardWidth: 170 /
+                                    Layout.width *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeHorizontal,
+                                frozenCardFontSize: 14 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                frozenCardHeight: 57 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                titleFontSize: 24 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical)
+                            : Container(),
+                        state.interestingAboutSex.length > 0
+                            ? ArticlesCardsHorizontalList(
+                                listOfArticles: state.interestingAboutSex,
+                                callback: () {
+                                  Analytics().sendEventReports(
+                                      event: EventsOfAnalytics
+                                          .show_articles_categories,
+                                      attr: {
+                                        'name': AppLocalizations.of(context)
+                                            .translate(
+                                                'interesting_about_sex')
+                                      });
+                                  Navigator.push(
+                                    context,
+                                    CustomMaterialPageRoute(
+                                        builder: (context) =>
+                                            ArticlesCategoriesDetailsScreen(
+                                              categoryId:
+                                                  AppLocalizations.of(context)
+                                                              .locale
+                                                              .languageCode ==
+                                                          'ru'
+                                                      ? 11
+                                                      : 12,
+                                              screenTitle: AppLocalizations
+                                                      .of(context)
+                                                  .translate(
+                                                      'interesting_about_sex'),
+                                            )),
+                                  );
+                                },
+                                title: AppLocalizations.of(context)
+                                    .translate('interesting_about_sex'),
+                                cardHeight: 220 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                cardRadius: 20 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                cardWidth: 170 /
+                                    Layout.width *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeHorizontal,
+                                frozenCardFontSize: 14 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                frozenCardHeight: 57 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                titleFontSize: 24 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical)
+                            : Container(),
+                        state.listOfPopularArticles.length > 0
+                            ? Padding(
+                                padding: EdgeInsets.all(22 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical),
+                                child: ArticlesListWithHeader(
+                                    title: AppLocalizations.of(context)
+                                        .translate('popular'),
+                                    listOfArticles:
+                                        state.listOfPopularArticles),
+                              )
+                            : Container(),
+                        state.orgasms.length > 0
+                            ? ArticlesCardsHorizontalList(
+                                listOfArticles: state.orgasms,
+                                callback: () {
+                                  Analytics().sendEventReports(
+                                      event: EventsOfAnalytics
+                                          .show_articles_categories,
+                                      attr: {
+                                        'name': AppLocalizations.of(context)
+                                            .translate('orgasms')
+                                      });
+                                  Navigator.push(
+                                    context,
+                                    CustomMaterialPageRoute(
+                                        builder: (context) =>
+                                            ArticlesCategoriesDetailsScreen(
+                                              categoryId:
+                                                  AppLocalizations.of(context)
+                                                              .locale
+                                                              .languageCode ==
+                                                          'ru'
+                                                      ? 13
+                                                      : 14,
+                                              screenTitle:
+                                                  AppLocalizations.of(context)
+                                                      .translate('orgasms'),
+                                            )),
+                                  );
+                                },
+                                title: AppLocalizations.of(context)
+                                    .translate('orgasms'),
+                                cardHeight: 220 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                cardRadius: 20 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                cardWidth: 170 /
+                                    Layout.width *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeHorizontal,
+                                frozenCardFontSize: 14 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                frozenCardHeight: 57 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical,
+                                titleFontSize: 24 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical)
+                            : Container(),
+                        Padding(
+                          padding: EdgeInsets.all(22 /
+                              Layout.height *
+                              Layout.multiplier *
+                              SizeConfig.blockSizeVertical),
+                          child: ArticlesCategoriesWithHeader(
+                            listOfTopics: state.listOfTopicsPopular,
+                            title: AppLocalizations.of(context)
+                                .translate('popular_categories'),
+                          ),
+                        ),
+                        Stack(children: [
+                          Container(
+                              height: height /
+                                  4.6 /
+                                  Layout.height *
+                                  Layout.multiplier *
+                                  SizeConfig.blockSizeVertical,
+                              width: SizeConfig.screenWidth,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: ArticlesColors.BottomLg,
+                              ))),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 22 /
+                                    Layout.height *
+                                    Layout.multiplier *
+                                    SizeConfig.blockSizeVertical),
+                            child: SofyButton(
+                              label: AppLocalizations.of(context)
+                                  .translate('view_all'),
+                              callback: () {
+                                Analytics().sendEventReports(
+                                    event: EventsOfAnalytics
+                                        .show_all_articles_categories,
+                                    attr: {});
+                                Navigator.push(
+                                  context,
+                                  CustomMaterialPageRoute(
+                                      builder: (context) =>
+                                          ArticlesCategoriesScreen()),
+                                );
+                              },
                             ),
-                          ]),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              );
-            }
-            if (state is ArticlesStateError) {
-              return Padding(
-                padding: const EdgeInsets.all(22),
-                child: Center(
-                  child: Container(child: Text(state.error)),
-                ),
-              );
-            }
-            return FullscreenPreloader();
-          },
-        ),
+                          ),
+                        ]),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          }
+          if (state is ArticlesStateError) {
+            return Padding(
+              padding: const EdgeInsets.all(22),
+              child: Center(
+                child: Container(child: Text(state.error)),
+              ),
+            );
+          }
+          return FullscreenPreloader();
+        },
       ),
     );
   }

@@ -16,7 +16,7 @@ class Player extends ChangeNotifier {
       _vibrationModel; //bool isLoop = kIsLoop;
   bool _isPlaying = false;
   bool _isPausing = false;
-
+  int customTimer = 0;
 
   int sliderSpeedValue = kSliderSpeedValue;
   int speedValuesPosition = kSpeedValuesPosition;

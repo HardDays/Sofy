@@ -2,9 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/player.dart';
@@ -19,6 +17,7 @@ class Equalizer extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final player = Provider.of<Player>(context, listen: true);
     return BlocBuilder<PlayerBloc, PlayerState>(
       builder: (context, state) {
         if (state.status == PlayerStatus.pause) {
@@ -42,9 +41,7 @@ class Equalizer extends StatelessWidget {
                         SizeConfig.blockSizeHorizontal,
                   ),
                   Container(
-                    height: Provider.of<Player>(context).isPlaying
-                        ? Random().nextInt(108).toDouble()
-                        : 15,
+                    height: player.isPlaying ? Random().nextInt(108).toDouble() : Random().nextInt(60).toDouble(),
                     width: 6 /
                         Layout.width *
                         Layout.multiplier *
