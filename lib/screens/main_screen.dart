@@ -120,6 +120,11 @@ class _MainScreenState extends State<MainScreen> {
                   height: 80,
                   width: width,
                   decoration: BoxDecoration(
+                    // boxShadow: [BoxShadow(
+                    //   offset: Offset(0, -1),
+                    //   color: Colors.red,
+                    //
+                    // )],
                     color: Colors.transparent,
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(10),
@@ -206,16 +211,6 @@ class _MainScreenState extends State<MainScreen> {
         }
       },
     );
-  }
-
-  bool _isIPhoneX(MediaQueryData mediaQuery) {
-    if (Platform.isIOS) {
-      var size = mediaQuery.size;
-      if (size.height > 812.0 || size.width > 812.0) {
-        return true;
-      }
-    }
-    return false;
   }
 
   Color getColor({PCProvider pcProvider, int pageIndex, bool forText = true}) {

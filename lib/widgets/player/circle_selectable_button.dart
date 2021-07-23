@@ -91,7 +91,7 @@ class CircleSelectableButton extends StatelessWidget {
               Text(
                 //model.titleEn,
                 AppLocalizations.of(context).translate(model.titleEn),
-                style: TextStyle(color: Color(0xFFFDAABC)),
+                style: TextStyle(color:selected ? Color(0xFFCD2059) : Color(0xFFFDAABC)),
               )
             ],
           ),

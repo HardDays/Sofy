@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_model.dart';

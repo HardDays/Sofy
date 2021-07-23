@@ -64,9 +64,9 @@ class PlayerScreenV2 extends StatelessWidget {
                     baseModel: data.playlist[0],
                     fireModel: data.playlist[4],
                   ),
-                  SizedBox(
-                    height: 100,
-                  )
+                  // SizedBox(
+                  //   height: 100,
+                  // )
                 ],
               ),
             ),
@@ -120,7 +120,7 @@ class _CustomSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Container(
-      height: height / 20 * 1.6,
+      height: height / 20 * 1.4,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: kPlayerScrV2ButtonThemeColor),
@@ -281,55 +281,6 @@ class _CustomSlider extends StatelessWidget {
   }
 }
 
-class CustomThumbShape extends SliderComponentShape {
-  @override
-  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
-    return Size.fromRadius(15);
-  }
-
-  @override
-  void paint(PaintingContext context, Offset center,
-      {Animation<double> activationAnimation,
-      Animation<double> enableAnimation,
-      bool isDiscrete,
-      TextPainter labelPainter,
-      RenderBox parentBox,
-      SliderThemeData sliderTheme,
-      TextDirection textDirection,
-      double value,
-      double textScaleFactor,
-      Size sizeWithOverflow}) {
-    final Canvas canvas = context.canvas;
-    final paint = Paint()
-      ..shader = LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: kPlayerScrV2SliderColor,
-      ).createShader(Rect.fromCircle(
-        center: center,
-        radius: 15,
-      ));
-    canvas.drawCircle(center, 12, paint);
-  }
-}
-
-class CustomTrackShape extends RoundedRectSliderTrackShape {
-  Rect getPreferredRect({
-    @required RenderBox parentBox,
-    Offset offset = Offset.zero,
-    @required SliderThemeData sliderTheme,
-    bool isEnabled = false,
-    bool isDiscrete = false,
-  }) {
-    final double trackHeight = sliderTheme.trackHeight;
-    final double trackLeft = offset.dx;
-    final double trackTop =
-        offset.dy + (parentBox.size.height - trackHeight) / 2;
-    final double trackWidth = parentBox.size.width;
-    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
-  }
-}
-
 class _BackgroundLinearColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -357,7 +308,7 @@ class _SelectableButtons extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final isAppPurchase = Provider.of<SubscribeData>(context).isAppPurchase;
     return Container(
-      height: height / 20 * 1.2,
+      height: height / 20 * 1.1,
       width: double.infinity,
       decoration: BoxDecoration(
         color: kPlayerScrV2ButtonThemeColor,
@@ -370,7 +321,7 @@ class _SelectableButtons extends StatelessWidget {
             selected: id == list[index].id ? true : false,
             model: list[index],
             onTap: () {
-              if (!isAppPurchase) {
+              if (isAppPurchase) {
                 BlocProvider.of<PlayerScreenBloc>(context)
                     .add(SetMode(id: list[index].id));
               } else {
@@ -560,7 +511,8 @@ class _PowerAndFireButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final player = Provider.of<Player>(context, listen: false);
     final isAppPurchase = Provider.of<SubscribeData>(context).isAppPurchase;
-    return Expanded(
+    return Container(
+      height: 150,
       child: Row(
         children: [
           Expanded(

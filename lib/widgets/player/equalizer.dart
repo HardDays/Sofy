@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/providers/player.dart';
@@ -13,49 +13,45 @@ class Equalizer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return BlocBuilder<PlayerBloc, PlayerState>(
       builder: (context, state) {
-        return Expanded(
-          child: Container(
-            padding: EdgeInsets.only(top: 10.0, bottom: 3.0),
-            child: BarChart(
-              BarChartData(
-                backgroundColor: Colors.transparent,
-                alignment: BarChartAlignment.spaceAround,
-                maxY: 255,
-                barTouchData: BarTouchData(enabled: false),
-                titlesData: FlTitlesData(show: false),
-                axisTitleData: FlAxisTitleData(show: false),
-                borderData: FlBorderData(show: false),
-                groupsSpace: 10,
-                barGroups: getBarChartGroupData(26, context),
-              ),
-            ),
+        if(state.status == PlayerStatus.pause){
+          return _EqualizeLines();
+        }
+        return Container(
+          height: height * 0.15,
+          padding: EdgeInsets.only(top: 10.0, bottom: 3.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(20, (index) {
+              return Container(
+                height: Provider.of<Player>(context).isPlaying
+                    ? Random().nextInt(90).toDouble()
+                    : 15,
+                width: 7,
+                decoration: BoxDecoration(
+                    color: kWelcomButtonDarkColor,
+                    borderRadius: BorderRadius.circular(3)),
+              );
+            }),
           ),
         );
       },
     );
   }
+}
 
-  List<BarChartGroupData> getBarChartGroupData(int count, context) {
-    List<BarChartGroupData> list = [];
-    for (int i = 0; i < count; i++) {
-      list.add(BarChartGroupData(
-        barsSpace: 1,
-        x: 0,
-        barRods: [
-          BarChartRodData(
-            y: Provider.of<Player>(context).isPlaying
-                ? Random().nextInt(255).toDouble()
-                : 15,
-            //Random().nextInt(55).toDouble(),
-            colors: [kWelcomButtonDarkColor],
-            width: 5,
-          ),
-        ],
-        showingTooltipIndicators: [],
-      ));
-    }
-    return list;
+class _EqualizeLines extends StatelessWidget {
+  const _EqualizeLines({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    return Container(
+      height: height * 0.15,
+      child: SvgPicture.asset('assets/svg/equalize_lines.svg'),
+    );
   }
 }
