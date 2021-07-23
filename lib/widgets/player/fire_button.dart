@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 
 class FireButton extends StatelessWidget {
   const FireButton({Key key, this.onTap}) : super(key: key);
@@ -20,11 +22,15 @@ class FireButton extends StatelessWidget {
                 //spreadRadius: 0.1,
               )
             ]),
-        width: 40,
-        height: 40,
+        width: 42 / Layout.width *
+            Layout.multiplier *
+            SizeConfig.blockSizeHorizontal,
+        height: 42 / Layout.width *
+            Layout.multiplier *
+            SizeConfig.blockSizeHorizontal,
         child: Image.asset(
           'assets/fire.png',
-          scale: 3,
+          scale: 4,
         ),
       ),
     );

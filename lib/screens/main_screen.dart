@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
@@ -117,29 +118,37 @@ class _MainScreenState extends State<MainScreen> {
                 bottom: 0,
                 right: 0,
                 child: Container(
-                  height: 80,
+                  height: 92 / Layout.height *
+                      Layout.multiplier *
+                      SizeConfig.blockSizeVertical,
                   width: width,
                   decoration: BoxDecoration(
-                    // boxShadow: [BoxShadow(
-                    //   offset: Offset(0, -1),
-                    //   color: Colors.red,
-                    //
-                    // )],
                     color: Colors.transparent,
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(10),
                         topLeft: Radius.circular(10)),
                   ),
-                  child: CurvedNavigationBar(
-                    height: 75,
-                    animationDuration: Duration(milliseconds: 300),
-                    backgroundColor: Colors.transparent,
-                    index: selectedItemBar,
-                    items:List.generate(3, (index) => CurvedNavBarItem(svgAsset: svgImagePath[index], title: title[index], selected: index == selectedItemBar ? true : false,)),
-                    onTap: (index) {
-                      selectedItemBar = index;
-                      _handleIndexChanged(index);
-                    },
+                  child: Column(
+                    children: [
+                      CurvedNavigationBar(
+                        height: 75,
+                        animationDuration: Duration(milliseconds: 300),
+                        backgroundColor: Colors.transparent,
+                        index: selectedItemBar,
+                        items:List.generate(3, (index) => CurvedNavBarItem(svgAsset: svgImagePath[index], title: title[index], selected: index == selectedItemBar ? true : false,)),
+                        onTap: (index) {
+                          selectedItemBar = index;
+                          _handleIndexChanged(index);
+                        },
+                      ),
+                      Container(
+                        width: width,
+                        height: 92 / Layout.height *
+                            Layout.multiplier *
+                            SizeConfig.blockSizeVertical - 75,
+                        color: Colors.white,
+                      )
+                    ],
                   ),
                 ),
               ),
