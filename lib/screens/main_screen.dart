@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
@@ -18,7 +17,9 @@ import 'package:sofy_new/screens/setting_screen.dart';
 import 'package:sofy_new/widgets/curved_nav_bar_item.dart';
 
 import 'arcticles_screen.dart';
+
 int selectedItemBar = 1;
+
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -43,32 +44,6 @@ class _MainScreenState extends State<MainScreen> {
     'settings',
   ];
 
-  PCProvider pcProvider;
-
-  void _handleIndexChanged(int i) {
-    setState(() {
-      selectedTab = SelectedTab.values[i];
-    });
-    print(selectedTab);
-    switch (selectedTab) {
-      case SelectedTab.player:
-        pcProvider.animateToPage(
-          index: PlayerScreen_PAGE_INDEX,
-        );
-        break;
-      case SelectedTab.article:
-        pcProvider.animateToPage(
-          index: ArticlesScreen_PAGE_INDEX,
-        );
-        break;
-      case SelectedTab.settings:
-        pcProvider.animateToPage(
-          index: SettingsScreen_PAGE_INDEX,
-        );
-        break;
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -89,35 +64,38 @@ class _MainScreenState extends State<MainScreen> {
     await AppTrackingTransparency.requestTrackingAuthorization();
   }
 
+  Widget _buildBody() {
+    switch (selectedItemBar) {
+      case 0:
+        return ArticlesScreen();
+      case 1:
+        return PlayerScreenV2();
+      case 2:
+        return SettingsScreen();
+      default:
+        return PlayerScreenV2();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
-    pcProvider = Provider.of<PCProvider>(context, listen: false);
     return RateMyAppBuilder(
       builder: (context) {
         return Scaffold(
           backgroundColor: kMainScreenScaffoldBackColor,
           body: Stack(
             children: <Widget>[
-              PageView(
-                pageSnapping: false,
-                scrollDirection: Axis.horizontal,
-                controller: Provider.of<PCProvider>(context).pageController,
-                physics: NeverScrollableScrollPhysics(),
-                onPageChanged: (index) {
-                  // //stop when screen is change
-                  // //Provider.of<Player>(context, listen: false).stopVibrations();
-                  pcProvider.updatePageIndex(index: index);
-                  selectedTab = SelectedTab.values[index];
-                },
-                children: screensList,
-              ),
+              _buildBody(),
               Positioned(
                 bottom: 0,
                 right: 0,
                 child: Container(
-                  height: 80,
+                  height: 92 /
+                      Layout.height *
+                      Layout.multiplier *
+                      SizeConfig.blockSizeVertical,
                   width: width,
                   decoration: BoxDecoration(
                     color: Colors.transparent,
@@ -125,16 +103,37 @@ class _MainScreenState extends State<MainScreen> {
                         topRight: Radius.circular(10),
                         topLeft: Radius.circular(10)),
                   ),
-                  child: CurvedNavigationBar(
-                    height: 75,
-                    animationDuration: Duration(milliseconds: 300),
-                    backgroundColor: Colors.transparent,
-                    index: selectedItemBar,
-                    items:List.generate(3, (index) => CurvedNavBarItem(svgAsset: svgImagePath[index], title: title[index], selected: index == selectedItemBar ? true : false,)),
-                    onTap: (index) {
-                      selectedItemBar = index;
-                      _handleIndexChanged(index);
-                    },
+                  child: Column(
+                    children: [
+                      CurvedNavigationBar(
+                        height: 75,
+                        animationDuration: Duration(milliseconds: 300),
+                        backgroundColor: Colors.transparent,
+                        index: selectedItemBar,
+                        items: List.generate(
+                            3,
+                            (index) => CurvedNavBarItem(
+                                  svgAsset: svgImagePath[index],
+                                  title: title[index],
+                                  selected:
+                                      index == selectedItemBar ? true : false,
+                                )),
+                        onTap: (index) {
+                          selectedItemBar = index;
+                          setState(() {
+                          });
+                        },
+                      ),
+                      Container(
+                        width: width,
+                        height: 92 /
+                                Layout.height *
+                                Layout.multiplier *
+                                SizeConfig.blockSizeVertical -
+                            75,
+                        color: Colors.white,
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -173,7 +172,7 @@ class _MainScreenState extends State<MainScreen> {
               // the star rating.
               return [
                 // Return a list of actions (that will be shown at the bottom of the dialog).
-                FlatButton(
+                TextButton(
                   child: Text('OK', style: TextStyle(fontSize: 18)),
                   onPressed: () async {
                     print('Thanks for the ' +
@@ -208,16 +207,6 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  bool _isIPhoneX(MediaQueryData mediaQuery) {
-    if (Platform.isIOS) {
-      var size = mediaQuery.size;
-      if (size.height > 812.0 || size.width > 812.0) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   Color getColor({PCProvider pcProvider, int pageIndex, bool forText = true}) {
     return pcProvider.pageIndex == pageIndex
         ? kAppPinkDarkColor
@@ -234,4 +223,3 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 enum SelectedTab { article, player, settings }
-

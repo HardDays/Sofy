@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 
 class PowerButton extends StatelessWidget {
   const PowerButton({Key key, this.onTap}) : super(key: key);
@@ -10,8 +12,12 @@ class PowerButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: 125,
-        height: 125,
+        width: 125 / Layout.width *
+      Layout.multiplier *
+          SizeConfig.blockSizeHorizontal,
+        height: 125 / Layout.height *
+            Layout.multiplier *
+            SizeConfig.blockSizeVertical,
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(

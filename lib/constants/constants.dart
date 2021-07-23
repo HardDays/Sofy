@@ -199,3 +199,7 @@ class Layout {
 
 const String monthly_purchase_key = "Monthly access";
 const String annual_purchase_key = "Annual access";
+
+const List<int> equalizerValues = [
+  59, 108, 80, 44, 35, 28, 17, 17, 35, 28, 17, 17, 24, 48, 35, 24, 20, 17, 17, 10
+];

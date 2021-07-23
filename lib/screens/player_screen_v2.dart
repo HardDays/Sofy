@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/PlaylistNameData.dart';
 import 'package:sofy_new/models/api_playlist_model.dart';
 import 'package:sofy_new/models/api_vibration_model.dart';
@@ -15,6 +16,7 @@ import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/widgets/articles/background.dart';
 import 'package:sofy_new/widgets/player/player_widgets.dart';
+
 import 'bloc/analytics.dart';
 import 'bloc/player_screen_v2/player_bloc.dart';
 
@@ -44,26 +46,63 @@ class PlayerScreenV2 extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 55,
+                    height: 57 / Layout.height *
+                        Layout.multiplier *
+                        SizeConfig.blockSizeVertical,
                   ),
                   _SelectableButtons(
+                    dWidth: 378 / Layout.width *
+                        Layout.multiplier *
+                        SizeConfig.blockSizeHorizontal,
+                    dHeight: 51 / Layout.height *
+                        Layout.multiplier *
+                        SizeConfig.blockSizeVertical,
                     list: data.playlistNames,
                     id: data.selected,
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 20 / Layout.height *
+                        Layout.multiplier *
+                        SizeConfig.blockSizeVertical,
                   ),
-                  _CustomSlider(),
+                  _CustomSlider(
+                    dHeight: 63 / Layout.height *
+                        Layout.multiplier *
+                        SizeConfig.blockSizeVertical,
+                    dWidth: 380 / Layout.width *
+                        Layout.multiplier *
+                        SizeConfig.blockSizeHorizontal,
+                  ),
                   _VibrationList2(
+                    dWidth: 365 / Layout.width *
+                        Layout.multiplier *
+                        SizeConfig.blockSizeHorizontal,
+                    dHeight: 247 / Layout.height *
+                        Layout.multiplier *
+                        SizeConfig.blockSizeVertical,
                     path: data.path,
                     list: data.playlist,
                   ),
-                  //_EqualizeLines(),
-                  Equalizer(),
-                  _PowerAndFireButton(),
                   SizedBox(
-                    height: 100,
-                  )
+                    height: 30 / Layout.height *
+                        Layout.multiplier *
+                        SizeConfig.blockSizeVertical,
+                  ),
+                  Equalizer(
+                    dWidth: 389 / Layout.width *
+                        Layout.multiplier *
+                        SizeConfig.blockSizeHorizontal,
+                    dHeight: 108 / Layout.height *
+                        Layout.multiplier *
+                        SizeConfig.blockSizeVertical,
+                  ),
+                  _PowerAndFireButton(
+                    baseModel: data.playlist[0],
+                    fireModel: data.playlist[4],
+                  ),
+                  // SizedBox(
+                  //   height: 100,
+                  // )
                 ],
               ),
             ),
@@ -110,27 +149,17 @@ class _BackgroundImages extends StatelessWidget {
   }
 }
 
-class _EqualizeLines extends StatelessWidget {
-  const _EqualizeLines({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    return Container(
-      height: height * 0.15,
-      child: SvgPicture.asset('assets/svg/equalize_lines.svg'),
-    );
-  }
-}
-
 class _CustomSlider extends StatelessWidget {
-  const _CustomSlider({Key key}) : super(key: key);
-
+  const _CustomSlider({Key key, this.dWidth, this.dHeight}) : super(key: key);
+  final dWidth;
+  final dHeight;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Container(
-      height: height / 20 * 1.6,
+      height: dHeight ?? height / 20 * 1.4,
+      width: dWidth ?? width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: kPlayerScrV2ButtonThemeColor),
@@ -188,9 +217,6 @@ class _CustomSlider extends StatelessWidget {
                   data: SliderThemeData(
                     trackShape: CustomTrackShape(),
                     thumbColor: Colors.redAccent,
-                    //thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                    //overlayColor: Colors.red.withAlpha(32),
-                    //overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
                     thumbShape: CustomThumbShape(),
                     activeTrackColor: Colors.white.withOpacity(0),
                     inactiveTrackColor: Colors.white.withOpacity(0),
@@ -205,12 +231,11 @@ class _CustomSlider extends StatelessWidget {
                       divisions: 40,
                       min: 0,
                       max: 78,
-                      value: //Provider.of<Player>(context).sliderSpeedValue.roundToDouble(),
-                          Provider.of<SubscribeData>(context).isAppPurchase
-                              ? Provider.of<Player>(context)
-                                  .sliderSpeedValue
-                                  .roundToDouble()
-                              : 39,
+                      value: Provider.of<SubscribeData>(context).isAppPurchase
+                          ? Provider.of<Player>(context)
+                              .sliderSpeedValue
+                              .roundToDouble()
+                          : 39,
                       onChanged: (value) {
                         if (Provider.of<SubscribeData>(context, listen: false)
                             .isAppPurchase) {
@@ -295,55 +320,6 @@ class _CustomSlider extends StatelessWidget {
   }
 }
 
-class CustomThumbShape extends SliderComponentShape {
-  @override
-  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
-    return Size.fromRadius(15);
-  }
-
-  @override
-  void paint(PaintingContext context, Offset center,
-      {Animation<double> activationAnimation,
-      Animation<double> enableAnimation,
-      bool isDiscrete,
-      TextPainter labelPainter,
-      RenderBox parentBox,
-      SliderThemeData sliderTheme,
-      TextDirection textDirection,
-      double value,
-      double textScaleFactor,
-      Size sizeWithOverflow}) {
-    final Canvas canvas = context.canvas;
-    final paint = Paint()
-      ..shader = LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: kPlayerScrV2SliderColor,
-      ).createShader(Rect.fromCircle(
-        center: center,
-        radius: 15,
-      ));
-    canvas.drawCircle(center, 12, paint);
-  }
-}
-
-class CustomTrackShape extends RoundedRectSliderTrackShape {
-  Rect getPreferredRect({
-    @required RenderBox parentBox,
-    Offset offset = Offset.zero,
-    @required SliderThemeData sliderTheme,
-    bool isEnabled = false,
-    bool isDiscrete = false,
-  }) {
-    final double trackHeight = sliderTheme.trackHeight;
-    final double trackLeft = offset.dx;
-    final double trackTop =
-        offset.dy + (parentBox.size.height - trackHeight) / 2;
-    final double trackWidth = parentBox.size.width;
-    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
-  }
-}
-
 class _BackgroundLinearColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -361,17 +337,20 @@ class _BackgroundLinearColor extends StatelessWidget {
 }
 
 class _SelectableButtons extends StatelessWidget {
-  const _SelectableButtons({Key key, @required this.list, @required this.id})
+  const _SelectableButtons({Key key, @required this.list, @required this.id, this.dWidth, this.dHeight})
       : super(key: key);
   final List<ApiPlayListModel> list;
   final id;
+  final dWidth;
+  final dHeight;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final isAppPurchase = Provider.of<SubscribeData>(context).isAppPurchase;
     return Container(
-      height: height / 20 * 1.3,
-      width: double.infinity,
+      height: dHeight ?? height / 20 * 1.1,
+      width: dWidth ?? double.infinity,
       decoration: BoxDecoration(
         color: kPlayerScrV2ButtonThemeColor,
         borderRadius: BorderRadius.circular(10.0),
@@ -383,8 +362,17 @@ class _SelectableButtons extends StatelessWidget {
             selected: id == list[index].id ? true : false,
             model: list[index],
             onTap: () {
-              BlocProvider.of<PlayerScreenBloc>(context)
-                  .add(SetMode(id: list[index].id));
+              if (isAppPurchase) {
+                BlocProvider.of<PlayerScreenBloc>(context)
+                    .add(SetMode(id: list[index].id));
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SubscribeScreen(isFromSplash: false),
+                  ),
+                );
+              }
             },
           );
         }),
@@ -412,7 +400,7 @@ class _SelectableButtonsItem extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          margin: EdgeInsets.all(4),
+          margin: EdgeInsets.symmetric(horizontal: 4.2, vertical: 5.2),
           child: Center(
             child: Text(
               //model.titleEn,
@@ -420,7 +408,10 @@ class _SelectableButtonsItem extends StatelessWidget {
               style: TextStyle(
                   color: selected
                       ? kPlayerScrV2SelectedTextColor
-                      : kPlayerScrV2UnselectedTextColor),
+                      : kPlayerScrV2UnselectedTextColor,
+                  fontWeight: selected
+                      ? FontWeight.bold
+                      : FontWeight.normal,),
             ),
           ),
           decoration: selected
@@ -447,11 +438,12 @@ class _SelectableButtonsItem extends StatelessWidget {
 }
 
 class _VibrationList2 extends StatelessWidget {
-  const _VibrationList2({Key key, @required this.list, @required this.path})
+  const _VibrationList2({Key key, @required this.list, @required this.path, this.dWidth, this.dHeight})
       : super(key: key);
   final List<ApiVibrationModel> list;
   final List<String> path;
-
+  final dWidth;
+  final dHeight;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -461,12 +453,12 @@ class _VibrationList2 extends StatelessWidget {
       builder: (context, state) {
         return Consumer<Player>(
           builder: (context, provider, child) {
-            //print('ras');
             return Container(
-              height: height / 3,
-              child: GridView.builder(
-                itemCount: list.length,
-                itemBuilder: (BuildContext context, int index) {
+              height: dHeight ?? height / 3,
+              width: dWidth ?? width,
+              child: GridView.count(
+                //itemCount: list.length,
+                children: List.generate(list.length, (index) {
                   return CircleSelectableButton(
                     selected:
                         list[index].id == state?.model?.id ?? -1 ? true : false,
@@ -500,12 +492,19 @@ class _VibrationList2 extends StatelessWidget {
                     model: list[index],
                     iconPath: path[index],
                   );
-                },
+                } ),
                 physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //shrinkWrap: true,
+                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //   crossAxisCount: 3,
+                // ),
                   crossAxisCount: 3,
-                ),
+                childAspectRatio:
+                (101 / Layout.width *
+                    Layout.multiplier *
+                    SizeConfig.blockSizeHorizontal) / (107 / Layout.height *
+                    Layout.multiplier *
+                    SizeConfig.blockSizeVertical),
               ),
             );
           },
@@ -553,14 +552,19 @@ void pause({@required context}) {
 }
 
 class _PowerAndFireButton extends StatelessWidget {
-  const _PowerAndFireButton({Key key}) : super(key: key);
+  const _PowerAndFireButton({Key key, this.baseModel, @required this.fireModel}) : super(key: key);
+
+  final ApiVibrationModel baseModel;
+  final ApiVibrationModel fireModel;
 
   @override
   Widget build(BuildContext context) {
     final player = Provider.of<Player>(context, listen: false);
-    return Expanded(
+    final isAppPurchase = Provider.of<SubscribeData>(context).isAppPurchase;
+    return Container(
+      height: 150,
+      //color: Colors.red,
       child: Row(
-        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             flex: 2,
@@ -569,11 +573,31 @@ class _PowerAndFireButton extends StatelessWidget {
           Expanded(
             flex: 3,
             child: PowerButton(
-              onTap: () {
+              onTap: () async {
                 BlocProvider.of<PlayerBloc>(context).add(StopVibration());
                 if (player.isPlaying) {
                   pause(context: context);
                   player.stopVibrations();
+                } else {
+                  if (player.currentPlayListModel != null) {
+                    player.stopVibrations();
+                    await Future.delayed(Duration(milliseconds: 200), () {});
+                    BlocProvider.of<PlayerBloc>(context).add(SelectVibration(
+                        vibrationModel: player.currentPlayListModel));
+                    player.updateCurrentPlayListModel(
+                        model: player.currentPlayListModel);
+                    play(
+                        context: context, model: player.currentPlayListModel);
+                  } else {
+                    player.stopVibrations();
+                    await Future.delayed(Duration(milliseconds: 200), () {});
+                    BlocProvider.of<PlayerBloc>(context).add(SelectVibration(
+                        vibrationModel: baseModel));
+                    player.updateCurrentPlayListModel(
+                        model: baseModel);
+                    play(
+                        context: context, model: baseModel);
+                  }
                 }
               },
             ),
@@ -582,18 +606,30 @@ class _PowerAndFireButton extends StatelessWidget {
             flex: 2,
             child: Align(
               alignment: Alignment(-1, 0),
-              child: FireButton(onTap: () async {
-                if(player.currentPlayListModel != null) {
-                  player.stopVibrations();
-                  await Future.delayed(
-                      Duration(milliseconds: 200), () {});
-                  BlocProvider.of<PlayerBloc>(context).add(
-                      SelectVibration(vibrationModel: player.currentPlayListModel));
-                  player.updateCurrentPlayListModel(
-                      model: player.currentPlayListModel);
-                  play(context: context, model: player.currentPlayListModel);
-                }
-              },),
+              child: FireButton(
+                onTap: () async {
+                  if (isAppPurchase) {
+                    if (player.currentPlayListModel != null) {
+                      player.stopVibrations();
+                      await Future.delayed(Duration(milliseconds: 200), () {});
+                      BlocProvider.of<PlayerBloc>(context).add(SelectVibration(
+                          vibrationModel: fireModel));
+                      player.updateCurrentPlayListModel(
+                          model: fireModel);
+                      play(
+                          context: context, model: fireModel);
+                    }
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SubscribeScreen(isFromSplash: false),
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
           ),
         ],
@@ -601,4 +637,3 @@ class _PowerAndFireButton extends StatelessWidget {
     );
   }
 }
-

@@ -17,7 +17,6 @@ class PCProvider extends ChangeNotifier {
   }
 
   void updatePageIndex({int index}) {
-//    _prevPageIndex = _pageIndex;
     _pageIndex = index;
     notifyListeners();
   }
