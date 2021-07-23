@@ -33,16 +33,38 @@ class _MainScreenState extends State<MainScreen> {
     SettingsScreen(),
   ];
   var selectedTab = SelectedTab.player;
-  List<String> svgImagePath = [
-    'assets/svg/articles.svg',
-    'assets/svg/player.svg',
-    'assets/svg/settings.svg'
-  ];
+  List<String> svgImagePath = ['assets/svg/articles.svg', 'assets/svg/player.svg', 'assets/svg/settings.svg'];
   List<String> title = [
     'articles',
     'player',
     'settings',
   ];
+
+  PCProvider pcProvider;
+
+  void _handleIndexChanged(int i) {
+    setState(() {
+      selectedTab = SelectedTab.values[i];
+    });
+    print(selectedTab);
+    switch (selectedTab) {
+      case SelectedTab.player:
+        pcProvider.animateToPage(
+          index: PlayerScreen_PAGE_INDEX,
+        );
+        break;
+      case SelectedTab.article:
+        pcProvider.animateToPage(
+          index: ArticlesScreen_PAGE_INDEX,
+        );
+        break;
+      case SelectedTab.settings:
+        pcProvider.animateToPage(
+          index: SettingsScreen_PAGE_INDEX,
+        );
+        break;
+    }
+  }
 
   @override
   void initState() {
@@ -64,50 +86,45 @@ class _MainScreenState extends State<MainScreen> {
     await AppTrackingTransparency.requestTrackingAuthorization();
   }
 
-  Widget _buildBody() {
-    switch (selectedItemBar) {
-      case 0:
-        return ArticlesScreen();
-      case 1:
-        return PlayerScreenV2();
-      case 2:
-        return SettingsScreen();
-      default:
-        return PlayerScreenV2();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
+    pcProvider = Provider.of<PCProvider>(context, listen: false);
     return RateMyAppBuilder(
       builder: (context) {
         return Scaffold(
           backgroundColor: kMainScreenScaffoldBackColor,
           body: Stack(
             children: <Widget>[
-              _buildBody(),
+              PageView(
+                pageSnapping: false,
+                scrollDirection: Axis.horizontal,
+                controller: Provider.of<PCProvider>(context).pageController,
+                physics: NeverScrollableScrollPhysics(),
+                onPageChanged: (index) {
+                  // //stop when screen is change
+                  Provider.of<Player>(context, listen: false).stopVibrations();
+                  pcProvider.updatePageIndex(index: index);
+                  selectedTab = SelectedTab.values[index];
+                },
+                children: screensList,
+              ),
               Positioned(
                 bottom: 0,
                 right: 0,
                 child: Container(
-                  height: 92 /
-                      Layout.height *
-                      Layout.multiplier *
-                      SizeConfig.blockSizeVertical,
+                  height: 92 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                   width: width,
                   decoration: BoxDecoration(
                     color: Colors.transparent,
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(10),
-                        topLeft: Radius.circular(10)),
+                    borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
                   ),
                   child: Column(
                     children: [
                       CurvedNavigationBar(
                         height: 75,
-                        animationDuration: Duration(milliseconds: 300),
+                        animationDuration: Duration(milliseconds: 230),
                         backgroundColor: Colors.transparent,
                         index: selectedItemBar,
                         items: List.generate(
@@ -115,22 +132,16 @@ class _MainScreenState extends State<MainScreen> {
                             (index) => CurvedNavBarItem(
                                   svgAsset: svgImagePath[index],
                                   title: title[index],
-                                  selected:
-                                      index == selectedItemBar ? true : false,
+                                  selected: index == selectedItemBar ? true : false,
                                 )),
                         onTap: (index) {
                           selectedItemBar = index;
-                          setState(() {
-                          });
+                          _handleIndexChanged(index);
                         },
                       ),
                       Container(
                         width: width,
-                        height: 92 /
-                                Layout.height *
-                                Layout.multiplier *
-                                SizeConfig.blockSizeVertical -
-                            75,
+                        height: 92 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical - 75,
                         color: Colors.white,
                       )
                     ],
@@ -158,14 +169,12 @@ class _MainScreenState extends State<MainScreen> {
           }
         });
 
-        print('Are all conditions met ? ' +
-            (rateMyApp.shouldOpenDialog ? 'Yes' : 'No'));
+        print('Are all conditions met ? ' + (rateMyApp.shouldOpenDialog ? 'Yes' : 'No'));
         if (rateMyApp.shouldOpenDialog) {
           rateMyApp.showStarRateDialog(
             context,
             title: AppLocalizations.of(context).translate('Rate this app'),
-            message:
-                AppLocalizations.of(context).translate('You like this app'),
+            message: AppLocalizations.of(context).translate('You like this app'),
             // contentBuilder: (context, defaultContent) => content, // This one allows you to change the default dialog content.
             actionsBuilder: (context, stars) {
               // Triggered when the user updates
@@ -175,17 +184,13 @@ class _MainScreenState extends State<MainScreen> {
                 TextButton(
                   child: Text('OK', style: TextStyle(fontSize: 18)),
                   onPressed: () async {
-                    print('Thanks for the ' +
-                        (stars == null ? '0' : stars.round().toString()) +
-                        ' star(s) !');
+                    print('Thanks for the ' + (stars == null ? '0' : stars.round().toString()) + ' star(s) !');
                     // You can handle the result as you want (for instance if the user puts 1 star then open your contact page, if he puts more then open the store page, etc...).
                     // This allows to mimic the behavior of the default "Rate" button. See "Advanced > Broadcasting events" for more information :
                     //TODO Finish after approve
                     await rateMyApp.launchStore();
-                    await rateMyApp
-                        .callEvent(RateMyAppEventType.laterButtonPressed);
-                    Navigator.pop<RateMyAppDialogButton>(
-                        context, RateMyAppDialogButton.later);
+                    await rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed);
+                    Navigator.pop<RateMyAppDialogButton>(context, RateMyAppDialogButton.later);
                   },
                 ),
               ];
@@ -199,8 +204,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
             starRatingOptions: StarRatingOptions(),
             // Custom star bar rating options.
-            onDismissed: () => rateMyApp.callEvent(RateMyAppEventType
-                .laterButtonPressed), // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
+            onDismissed: () => rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed), // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
           );
         }
       },
@@ -216,9 +220,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   FontWeight getFontWeight({PCProvider pcProvider, int pageIndex}) {
-    return pcProvider.pageIndex == pageIndex
-        ? FontWeight.bold
-        : FontWeight.normal;
+    return pcProvider.pageIndex == pageIndex ? FontWeight.bold : FontWeight.normal;
   }
 }
 

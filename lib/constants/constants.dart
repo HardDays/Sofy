@@ -49,8 +49,8 @@ const int DEFAULT_VIBRATION_DURATION = 600;
 
 const int ArticlesScreen_PAGE_INDEX = 0;
 const int PlayerScreen_PAGE_INDEX = 1;
+const int SettingsScreen_PAGE_INDEX = 2;
 const int PlayListScreen_PAGE_INDEX = 4;
-const int SettingsScreen_PAGE_INDEX = 3;
 const int RecommendationScreen_PAGE_INDEX = 5;
 const int MyPlaylistScreen_PAGE_INDEX = 3;
 
