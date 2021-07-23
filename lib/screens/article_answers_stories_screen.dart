@@ -18,20 +18,13 @@ class ArticleAnswersStoriesScreen extends StatefulWidget {
   final String coverUrl;
   final String question;
 
-  ArticleAnswersStoriesScreen({Key key,
-    @required this.articleId,
-    @required this.coverUrl,
-    @required this.question})
-      : super(key: key);
+  ArticleAnswersStoriesScreen({Key key, @required this.articleId, @required this.coverUrl, @required this.question}) : super(key: key);
 
   @override
-  _ArticleAnswersStoriesScreenState createState() =>
-      _ArticleAnswersStoriesScreenState();
+  _ArticleAnswersStoriesScreenState createState() => _ArticleAnswersStoriesScreenState();
 }
 
-class _ArticleAnswersStoriesScreenState
-    extends State<ArticleAnswersStoriesScreen>
-    with SingleTickerProviderStateMixin {
+class _ArticleAnswersStoriesScreenState extends State<ArticleAnswersStoriesScreen> with SingleTickerProviderStateMixin {
   List<Story> stories = [];
   List<ApiAnswersModel> answers = [];
 
@@ -63,14 +56,8 @@ class _ArticleAnswersStoriesScreenState
 
   @override
   Widget build(BuildContext context) {
-    height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
 
     final Story story = stories[_currentIndex];
     return Scaffold(
@@ -95,12 +82,7 @@ class _ArticleAnswersStoriesScreenState
                 return const SizedBox.shrink();
               },
             ),
-            BackdropFilter(
-                filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-                child: Container(
-                    color: kArticlesAnsStoriesBackdropFilterColor,
-                    height: double.infinity,
-                    width: double.infinity)),
+            BackdropFilter(filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0), child: Container(color: kArticlesAnsStoriesBackdropFilterColor, height: double.infinity, width: double.infinity)),
             Padding(
               padding: EdgeInsets.only(top: height / 9.95),
               child: Column(children: [
@@ -114,14 +96,10 @@ class _ArticleAnswersStoriesScreenState
                         children: [
                           Container(
                               width: width / 1.5,
-                              margin: EdgeInsets.only(
-                                  top: height / 12.6,
-                                  left: index == 1 ? width / 3.6 : 20,
-                                  right: 20),
+                              margin: EdgeInsets.only(top: height / 12.6, left: index == 1 ? width / 3.6 : 20, right: 20),
                               child: Neumorphic(
                                   style: NeumorphicStyle(
-                                      boxShape: NeumorphicBoxShape.roundRect(
-                                          BorderRadius.circular(15)),
+                                      boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
                                       depth: 3,
                                       intensity: 0.65,
                                       shadowLightColorEmboss: kArticlesWhiteColor,
@@ -137,8 +115,7 @@ class _ArticleAnswersStoriesScreenState
                                           color: kArticlesAnsStoriesColor,
                                           width: double.infinity,
                                           height: height / 14.45,
-                                          padding: EdgeInsets.only(
-                                              left: 15.0, right: 15.0),
+                                          padding: EdgeInsets.only(left: 15.0, right: 15.0),
                                           alignment: Alignment.center,
                                           child: Text(
                                             widget.question,
@@ -156,11 +133,7 @@ class _ArticleAnswersStoriesScreenState
                                         Container(
                                           width: double.infinity,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.only(
-                                              left: 16.0,
-                                              right: 16.0,
-                                              top: height / 44.65,
-                                              bottom: height / 44.65),
+                                          padding: EdgeInsets.only(left: 16.0, right: 16.0, top: height / 44.65, bottom: height / 44.65),
                                           child: Text(
                                             answers[index].content,
                                             overflow: TextOverflow.clip,
@@ -190,15 +163,15 @@ class _ArticleAnswersStoriesScreenState
                     children: stories
                         .asMap()
                         .map((i, e) {
-                      return MapEntry(
-                        i,
-                        AnimatedBar(
-                          animController: _animController,
-                          position: i,
-                          currentIndex: _currentIndex,
-                        ),
-                      );
-                    })
+                          return MapEntry(
+                            i,
+                            AnimatedBar(
+                              animController: _animController,
+                              position: i,
+                              currentIndex: _currentIndex,
+                            ),
+                          );
+                        })
                         .values
                         .toList(),
                   ),
@@ -244,10 +217,7 @@ class _ArticleAnswersStoriesScreenState
   }
 
   void _onTapDown(TapDownDetails details, Story story) {
-    final double screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final double screenWidth = MediaQuery.of(context).size.width;
     final double dx = details.globalPosition.dx;
     if (dx < screenWidth / 3) {
       setState(() {
@@ -292,9 +262,7 @@ class _ArticleAnswersStoriesScreenState
 
   Future<void> getAnswers(int page) async {
     String userToken = await PreferencesProvider().getAnonToken();
-    RestApi()
-        .getAnswers(context, widget.articleId, page, token: userToken)
-        .then((values) {
+    RestApi().getAnswers(context, widget.articleId, page, token: userToken).then((values) {
       answers = values.info.items;
       if (stories.length == 0) {
         for (int i = 0; i < values.info.meta.pageCount; i++) {
@@ -357,20 +325,18 @@ class AnimatedBar extends StatelessWidget {
               children: <Widget>[
                 _buildContainer(
                   double.infinity,
-                  position < currentIndex
-                      ? kArticlesWhiteColor
-                      : kArticlesWhiteColor.withOpacity(0.3),
+                  position < currentIndex ? kArticlesWhiteColor : kArticlesWhiteColor.withOpacity(0.3),
                 ),
                 position == currentIndex
                     ? AnimatedBuilder(
-                  animation: animController,
-                  builder: (context, child) {
-                    return _buildContainer(
-                      constraints.maxWidth * animController.value,
-                      kArticlesWhiteColor,
-                    );
-                  },
-                )
+                        animation: animController,
+                        builder: (context, child) {
+                          return _buildContainer(
+                            constraints.maxWidth * animController.value,
+                            kArticlesWhiteColor,
+                          );
+                        },
+                      )
                     : const SizedBox.shrink(),
               ],
             );
@@ -397,12 +363,10 @@ class AnimatedBar extends StatelessWidget {
 }
 
 class FadeRoute<T> extends MaterialPageRoute<T> {
-  FadeRoute({WidgetBuilder builder, RouteSettings settings})
-      : super(builder: builder, settings: settings);
+  FadeRoute({WidgetBuilder builder, RouteSettings settings}) : super(builder: builder, settings: settings);
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return new FadeTransition(opacity: animation, child: child);
   }
 }

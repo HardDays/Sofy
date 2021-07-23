@@ -170,11 +170,11 @@ const String share_click = 'share_click';
 
 
 class EventsOfAnalytics {
-  static const String article_show = 'article_show';
-  static const String share_article_click = 'share_article_click';
-  static const String go_to_stories_click = 'go_to_stories_click';
-  static const String reply_click = 'reply_click';
-  static const String send_stories = 'send_stories';
+  static const String article_show = 'article_show'; // показ статьи
+  static const String share_article_click = 'share_article_click'; // поделиться статьей кнопка в правом верхнем углу
+  static const String go_to_stories_click = 'go_to_stories_click'; // перейти к историям - кнопка на экране статьи
+  static const String reply_click = 'reply_click'; //
+  static const String send_stories = 'send_stories'; // ответ на историю (вопрос)
   static const String show_stories = 'show_stories';
   static const String articles_feedback = 'articles_feedback';
   static const String splash_show = 'splash_show';
@@ -186,7 +186,9 @@ class EventsOfAnalytics {
   static const String comment_dislike_click = 'comment_dislike_click';
   static const String comment_like_click = 'comment_like_click';
   static const String comment_send_reply_click = 'comment_send_reply_click';
-  static const String article_readed = 'article_readed';
+  static const String article_readed = 'article_readed'; // статья пролистана до конца
+  static const String vote_variant_selected = 'vote_selected'; // ВЫБРАН вариант ответа в голосовании
+
 }
 
 class Layout {

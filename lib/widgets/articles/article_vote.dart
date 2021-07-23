@@ -5,6 +5,7 @@ import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/models/api_article_poll_model.dart';
 import 'package:sofy_new/models/api_article_variants_model.dart';
 import 'package:sofy_new/rest_api.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/bloc/article_vote_bloc.dart';
 import 'package:sofy_new/widgets/articles/sofy_button.dart';
 import 'package:sofy_new/widgets/articles/sofy_vote_button.dart';
@@ -39,14 +40,14 @@ class ArticleVote extends StatelessWidget {
               ),
               BlocProvider<ArticleVoteBloc>(
                 create: (BuildContext context) =>
-                    ArticleVoteBloc(restApi: RestApi(), variants: poll.variants)
-                      ..add(ArticleVoteEventInit()),
+                ArticleVoteBloc(restApi: RestApi(), variants: poll.variants)
+                  ..add(ArticleVoteEventInit()),
                 child: BlocBuilder<ArticleVoteBloc, ArticleVoteState>(
                   builder: (context, state) {
                     bool isResult = state is ArticleVoteStatePostedVote ||
                         (poll.variants
-                                .where((element) => !element.selected)
-                                .length !=
+                            .where((element) => !element.selected)
+                            .length !=
                             poll.variants.length);
                     return Column(
                       children: [
@@ -57,7 +58,7 @@ class ArticleVote extends StatelessWidget {
                           itemCount: state.variants.length,
                           itemBuilder: (BuildContext context, int index) {
                             ApiArticleVariantsModel variant =
-                                state.variants[index];
+                            state.variants[index];
                             // результаты
                             if ((isResult && state is ArticleVoteStateInit) ||
                                 state is ArticleVoteStatePostedVote)
@@ -74,9 +75,14 @@ class ArticleVote extends StatelessWidget {
                               child: SofyVoteButton(
                                   label: variant.content,
                                   callback: () {
+                                    Analytics().sendEventReports(event: EventsOfAnalytics.vote_variant_selected, attr: {
+                                      "name": variant.content,
+                                      'variant_id': variant.id,
+                                      'pollId': variant.pollId,
+                                    });
                                     BlocProvider.of<ArticleVoteBloc>(context)
                                         .add(ArticleVoteEventSetVote(
-                                            variantId: variant.id));
+                                        variantId: variant.id));
                                   },
                                   isBordered: variant.selected),
                             );
@@ -85,18 +91,24 @@ class ArticleVote extends StatelessWidget {
                         isResult && state is ArticleVoteStateInit
                             ? Container()
                             : state is ArticleVoteStateSettedVote
-                                ? Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 14, bottom: 30),
-                                    child: SofyButton(
-                                        label: poll.buttonName,
-                                        callback: () {
-                                          BlocProvider.of<ArticleVoteBloc>(
-                                                  context)
-                                              .add(ArticleVoteEventVote());
-                                        }),
-                                  )
-                                : Container(),
+                            ? Padding(
+                          padding: const EdgeInsets.only(
+                              top: 14, bottom: 30),
+                          child: SofyButton(
+                              label: poll.buttonName,
+                              callback: () {
+
+                                // Analytics().sendEventReports(event: EventsOfAnalytics.vote_variant_selected, attr: {
+                                //   "name": variant.content,
+                                //   'variant_id': variant.id,
+                                //   'pollId': variant.pollId,
+                                // });
+                                BlocProvider.of<ArticleVoteBloc>(
+                                    context)
+                                    .add(ArticleVoteEventVote());
+                              }),
+                        )
+                            : Container(),
                       ],
                     );
                   },

@@ -15,11 +15,11 @@ import 'package:sofy_new/screens/articles_categories_details_screen.dart';
 import 'package:sofy_new/screens/articles_categories_screen.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/bloc/articles_screen_bloc.dart';
-import 'package:sofy_new/widgets/fullscreen_preloader.dart';
 import 'package:sofy_new/widgets/articles/articles_cards_horizontal_list.dart';
 import 'package:sofy_new/widgets/articles/articles_categories_with_header.dart';
 import 'package:sofy_new/widgets/articles/articles_list_with_header.dart';
 import 'package:sofy_new/widgets/articles/sofy_button.dart';
+import 'package:sofy_new/widgets/fullscreen_preloader.dart';
 import 'package:sofy_new/widgets/material_page_route.dart';
 
 import '../rest_api.dart';
@@ -182,7 +182,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                               : Container(),
                           state.listOfPopularArticles.length > 0
                               ? Padding(
-                            padding: EdgeInsets.all(22/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                  padding: EdgeInsets.all(22 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                   child: ArticlesListWithHeader(title: AppLocalizations.of(context).translate('popular'), listOfArticles: state.listOfPopularArticles),
                                 )
                               : Container(),
@@ -209,7 +209,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                   titleFontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical)
                               : Container(),
                           Padding(
-                            padding: EdgeInsets.all(22/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                            padding: EdgeInsets.all(22 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                             child: ArticlesCategoriesWithHeader(
                               listOfTopics: state.listOfTopicsPopular,
                               title: AppLocalizations.of(context).translate('popular_categories'),
@@ -217,7 +217,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                           ),
                           Stack(children: [
                             Container(
-                                height: height / 4.6/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                height: height / 4.6 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                 width: SizeConfig.screenWidth,
                                 decoration: BoxDecoration(
                                     gradient: LinearGradient(
@@ -226,7 +226,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                   colors: ArticlesColors.BottomLg,
                                 ))),
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 22/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                              padding: EdgeInsets.symmetric(horizontal: 22 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                               child: SofyButton(
                                 label: AppLocalizations.of(context).translate('view_all'),
                                 callback: () {

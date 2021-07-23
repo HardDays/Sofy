@@ -33,16 +33,16 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
         title == ''
             ? Container()
             : Container(
-                height: 64,
-                width: width,
-                padding: EdgeInsets.fromLTRB(22, 16, 22, 16),
-                child: HeaderButton(
-                  text: title,
-                  callback: callback,
-                  fontSize: titleFontSize,
-                  textColor: kArticlesHeaderTextColor,
-                ),
-              ),
+          height: 64,
+          width: width,
+          padding: EdgeInsets.fromLTRB(22, 16, 22, 16),
+          child: HeaderButton(
+            text: title,
+            callback: callback,
+            fontSize: titleFontSize,
+            textColor: kArticlesHeaderTextColor,
+          ),
+        ),
         Container(
           height: cardHeight,
           child: ListView.builder(
@@ -68,6 +68,7 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
                         if (isAppPurchase) {
                           Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
                             "name": listOfArticles[index].title,
+                            'id': listOfArticles[index].id
                           });
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -79,6 +80,7 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
                         } else {
                           Analytics().sendEventReports(event: EventsOfAnalytics.splash_show, attr: {
                             "name": listOfArticles[index].title,
+                            'id': listOfArticles[index].id,
                             'source': 'onboarding/speed_change/modes_screen/settings_screen',
                           });
                           Navigator.push(
@@ -91,6 +93,7 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
                       } else {
                         Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
                           "name": listOfArticles[index].title,
+                          'id': listOfArticles[index].id,
                         });
                         Navigator.of(context).push(
                           MaterialPageRoute(

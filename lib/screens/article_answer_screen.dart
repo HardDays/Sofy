@@ -231,13 +231,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                         onClick: () {
                                           if (isAnswerSent) return;
                                           if (textController.text.length > 0 || textController.text.length < 255) {
-                                            Analytics().sendEventReports(
-                                              event: EventsOfAnalytics.send_stories,
-                                              attr: {
-                                                'name': widget.articleTitle,
-                                                'id': widget.articleId,
-                                              },
-                                            );
+                                            // аналитика уходит в функции
                                             sendAnswer(widget.articleId, widget.questionId, textController.text.toString());
                                           }
                                         },
