@@ -97,12 +97,11 @@ class ArticleVote extends StatelessWidget {
                           child: SofyButton(
                               label: poll.buttonName,
                               callback: () {
-
-                                // Analytics().sendEventReports(event: EventsOfAnalytics.vote_variant_selected, attr: {
-                                //   "name": variant.content,
-                                //   'variant_id': variant.id,
-                                //   'pollId': variant.pollId,
-                                // });
+                                Analytics().sendEventReports(event: EventsOfAnalytics.reply_click, attr: {
+                                  "name": poll.blockName,
+                                  'variant_id': BlocProvider.of<ArticleVoteBloc>(context).selectedVariantsId,
+                                  'pollId': poll.variants[0].id,
+                                });
                                 BlocProvider.of<ArticleVoteBloc>(
                                     context)
                                     .add(ArticleVoteEventVote());

@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/user_auth.dart';
 import 'package:sofy_new/widgets/user_text_field.dart';
 
@@ -258,6 +259,7 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
                                     ),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
+                                        Analytics().sendEventReports(event: EventsOfAnalytics.show_sign_in_screen);
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -275,10 +277,8 @@ class _UserRegistrationScreen extends State<UserRegistrationScreen> {
   }
 
   void _signUp() {
-    /*Analytics().sendEventReports(
-                              event: banner_click,
-                            );*/
     if (isButtonActive == 1) {
+      Analytics().sendEventReports(event: EventsOfAnalytics.sign_up_click);
       RestApi().userReg(
           context,
           nameController.text.toString(),

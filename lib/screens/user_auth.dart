@@ -9,6 +9,7 @@ import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/rest_api.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/user_recovery_pass.dart';
 import 'package:sofy_new/widgets/user_text_field.dart';
 
@@ -221,6 +222,7 @@ class _UserAuthScreen extends State<UserAuthScreen> {
                                           ),
                                           onTap: () {
                                             if (isButtonActive == 1) {
+                                              Analytics().sendEventReports(event: EventsOfAnalytics.sign_in_click);
                                               RestApi().userAuth(
                                                   context,
                                                   mailController.text.toString(),
@@ -249,6 +251,7 @@ class _UserAuthScreen extends State<UserAuthScreen> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
+                                Analytics().sendEventReports(event: EventsOfAnalytics.forgot_pass_click);
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

@@ -109,13 +109,14 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                       style: TextStyle(
                                           fontFamily: Fonts.Exo2,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 24/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, //24
+                                          fontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, //24
                                           color: kNavigBarInactiveColor),
                                     ),
                                   ),
                                 ],
                               ),
                               onTap: () {
+                                if (!isAnswerSent) Analytics().sendEventReports(event: EventsOfAnalytics.cancel_answer_story_screen, attr: {"name": widget.articleTitle, 'id': widget.articleId});
                                 Navigator.pop(context);
                               }),
                         )),
@@ -148,13 +149,8 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                         AppLocalizations.of(context).translate('share_answer'),
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontFamily: Fonts.GilroyBold,
-                                            height: 1.5,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 16.0,
-                                            color: kWelcomDarkTextColor),
+                                        style:
+                                            TextStyle(fontFamily: Fonts.GilroyBold, height: 1.5, fontWeight: FontWeight.bold, fontStyle: FontStyle.normal, fontSize: 16.0, color: kWelcomDarkTextColor),
                                       ),
                                     ),
                                     Container(
@@ -195,7 +191,8 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                             hintStyle: TextStyle(
                                                 fontFamily: Fonts.HindGuntur,
                                                 fontSize: 16 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                fontWeight: FontWeight.w600, color: SofyQuestionColors.InputHintColor),
+                                                fontWeight: FontWeight.w600,
+                                                color: SofyQuestionColors.InputHintColor),
                                             hintText: AppLocalizations.of(context).translate('answer_hint'),
                                           ),
                                           maxLength: 100,

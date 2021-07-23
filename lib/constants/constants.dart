@@ -54,17 +54,17 @@ const int PlayListScreen_PAGE_INDEX = 4;
 const int RecommendationScreen_PAGE_INDEX = 5;
 const int MyPlaylistScreen_PAGE_INDEX = 3;
 
- const DEFAULT_DURATION = const Duration(milliseconds: 100);
- const DEFAULT_CURVE = Curves.linear;
+const DEFAULT_DURATION = const Duration(milliseconds: 100);
+const DEFAULT_CURVE = Curves.linear;
 
- const double MIN_DEPTH = -20.0;
- const double MAX_DEPTH = 20.0;
+const double MIN_DEPTH = -20.0;
+const double MAX_DEPTH = 20.0;
 
- const double MIN_INTENSITY = 0.0;
- const double MAX_INTENSITY = 1.0;
+const double MIN_INTENSITY = 0.0;
+const double MAX_INTENSITY = 1.0;
 
- const double MIN_CURVE = 0.0;
- const double MAX_CURVE = 1.0;
+const double MIN_CURVE = 0.0;
+const double MAX_CURVE = 1.0;
 
 const KEY_USER_TOKEN = "user_token";
 const KEY_FAVORITES = "favorites";
@@ -104,10 +104,8 @@ const String kAmplitudeFlutterApiKey = '1e7c869394652c8fe58b0857da11106d';
 const String kTenjinFlutterApiKey = 'ESDVC9YTT4285BWUM2SWBBH8EAW5WJBY';
 
 
-
 const String kQonversionSdkApiKey = 'BgkZ-H3cZBLerSqF6vhxb-xnVNfrb18S';
-const String kCatSdkApiKey        = 'omjpjHtHQsbODxoYFLqUCsLvZrMjlsOL';
-
+const String kCatSdkApiKey = 'omjpjHtHQsbODxoYFLqUCsLvZrMjlsOL';
 
 
 const int kPageAnimDuration = 700;
@@ -188,7 +186,14 @@ class EventsOfAnalytics {
   static const String comment_send_reply_click = 'comment_send_reply_click';
   static const String article_readed = 'article_readed'; // статья пролистана до конца
   static const String vote_variant_selected = 'vote_selected'; // ВЫБРАН вариант ответа в голосовании
-
+  static const String show_answer_story_screen = 'show_answer_story_screen'; // показан экран ответа на историю
+  static const String cancel_answer_story_screen = 'cancel_answer_story_screen'; // на историю не стали отвечать на заходили на экран ответа
+  static const String bottom_bar_click = 'bottom_bar_click'; // переход с вкладки на вкладку
+  static const String show_create_account_screen = 'show_create_account_screen'; // показан экран создания аккаунта
+  static const String show_sign_in_screen = 'show_sign_in_screen'; // показан экран входа
+  static const String sign_in_click = 'sign_in_click'; // клик по кнопке входа
+  static const String forgot_pass_click = 'forgot_pass_click'; // клик по кнопке входа
+  static const String sign_up_click = 'sign_up_click'; // клик по кнопке входа
 }
 
 class Layout {
