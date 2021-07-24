@@ -9,11 +9,12 @@ class ArticleVoteBloc extends Bloc<ArticleVoteEvent, ArticleVoteState> {
       : super(ArticleVoteStateInit(variants: variants));
   final RestApi restApi;
   final List<ApiArticleVariantsModel> variants;
-
+  int selectedVariantsId = -1;
   @override
   Stream<ArticleVoteState> mapEventToState(ArticleVoteEvent event) async* {
     if (event is ArticleVoteEventInit) ArticleVoteStateInit(variants: variants);
     if (event is ArticleVoteEventSetVote) {
+      selectedVariantsId = event.variantId;
       try {
         for (int i = 0; i < variants.length; i++) {
           if (variants[i].id == event.variantId)

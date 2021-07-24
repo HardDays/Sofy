@@ -85,7 +85,14 @@ class ArticleQuestion extends StatelessWidget {
                               context,
                               PageRouteBuilder(
                                 opaque: false,
-                                pageBuilder: (_, __, ___) => ArticleAnswerScreen(articleId: articleId.toString(), articleTitle: article.title, questionId: question.id),
+                                pageBuilder: (_, __, ___) {
+                                  Analytics().sendEventReports(event: EventsOfAnalytics.show_answer_story_screen, attr: {
+                                    "name": article.title,
+                                    'id': articleId,
+                                    'questionId': question.id
+                                  });
+                                  return ArticleAnswerScreen(articleId: articleId.toString(), articleTitle: article.title, questionId: question.id);
+                                  },
                               ),
                             );
                           },

@@ -12,6 +12,7 @@ import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/PageProvider.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/player.dart';
+import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/player_screen_v2.dart';
 import 'package:sofy_new/screens/setting_screen.dart';
 import 'package:sofy_new/widgets/curved_nav_bar_item.dart';
@@ -46,19 +47,21 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       selectedTab = SelectedTab.values[i];
     });
-    print(selectedTab);
     switch (selectedTab) {
       case SelectedTab.player:
+        Analytics().sendEventReports(event: EventsOfAnalytics.bottom_bar_click, attr: {'name': title[PlayerScreen_PAGE_INDEX]});
         pcProvider.animateToPage(
           index: PlayerScreen_PAGE_INDEX,
         );
         break;
       case SelectedTab.article:
+        Analytics().sendEventReports(event: EventsOfAnalytics.bottom_bar_click, attr: {'name': title[ArticlesScreen_PAGE_INDEX]});
         pcProvider.animateToPage(
           index: ArticlesScreen_PAGE_INDEX,
         );
         break;
       case SelectedTab.settings:
+        Analytics().sendEventReports(event: EventsOfAnalytics.bottom_bar_click, attr: {'name': title[SettingsScreen_PAGE_INDEX]});
         pcProvider.animateToPage(
           index: SettingsScreen_PAGE_INDEX,
         );
