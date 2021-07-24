@@ -17,7 +17,6 @@ class Equalizer extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final player = Provider.of<Player>(context, listen: true);
     return BlocBuilder<PlayerBloc, PlayerState>(
       builder: (context, state) {
         if (state.status == PlayerStatus.pause) {
@@ -26,41 +25,7 @@ class Equalizer extends StatelessWidget {
             dWidth: dWidth,
           );
         }
-        return Container(
-          height: dHeight ?? height * 0.15,
-          width: dWidth ?? width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(20, (index) {
-              return Row(
-                children: [
-                  SizedBox(
-                    width: 6 /
-                        Layout.width *
-                        Layout.multiplier *
-                        SizeConfig.blockSizeHorizontal,
-                  ),
-                  Container(
-                    height: player.isPlaying ? Random().nextInt(108).toDouble() : Random().nextInt(60).toDouble(),
-                    width: 6 /
-                        Layout.width *
-                        Layout.multiplier *
-                        SizeConfig.blockSizeHorizontal,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFEE145C).withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(3)),
-                  ),
-                  SizedBox(
-                    width: 6 /
-                        Layout.width *
-                        Layout.multiplier *
-                        SizeConfig.blockSizeHorizontal,
-                  )
-                ],
-              );
-            }),
-          ),
-        );
+        return _ActiveEqualizeLines(dWidth: dWidth, dHeight: dHeight,);
       },
     );
   }
@@ -91,6 +56,73 @@ class _EqualizeLines extends StatelessWidget {
               ),
               Container(
                 height: equalizerValues[index].toDouble(),
+                width: 6 /
+                    Layout.width *
+                    Layout.multiplier *
+                    SizeConfig.blockSizeHorizontal,
+                decoration: BoxDecoration(
+                    color: Color(0xFFEE145C).withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(3)),
+              ),
+              SizedBox(
+                width: 6 /
+                    Layout.width *
+                    Layout.multiplier *
+                    SizeConfig.blockSizeHorizontal,
+              )
+            ],
+          );
+        }),
+      ),
+    );
+  }
+}
+
+class _ActiveEqualizeLines extends StatefulWidget {
+  const _ActiveEqualizeLines({Key key, this.dWidth, this.dHeight}) : super(key: key);
+
+  final dWidth;
+  final dHeight;
+  @override
+  __ActiveEqualizeLinesState createState() => __ActiveEqualizeLinesState();
+}
+
+class __ActiveEqualizeLinesState extends State<_ActiveEqualizeLines> {
+
+  @override
+  void initState() {
+    loopState();
+    super.initState();
+  }
+
+  Future<void> loopState() async {
+    Future.delayed(Duration(milliseconds: 100), () {
+      setState(() {
+      });
+      loopState();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    return Container(
+      height: widget.dHeight ?? height * 0.15,
+      width: widget.dWidth ?? width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(20, (index) {
+          return Row(
+            children: [
+              SizedBox(
+                width: 6 /
+                    Layout.width *
+                    Layout.multiplier *
+                    SizeConfig.blockSizeHorizontal,
+              ),
+              Container(
+                height: index % 2 == 0 ? Random().nextInt(108).toDouble() : Random().nextInt(60).toDouble(),
                 width: 6 /
                     Layout.width *
                     Layout.multiplier *
