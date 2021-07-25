@@ -156,7 +156,7 @@ class _MyPlaylistScreenState extends State<MyPlaylistScreen> {
                             );
 
                             Analytics().sendEventReports(
-                              event: vibration_play,
+                              event: EventsOfAnalytics.vibration_play,
                               attr: {
                                 'vibration_id': playlistData
                                     .getCurrentPlaylistModelApi(context)

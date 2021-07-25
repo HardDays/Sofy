@@ -239,9 +239,11 @@ class _CustomSlider extends StatelessWidget {
                       onChanged: (value) {
                         if (Provider.of<SubscribeData>(context, listen: false)
                             .isAppPurchase) {
+                          Analytics().sendEventReports(event: EventsOfAnalytics.vibration_set_to_value, attr: {'value': value.round()});
                           Provider.of<Player>(context, listen: false)
                               .updateSliderSpeedValue(value: value.round());
                         } else {
+                          Analytics().sendEventReports(event: EventsOfAnalytics.locked_slider_click);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -261,6 +263,7 @@ class _CustomSlider extends StatelessWidget {
                       color: Colors.transparent,
                       child: InkWell(
                         onTap: () {
+                          Analytics().sendEventReports(event: EventsOfAnalytics.locked_slider_click);
                           Navigator.of(context).push(
                             FadeRoute(
                               builder: (BuildContext context) =>
@@ -362,7 +365,9 @@ class _SelectableButtons extends StatelessWidget {
             selected: id == list[index].id ? true : false,
             model: list[index],
             onTap: () {
+              // todo
               if (isAppPurchase) {
+                Analytics().sendEventReports(event: EventsOfAnalytics.vibration_mode, attr: {'vibration_id': list[index].id});
                 BlocProvider.of<PlayerScreenBloc>(context)
                     .add(SetMode(id: list[index].id));
               } else {
@@ -522,7 +527,7 @@ void play({@required context, ApiVibrationModel model}) {
     startPosition: player.pausePosition,
   );
   Analytics().sendEventReports(
-    event: vibration_play,
+    event: EventsOfAnalytics.vibration_play,
     attr: {
       'vibration_id': model.id,
       'playlist_id': 'playlist_' +
@@ -539,7 +544,7 @@ void pause({@required context}) {
   player.updateIsPlaying(flag: false);
   player.pauseVibrations();
   Analytics().sendEventReports(
-    event: vibration_pause,
+    event: EventsOfAnalytics.vibration_pause,
     attr: {
       'vibration_id': player.currentPlayListModel.id,
       'playlist_id': 'playlist_' +

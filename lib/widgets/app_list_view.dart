@@ -83,7 +83,7 @@ class AppListView extends StatelessWidget {
                   );
 
                   Analytics().sendEventReports(
-                    event: vibration_play,
+                    event: EventsOfAnalytics.vibration_play,
                     attr: {
                       'vibration_id': playlistData.getCurrentPlaylistModelApi(context).id,
                       'playlist_id': Provider.of<PlaylistNameData>(context, listen: false).getCurrentPlaylistNameApi().titleEn,

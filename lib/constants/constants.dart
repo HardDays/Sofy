@@ -4,7 +4,6 @@ const appStoreIdentifier = '1532641266';
 const googlePlayIdentifier = 'sofy.vibrator.app';
 const feedbackEmail = 'sofy1.app@gmail.com';
 
-
 // const Fonts.ProximaNova = 'Proxima Nova';
 // const Fonts.Kalam = 'Kalam';
 // const Fonts.Exo2 = 'Exo 2';
@@ -103,10 +102,8 @@ const String kAppmetricaSdkApiKey = '88477e76-0ca3-4eb3-98fb-c271b8ef6051';
 const String kAmplitudeFlutterApiKey = '1e7c869394652c8fe58b0857da11106d';
 const String kTenjinFlutterApiKey = 'ESDVC9YTT4285BWUM2SWBBH8EAW5WJBY';
 
-
 const String kQonversionSdkApiKey = 'BgkZ-H3cZBLerSqF6vhxb-xnVNfrb18S';
 const String kCatSdkApiKey = 'omjpjHtHQsbODxoYFLqUCsLvZrMjlsOL';
-
 
 const int kPageAnimDuration = 700;
 const Curve kPageAnimateCurves = Curves.linear;
@@ -136,9 +133,6 @@ const String subscription_purchase_m_click = 'purchase_w';
 const String subscription_restore_click = 'restore';
 //const String subscription_restored = 'restored';
 const String main_screen_show = 'main_screen_show';
-const String vibration_play = 'vibration_play';
-const String vibration_pause = 'vibration_pause';
-const String vibration_next = 'vibration_next';
 const String vibration_previous = 'vibration_previous';
 const String playlist_current_click = 'current_playlist';
 const String like_vibration = 'like_vibration';
@@ -165,7 +159,6 @@ const String not_vibrating_click = 'not_vibrating_click';
 const String rate_us_click = 'rate_us_click';
 const String send_feedback_click = 'send_feedback_click';
 const String share_click = 'share_click';
-
 
 class EventsOfAnalytics {
   static const String article_show = 'article_show'; // показ статьи
@@ -194,6 +187,15 @@ class EventsOfAnalytics {
   static const String sign_in_click = 'sign_in_click'; // клик по кнопке входа
   static const String forgot_pass_click = 'forgot_pass_click'; // клик по кнопке входа
   static const String sign_up_click = 'sign_up_click'; // клик по кнопке входа
+// плеер
+  static const String vibration_pause = 'vibration_pause'; //  вибрации на паузу
+  static const String vibration_play = 'vibration_play'; // вибрации на плей
+  static const String vibration_next = 'vibration_next'; // следующая вибрация
+  static const String locked_slider_click = 'locked_slider_click'; // клик по заблокированному слайдеру переключатля скорости
+  static const String vibration_set_to_value = 'vibration_set_to_value'; // вибрация установлена на значение
+  static const String vibration_mode = 'vibration_mode'; // выбран список вибраций с vibration_id
+
+
 }
 
 class Layout {
