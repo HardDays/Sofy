@@ -30,7 +30,7 @@ void main() async {
 
   /// Initializing the AppMetrica SDK.
   await AppmetricaSdk().activate(apiKey: kAppmetricaSdkApiKey);
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   await TenjinSDK.instance.init(apiKey: kTenjinFlutterApiKey);
 
   runZoned(() {

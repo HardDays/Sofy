@@ -57,13 +57,12 @@ class Analytics {
 
     _amplitude.logEvent(event, eventProperties: attr);
 
-    /*facebookAppEvents.logEvent(
-      name: event,
-      parameters: attr,
-    );*/
+    // facebookAppEvents.logEvent(
+    //   name: event,
+    //   parameters: attr,
+    // );
 
     TenjinSDK.instance.eventWithName(event);
-
     await firebaseAnalytics.logEvent(name: event, parameters: attr);
   }
 }
