@@ -74,10 +74,10 @@ class PlayerScreenV2 extends StatelessWidget {
                         SizeConfig.blockSizeHorizontal,
                   ),
                   _VibrationList2(
-                    dWidth: 365 / Layout.width *
+                    dWidth: 366 / Layout.width *
                         Layout.multiplier *
                         SizeConfig.blockSizeHorizontal,
-                    dHeight: 247 / Layout.height *
+                    dHeight: 266 / Layout.height *
                         Layout.multiplier *
                         SizeConfig.blockSizeVertical,
                     path: data.path,
@@ -499,10 +499,6 @@ class _VibrationList2 extends StatelessWidget {
                   );
                 } ),
                 physics: NeverScrollableScrollPhysics(),
-                //shrinkWrap: true,
-                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                //   crossAxisCount: 3,
-                // ),
                   crossAxisCount: 3,
                 childAspectRatio:
                 (101 / Layout.width *
