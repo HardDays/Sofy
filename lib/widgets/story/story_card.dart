@@ -55,7 +55,7 @@ class StoryCard extends StatelessWidget {
                   child: AutoSizeText(
                     title,
                     style: TextStyle(
-                      fontFamily: Fonts.AbhayaLibreExtraBold,
+                      fontFamily: Fonts.HindGunturBold,
                       fontWeight: FontWeight.w800,
                       fontSize: 15,
                       color: SofyStoryColors.CardHeaderTextColor,
