@@ -52,7 +52,7 @@ const kDividerWithStarsColor = Color(0x50edc3ed);
 const kDividerWithStarsColor2 = Color(0x50edc3ed);
 
 const kCustomDivider = Color(0x40fdb0c1);
-const kArticlesDetailsScreenColor = Color.fromRGBO(47, 46, 65, 0.85);
+const kArticlesDetailsScreenColor = Color.fromRGBO(47, 46, 65, 1);
 const kArticlesDetailsScreenInputColor = Color(0xff836771);
 const kArticlesDetailsScreenInput2Color = Color(0x50836771);
 const kArticlesDetailsAppBarColor = Color(0xffFCEFFC);
@@ -252,6 +252,7 @@ const kArticlePopCatListTextColor = Color.fromARGB(201, 77, 59, 55);
 const kArticlePopCatIconBgColor = Color(0xFFFDB0C1);
 const kArticlePopCatIconBorderColor = [
   Colors.white,
+  Colors.white,
   Color(0xFFFDB0C1),
   Color(0xFFBF7786)
 ];
@@ -371,4 +372,8 @@ class SofyStoryColors {
   static const CardTextColor = Color.fromRGBO(47, 46, 65, 1);
   static const TopPageCounterNotActiveColor = Colors.grey;
   static const TopPageCounterActiveColor = Colors.white;
+}
+class SofyRateColors {
+  static const Text = Color(0xFF2F2E41);
+  static const CardTextColor = Color.fromRGBO(131, 103, 113, 1);
 }

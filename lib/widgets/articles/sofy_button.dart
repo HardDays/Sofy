@@ -26,37 +26,39 @@ class SofyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(229, 207, 178, 205),
-            offset: Offset(4, 4),
-            blurRadius: 10.0,
+    return GestureDetector(
+      child: Container(
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(229, 207, 178, 205),
+                offset: Offset(4, 4),
+                blurRadius: 10.0,
+              ),
+            ],
+            gradient: LinearGradient(
+              colors: linearGradientColors,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            borderRadius: BorderRadius.circular(9),
           ),
-        ],
-        gradient: LinearGradient(
-          colors: linearGradientColors,
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-        borderRadius: BorderRadius.circular(9),
-      ),
-      height: height,
-      width: width,
-      child: InkWell(
-        child: Center(
-          child: Text(
-            label,
-            style: TextStyle(
-                color: labelColor,
-                fontSize: labelFontSize/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                fontWeight: FontWeight.bold,
-                fontFamily: Fonts.HindGuntur),
+          height: height,
+          width: width,
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(
+                  color: labelColor,
+                  fontSize: labelFontSize/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: Fonts.HindGunturBold),
+            ),
           ),
         ),
-        onTap: callback,
       ),
+      onTap: callback,
     );
   }
 }

@@ -14,18 +14,23 @@ const feedbackEmail = 'sofy1.app@gmail.com';
 // const Fonts.Montserrat = 'Montserrat';
 class Fonts {
   static const HindGuntur = 'Hind Guntur';
+  static const HindGunturBold = 'Hind Guntur Bold';
+  static const HindGunturSemiBold = 'Hind Guntur SemiBold';
   static const Roboto = 'Roboto';
+  static const RobotoBold = 'Roboto Bold';
   static const Allerta = 'Allerta';
-  static const AllertaRegular = 'Allerta Regular';
+  static const AllertaRegular = 'Allerta';
   static const ProximaNova = 'Proxima Nova';
   static const Kalam = 'Kalam';
   static const Exo2 = 'Exo 2';
   static const GilroyBold = 'Gilroy Bold';
+  static const Gilroy1 = 'Gilroy1';
   static const Gilroy = 'Gilroy';
   static const MontserratSemi = 'Montserrat Semi';
   static const MontserratBold = 'Montserrat Bold';
   static const Montserrat = 'Montserrat';
   static const AbhayaLibreExtraBold = 'Abhaya Libre ExtraBold';
+  static const Exo2Bold = 'Exo 2 Bold';
 }
 
 const kUrlPattern = r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";

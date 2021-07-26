@@ -141,6 +141,23 @@ class ArticleDetailsScreen extends StatelessWidget {
                                         cache: true,
                                       ),
                                     ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: (390 - radius) / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(radius), topRight: Radius.circular(radius)),
+                                        child: Stack(
+                                          alignment: Alignment.topCenter,
+                                          children: [
+                                            Container(
+                                              height: 26 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                              width: width,
+                                              color: Colors.white,
+                                            ),
+
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                     Visibility(
                                       visible: isAuthorEnabled,
                                       child: Padding(
@@ -174,110 +191,118 @@ class ArticleDetailsScreen extends StatelessWidget {
                                         alignment: Alignment.topCenter,
                                         children: [
                                           Container(
-                                            padding: EdgeInsets.fromLTRB(21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                                26 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal, 0),
+                                      // padding: EdgeInsets.only(top:26 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                            // padding: EdgeInsets.fromLTRB(21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                            //     26 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal, 0),
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                Text(
-                                                  state.articleDetails.article.title,
-                                                  style: TextStyle(
-                                                      fontFamily: Fonts.Roboto,
-                                                      fontWeight: FontWeight.w700,
-                                                      fontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                      color: ArticlesColors.HeaderTextColor),
-                                                ),
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                      bottom: 8 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      SofyButton(
-                                                        width: isCommentsEnabled
-                                                            ? width / 2 - 30/Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal
-                                                            : width - 42/ Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                                        label: AppLocalizations.of(context).translate('questions_btn'),
-                                                        callback: () {
-                                                          Analytics().sendEventReports(
-                                                            event: EventsOfAnalytics.questions_btn_click,
-                                                            attr: {
-                                                              'name': AppLocalizations.of(context).translate('questions_btn'),
-                                                              'id': articleId,
-                                                            },
-                                                          );
-                                                          final RenderBox questions = _questionsKey.currentContext.findRenderObject();
-                                                          final sizeQuestions = questions.localToGlobal(Offset.zero);
-                                                          _controller.animateTo(sizeQuestions.dy - height / 8.21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                              duration: Duration(milliseconds: 350), curve: Curves.ease);
-                                                        },
-                                                      ),
-                                                      Visibility(
-                                                        visible: isCommentsEnabled,
-                                                        child: SofyButton(
-                                                            width: width / 2 - 30/Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                                            label: AppLocalizations.of(context).translate('comments_btn'),
-                                                            callback: () {
-                                                              Analytics().sendEventReports(
-                                                                event: EventsOfAnalytics.comments_btn_click,
-                                                                attr: {
-                                                                  'name': AppLocalizations.of(context).translate('comments_btn'),
-                                                                  'id': articleId,
-                                                                },
-                                                              );
-                                                              final RenderBox comments = _commentsKey.currentContext.findRenderObject();
-                                                              final sizeComments = comments.localToGlobal(Offset.zero);
-                                                              _controller.animateTo(sizeComments.dy - height / 8.21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                                  duration: Duration(milliseconds: 350), curve: Curves.ease);
-                                                            }),
-                                                      )
-                                                    ],
+                                                  padding: EdgeInsets.symmetric(horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,),
+                                                  child: Text(
+                                                    state.articleDetails.article.title,
+                                                    style: TextStyle(
+                                                        fontFamily: Fonts.RobotoBold,
+                                                        fontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                        color: ArticlesColors.HeaderTextColor,
+                                                      height: 1.35,
+                                                    ),
                                                   ),
                                                 ),
-                                                Html(
-                                                  style: {
-                                                    "p": Style(
-                                                        wordSpacing: 5,
-                                                        lineHeight: LineHeight.number(1.5),
-                                                        fontFamily: Fonts.HindGuntur,
-                                                        fontStyle: FontStyle.normal,
-                                                        fontSize: FontSize(height / 57.73),
-                                                        color: kArticlesDetailsScreenColor),
-                                                    "strong": Style(
-                                                        wordSpacing: 5,
-                                                        lineHeight: LineHeight.number(1.6),
-                                                        fontFamily: Fonts.HindGuntur,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontStyle: FontStyle.normal,
-                                                        fontSize: FontSize(height / 50.7),
-                                                        color: kArticlesDetailsScreenColor),
-                                                    "h1": Style(
-                                                        wordSpacing: 5,
-                                                        lineHeight: LineHeight.number(1.7),
-                                                        fontFamily: Fonts.HindGuntur,
-                                                        fontWeight: FontWeight.w600,
-                                                        fontStyle: FontStyle.normal,
-                                                        fontSize: FontSize(height / 50.7),
-                                                        color: kArticlesDetailsScreenColor),
-                                                    "li": Style(
-                                                        wordSpacing: 5,
-                                                        lineHeight: LineHeight.number(1.5),
-                                                        fontFamily: Fonts.HindGuntur,
-                                                        fontStyle: FontStyle.normal,
-                                                        fontSize: FontSize(height / 57.73),
-                                                        color: kArticlesDetailsScreenColor),
-                                                    "u": Style(
-                                                        wordSpacing: 5,
-                                                        lineHeight: LineHeight.number(1.7),
-                                                        fontFamily: Fonts.HindGuntur,
-                                                        fontStyle: FontStyle.normal,
-                                                        fontSize: FontSize(height / 57.73),
-                                                        color: kArticlesDetailsScreenColor),
-                                                  },
-                                                  data: state.articleDetails.article.content != null ? state.articleDetails.article.content : '',
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,),
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                        bottom: 8 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        SofyButton(
+                                                          width: isCommentsEnabled
+                                                              ? width / 2 - 30 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal
+                                                              : width - 42 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                          label: AppLocalizations.of(context).translate('questions_btn'),
+                                                          callback: () {
+                                                            Analytics().sendEventReports(
+                                                              event: EventsOfAnalytics.questions_btn_click,
+                                                              attr: {
+                                                                'name': AppLocalizations.of(context).translate('questions_btn'),
+                                                                'id': articleId,
+                                                              },
+                                                            );
+                                                            final RenderBox questions = _questionsKey.currentContext.findRenderObject();
+                                                            final sizeQuestions = questions.localToGlobal(Offset.zero);
+                                                            _controller.animateTo(sizeQuestions.dy - height / 8.21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                                duration: Duration(milliseconds: 350), curve: Curves.ease);
+                                                          },
+                                                        ),
+                                                        Visibility(
+                                                          visible: isCommentsEnabled,
+                                                          child: SofyButton(
+                                                              width: width / 2 - 30 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                              label: AppLocalizations.of(context).translate('comments_btn'),
+                                                              callback: () {
+                                                                Analytics().sendEventReports(
+                                                                  event: EventsOfAnalytics.comments_btn_click,
+                                                                  attr: {
+                                                                    'name': AppLocalizations.of(context).translate('comments_btn'),
+                                                                    'id': articleId,
+                                                                  },
+                                                                );
+                                                                final RenderBox comments = _commentsKey.currentContext.findRenderObject();
+                                                                final sizeComments = comments.localToGlobal(Offset.zero);
+                                                                _controller.animateTo(sizeComments.dy - height / 8.21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                                    duration: Duration(milliseconds: 350), curve: Curves.ease);
+                                                              }),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(horizontal: 17 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,),
+                                                  child: Html(
+                                                    style: {
+                                                      "p": Style(
+                                                          lineHeight: LineHeight.number(1.7),
+                                                          fontFamily: Fonts.HindGuntur,
+                                                          fontStyle: FontStyle.normal,
+                                                          fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          color: kArticlesDetailsScreenColor),
+                                                      "strong": Style(
+                                                          lineHeight: LineHeight.number(1.7),
+                                                          fontFamily: Fonts.HindGunturBold,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontStyle: FontStyle.normal,
+                                                          fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          color: kArticlesDetailsScreenColor),
+                                                      "h1": Style(
+                                                          lineHeight: LineHeight.number(1.7),
+                                                          fontFamily: Fonts.Roboto,
+                                                          fontWeight: FontWeight.w700,
+                                                          fontStyle: FontStyle.normal,
+                                                          fontSize: FontSize(22 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          color: kArticlesDetailsScreenColor),
+                                                      "li": Style(
+                                                          lineHeight: LineHeight.number(1.5),
+                                                          fontFamily: Fonts.HindGuntur,
+                                                          fontStyle: FontStyle.normal,
+                                                          fontWeight: FontWeight.w500,
+                                                          fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          color: kArticlesDetailsScreenColor),
+                                                      "u": Style(
+                                                          lineHeight: LineHeight.number(1.7),
+                                                          fontFamily: Fonts.HindGuntur,
+                                                          fontStyle: FontStyle.normal,
+                                                          fontWeight: FontWeight.w500,
+                                                          fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          color: kArticlesDetailsScreenColor),
+                                                    },
+                                                    data: state.articleDetails.article.content != null ? state.articleDetails.article.content : '',
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -349,7 +374,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                       ValueListenableBuilder(
                         valueListenable: scroll,
                         builder: (_, value, __) => AnimatedContainer(
-                          height: height / 9.61/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          height: height / 9.61 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                           padding: EdgeInsets.only(top: height / 40.66 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                           color: appBar,
                           duration: Duration(milliseconds: 350),

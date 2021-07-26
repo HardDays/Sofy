@@ -21,6 +21,7 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
     this.cardHeight = 50,
     this.cardWidth = 50,
     this.imageRadius = 8,
+    this.lineHeight = 1,
     this.callback,
   }) : super(key: key);
   final String title;
@@ -30,6 +31,7 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
   final double fontListSize;
   final double cardHeight;
   final double cardWidth;
+  final double lineHeight;
   final double imageRadius;
   final VoidCallback callback;
 
@@ -49,7 +51,7 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
                   color: textColor,
                   fontSize: fontTitleSize,
                   fontWeight: FontWeight.normal,
-                  letterSpacing: -0.065*fontTitleSize,
+                  letterSpacing: -0.065 * fontTitleSize,
                 ),
               )
             : Container(),
@@ -71,7 +73,8 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
                         child: InkWell(
                           onTap: () {
                             Analytics().sendEventReports(
-                              event: EventsOfAnalytics.show_articles_categories, attr: {'name': listOfTopics[index].name},
+                              event: EventsOfAnalytics.show_articles_categories,
+                              attr: {'name': listOfTopics[index].name},
                             );
                             Navigator.push(
                               context,
@@ -95,8 +98,8 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
                                         alignment: AlignmentDirectional.center,
                                         children: [
                                           Container(
-                                            height: 28,
-                                            width: 28,
+                                            height: 28 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                            width: 28 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                             decoration: BoxDecoration(
                                               gradient: LinearGradient(
                                                 colors: kArticlePopCatIconBorderColor,
@@ -107,20 +110,20 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
                                             ),
                                           ),
                                           Container(
-                                            height: 26,
-                                            width: 26,
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(5.0),
-                                              child: ExtendedImage.network(
-                                                listOfTopics[index].coverImg,
-                                                cache: true,
-                                              ),
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: kArticlePopCatIconBgColor,
-                                              borderRadius: BorderRadius.circular(5),
-                                            ),
-                                          )
+                                              height: 27 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                              width: 27 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                              decoration: BoxDecoration(
+                                                color: kArticlePopCatIconBorderColor[2],
+                                                borderRadius: BorderRadius.circular(5),
+                                              ),),Container(
+                                                height: 18 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                width: 18 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                child: ExtendedImage.network(listOfTopics[index].coverImg, cache: true),
+                                                decoration: BoxDecoration(
+                                                  color: kArticlePopCatIconBgColor,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                ),
+                                              )
                                         ],
                                       ),
                                       SizedBox(
@@ -134,6 +137,7 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
                                           fontWeight: FontWeight.w600,
                                           fontSize: 14,
                                           color: ArticlesColors.TextColorCat,
+                                          height: lineHeight
                                         ),
                                       ),
                                     ],

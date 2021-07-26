@@ -35,6 +35,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
   @override
   bool get wantKeepAlive => true;
   double radius = 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal;
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -59,14 +60,14 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                     child: Stack(
                       children: [
                         Container(
-                          height: 529 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          height: (529 - 49) / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                           width: width,
                           color: kArticlesNewBgColor,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 49 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                            // SizedBox(height: 49 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                             Container(
                               width: width - 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                               height: 96 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
@@ -76,11 +77,12 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                   AppLocalizations.of(context).translate('learn_and_get_inspired'),
                                   wrapWords: true,
                                   style: TextStyle(
-                                    fontFamily: Fonts.Roboto,
+                                    fontFamily: Fonts.RobotoBold,
                                     letterSpacing: -0.02 * 50 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 50 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                     color: kArticlesTextColor,
+                                    height: 0.964,
                                   ),
                                 ),
                               ),
@@ -94,21 +96,23 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                 child: AutoSizeText(
                                   AppLocalizations.of(context).translate('new_topics'),
                                   style: TextStyle(
-                                    fontFamily: Fonts.AllertaRegular,
-                                    letterSpacing: -0.065 * 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                    fontSize: 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                    color: kArticlesTextColor,
-                                  ),
+                                      fontFamily: Fonts.AllertaRegular,
+                                      letterSpacing: -0.065 * 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                      fontSize: 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                      color: kArticlesTextColor,
+                                      height: 38 / 30),
                                 ),
                               ),
                             ),
                             SizedBox(height: 9 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                             ArticlesCardsHorizontalList(
+                                frozenCardTextColor: Color.fromRGBO(114, 94, 92, 1),
                                 listOfArticles: state.listOfArticles,
                                 cardHeight: 293 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                 cardRadius: 27 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                 cardWidth: 242 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                frozenCardFontSize: 17,
+                                frozenCardFontSize: 17 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                lineHeight: 1.135,
                                 frozenCardHeight: 81 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                 titleFontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                           ],
@@ -134,6 +138,8 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                             )),
                                   );
                                 },
+                                lineHeight: 1.193,
+                                frozenCardTextColor: Color.fromRGBO(114, 94, 92, 1),
                                 title: AppLocalizations.of(context).translate('female_sexuality'),
                                 cardHeight: 220 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                 cardRadius: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
@@ -156,6 +162,8 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                             )),
                                   );
                                 },
+                                frozenCardTextColor: Color.fromRGBO(56, 57, 79, 1),
+                                lineHeight: 1.378,
                                 title: AppLocalizations.of(context).translate('interesting_about_sex'),
                                 cardHeight: 220 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                 cardRadius: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
@@ -184,6 +192,8 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                                             )),
                                   );
                                 },
+                                frozenCardTextColor: Color.fromRGBO(56, 57, 79, 1),
+                                lineHeight: 1.378,
                                 title: AppLocalizations.of(context).translate('orgasms'),
                                 cardHeight: 220 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                 cardRadius: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
@@ -197,6 +207,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                           child: ArticlesCategoriesWithHeader(
                             listOfTopics: state.listOfTopicsPopular,
                             title: AppLocalizations.of(context).translate('popular_categories'),
+                            lineHeight: 1.343,
                           ),
                         ),
                         Stack(children: [

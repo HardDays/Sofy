@@ -13,13 +13,15 @@ import 'package:sofy_new/widgets/articles/header_button.dart';
 
 class ArticlesCardsHorizontalList extends StatelessWidget {
   ArticlesCardsHorizontalList(
-      {Key key, this.listOfArticles, this.callback, this.title = '', this.cardHeight, this.cardRadius, this.cardWidth, this.frozenCardFontSize, this.frozenCardHeight, this.titleFontSize})
+      {Key key, this.lineHeight = 1, this.frozenCardTextColor, this.listOfArticles, this.callback, this.title = '', this.cardHeight, this.cardRadius, this.cardWidth, this.frozenCardFontSize, this.frozenCardHeight, this.titleFontSize})
       : super(key: key);
   final List<ApiArticlesModel> listOfArticles;
   final double cardHeight;
   final double cardWidth;
   final double frozenCardHeight;
   final double frozenCardFontSize;
+  final Color frozenCardTextColor;
+  final double lineHeight;
   final double cardRadius;
   final String title;
   final VoidCallback callback;
@@ -59,9 +61,10 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
                     width: cardWidth,
                     frozenHeight: frozenCardHeight,
                     fontSize: frozenCardFontSize,
-                    textColor: kArticleCardTextColor,
+                    textColor: frozenCardTextColor,
                     radius: cardRadius,
                     isPaid: listOfArticles[index].isPaid,
+              lineHeight:lineHeight,
                     callback: () async {
                       bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
                       if (listOfArticles[index].isPaid == 1) {

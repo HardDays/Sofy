@@ -14,7 +14,7 @@ class SofyVoteButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      child: InkWell(
+      child: GestureDetector(
         child: Container(
           decoration: BoxDecoration(
             color: isBordered ? SofyVoteButtonColors.SelectedBgColor : SofyVoteButtonColors.BgColor,
