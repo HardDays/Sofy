@@ -32,7 +32,9 @@ class ArticleQuestion extends StatelessWidget {
         ),
         Column(
           children: [
-            Text(
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+              ), child: Text(
               question.message,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -41,7 +43,7 @@ class ArticleQuestion extends StatelessWidget {
                   fontSize: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                   fontWeight: FontWeight.bold,
                   height: 1.7),
-            ),
+            ),),
             SizedBox(
               height: 15 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
             ),
@@ -63,10 +65,15 @@ class ArticleQuestion extends StatelessWidget {
               Navigator.push(
                 context,
                 CustomMaterialPageRoute(
-                  builder: (context) => BlocProvider(
-                    create: (_) => StoryBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode), articleId: articleId),
-                    child: StoryScreen(article: article),
-                  ),
+                  builder: (context) =>
+                      BlocProvider(
+                        create: (_) =>
+                            StoryBloc(restApi: RestApi(systemLang: AppLocalizations
+                                .of(context)
+                                .locale
+                                .languageCode), articleId: articleId),
+                        child: StoryScreen(article: article),
+                      ),
                 ),
               );
             },

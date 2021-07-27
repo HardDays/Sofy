@@ -157,7 +157,7 @@ flutter:
           - asset: fonts/Roboto-Bold.ttf
     - family: Hind Guntur Bold
       fonts:
-        - asset: fonts/HindGuntur-bold.ttf
+        - asset: fonts/HindGuntur-Bold.ttf
     - family: Hind Guntur SemiBold
       fonts:
         - asset: fonts/HindGuntur-SemiBold.ttf
