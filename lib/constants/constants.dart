@@ -33,6 +33,10 @@ class Fonts {
   static const Exo2Bold = 'Exo 2 Bold';
   static const SFProMedium = 'SF Pro Medium';
   static const SFProBold = 'SF Pro Bold';
+  static const RalewayRegular = 'Raleway Regular';
+  static const RalewayMedium = 'Raleway Medium';
+  static const RalewaySemiBold = 'Raleway SemiBold';
+  static const RalewayBold = 'Raleway Bold';
 }
 
 const kUrlPattern = r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
@@ -237,7 +241,6 @@ class EventsOfAnalytics {
   static const String locked_slider_click = 'locked_slider_click'; // клик по заблокированному слайдеру переключатля скорости
   static const String vibration_set_to_value = 'vibration_set_to_value'; // вибрация установлена на значение
   static const String vibration_mode = 'vibration_mode'; // выбран список вибраций с vibration_id
-
 
 }
 

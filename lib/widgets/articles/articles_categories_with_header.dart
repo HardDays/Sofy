@@ -47,7 +47,7 @@ class ArticlesCategoriesWithHeader extends StatelessWidget {
                 title,
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                  fontFamily: Fonts.Allerta,
+                  fontFamily: SizeConfig.lang == 'en' ? Fonts.Allerta : Fonts.SFProMedium,
                   color: textColor,
                   fontSize: fontTitleSize,
                   fontWeight: FontWeight.normal,

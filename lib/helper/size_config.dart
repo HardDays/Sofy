@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:sofy_new/providers/app_localizations.dart';
 
 class SizeConfig {
   static MediaQueryData _mediaQueryData;
@@ -11,6 +12,7 @@ class SizeConfig {
   static double safeBlockHorizontal;
   static double safeBlockVertical;
   static double devicePixelRatio;
+  static String lang;
 
   void init(BuildContext context){
     _mediaQueryData = MediaQuery.of(context);
@@ -25,5 +27,6 @@ class SizeConfig {
     safeBlockHorizontal = (screenWidth - _safeAreaHorizontal)/100;
     safeBlockVertical = (screenHeight - _safeAreaVertical)/100;
     devicePixelRatio = _mediaQueryData.devicePixelRatio;
+    lang = AppLocalizations.of(context).languageCode();
   }
 }

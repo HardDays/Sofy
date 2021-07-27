@@ -268,13 +268,13 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                     style: {
                                                       "p": Style(
                                                           lineHeight: LineHeight.number(1.7),
-                                                          fontFamily: Fonts.HindGuntur,
+                                                          fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
                                                           fontStyle: FontStyle.normal,
                                                           fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                                           color: kArticlesDetailsScreenColor),
                                                       "strong": Style(
                                                           lineHeight: LineHeight.number(1.7),
-                                                          fontFamily: Fonts.HindGunturBold,
+                                                          fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGunturBold : Fonts.RalewayBold,
                                                           fontWeight: FontWeight.bold,
                                                           fontStyle: FontStyle.normal,
                                                           fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
@@ -288,21 +288,21 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                           color: kArticlesDetailsScreenColor),
                                                       "li": Style(
                                                           lineHeight: LineHeight.number(1.5),
-                                                          fontFamily: Fonts.HindGuntur,
+                                                          fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
                                                           fontStyle: FontStyle.normal,
                                                           fontWeight: FontWeight.w500,
                                                           fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                                           color: kArticlesDetailsScreenColor),
                                                       "ol": Style(
                                                           lineHeight: LineHeight.number(1.5),
-                                                          fontFamily: Fonts.HindGuntur,
+                                                          fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
                                                           fontStyle: FontStyle.normal,
                                                           fontWeight: FontWeight.w500,
                                                           fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                                           color: kArticlesDetailsScreenColor),
                                                       "u": Style(
                                                           lineHeight: LineHeight.number(1.7),
-                                                          fontFamily: Fonts.HindGuntur,
+                                                          fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
                                                           fontStyle: FontStyle.normal,
                                                           fontWeight: FontWeight.w500,
                                                           fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),

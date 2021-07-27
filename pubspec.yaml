@@ -176,6 +176,18 @@ flutter:
     - family: SF Pro Bold
       fonts:
         - asset: fonts/SFProDisplay-Bold.ttf
+    - family: Raleway Regular
+      fonts:
+        - asset: fonts/Raleway-Regular.ttf
+    - family: Raleway Medium
+      fonts:
+        - asset: fonts/Raleway-Medium.ttf
+    - family: Raleway SemiBold
+      fonts:
+        - asset: fonts/Raleway-SemiBold.ttf
+    - family: Raleway Bold
+      fonts:
+        - asset: fonts/Raleway-Bold.ttf
     - family: Exo 2 Bold
       fonts:
         - asset: fonts/Exo2-Bold.ttf
