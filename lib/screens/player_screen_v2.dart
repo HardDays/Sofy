@@ -527,11 +527,11 @@ class _VibrationList2 extends StatelessWidget {
                 }),
                 physics: NeverScrollableScrollPhysics(),
                 crossAxisCount: 3,
-                childAspectRatio: (101 /
+                childAspectRatio: (107 /
                         Layout.width *
                         Layout.multiplier *
                         SizeConfig.blockSizeHorizontal) /
-                    (107 /
+                    (101 /
                         Layout.height *
                         Layout.multiplier *
                         SizeConfig.blockSizeVertical),

@@ -126,7 +126,7 @@ class _MainScreenState extends State<MainScreen> {
                   child: Column(
                     children: [
                       CurvedNavigationBar(
-                        height: 75 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                        height: (75 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical) > 75 ? 75 : (75 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                         animationDuration: Duration(milliseconds: 230),
                         backgroundColor: Colors.transparent,
                         index: selectedItemBar,
