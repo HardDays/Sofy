@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sofy_new/constants/constants.dart';
+import 'package:sofy_new/helper/size_config.dart';
 
 class HeaderButton extends StatelessWidget {
   const HeaderButton(
@@ -19,7 +20,7 @@ class HeaderButton extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
-            fontFamily: Fonts.Allerta,
+            fontFamily: SizeConfig.lang == 'en' ? Fonts.Allerta : Fonts.SFProMedium,
             color: textColor,
             fontSize: fontSize,
             letterSpacing: -0.065*fontSize,
