@@ -85,7 +85,7 @@ class ArticleCard extends StatelessWidget {
                             child: AutoSizeText(
                               title,
                               textAlign: TextAlign.center,
-                              maxLines: 3,
+                              maxLines: 2,
                               style: TextStyle(color: textColor, fontSize: fontSize, fontFamily: Fonts.HindGuntur, fontWeight: FontWeight.w600, fontStyle: FontStyle.normal, height: lineHeight),
                             ),
                           ),

@@ -25,8 +25,8 @@ final String languageCode;
             await restApi.getPopularArticlesWithoutCtx(token: userToken);
         List<ApiFavTopicsInfoModel> listOfFavoritesTopics =
             await restApi.getFavoritesTopicsWithoutCtx(token: userToken);
-        // List<ApiArticleTopicModel> listOfArticleTopic =
-        //     await restApi.getTopicsListWithoutCtx(token: userToken);
+        List<ApiArticleTopicModel> listOfArticleTopic =
+            await restApi.getTopicsListWithoutCtx(token: userToken);
 
         List<ApiArticlesModel> femaleSexuality =
             await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 21 : 22, token: userToken);
@@ -42,6 +42,7 @@ final String languageCode;
           listOfTopicsPopular: listOfTopicsPopular,
           femaleSexuality: femaleSexuality,
           interestingAboutSex: interestingAboutSex,
+          listOfArticleTopic:listOfArticleTopic,
           orgasms: orgasms,
         );
       } catch(e) {
@@ -60,6 +61,7 @@ class ArticlesStateResult extends ArticlesState {
   ArticlesStateResult({
     this.listOfArticles = const [],
     this.listOfFavoritesTopics = const [],
+    this.listOfArticleTopic = const [],
     this.listOfPopularArticles = const [],
     this.listOfTopicsPopular = const [],
     this.femaleSexuality = const [],
@@ -69,6 +71,7 @@ class ArticlesStateResult extends ArticlesState {
 
   final List<ApiArticlesModel> listOfArticles;
   final List<ApiArticleTopicModel> listOfTopicsPopular;
+  final List<ApiArticleTopicModel> listOfArticleTopic;
   final List<ApiArticlesModel> listOfPopularArticles;
   final List<ApiFavTopicsInfoModel> listOfFavoritesTopics;
   final List<ApiArticlesModel> femaleSexuality; // 21

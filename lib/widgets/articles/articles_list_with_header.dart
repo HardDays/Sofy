@@ -98,13 +98,7 @@ class ArticlesListWithHeader extends StatelessWidget {
                                               style: TextStyle(
                                                 fontFamily: Fonts.HindGuntur,
                                                 color: textColor,
-
-
-
-
-
-                                                height: 1.4*14/ Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal > 20 ? 1.4 : 1,
-
+                                                height: 1.4 * 14 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal > 20 ? 1.4 : 1,
                                                 fontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                                 fontWeight: FontWeight.w500,
                                               )),

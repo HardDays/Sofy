@@ -212,7 +212,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                         ),
                         Stack(children: [
                           Container(
-                              height: height / 4.6 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                              height: 2*92 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                               width: SizeConfig.screenWidth,
                               decoration: BoxDecoration(
                                   gradient: LinearGradient(
