@@ -293,6 +293,13 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                           fontWeight: FontWeight.w500,
                                                           fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                                           color: kArticlesDetailsScreenColor),
+                                                      "ol": Style(
+                                                          lineHeight: LineHeight.number(1.5),
+                                                          fontFamily: Fonts.HindGuntur,
+                                                          fontStyle: FontStyle.normal,
+                                                          fontWeight: FontWeight.w500,
+                                                          fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          color: kArticlesDetailsScreenColor),
                                                       "u": Style(
                                                           lineHeight: LineHeight.number(1.7),
                                                           fontFamily: Fonts.HindGuntur,

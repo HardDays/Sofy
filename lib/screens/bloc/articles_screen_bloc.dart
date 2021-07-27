@@ -9,31 +9,32 @@ import 'package:sofy_new/rest_api.dart';
 class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
   ArticlesBloc({this.restApi, this.languageCode}) : super(ArticlesStateLoading());
   final RestApi restApi;
-final String languageCode;
+  final String languageCode;
+
   @override
   Stream<ArticlesState> mapEventToState(ArticlesEvent event) async* {
     if (event is ArticlesEventLoad) {
       yield ArticlesStateLoading();
       try {
         String userToken = await PreferencesProvider().getAnonToken();
-        List<ApiArticlesModel> listOfArticles =
-            await restApi.getNewArticlesWithoutCtx(token: userToken);
-        List<ApiArticleTopicModel> listOfTopicsPopular =
-            await restApi.getArticleTopicsPopularWithoutCtx(token: userToken);
 
-        List<ApiArticlesModel> listOfPopularArticles =
-            await restApi.getPopularArticlesWithoutCtx(token: userToken);
-        List<ApiFavTopicsInfoModel> listOfFavoritesTopics =
-            await restApi.getFavoritesTopicsWithoutCtx(token: userToken);
-        List<ApiArticleTopicModel> listOfArticleTopic =
-            await restApi.getTopicsListWithoutCtx(token: userToken);
+        List<ApiArticlesModel> listOfArticles = await restApi.getNewArticlesWithoutCtx(token: userToken);
 
-        List<ApiArticlesModel> femaleSexuality =
-            await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 21 : 22, token: userToken);
-        List<ApiArticlesModel> interestingAboutSex =
-            await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 11 : 12, token: userToken);
-        List<ApiArticlesModel> orgasms =
-            await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 13 : 14, token: userToken);
+        List<ApiArticleTopicModel> listOfTopicsPopular = await restApi.getArticleTopicsPopularWithoutCtx(token: userToken);
+
+        List<ApiArticlesModel> listOfPopularArticles = await restApi.getPopularArticlesWithoutCtx(token: userToken);
+
+        List<ApiFavTopicsInfoModel> listOfFavoritesTopics = await restApi.getFavoritesTopicsWithoutCtx(token: userToken);
+
+        List<ApiArticleTopicModel> listOfArticleTopic = await restApi.getTopicsListWithoutCtx(token: userToken);
+
+        List<ApiArticlesModel> femaleSexuality = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 21 : 22, token: userToken);
+
+        List<ApiArticlesModel> interestingAboutSex = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 11 : 12, token: userToken);
+
+        List<ApiArticlesModel> orgasms = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 13 : 14, token: userToken);
+
+
 
         yield ArticlesStateResult(
           listOfArticles: listOfArticles,
@@ -42,10 +43,10 @@ final String languageCode;
           listOfTopicsPopular: listOfTopicsPopular,
           femaleSexuality: femaleSexuality,
           interestingAboutSex: interestingAboutSex,
-          listOfArticleTopic:listOfArticleTopic,
+          listOfArticleTopic: listOfArticleTopic,
           orgasms: orgasms,
         );
-      } catch(e) {
+      } catch (e) {
         yield ArticlesStateError('Ошибка загрузки');
       }
     }

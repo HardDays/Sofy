@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -60,14 +61,16 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                     child: Stack(
                       children: [
                         Container(
-                          height: (529 - 49) / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          // для андроида убрать -42
+                          height: (529 - 42) / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                           width: width,
                           color: kArticlesNewBgColor,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // SizedBox(height: 49 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                            // для андроида добавить -42
+                            // SizedBox(height: 42 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                             Container(
                               width: width - 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                               height: 96 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,

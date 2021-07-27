@@ -31,6 +31,8 @@ class Fonts {
   static const Montserrat = 'Montserrat';
   static const AbhayaLibreExtraBold = 'Abhaya Libre ExtraBold';
   static const Exo2Bold = 'Exo 2 Bold';
+  static const SFProMedium = 'SF Pro Medium';
+  static const SFProBold = 'SF Pro Bold';
 }
 
 const kUrlPattern = r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
