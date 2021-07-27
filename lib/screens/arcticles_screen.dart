@@ -231,7 +231,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                           ),
                           child: Categories(
                             titListPadd: 10 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                            listOfTopics: state.listOfTopicsPopular,
+                            listOfTopics: state.popularCategories,
                             title: AppLocalizations.of(context).translate('popular_categories'),
                             lineHeight: 1.343,
                             fontTitleSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
