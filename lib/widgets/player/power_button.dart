@@ -37,12 +37,12 @@ class PowerButton extends StatelessWidget {
                 Color(0xFFE5356F),
               ],
               stops: [0.0, 0.3, 0.8],
-            )),
-        padding: const EdgeInsets.all(40),
+            ),),
+        padding: EdgeInsets.all(40 / Layout.height *
+            Layout.multiplier *
+            SizeConfig.blockSizeVertical),
         child: SvgPicture.asset(
           'assets/svg/power.svg',
-          width: 40,
-          height: 40,
           color: Colors.white,
         ),
       ),

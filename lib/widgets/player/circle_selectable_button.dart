@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
@@ -52,7 +53,7 @@ class CircleSelectableButton extends StatelessWidget {
                     decoration: BoxDecoration(
                       gradient: selected
                           ? RadialGradient(
-                        center: Alignment(0.07, 0.12),
+                        center: Alignment(0.10, 0.00),
                         stops: [0.0, 0.7, 1],
                         colors: [
                           Color(0xFFffe1e8),
@@ -62,7 +63,6 @@ class CircleSelectableButton extends StatelessWidget {
                       )
                           : null,
                       color: selected ? Color(0xFFFFE1E8) : Color(0xFFFFFFFF),
-                      //borderRadius: BorderRadius.circular(width / 12),
                       shape: BoxShape.circle,
                       boxShadow: selected
                           ? null
@@ -71,7 +71,6 @@ class CircleSelectableButton extends StatelessWidget {
                           offset: Offset(1, 4),
                           color: Color(0xFFE2BED8),
                           blurRadius: 8,
-                          //spreadRadius: 0.1,
                         ),
                       ],
                     ),
@@ -81,8 +80,8 @@ class CircleSelectableButton extends StatelessWidget {
                           return LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
-                            colors: [Color(0xFFFFD2DC), Color(0xFFF95C8F)],
-                            stops: [0.3, 1],
+                            colors: [Color(0xFFfef6f9),Color(0xFFfca5be).withOpacity(0.5), Color(0xFFF95C8F)],
+                            stops: [0.2, 0.37, 0.7],
                           ).createShader(image);
                         }
                         return LinearGradient(
@@ -94,9 +93,11 @@ class CircleSelectableButton extends StatelessWidget {
                           ],
                         ).createShader(image);
                       },
-                      child: Image.asset(
-                        iconPath,
-                        scale: 1.5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: Image.asset(
+                          iconPath,
+                        ),
                       ),
                     ),
                   ),
@@ -106,7 +107,7 @@ class CircleSelectableButton extends StatelessWidget {
                   Text(
                     //model.titleEn,
                     AppLocalizations.of(context).translate(model.titleEn),
-                    style: TextStyle(color:selected ? Color(0xFFCD2059) : Color(0xFFFDAABC)),
+                    style: TextStyle(color:selected ? Color(0xFFCD2059) : Color(0xFFFDAABC), fontWeight: selected ? FontWeight.bold : FontWeight.normal),
                   )
                 ],
               ),
