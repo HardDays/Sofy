@@ -9,7 +9,7 @@ import 'package:sofy_new/models/api_article_topic_model.dart';
 import 'package:sofy_new/models/favortes/api_fav_topics_answer_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
-import 'package:sofy_new/widgets/articles/articles_categories_with_header.dart';
+import 'package:sofy_new/widgets/articles/categories.dart';
 import 'package:sofy_new/widgets/articles/background.dart';
 import 'package:sofy_new/widgets/fullscreen_preloader.dart';
 
@@ -88,7 +88,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                         }),
                     Padding(
                       padding: EdgeInsets.only(left: 21.0/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, right: 21.0, top: height / 50.29/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
-                      child: ArticlesCategoriesWithHeader(
+                      child: Categories(
                         listOfTopics: topicsList,
                       ),
                     ),

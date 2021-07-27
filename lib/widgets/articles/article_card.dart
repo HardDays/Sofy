@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
@@ -86,7 +87,14 @@ class ArticleCard extends StatelessWidget {
                               title,
                               textAlign: TextAlign.center,
                               maxLines: 2,
-                              style: TextStyle(color: textColor, fontSize: fontSize, fontFamily: Fonts.HindGuntur, fontWeight: FontWeight.w600, fontStyle: FontStyle.normal, height: lineHeight),
+                              style: TextStyle(
+                                color: textColor,
+                                fontSize: fontSize,
+                                fontFamily: Fonts.HindGuntur,
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                height: lineHeight,
+                              ),
                             ),
                           ),
                         ),
@@ -102,23 +110,30 @@ class ArticleCard extends StatelessWidget {
                           : true
                       : false,
                   child: Container(
-                    height: Provider.of<SubscribeData>(context).isAppPurchase ? 0.0 : screenHeight,
-                    width: Provider.of<SubscribeData>(context).isAppPurchase ? 0.0 : screenHeight,
-                    decoration: BoxDecoration(
-                      //color: Color(0x75C4C4C4),
-                      borderRadius: BorderRadius.all(Radius.circular(radius)),
-                    ),
-                    alignment: Alignment.topRight,
-                    child: Container(
-                        height: screenHeight / 12.6 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                        width: screenHeight / 12.6 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/new_lock.png'),
-                            fit: BoxFit.fill,
-                          ),
-                        )),
-                  ),
+                      height: Provider.of<SubscribeData>(context).isAppPurchase ? 0.0 : screenHeight,
+                      width: Provider.of<SubscribeData>(context).isAppPurchase ? 0.0 : screenHeight,
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        padding: EdgeInsets.only(
+                          top: 11 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          right: 10 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                        ),
+                        height: (19+11) / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                        width: (16+10) / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                        child: SvgPicture.asset(
+                          'assets/lock.svg',
+                        ),
+                      )
+                      //   Container(
+                      //       height: 64 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                      //       width: 64 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                      //       decoration: BoxDecoration(
+                      //         image: DecorationImage(
+                      //           image: AssetImage('assets/new_lock.png'),
+                      //           fit: BoxFit.fill,
+                      //         ),
+                      //       )),
+                      ),
                 ),
               ],
             ),

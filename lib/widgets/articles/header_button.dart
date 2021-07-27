@@ -39,7 +39,7 @@ class HeaderButton extends StatelessWidget {
               child: SvgPicture.asset(
                 'assets/svg/arrow_next_vector.svg',
                 color: textColor,
-                height: fontSize,
+                height: 12/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
               ),
             ),
             Positioned.fill(

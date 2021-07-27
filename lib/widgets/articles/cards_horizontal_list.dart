@@ -11,15 +11,30 @@ import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/widgets/articles/article_card.dart';
 import 'package:sofy_new/widgets/articles/header_button.dart';
 
-class ArticlesCardsHorizontalList extends StatelessWidget {
-  ArticlesCardsHorizontalList(
-      {Key key, this.lineHeight = 1, this.frozenCardTextColor, this.listOfArticles, this.callback, this.title = '', this.cardHeight, this.cardRadius, this.cardWidth, this.frozenCardFontSize, this.frozenCardHeight, this.titleFontSize})
+class CardsHorizontalList extends StatelessWidget {
+  CardsHorizontalList(
+      {Key key,
+      this.lineHeight = 1,
+      this.frozenCardTextColor,
+      this.listOfArticles,
+      this.callback,
+      this.title = '',
+      this.cardHeight,
+      this.cardRadius,
+      this.cardWidth,
+      this.frozenCardFontSize,
+      this.frozenCardHeight,
+      this.titleFontSize,this.l,this.t,this.r,this.b,})
       : super(key: key);
   final List<ApiArticlesModel> listOfArticles;
   final double cardHeight;
   final double cardWidth;
   final double frozenCardHeight;
   final double frozenCardFontSize;
+  final double l;
+  final double t;
+  final double r;
+  final double b;
   final Color frozenCardTextColor;
   final double lineHeight;
   final double cardRadius;
@@ -35,16 +50,18 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
         title == ''
             ? Container()
             : Container(
-          height: 64,
-          width: width,
-          padding: EdgeInsets.fromLTRB(22, 16, 22, 16),
-          child: HeaderButton(
-            text: title,
-            callback: callback,
-            fontSize: titleFontSize,
-            textColor: kArticlesHeaderTextColor,
-          ),
-        ),
+                height: 64 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                width: width,
+                padding: EdgeInsets.fromLTRB(
+                  l,t,r,b
+                ),
+                child: HeaderButton(
+                  text: title,
+                  callback: callback,
+                  fontSize: titleFontSize,
+                  textColor: kArticlesHeaderTextColor,
+                ),
+              ),
         Container(
           height: cardHeight,
           child: ListView.builder(
@@ -53,7 +70,9 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return Row(
                 children: [
-                  index == 0 ? SizedBox(width: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal) : SizedBox(width: 7.5 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
+                  index == 0
+                      ? SizedBox(width: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal)
+                      : SizedBox(width: 7.5 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
                   ArticleCard(
                     title: listOfArticles[index].title,
                     path: listOfArticles[index].coverImg,
@@ -64,15 +83,15 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
                     textColor: frozenCardTextColor,
                     radius: cardRadius,
                     isPaid: listOfArticles[index].isPaid,
-              lineHeight:lineHeight,
+                    lineHeight: lineHeight,
                     callback: () async {
                       bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
                       if (listOfArticles[index].isPaid == 1) {
                         if (isAppPurchase) {
-                          Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
-                            "name": listOfArticles[index].title,
-                            'id': listOfArticles[index].id
-                          });
+                          Analytics().sendEventReports(
+                            event: EventsOfAnalytics.article_show,
+                            attr: {"name": listOfArticles[index].title, 'id': listOfArticles[index].id},
+                          );
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) => ArticleDetailsScreen(
@@ -108,7 +127,9 @@ class ArticlesCardsHorizontalList extends StatelessWidget {
                       }
                     },
                   ),
-                  index == listOfArticles.length - 1 ? SizedBox(width: 22) : SizedBox(width: 7.5),
+                  index == listOfArticles.length - 1
+                      ? SizedBox(width: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal)
+                      : SizedBox(width: 7.5 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
                 ],
               );
             },
