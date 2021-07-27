@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/bloc/article_detales_screen_bloc.dart';
 import 'package:sofy_new/screens/bloc/comments_bloc.dart';
 import 'package:sofy_new/widgets/articles/article_author_desciption.dart';
-import 'package:sofy_new/widgets/articles/article_details_skeletion.dart';
 import 'package:sofy_new/widgets/articles/article_rating.dart';
 import 'package:sofy_new/widgets/articles/article_question.dart';
 import 'package:sofy_new/widgets/articles/article_vote.dart';
@@ -381,7 +381,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                       ValueListenableBuilder(
                         valueListenable: scroll,
                         builder: (_, value, __) => AnimatedContainer(
-                          height: height / 9.61 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          height: 104 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                           padding: EdgeInsets.only(top: height / 40.66 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                           color: appBar,
                           duration: Duration(milliseconds: 350),
@@ -397,11 +397,12 @@ class ArticleDetailsScreen extends StatelessWidget {
                                           child: Stack(
                                         children: <Widget>[
                                           Container(
-                                            width: 75.0,
+                                            width: 75.0/ Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                             child: SvgPicture.asset(
                                               'assets/svg/back_vector.svg',
                                               color: backButton,
-                                              height: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                              height: 17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                              width: 11 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                             ),
                                           ),
                                           Positioned.fill(
@@ -429,7 +430,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                           child: Container(
                                             child: Padding(
                                               padding: const EdgeInsets.only(top: 8),
-                                              child: Text(
+                                              child: AutoSizeText(
                                                 state.articleDetails.article.title != null ? state.articleDetails.article.title : '',
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
@@ -450,12 +451,12 @@ class ArticleDetailsScreen extends StatelessWidget {
                                         child: Stack(
                                           children: <Widget>[
                                             Container(
-                                              width: 75.0,
+                                              width: 75.0/ Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                               child: SvgPicture.asset(
                                                 'assets/svg/article_share.svg',
                                                 color: shareButton,
-                                                height: height / 37.33,
-                                              ),
+                                                height: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                width: 24 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,                                              ),
                                             ),
                                             Positioned.fill(
                                               child: Material(

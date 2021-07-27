@@ -39,7 +39,13 @@ class ArticleVote extends StatelessWidget {
                       child: Text(
                         poll.blockName,
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontFamily: Fonts.RobotoBold, color: SofyVoteColors.Text, fontSize: 20, fontWeight: FontWeight.bold, height: 1.7),
+                        style: TextStyle(
+                          fontFamily: Fonts.RobotoBold,
+                          color: SofyVoteColors.Text,
+                          fontSize: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          fontWeight: FontWeight.bold,
+                          height: 1.7,
+                        ),
                       ),
                     ),
                     BlocProvider<ArticleVoteBloc>(
@@ -52,7 +58,7 @@ class ArticleVote extends StatelessWidget {
                               ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.all(0.0),
+                                padding: EdgeInsets.zero,
                                 itemCount: state.variants.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   ApiArticleVariantsModel variant = state.variants[index];

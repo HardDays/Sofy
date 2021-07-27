@@ -18,7 +18,7 @@ class SofyVoteButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: isBordered ? SofyVoteButtonColors.SelectedBgColor : SofyVoteButtonColors.BgColor,
-            borderRadius: BorderRadius.circular(13),
+            borderRadius: BorderRadius.circular(13 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
             border: isBordered
                 ? Border.all(width: 1.5, color: SofyVoteButtonColors.BorderColor)
                 : Border.all(
@@ -27,7 +27,7 @@ class SofyVoteButton extends StatelessWidget {
                   ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -39,7 +39,13 @@ class SofyVoteButton extends StatelessWidget {
                     children: [
                       Text(
                         label,
-                        style: TextStyle(color: SofyVoteButtonColors.TextColor, fontSize: 16, fontFamily: Fonts.HindGuntur, fontWeight: FontWeight.w500, fontStyle: FontStyle.normal),
+                        style: TextStyle(
+                          color: SofyVoteButtonColors.TextColor,
+                          fontSize: 16 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          fontFamily: Fonts.HindGuntur,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                        ),
                       ),
                     ],
                   ),

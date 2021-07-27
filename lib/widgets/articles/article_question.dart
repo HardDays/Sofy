@@ -56,6 +56,7 @@ class ArticleQuestion extends StatelessWidget {
             vertical: 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
           ),
           child: SofyButton(
+            height: 52 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
             label: AppLocalizations.of(context).translate('show_answers'),
             callback: () {
               Analytics().sendEventReports(
