@@ -14,12 +14,13 @@ class VibrationsLoaded extends PlayerScreenState {
   final List<ApiPlayListModel> playlistNames;
   final List<String> path;
   final int selected;
+  final ApiVibrationModel fireModel;
 
   VibrationsLoaded(
-      {this.playlistNames, this.playlist, this.path, this.selected});
+      {this.fireModel, this.playlistNames, this.playlist, this.path, this.selected});
 
   @override
-  List<Object> get props => [playlist, playlistNames, path, selected];
+  List<Object> get props => [playlist, playlistNames, path, selected, fireModel];
 }
 
 class ErrorState extends PlayerScreenState {
