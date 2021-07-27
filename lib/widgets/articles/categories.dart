@@ -97,7 +97,7 @@ class Categories extends StatelessWidget {
                                         children: [
                                           Container(
                                             height: 28 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                            width: 28 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                            width: 28 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                             decoration: BoxDecoration(
                                               gradient: LinearGradient(
                                                 colors: kArticlePopCatIconBorderColor,

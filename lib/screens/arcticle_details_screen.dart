@@ -221,6 +221,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
                                                         SofyButton(
+                                                          height: 52 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                                           width: isCommentsEnabled
                                                               ? width / 2 - 30 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal
                                                               : width - 42 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
@@ -241,7 +242,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                         ),
                                                         Visibility(
                                                           visible: isCommentsEnabled,
-                                                          child: SofyButton(
+                                                          child: SofyButton(            height: 52 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+
                                                               width: width / 2 - 30 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                                               label: AppLocalizations.of(context).translate('comments_btn'),
                                                               callback: () {

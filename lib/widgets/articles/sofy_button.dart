@@ -5,7 +5,8 @@ import 'package:sofy_new/helper/size_config.dart';
 class SofyButton extends StatelessWidget {
   const SofyButton({
     Key key,
-    this.height = 52,
+    this.height =        52,
+
     this.width,
     this.linearGradientColors = const [
       Color(0xFFFDB0C1),

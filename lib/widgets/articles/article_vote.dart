@@ -58,7 +58,7 @@ class ArticleVote extends StatelessWidget {
                               ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.zero,
+                                padding: EdgeInsets.all(0),
                                 itemCount: state.variants.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   ApiArticleVariantsModel variant = state.variants[index];
@@ -105,7 +105,6 @@ class ArticleVote extends StatelessWidget {
                                           ),
                                           child: SofyButton(
                                               label: poll.buttonName,
-                                              height: 52 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                                               callback: () {
                                                 Analytics().sendEventReports(event: EventsOfAnalytics.reply_click, attr: {
                                                   "name": poll.blockName,
