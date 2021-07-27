@@ -126,7 +126,7 @@ class _MainScreenState extends State<MainScreen> {
                   child: Column(
                     children: [
                       CurvedNavigationBar(
-                        height: 75,
+                        height: 75 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                         animationDuration: Duration(milliseconds: 230),
                         backgroundColor: Colors.transparent,
                         index: selectedItemBar,
@@ -142,10 +142,12 @@ class _MainScreenState extends State<MainScreen> {
                           _handleIndexChanged(index);
                         },
                       ),
-                      Container(
-                        width: width,
-                        height: 92 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical - 75,
-                        color: Colors.white,
+                      Expanded(
+                        child: Container(
+                          // width: width,
+                          // height: 92 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical - 75,
+                          color: Colors.white,
+                        ),
                       )
                     ],
                   ),

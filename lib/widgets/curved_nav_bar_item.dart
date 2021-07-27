@@ -19,7 +19,9 @@ class CurvedNavBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: selected ? Colors.white : null, shape: BoxShape.circle),
-      padding: selected ? null : EdgeInsets.only(top: 20),
+      padding: selected ? null : EdgeInsets.only(top: 10 / Layout.height *
+          Layout.multiplier *
+          SizeConfig.blockSizeVertical),
       //color: Colors.red,
       width: selected
           ? 40 /
@@ -37,23 +39,38 @@ class CurvedNavBarItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          selected ?
           Expanded(
             child: SvgPicture.asset(
               svgAsset,
-              color: selected ? Color(0xFFE1397C) : Color(0xFFE1D2D5),
+              color:Color(0xFFE1397C),
               width: 25 /
-                  Layout.height *
+                  Layout.width *
                   Layout.multiplier *
-                  SizeConfig.blockSizeVertical,
+                  SizeConfig.blockSizeHorizontal,
               height: 25 /
                   Layout.height *
                   Layout.multiplier *
                   SizeConfig.blockSizeVertical,
             ),
+          ) :
+          SvgPicture.asset(
+            svgAsset,
+            color: Color(0xFFE1D2D5),
+            width: 25 /
+                Layout.width *
+                Layout.multiplier *
+                SizeConfig.blockSizeHorizontal,
+            height: 25 /
+                Layout.height *
+                Layout.multiplier *
+                SizeConfig.blockSizeVertical,
           ),
           if (!selected)
             SizedBox(
-              height: 10,
+              height: 5 / Layout.height *
+                  Layout.multiplier *
+                  SizeConfig.blockSizeVertical,
             ),
           if (!selected)
             Text(
@@ -67,3 +84,5 @@ class CurvedNavBarItem extends StatelessWidget {
     );
   }
 }
+
+

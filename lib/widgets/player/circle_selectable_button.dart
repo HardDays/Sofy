@@ -93,9 +93,11 @@ class CircleSelectableButton extends StatelessWidget {
                           ],
                         ).createShader(image);
                       },
-                      child: Image.asset(
-                        iconPath,
-                        scale: 1.5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: Image.asset(
+                          iconPath,
+                        ),
                       ),
                     ),
                   ),
