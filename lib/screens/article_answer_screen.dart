@@ -78,51 +78,49 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                        width: width / 3,
-                        child: Material(
-                          color: kArticlesTransparentColor,
-                          child: InkWell(
-                              borderRadius: BorderRadius.circular(60.r),
-                              focusColor: kArticlesTransparentColor,
-                              highlightColor: kArticlesTransparentColor,
-                              splashColor: kArticlesTransparentColor,
-                              hoverColor: kArticlesTransparentColor,
-                              radius: 25.r,
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    width: 50.0,
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-                                      child: Container(
-                                        child: SvgPicture.asset(
-                                          'assets/svg/back_vector.svg',
-                                          color: kNavigBarInactiveColor,
-                                        ),
-                                      ),
+                    Material(
+                      color: kArticlesTransparentColor,
+                      child: InkWell(
+                          borderRadius: BorderRadius.circular(60.r),
+                          focusColor: kArticlesTransparentColor,
+                          highlightColor: kArticlesTransparentColor,
+                          splashColor: kArticlesTransparentColor,
+                          hoverColor: kArticlesTransparentColor,
+                          radius: 25.r,
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                width: 50.0,
+                                alignment: Alignment.center,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                                  child: Container(
+                                    child: SvgPicture.asset(
+                                      'assets/svg/back_vector.svg',
+                                      color: kNavigBarInactiveColor,
                                     ),
                                   ),
-                                  Container(
-                                    padding: EdgeInsets.only(bottom: height / 179.2),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      isAnswerSent ? AppLocalizations.of(context).translate('back') : AppLocalizations.of(context).translate('cancel'),
-                                      style: TextStyle(
-                                          fontFamily: Fonts.Exo2Bold,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 24.sp, //24
-                                          color: kNavigBarInactiveColor),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                              onTap: () {
-                                if (!isAnswerSent) Analytics().sendEventReports(event: EventsOfAnalytics.cancel_answer_story_screen, attr: {"name": widget.articleTitle, 'id': widget.articleId});
-                                Navigator.pop(context);
-                              }),
-                        )),
+                              Container(
+                                padding: EdgeInsets.only(bottom: height / 179.2),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  isAnswerSent ? AppLocalizations.of(context).translate('back') : AppLocalizations.of(context).translate('cancel'),
+                                  style: TextStyle(
+                                      fontFamily: Fonts.Exo2Bold,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24.sp, //24
+                                      color: kNavigBarInactiveColor),
+                                ),
+                              ),
+                            ],
+                          ),
+                          onTap: () {
+                            if (!isAnswerSent) Analytics().sendEventReports(event: EventsOfAnalytics.cancel_answer_story_screen, attr: {"name": widget.articleTitle, 'id': widget.articleId});
+                            Navigator.pop(context);
+                          }),
+                    ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 21.w),
                       child: Stack(alignment: Alignment.topCenter, children: [

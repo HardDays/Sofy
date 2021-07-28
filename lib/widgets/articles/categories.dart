@@ -133,7 +133,7 @@ class Categories extends StatelessWidget {
                                       ),
                                       Container(
                                         padding: EdgeInsets.only(
-                                          top: 7.h,
+                                          top: SizeConfig.lang == 'en' ? 7.h : 0,
                                         ),
                                         width: 212.w,
                                         child: Text(
