@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +13,7 @@ import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/screens/arcticle_details_screen.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Popular extends StatelessWidget {
   const Popular({Key key, this.title, this.listOfArticles, this.textColor = kArticlesHeaderTextColor, this.fontSize = 24, this.cardHeight = 64, this.cardWidth = 64, this.imageRadius = 8})
@@ -38,11 +38,11 @@ class Popular extends StatelessWidget {
           style: TextStyle(
             fontFamily: SizeConfig.lang == 'en' ? Fonts.Allerta : Fonts.SFProMedium,
             color: textColor,
-            fontSize: fontSize / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-            letterSpacing: -0.065 * fontSize / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+            fontSize: fontSize,
+            letterSpacing: -0.065*fontSize,
           ),
         ),
-        SizedBox(height: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+        SizedBox(height: 14.h),
         ListView.builder(
             padding: EdgeInsets.zero,
             shrinkWrap: true,
@@ -51,7 +51,7 @@ class Popular extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 children: [
-                  index != 0 ? SizedBox(height: 21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical) : Container(),
+                  index != 0 ? SizedBox(height: 21.h) : Container(),
                   GestureDetector(
                     child: Stack(
                       children: [
@@ -66,15 +66,15 @@ class Popular extends StatelessWidget {
                                   fit: BoxFit.cover,
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.all(Radius.circular(imageRadius)),
-                                  height: cardHeight / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                  width: cardWidth / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                  height: cardHeight.h,
+                                  width: cardWidth.h,
                                 ),
                                 Visibility(
                                   // ignore: null_aware_in_logical_operator
                                   visible: listOfArticles[index].isPaid == 1 ? true : false,
                                   child: Container(
-                                    height: 19 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                    width: 16 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                    height: 19.h,
+                                    width: 16.w,
                                     child: SvgPicture.asset(
                                       'assets/lock.svg',
                                     ),
@@ -83,10 +83,10 @@ class Popular extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              width: 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                              width: 20.w,
                             ),
                             Container(
-                              width: 286 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                              width: SizeConfig.screenWidth - 20.w-22.w-64.h-22.w, // todo
                               child: Column(
                                 children: [
                                   Container(
@@ -97,7 +97,7 @@ class Popular extends StatelessWidget {
                                           fontFamily: Fonts.HindGuntur,
                                           color: textColor,
                                           height: 1.4,
-                                          fontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                          fontSize: 14.sp,
                                           fontWeight: FontWeight.w500,
                                         )),
                                   ),
@@ -105,7 +105,7 @@ class Popular extends StatelessWidget {
                                     child: Text('${listOfArticles[index].repliesCount} ${AppLocalizations.of(context).translate('comments')}',
                                         style: TextStyle(
                                           color: ArticlesColors.GreyColor,
-                                          fontSize: 12 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                          fontSize: 12.h,
                                         )),
                                     visible: isCommentsEnabled,
                                   ),
@@ -149,8 +149,8 @@ class Popular extends StatelessWidget {
                       }
                     },
                   ),
-                  index != listOfArticles.length - 1 ? SizedBox(height: 19 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical) : Container(),
-                  index != listOfArticles.length - 1 ? Container(height: 1, width: Layout.width.toDouble(), color: kArticlesDividerColor) : Container(),
+                  index != listOfArticles.length - 1 ? SizedBox(height: 19.h) : Container(),
+                  index != listOfArticles.length - 1 ? Container(height: 1.h, width: Layout.width.toDouble(), color: kArticlesDividerColor) : Container(),
                 ],
               );
             }),

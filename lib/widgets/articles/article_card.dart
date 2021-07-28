@@ -1,15 +1,13 @@
 import 'dart:ui';
-
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ArticleCard extends StatelessWidget {
   const ArticleCard(
@@ -81,9 +79,9 @@ class ArticleCard extends StatelessWidget {
                             color: Color.fromARGB(5, 255, 255, 255),
                           ),
                           alignment: Alignment.center,
-                          padding: EdgeInsets.all(FontSize(fontSize * 0.5).size.roundToDouble()),
+                          padding: EdgeInsets.symmetric(horizontal: 4.w),
                           child: Center(
-                            child: AutoSizeText(
+                            child: Text(
                               title,
                               textAlign: TextAlign.center,
                               maxLines: 2,
@@ -115,11 +113,11 @@ class ArticleCard extends StatelessWidget {
                       alignment: Alignment.topRight,
                       child: Container(
                         padding: EdgeInsets.only(
-                          top: 11 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                          right: 10 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                          top: 11.h,
+                          right: 10.w,
                         ),
-                        height: (19+11) / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                        width: (16+10) / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                        height: (19+11).h,
+                        width: (16+10).w,
                         child: SvgPicture.asset(
                           'assets/lock.svg',
                         ),

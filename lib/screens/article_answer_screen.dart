@@ -11,8 +11,8 @@ import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
-import 'package:sofy_new/widgets/articles/sofy_button.dart';
 import 'package:sofy_new/widgets/neumorphic/neumorphic_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../rest_api.dart';
 import 'bloc/analytics.dart';
@@ -83,19 +83,19 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                         child: Material(
                           color: kArticlesTransparentColor,
                           child: InkWell(
-                              borderRadius: BorderRadius.circular(60),
+                              borderRadius: BorderRadius.circular(60.r),
                               focusColor: kArticlesTransparentColor,
                               highlightColor: kArticlesTransparentColor,
                               splashColor: kArticlesTransparentColor,
                               hoverColor: kArticlesTransparentColor,
-                              radius: 25,
+                              radius: 25.r,
                               child: Row(
                                 children: <Widget>[
                                   Container(
                                     width: 50.0,
                                     alignment: Alignment.center,
                                     child: Padding(
-                                      padding: EdgeInsets.all(12.0),
+                                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
                                       child: Container(
                                         child: SvgPicture.asset(
                                           'assets/svg/back_vector.svg',
@@ -112,7 +112,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                       style: TextStyle(
                                           fontFamily: Fonts.Exo2Bold,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, //24
+                                          fontSize: 24.sp, //24
                                           color: kNavigBarInactiveColor),
                                     ),
                                   ),
@@ -124,10 +124,10 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                               }),
                         )),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
+                      padding: EdgeInsets.symmetric(horizontal: 21.w),
                       child: Stack(alignment: Alignment.topCenter, children: [
                         Padding(
-                          padding: EdgeInsets.only(top: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                          padding: EdgeInsets.only(top: 24.h),
                           child: Container(
                             decoration: BoxDecoration(
                               color: SofyQuestionColors.FormBgColor,
@@ -143,35 +143,28 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                   blurRadius: 15.0,
                                 ),
                               ],
-                              borderRadius: BorderRadius.circular(9 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                              borderRadius: BorderRadius.circular(9.r),
                             ),
                             child: Column(
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB((46 - 21) / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                      40 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 8 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 0
-                                      // 8 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                  padding: EdgeInsets.fromLTRB(46.w - 21.w, 40.h, 8.w, 0
                                       ),
                                   child: Text(
                                     AppLocalizations.of(context).translate('share_answer'),
                                     style: TextStyle(
-                                        color: SofyQuestionColors.QText,
-                                        fontSize: 16 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.normal,
-                                        fontFamily: Fonts.HindGunturBold,
-                                        height: 1.5),
+                                        color: SofyQuestionColors.QText, fontSize: 16.sp, fontWeight: FontWeight.bold, fontStyle: FontStyle.normal, fontFamily: Fonts.HindGunturBold, height: 1.5),
                                   ),
                                 ),
                                 Container(
                                   decoration: BoxDecoration(
                                     color: SofyQuestionColors.FormBgColor,
-                                    borderRadius: BorderRadius.circular(9),
+                                    borderRadius: BorderRadius.circular(9.r),
                                   ),
                                   padding: EdgeInsets.fromLTRB(
-                                    21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                    16 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                    21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                    21.w,
+                                    16.h,
+                                    21.w,
                                     0,
                                   ),
                                   child: Container(
@@ -191,32 +184,27 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                     ),
                                     child: TextField(
                                       textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          fontFamily: Fonts.Gilroy1,
-                                          fontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                          fontWeight: FontWeight.w600,
-                                          color: CommentsColors.Text,
-                                          height: 1.4),
+                                      style: TextStyle(fontFamily: Fonts.Gilroy1, fontSize: 14.sp, fontWeight: FontWeight.w600, color: CommentsColors.Text, height: 1.4),
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
                                         filled: true,
                                         fillColor: SofyQuestionColors.InputBgColor,
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
-                                          borderRadius: BorderRadius.circular(10 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                          borderRadius: BorderRadius.circular(10.r),
                                         ),
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
-                                          borderRadius: BorderRadius.circular(10 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                          borderRadius: BorderRadius.circular(10.r),
                                         ),
                                         disabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(color: SofyQuestionColors.InputBgColor),
-                                          borderRadius: BorderRadius.circular(10 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                          borderRadius: BorderRadius.circular(10.r),
                                         ),
-                                        contentPadding: EdgeInsets.only(left: 16.0 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                        contentPadding: EdgeInsets.only(left: 16.w),
                                         hintStyle: TextStyle(
                                           fontFamily: Fonts.HindGuntur,
-                                          fontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                          fontSize: 14.sp,
                                           fontWeight: FontWeight.w600,
                                           color: SofyQuestionColors.InputHintColor,
                                           height: 1.5,
@@ -235,10 +223,10 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                 /////////////////
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(
-                                    21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                    21.w,
                                     0,
-                                    21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                    24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                    21.w,
+                                    24.h,
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(boxShadow: [
@@ -248,8 +236,8 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                         blurRadius: 10.0,
                                       ),
                                     ]),
-                                    height: 52.0 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                    margin: EdgeInsets.only(top: 21),
+                                    height: 52.h,
+                                    margin: EdgeInsets.only(top: 21.h),
                                     child: NeumorphicCustomButton(
                                       margin: EdgeInsets.zero,
                                       style: NeumorphicStyle(
@@ -261,7 +249,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                           shadowDarkColorEmboss: kADNeumorphicShadowDarkColorEmboss,
                                           shadowLightColor: kArticlesWhiteColor,
                                           color: kADNeumorphicColor),
-                                      boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
+                                      boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10.r)),
                                       provideHapticFeedback: false,
                                       onClick: () {
                                         if (isAnswerSent) return;
@@ -270,76 +258,72 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                           sendAnswer(widget.articleId, widget.questionId, textController.text.toString());
                                         }
                                       },
-                                      padding: EdgeInsets.all(0.0),
+                                      padding: EdgeInsets.zero,
                                       child: Container(
-                                          height: 52.0 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                          decoration: BoxDecoration(
-                                            gradient: new LinearGradient(
-                                              begin: Alignment.topCenter,
-                                              end: Alignment.bottomCenter,
-                                              colors: kLinearGrad2Color,
-                                            ),
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0),
-                                            ),
+                                        height: 52.h,
+                                        decoration: BoxDecoration(
+                                          gradient: new LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            colors: kLinearGrad2Color,
                                           ),
-                                          child:
-                                          !isAnswerSent && !isLoading ? Row(mainAxisAlignment: MainAxisAlignment.center,
-                                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: [
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(10.r),
+                                          ),
+                                        ),
+                                        child: !isAnswerSent && !isLoading
+                                            ? Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                                                 SvgPicture.asset(
-                                                              'assets/svg/article_send_comment.svg',
-                                                            ),
-                                                SizedBox(width: 9 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,),
+                                                  'assets/svg/article_send_comment.svg',
+                                                ),
+                                                SizedBox(width: 9.w),
                                                 Padding(
-                                                  padding: EdgeInsets.only(top: 3.5 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                  padding: EdgeInsets.only(top: 3.5.h),
                                                   child: Text(
                                                     AppLocalizations.of(context).translate('send'),
                                                     style: TextStyle(
                                                       fontFamily: Fonts.HindGunturSemiBold,
                                                       fontStyle: FontStyle.normal,
-                                                      fontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                      fontSize: 14.sp,
                                                       color: kArticlesWhiteColor,
                                                     ),
                                                   ),
                                                 )
-                                              ]): isLoading
-                                                  ? Row(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: <Widget>[
-                                                        Container(
-                                                            width: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                            height: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                            child: CircularProgressIndicator(
-                                                              color: SofyVoteProgressColors.BgColor,
-                                                            )),
-                                                      ],
-                                                    )
-                                          :
-                                              Row(mainAxisAlignment: MainAxisAlignment.center,
-                                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: [
+                                              ])
+                                            : isLoading
+                                                ? Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Container(
+                                                          width: 14.w,
+                                                          height: 14.h,
+                                                          child: CircularProgressIndicator(
+                                                            color: SofyVoteProgressColors.BgColor,
+                                                          )),
+                                                    ],
+                                                  )
+                                                : Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                                                     Icon(
                                                       FontAwesomeIcons.solidCheckCircle,
-                                                      size: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                      size: 14.sp,
                                                       color: Colors.white,
                                                     ),
-                                                SizedBox(width: 9 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,),
-                                                Padding(
-                                                  padding: EdgeInsets.only(top: 7 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
-                                                  child: Text(
-                                                    AppLocalizations.of(context).translate('answer_sent'),
-                                                    style: TextStyle(
-                                                      fontFamily: Fonts.HindGunturSemiBold,
-                                                      fontStyle: FontStyle.normal,
-                                                      fontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                      color: kArticlesWhiteColor,
-                                                    ),
-                                                  ),
-                                                )
-                                              ]),
-                                          ),
+                                                    SizedBox(width: 9.h),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(top: 7.h),
+                                                      child: Text(
+                                                        AppLocalizations.of(context).translate('answer_sent'),
+                                                        style: TextStyle(
+                                                          fontFamily: Fonts.HindGunturSemiBold,
+                                                          fontStyle: FontStyle.normal,
+                                                          fontSize: 14.sp,
+                                                          color: kArticlesWhiteColor,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ]),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -350,16 +334,16 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                         Stack(
                           children: [
                             Container(
-                              width: 48 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              height: 48 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                              width: 48.w,
+                              height: 48.w,
                               decoration: BoxDecoration(boxShadow: [
                                 BoxShadow(color: Color.fromRGBO(255, 255, 255, 0.6), offset: Offset(-4, -4), blurRadius: 10),
                                 BoxShadow(color: Color.fromRGBO(219, 196, 219, 0.41), offset: Offset(4, 4), blurRadius: 10)
                               ], borderRadius: BorderRadius.all(Radius.circular(1000)), color: Color.fromRGBO(252, 239, 252, 1)),
                             ),
                             Container(
-                              width: 48 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              height: 48 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                              width: 48.w,
+                              height: 48.w,
                               decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(1000))),
                               child: Image.asset('assets/answer_title_image_cut.png'),
                             ),

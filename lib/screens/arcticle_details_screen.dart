@@ -34,12 +34,11 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../rest_api.dart';
 import 'bloc/analytics.dart';
 import 'bloc/setting_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ArticleDetailsScreen extends StatelessWidget {
   ArticleDetailsScreen({Key key, this.articleId = 100}) : super(key: key);
   final int articleId;
-
-  double radius = 25;
 
   final SettingBloc _bloc = SettingBloc();
 
@@ -133,7 +132,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                 Stack(
                                   children: [
                                     Container(
-                                      height: 390 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                      height: 390.h,
                                       width: width,
                                       child: ExtendedImage.network(
                                         state.articleDetails.article.coverImg,
@@ -142,14 +141,14 @@ class ArticleDetailsScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(top: (390 - radius) / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                      padding: EdgeInsets.only(top: 390.h - 25.h),
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(radius), topRight: Radius.circular(radius)),
+                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(25.r), topRight: Radius.circular(25.r)),
                                         child: Stack(
                                           alignment: Alignment.topCenter,
                                           children: [
                                             Container(
-                                              height: 26 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                              height: 26.h,
                                               width: width,
                                               color: Colors.white,
                                             ),
@@ -160,9 +159,9 @@ class ArticleDetailsScreen extends StatelessWidget {
                                     Visibility(
                                       visible: isAuthorEnabled,
                                       child: Padding(
-                                        padding: EdgeInsets.only(top: 366 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                        padding: EdgeInsets.only(top: 366.h),
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(radius), topRight: Radius.circular(radius)),
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(25.r), topRight: Radius.circular(25.r)),
                                           child: Stack(
                                             alignment: Alignment.topCenter,
                                             children: [
@@ -172,8 +171,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                 color: Colors.white,
                                               ),
                                               Padding(
-                                                padding: EdgeInsets.fromLTRB(21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                    21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 0),
+                                                padding: EdgeInsets.fromLTRB(21.h, 21.h, 21.h, 0),
                                                 child: ArticleAuthorDescription(author: state.author),
                                               ),
                                             ],
@@ -184,15 +182,12 @@ class ArticleDetailsScreen extends StatelessWidget {
                                     Padding(
                                       padding: EdgeInsets.only(
                                           top: isAuthorEnabled
-                                              ? 426 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical
-                                              : 386 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                              ? 426.h
+                                              : 386.h),
                                       child: Stack(
                                         alignment: Alignment.topCenter,
                                         children: [
                                           Container(
-                                            // padding: EdgeInsets.only(top:26 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
-                                            // padding: EdgeInsets.fromLTRB(21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                            //     26 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal, 0),
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,13 +195,13 @@ class ArticleDetailsScreen extends StatelessWidget {
                                               children: [
                                                 Padding(
                                                   padding: EdgeInsets.symmetric(
-                                                    horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                    horizontal: 21.w,
                                                   ),
                                                   child: Text(
                                                     state.articleDetails.article.title,
                                                     style: TextStyle(
                                                       fontFamily: Fonts.RobotoBold,
-                                                      fontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                      fontSize: 24.sp,
                                                       color: ArticlesColors.HeaderTextColor,
                                                       height: 1.35,
                                                     ),
@@ -214,20 +209,19 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsets.symmetric(
-                                                    horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                    horizontal: 21.w,
                                                   ),
                                                   child: Padding(
                                                     padding: EdgeInsets.only(
-                                                        top: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                        bottom: 8 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                        top: 25.h,
+                                                        bottom: 8.h),
                                                     child: Row(
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
                                                         SofyButton(
-                                                          height: 52 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                                           width: isCommentsEnabled
-                                                              ? width / 2 - 30 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal
-                                                              : width - 42 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                              ? width / 2 - 30.w
+                                                              : width - 42.w,
                                                           label: AppLocalizations.of(context).translate('questions_btn'),
                                                           callback: () {
                                                             Analytics().sendEventReports(
@@ -239,15 +233,14 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                             );
                                                             final RenderBox questions = _questionsKey.currentContext.findRenderObject();
                                                             final sizeQuestions = questions.localToGlobal(Offset.zero);
-                                                            _controller.animateTo(sizeQuestions.dy - height / 8.21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                            _controller.animateTo(sizeQuestions.dy - (height / 8.21).h,
                                                                 duration: Duration(milliseconds: 350), curve: Curves.ease);
                                                           },
                                                         ),
                                                         Visibility(
                                                           visible: isCommentsEnabled,
                                                           child: SofyButton(
-                                                              height: 52 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                                              width: width / 2 - 30 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                              width: width / 2 - 30.w,
                                                               label: AppLocalizations.of(context).translate('comments_btn'),
                                                               callback: () {
                                                                 Analytics().sendEventReports(
@@ -259,7 +252,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                                 );
                                                                 final RenderBox comments = _commentsKey.currentContext.findRenderObject();
                                                                 final sizeComments = comments.localToGlobal(Offset.zero);
-                                                                _controller.animateTo(sizeComments.dy - height / 8.21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                                _controller.animateTo(sizeComments.dy - (height / 8.21).h,
                                                                     duration: Duration(milliseconds: 350), curve: Curves.ease);
                                                               }),
                                                         )
@@ -269,7 +262,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsets.symmetric(
-                                                    horizontal: 17 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                    horizontal: 17.w,
                                                   ),
                                                   child: Html(
                                                     style: {
@@ -277,42 +270,42 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                           lineHeight: LineHeight.number(1.7),
                                                           fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
                                                           fontStyle: FontStyle.normal,
-                                                          fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          fontSize: FontSize(17.sp),
                                                           color: kArticlesDetailsScreenColor),
                                                       "strong": Style(
                                                           lineHeight: LineHeight.number(1.7),
                                                           fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGunturBold : Fonts.RalewayBold,
                                                           fontWeight: FontWeight.bold,
                                                           fontStyle: FontStyle.normal,
-                                                          fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          fontSize: FontSize(17.sp),
                                                           color: kArticlesDetailsScreenColor),
                                                       "h1": Style(
                                                           lineHeight: LineHeight.number(1.7),
                                                           fontFamily: Fonts.Roboto,
                                                           fontWeight: FontWeight.w700,
                                                           fontStyle: FontStyle.normal,
-                                                          fontSize: FontSize(22 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          fontSize: FontSize(22.sp),
                                                           color: kArticlesDetailsScreenColor),
                                                       "li": Style(
                                                           lineHeight: LineHeight.number(1.5),
                                                           fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
                                                           fontStyle: FontStyle.normal,
                                                           fontWeight: FontWeight.w500,
-                                                          fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          fontSize: FontSize(17.sp),
                                                           color: kArticlesDetailsScreenColor),
                                                       "ol": Style(
                                                           lineHeight: LineHeight.number(1.5),
                                                           fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
                                                           fontStyle: FontStyle.normal,
                                                           fontWeight: FontWeight.w500,
-                                                          fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          fontSize: FontSize(17.sp),
                                                           color: kArticlesDetailsScreenColor),
                                                       "u": Style(
                                                           lineHeight: LineHeight.number(1.7),
                                                           fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
                                                           fontStyle: FontStyle.normal,
                                                           fontWeight: FontWeight.w500,
-                                                          fontSize: FontSize(17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                                          fontSize: FontSize(17.sp),
                                                           color: kArticlesDetailsScreenColor),
                                                     },
                                                     data: state.articleDetails.article.content != null ? state.articleDetails.article.content : '',
@@ -358,8 +351,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                                       Container(
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
-                                                topRight: Radius.circular(25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical)),
+                                                topLeft: Radius.circular(25.r),
+                                                topRight: Radius.circular(25.r)),
                                             boxShadow: [
                                               BoxShadow(
                                                 color: CommentsColors.InputCardShadow1Color,
@@ -388,8 +381,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                       ValueListenableBuilder(
                         valueListenable: scroll,
                         builder: (_, value, __) => AnimatedContainer(
-                          height: 104 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                          padding: EdgeInsets.only(top: height / 40.66 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                          height: 104.h,
+                          padding: EdgeInsets.only(top: (height / 40.66).h),
                           color: appBar,
                           duration: Duration(milliseconds: 350),
                           child: Stack(
@@ -404,12 +397,12 @@ class ArticleDetailsScreen extends StatelessWidget {
                                           child: Stack(
                                         children: <Widget>[
                                           Container(
-                                            width: 75.0 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                            width: 75.0.w,
                                             child: SvgPicture.asset(
                                               'assets/svg/back_vector.svg',
                                               color: backButton,
-                                              height: 17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                              width: 11 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                              height: 17.h,
+                                              width: 11.w,
                                             ),
                                           ),
                                           Positioned.fill(
@@ -420,8 +413,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                   highlightColor: Colors.transparent,
                                                   splashColor: Colors.transparent,
                                                   hoverColor: Colors.transparent,
-                                                  borderRadius: BorderRadius.circular(60),
-                                                  radius: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                  borderRadius: BorderRadius.circular(60.r),
+                                                  radius: 25.r,
                                                   onTap: () {
                                                     Navigator.pop(context);
                                                   }),
@@ -436,7 +429,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                           curve: Curves.fastOutSlowIn,
                                           child: Container(
                                             child: Padding(
-                                              padding: const EdgeInsets.only(top: 8),
+                                              padding: EdgeInsets.only(top: 8.r),
                                               child: AutoSizeText(
                                                 state.articleDetails.article.title != null ? state.articleDetails.article.title : '',
                                                 maxLines: 2,
@@ -446,7 +439,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                   fontFamily: Fonts.HindGuntur,
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle: FontStyle.normal,
-                                                  fontSize: 15 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                  fontSize: 15.sp,
                                                   color: kArticlesPopularColor,
                                                 ),
                                               ),
@@ -458,12 +451,12 @@ class ArticleDetailsScreen extends StatelessWidget {
                                         child: Stack(
                                           children: <Widget>[
                                             Container(
-                                              width: 75.0 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                              width: 75.0.w,
                                               child: SvgPicture.asset(
                                                 'assets/svg/article_share.svg',
                                                 color: shareButton,
-                                                height: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                width: 24 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                height: 24.h,
+                                                width: 24.w,
                                               ),
                                             ),
                                             Positioned.fill(
@@ -474,8 +467,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                   highlightColor: Colors.transparent,
                                                   splashColor: Colors.transparent,
                                                   hoverColor: Colors.transparent,
-                                                  borderRadius: BorderRadius.circular(60),
-                                                  radius: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                  borderRadius: BorderRadius.circular(60.r),
+                                                  radius: 25.r,
                                                   onTap: () {
                                                     Analytics().sendEventReports(
                                                       event: EventsOfAnalytics.share_article_click,
@@ -498,7 +491,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                               Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Container(
-                                  height: height / 298.6 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                  height: (height / 298.6).h,
                                   color: dividerColor,
                                   child: LinearProgressIndicator(
                                     backgroundColor: dividerColor,
@@ -516,7 +509,7 @@ class ArticleDetailsScreen extends StatelessWidget {
             }
             if (state is ArticleDetailsStateError) {
               return Padding(
-                padding: EdgeInsets.all(22 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                padding: EdgeInsets.all(22.w),
                 child: Center(
                   child: Container(child: Text(state.error)),
                 ),

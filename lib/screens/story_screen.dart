@@ -188,8 +188,8 @@ class CloseButtonMaybePop extends StatelessWidget {
     return Container(
       // decoration: BoxDecoration(color: Colors.pink[50], borderRadius: BorderRadius.all(Radius.circular(100))),
       decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(100)), boxShadow: [
-        BoxShadow(offset: Offset(3, 3), color: Color.fromRGBO(236, 209, 232, 0.7), blurRadius: 4),
-        BoxShadow(offset: Offset(-3, -3), color: Color.fromRGBO(236, 209, 232, 0.3), blurRadius: 10),
+        BoxShadow(offset: Offset(3, 3), color: Color.fromRGBO(236, 209, 232, 0.3), blurRadius: 4),
+        BoxShadow(offset: Offset(-3, -3), color: Color.fromRGBO(236, 209, 232, 0.1), blurRadius: 10),
       ]),
       child: Padding(
         padding: const EdgeInsets.all(4.0),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
-import 'package:sofy_new/helper/size_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SofyVoteButton extends StatelessWidget {
   const SofyVoteButton({Key key, this.callback, this.label = 'btn with ctar', this.isBordered = false}) : super(key: key);
@@ -18,7 +18,7 @@ class SofyVoteButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: isBordered ? SofyVoteButtonColors.SelectedBgColor : SofyVoteButtonColors.BgColor,
-            borderRadius: BorderRadius.circular(13 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
+            borderRadius: BorderRadius.circular(13.r),
             border: isBordered
                 ? Border.all(width: 1.5, color: SofyVoteButtonColors.BorderColor)
                 : Border.all(
@@ -27,7 +27,7 @@ class SofyVoteButton extends StatelessWidget {
                   ),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
+            padding: EdgeInsets.symmetric(horizontal: 20 .w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -41,7 +41,7 @@ class SofyVoteButton extends StatelessWidget {
                         label,
                         style: TextStyle(
                           color: SofyVoteButtonColors.TextColor,
-                          fontSize: 16 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          fontSize: 16.sp,
                           fontFamily: Fonts.HindGuntur,
                           fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.normal,
@@ -54,13 +54,13 @@ class SofyVoteButton extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     Container(
-                      height: 18,
-                      width: 18,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: isBordered ? SofyVoteButtonColors.SelectedRoundedColor : SofyVoteButtonColors.NotSelectedRoundedColor),
+                      height: 18.h,
+                      width: 18.h,
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(50.r), color: isBordered ? SofyVoteButtonColors.SelectedRoundedColor : SofyVoteButtonColors.NotSelectedRoundedColor),
                       child: isBordered
                           ? Icon(
                               Icons.check,
-                              size: 14,
+                              size: 14.sp,
                               color: Colors.white,
                             )
                           : Container(),

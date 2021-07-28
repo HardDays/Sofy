@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/constants.dart';
-import 'package:sofy_new/helper/size_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SofyButton extends StatelessWidget {
   const SofyButton({
     Key key,
-    this.height =        52,
-
     this.width,
     this.linearGradientColors = const [
       Color(0xFFFDB0C1),
@@ -14,14 +12,11 @@ class SofyButton extends StatelessWidget {
     ],
     this.label = 'button',
     this.labelColor = Colors.white,
-    this.labelFontSize = 14,
     this.callback,
   }) : super(key: key);
-  final double height;
   final double width;
   final List<Color> linearGradientColors;
   final Color labelColor;
-  final double labelFontSize;
   final String label;
   final VoidCallback callback;
 
@@ -43,16 +38,16 @@ class SofyButton extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
-            borderRadius: BorderRadius.circular(9),
+            borderRadius: BorderRadius.circular(9.r),
           ),
-          height: height,
+          height: 52.h,
           width: width,
           child: Center(
             child: Text(
               label,
               style: TextStyle(
                   color: labelColor,
-                  fontSize: labelFontSize/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                   fontFamily: Fonts.HindGunturBold),
             ),

@@ -14,6 +14,7 @@ import 'package:sofy_new/widgets/articles/sofy_button.dart';
 import 'package:sofy_new/widgets/articles/sofy_vote_button.dart';
 import 'package:sofy_new/widgets/articles/sofy_vote_result.dart';
 import 'package:sofy_new/widgets/articles/vote_divider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ArticleVote extends StatelessWidget {
   const ArticleVote({Key key, this.poll}) : super(key: key);
@@ -24,17 +25,17 @@ class ArticleVote extends StatelessWidget {
     return poll.variants.length > 0
         ? Column(
             children: [
-              SofyDivider(icon: FontAwesomeIcons.check, size: 8), // scaled yet
+              SofyDivider(icon: FontAwesomeIcons.check, size: 8.h), // scaled yet
               SizedBox(
-                height: 40 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                height: 40.h,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
+                padding: EdgeInsets.symmetric(horizontal: 21.w),
                 child: Column(
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                        bottom: 23.0 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                        bottom: 23.w,
                       ),
                       child: Text(
                         poll.blockName,
@@ -42,7 +43,7 @@ class ArticleVote extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: Fonts.RobotoBold,
                           color: SofyVoteColors.Text,
-                          fontSize: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                           height: 1.7,
                         ),
@@ -66,7 +67,7 @@ class ArticleVote extends StatelessWidget {
                                   if ((isResult && state is ArticleVoteStateInit) || state is ArticleVoteStatePostedVote)
                                     return Padding(
                                       padding: EdgeInsets.only(
-                                        bottom: 16.0 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                        bottom: 16.h,
                                       ),
                                       child: SofyVoteResult(
                                         variant: variant,
@@ -76,7 +77,7 @@ class ArticleVote extends StatelessWidget {
                                   // варианты
                                   return Padding(
                                     padding: EdgeInsets.symmetric(
-                                      vertical: 6 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                      vertical: 6.h,
                                     ),
                                     child: SofyVoteButton(
                                         label: variant.content,
@@ -100,8 +101,8 @@ class ArticleVote extends StatelessWidget {
                                   : state is ArticleVoteStateSettedVote
                                       ? Padding(
                                           padding: EdgeInsets.only(
-                                            top: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                            bottom: 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                            top: 14.h,
+                                            bottom: 30.h,
                                           ),
                                           child: SofyButton(
                                               label: poll.buttonName,
@@ -116,7 +117,7 @@ class ArticleVote extends StatelessWidget {
                                         )
                                       : Container(),
                               SizedBox(
-                                height: 13 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                height: 13.h,
                               ),
                             ],
                           );

@@ -15,6 +15,7 @@ import 'package:sofy_new/widgets/articles/sofy_button.dart';
 import 'package:sofy_new/widgets/articles/vote_divider.dart';
 import 'package:sofy_new/widgets/material_page_route.dart';
 import 'package:sofy_new/widgets/story/story_input_card.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ArticleQuestion extends StatelessWidget {
   ArticleQuestion({Key key, this.question, this.articleId, this.article}) : super(key: key);
@@ -28,35 +29,34 @@ class ArticleQuestion extends StatelessWidget {
       children: [
         SofyDivider(icon: FontAwesomeIcons.question),
         SizedBox(
-          height: 40 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+          height: 40.h,
         ),
         Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+              padding: EdgeInsets.symmetric(horizontal: 21.w,
               ), child: Text(
               question.message,
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: SofyQuestionColors.Text,
                   fontFamily: Fonts.RobotoBold,
-                  fontSize: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                  fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
                   height: 1.7),
             ),),
             SizedBox(
-              height: 15 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+              height: 15.h,
             ),
             StoryInputCard(question: question, article: article, articleId: articleId, enabled: false),
           ],
         ),
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-            vertical: 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+            horizontal: 21.w,
+            vertical: 30.h,
           ),
           child: SofyButton(
-            height: 52 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
             label: AppLocalizations.of(context).translate('show_answers'),
             callback: () {
               Analytics().sendEventReports(

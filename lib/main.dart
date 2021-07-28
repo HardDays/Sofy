@@ -19,6 +19,7 @@ import 'package:sofy_new/screens/bloc/player_screen_v2/player_bloc.dart';
 import 'package:sofy_new/screens/bloc/player_screen_v2/player_screen_bloc.dart';
 import 'package:sofy_new/screens/splash_screen.dart';
 import 'package:tenjin_sdk/tenjin_sdk.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'constants/constants.dart';
 import 'providers/user.dart';
@@ -34,25 +35,32 @@ void main() async {
   await TenjinSDK.instance.init(apiKey: kTenjinFlutterApiKey);
 
   runZoned(() {
-    runApp(MaterialApp(
-      supportedLocales: [
-        Locale('en', 'US'),
-        Locale('ru', 'RU'),
-      ],
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      debugShowCheckedModeBanner: false,
-      // home: OnBoardingScreen(),
-      home: MyApp(),
-      theme: ThemeData(
-        pageTransitionsTheme: PageTransitionsTheme(builders: {
-          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-        },),),
+    runApp(ScreenUtilInit(
+        designSize: Size(414, 896),
+        builder: () =>
+       MaterialApp(
+        supportedLocales: [
+          Locale('en', 'US'),
+          Locale('ru', 'RU'),
+        ],
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        debugShowCheckedModeBanner: false,
+        // home: OnBoardingScreen(),
+        home: MyApp(),
+        theme: ThemeData(
+          pageTransitionsTheme: PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            },
+          ),
+        ),
+      )
     ));
   });
 }
@@ -60,6 +68,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final PlaylistData playlistData = PlaylistData();
   final PlaylistNameData playlistNameData = PlaylistNameData();
+
   @override
   Widget build(BuildContext context) {
     final String systemLang = AppLocalizations.of(context).languageCode();
@@ -91,29 +100,22 @@ class MyApp extends StatelessWidget {
           BlocProvider<PlayerScreenBloc>(
             create: (context) => PlayerScreenBloc()
               ..add(
-                LoadVibrations(
-                    id: 5,
-                    playlist: playlistData.getAllPlaylist(),
-                    playlistNames:
-                        playlistNameData.apiPlaylistsForRecomendScreen),
+                LoadVibrations(id: 5, playlist: playlistData.getAllPlaylist(), playlistNames: playlistNameData.apiPlaylistsForRecomendScreen),
               ),
           ),
           BlocProvider<PlayerBloc>(create: (context) => PlayerBloc()),
-          BlocProvider<ArticlesBloc>(create: (context) => ArticlesBloc(restApi: RestApi(systemLang: systemLang), languageCode: systemLang)..add(ArticlesEventLoad()),)
+          BlocProvider<ArticlesBloc>(
+            create: (context) => ArticlesBloc(restApi: RestApi(systemLang: systemLang), languageCode: systemLang)..add(ArticlesEventLoad()),
+          )
         ],
         child: MaterialApp(
           supportedLocales: [
             Locale('en', 'US'),
             Locale('ru', 'RU'),
           ],
-          localizationsDelegates: [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate
-          ],
+          localizationsDelegates: [AppLocalizations.delegate, GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate, GlobalCupertinoLocalizations.delegate],
           debugShowCheckedModeBanner: false,
-       // home: OnBoardingScreen(),
+          // home: OnBoardingScreen(),
           home: SplashScreen(),
           theme: ThemeData(
               pageTransitionsTheme: PageTransitionsTheme(builders: {

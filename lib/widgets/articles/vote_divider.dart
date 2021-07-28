@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SofyDivider extends StatelessWidget {
   const SofyDivider({Key key, this.icon = const IconData(1), this.size = 9}) : super(key: key);
@@ -31,29 +32,29 @@ class SofyDivider extends StatelessWidget {
           icon == IconData(1)
               ? Container()
               : Container(
-                  margin: EdgeInsets.only(left: 21.0),
+                  margin: EdgeInsets.only(left: 21.w),
                   child: Icon(
                     icon,
                     color: SvgColors.Done1Color,
-                    size: size / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                    size: size,
                   )),
           icon == IconData(1)
               ? Container()
               : Container(
-                  margin: EdgeInsets.only(right: 5.0, left: 5.0),
+                  margin: EdgeInsets.only(right: 5.w, left: 5.w),
                   child: Icon(
                     icon,
                     color: SvgColors.Done2Color,
-                    size: size / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                    size: size,
                   )),
           icon == IconData(1)
               ? Container()
               : Container(
-                  margin: EdgeInsets.only(right: 21.0),
+                  margin: EdgeInsets.only(right: 21.w),
                   child: Icon(
                     icon,
                     color: SvgColors.Done1Color,
-                    size: size / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                    size: size,
                   )),
           Container(
             height: 1.0,

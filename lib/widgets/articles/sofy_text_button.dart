@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SofyTextButton extends StatelessWidget {
   const SofyTextButton(
-      {Key key, this.label = 'text btn', this.callback, this.fontSize = 16})
+      {Key key, this.label = 'text btn', this.callback})
       : super(key: key);
   final String label;
-  final double fontSize;
   final VoidCallback callback;
 
   @override
@@ -17,7 +17,7 @@ class SofyTextButton extends StatelessWidget {
           label,
           style: TextStyle(
               color: SofyTextButtonColors.LabelColor,
-              fontSize: fontSize,
+              fontSize: 16.sp,
               fontWeight: FontWeight.bold,
               fontFamily: 'Roboto'),
         ),

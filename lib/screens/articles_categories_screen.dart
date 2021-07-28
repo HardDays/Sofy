@@ -12,6 +12,7 @@ import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/widgets/articles/categories.dart';
 import 'package:sofy_new/widgets/articles/background.dart';
 import 'package:sofy_new/widgets/fullscreen_preloader.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../rest_api.dart';
 
@@ -22,7 +23,6 @@ class ArticlesCategoriesScreen extends StatefulWidget {
 
 class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
   List<ApiArticleTopicModel> topicsList = [];
-  List<ApiFavTopicsInfoModel> topicsList2 = [];
   @override
   void initState() {
     super.initState();
@@ -38,7 +38,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
     return Scaffold(
         backgroundColor: kMainScreenScaffoldBackColor,
         body: topicsList.length > 0 ? Padding(
-            padding: EdgeInsets.only(left: 0.0, right: 0.0, top: height / 20.8/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+            padding: EdgeInsets.only(left: 0.0, right: 0.0, top: (height / 20.8).h),
             child: Stack(
               children: [
                 Background(),
@@ -46,7 +46,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     InkWell(
-                        borderRadius: BorderRadius.circular(60),
+                        borderRadius: BorderRadius.circular(60.r),
                         focusColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         splashColor: Colors.transparent,
@@ -59,7 +59,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                               width: 50.0,
                               alignment: Alignment.center,
                               child: Padding(
-                                padding: EdgeInsets.all(12.0),
+                                padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 12.h),
                                 child: Container(
                                   child: SvgPicture.asset(
                                     'assets/svg/back_vector.svg',
@@ -69,7 +69,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(bottom: height / 179.2/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                              padding: EdgeInsets.only(bottom: (height / 179.2).h),
                               alignment: Alignment.center,
                               child: Text(
                                 AppLocalizations.of(context)
@@ -77,7 +77,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                                 style: TextStyle(
                                     fontFamily: Fonts.Exo2,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 24/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, //24
+                                    fontSize: 24.sp,
                                     color: kNavigBarInactiveColor),
                               ),
                             ),
@@ -87,7 +87,7 @@ class _ArticlesCategoriesScreen extends State<ArticlesCategoriesScreen> {
                           Navigator.pop(context);
                         }),
                     Padding(
-                      padding: EdgeInsets.only(left: 21.0/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, right: 21.0, top: height / 50.29/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                      padding: EdgeInsets.only(left: 21.w, right: 21.w),
                       child: Categories(
                         listOfTopics: topicsList,
                       ),

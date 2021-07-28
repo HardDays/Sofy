@@ -10,6 +10,7 @@ import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
 import 'package:sofy_new/widgets/articles/article_card.dart';
 import 'package:sofy_new/widgets/articles/header_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CardsHorizontalList extends StatelessWidget {
   CardsHorizontalList(
@@ -50,7 +51,7 @@ class CardsHorizontalList extends StatelessWidget {
         title == ''
             ? Container()
             : Container(
-                height: 64 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                height: 64.h,
                 width: width,
                 padding: EdgeInsets.fromLTRB(
                   l,t,r,b
@@ -71,8 +72,8 @@ class CardsHorizontalList extends StatelessWidget {
               return Row(
                 children: [
                   index == 0
-                      ? SizedBox(width: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal)
-                      : SizedBox(width: 7.5 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
+                      ? SizedBox(width: 22.w)
+                      : SizedBox(width: 7.5.w),
                   ArticleCard(
                     title: listOfArticles[index].title,
                     path: listOfArticles[index].coverImg,
@@ -128,8 +129,8 @@ class CardsHorizontalList extends StatelessWidget {
                     },
                   ),
                   index == listOfArticles.length - 1
-                      ? SizedBox(width: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal)
-                      : SizedBox(width: 7.5 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
+                      ? SizedBox(width: 22.w)
+                      : SizedBox(width: 7.5.w),
                 ],
               );
             },

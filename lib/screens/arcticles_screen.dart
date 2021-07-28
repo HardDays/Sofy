@@ -22,6 +22,7 @@ import 'package:sofy_new/widgets/articles/popular.dart';
 import 'package:sofy_new/widgets/articles/sofy_button.dart';
 import 'package:sofy_new/widgets/fullscreen_preloader.dart';
 import 'package:sofy_new/widgets/material_page_route.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ArticlesScreen extends StatefulWidget {
   const ArticlesScreen({Key key}) : super(key: key);
@@ -33,7 +34,7 @@ class ArticlesScreen extends StatefulWidget {
 class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-  double radius = 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal;
+  double radius = 22.r;
 
   @override
   Widget build(BuildContext context) {
@@ -54,72 +55,70 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: (529 - (ios? 44 : 0)) / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                        width: width,
-                        color: kArticlesNewBgColor,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ios? Container() : SizedBox(height: 44 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
-                          Container(
-                            width: width - 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                            height: 96 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
-                              child: AutoSizeText(
-                                AppLocalizations.of(context).translate('learn_and_get_inspired'),
-                                wrapWords: true,
-                                style: TextStyle(
-                                  fontFamily: Fonts.RobotoBold,
-                                  letterSpacing: -0.02 * 50 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 50 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                  color: kArticlesTextColor,
-                                  height: 0.964,
+                  child: Container(
+                    color: kArticlesNewBgColor,
+                    child: Stack(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ios? Container() : SizedBox(height: 44.h),
+                            Container(
+                              width: width - 20.w,
+                              height: 96.h,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 20.w),
+                                child: AutoSizeText(
+                                  AppLocalizations.of(context).translate('learn_and_get_inspired'),
+                                  wrapWords: true,
+                                  style: TextStyle(
+                                    fontFamily: Fonts.RobotoBold,
+                                    letterSpacing: -0.02*(50.sp),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 50.sp,
+                                    color: kArticlesTextColor,
+                                    height: 0.964,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 23 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
-                          Container(
-                            width: width - 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                            height: 38 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
-                              child: AutoSizeText(
-                                AppLocalizations.of(context).translate('new_topics'),
-                                style: TextStyle(
-                                  fontFamily: SizeConfig.lang == 'en' ? Fonts.AllertaRegular : Fonts.SFProMedium,
-                                  letterSpacing: -0.065 * 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                  fontSize: 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                  color: kArticlesTextColor,
-                                  height: 38 / 30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                            SizedBox(height: 23.h),
+                            Container(
+                              width: width - 20.w,
+                              height: 38.h,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 20.w),
+                                child: AutoSizeText(
+                                  AppLocalizations.of(context).translate('new_topics'),
+                                  style: TextStyle(
+                                    fontFamily: SizeConfig.lang == 'en' ? Fonts.AllertaRegular : Fonts.SFProMedium,
+                                    letterSpacing: -0.065*(30.sp),
+                                    fontSize: 30.sp,
+                                    color: kArticlesTextColor,
+                                    height: 38 / 30.sp,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 9 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
-                          CardsHorizontalList(
-                              l: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              t: 9 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              r: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              b: 21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              frozenCardTextColor: Color.fromRGBO(114, 94, 92, 1),
-                              listOfArticles: state.listOfArticles,
-                              cardHeight: 293 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              cardRadius: 27 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              cardWidth: 242 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              frozenCardFontSize: 17 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              lineHeight: 1.135,
-                              frozenCardHeight: 81 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              titleFontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
-                        ],
-                      ),
-                    ],
+                            CardsHorizontalList(
+                                l: 22.w,
+                                t: 9.h,
+                                r: 22.w,
+                                b: 21.h,
+                                frozenCardTextColor: Color.fromRGBO(114, 94, 92, 1),
+                                listOfArticles: state.listOfArticles,
+                                cardHeight: 293.h,
+                                cardRadius: 27.r,
+                                cardWidth: 242.w,
+                                frozenCardFontSize: 17.sp,
+                                lineHeight: 1.135,
+                                frozenCardHeight: 81.h,
+                                titleFontSize: 24.sp),
+                            SizedBox(height: 21.h),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -128,10 +127,10 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                     children: [
                       state.femaleSexuality.length > 0
                           ? CardsHorizontalList(
-                              l: 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              t: 22 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              r: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              b: 11 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                              l: 20.w,
+                              t: 22.h,
+                              r: 22.w,
+                              b: 11.h,
                               listOfArticles: state.femaleSexuality,
                               callback: () {
                                 Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('female_sexuality')});
@@ -147,19 +146,19 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                               lineHeight: 1.193,
                               frozenCardTextColor: Color.fromRGBO(114, 94, 92, 1),
                               title: AppLocalizations.of(context).translate('female_sexuality'),
-                              cardHeight: 220 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              cardRadius: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              cardWidth: 170 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              frozenCardFontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              frozenCardHeight: 57 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              titleFontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical)
+                              cardHeight: 220.h,
+                              cardRadius: 20.r,
+                              cardWidth: 170.w,
+                              frozenCardFontSize: 14.sp,
+                              frozenCardHeight: 57.h,
+                              titleFontSize: 24.sp)
                           : Container(),
                       state.interestingAboutSex.length > 0
                           ? CardsHorizontalList(
-                              l: 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              t: 22 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              r: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              b: 11 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                              l: 20.w,
+                              t: 22.h,
+                              r: 22.w,
+                              b: 11.h,
                               listOfArticles: state.interestingAboutSex,
                               callback: () {
                                 Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('interesting_about_sex')});
@@ -175,30 +174,30 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                               frozenCardTextColor: Color.fromRGBO(56, 57, 79, 1),
                               lineHeight: 1.378,
                               title: AppLocalizations.of(context).translate('interesting_about_sex'),
-                              cardHeight: 220 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              cardRadius: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              cardWidth: 170 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              frozenCardFontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              frozenCardHeight: 57 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              titleFontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical)
+                              cardHeight: 220.h,
+                              cardRadius: 20.r,
+                              cardWidth: 170.w,
+                              frozenCardFontSize: 14.sp,
+                              frozenCardHeight: 57.h,
+                              titleFontSize: 24.sp)
                           : Container(),
                       state.listOfPopularArticles.length > 0
                           ? Padding(
                               padding: EdgeInsets.fromLTRB(
-                                20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                30 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                20.w,
+                                30.h,
+                                20.w,
+                                14.h,
                               ),
-                              child: Popular(title: AppLocalizations.of(context).translate('popular'), listOfArticles: state.listOfPopularArticles),
+                              child: Popular(title: AppLocalizations.of(context).translate('popular'), listOfArticles: state.listOfPopularArticles, fontSize: 24.sp,),
                             )
                           : Container(),
                       state.orgasms.length > 0
                           ? CardsHorizontalList(
-                              l: 20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              t: 28 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              r: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              b: 11 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                              l: 20.w,
+                              t: 28.h,
+                              r: 22.w,
+                              b: 11.h,
                               listOfArticles: state.orgasms,
                               callback: () {
                                 Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('orgasms')});
@@ -214,32 +213,31 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                               frozenCardTextColor: Color.fromRGBO(114, 94, 92, 1),
                               lineHeight: 1.378,
                               title: AppLocalizations.of(context).translate('orgasms'),
-                              cardHeight: 220 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              cardRadius: 20 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              cardWidth: 170 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                              frozenCardFontSize: 13 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              frozenCardHeight: 57 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                              titleFontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical)
+                              cardHeight: 220.h,
+                              cardRadius: 20.r,
+                              cardWidth: 170.w,
+                              frozenCardFontSize: 13.sp,
+                              frozenCardHeight: 57.h,
+                              titleFontSize: 24.sp)
                           : Container(),
                       Padding(
                         padding: EdgeInsets.fromLTRB(
-                          20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                          23 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                          20 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                          21 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          20.w,
+                          23.h,
+                          20.w,
+                          21.h,
                         ),
                         child: Categories(
-                          titListPadd: 10 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          titListPadd: 10.h,
                           listOfTopics: state.popularCategories,
                           title: AppLocalizations.of(context).translate('popular_categories'),
                           lineHeight: 1.343,
-                          fontTitleSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          fontTitleSize: 24.sp,
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 22 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal),
+                        padding: EdgeInsets.symmetric(horizontal: 22.w),
                         child: SofyButton(
-                          height: 52 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
                           label: AppLocalizations.of(context).translate('view_all'),
                           callback: () {
                             Analytics().sendEventReports(event: EventsOfAnalytics.show_all_articles_categories, attr: {});
@@ -252,7 +250,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                       ),
                       SizedBox(height: 20),
                       Container(
-                          height: 95 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                          height: 95.h,
                           width: SizeConfig.screenWidth,
                           decoration: BoxDecoration(
                               gradient: LinearGradient(

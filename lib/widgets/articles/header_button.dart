@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeaderButton extends StatelessWidget {
   const HeaderButton(
@@ -39,7 +40,7 @@ class HeaderButton extends StatelessWidget {
               child: SvgPicture.asset(
                 'assets/svg/arrow_next_vector.svg',
                 color: textColor,
-                height: 12/ Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                height: 12.h,
               ),
             ),
             Positioned.fill(
@@ -50,8 +51,8 @@ class HeaderButton extends StatelessWidget {
                     highlightColor: Colors.transparent,
                     splashColor: Colors.transparent,
                     hoverColor: Colors.transparent,
-                    borderRadius: BorderRadius.circular(60),
-                    radius: fontSize * 2,
+                    borderRadius: BorderRadius.circular(60.r),
+                    radius: (fontSize * 2).r,
                     onTap: callback),
               ),
             ),

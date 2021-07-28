@@ -21,6 +21,7 @@ import 'package:sofy_new/widgets/fullscreen_preloader.dart';
 
 import '../rest_api.dart';
 import 'arcticle_details_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ArticlesCategoriesDetailsScreen extends StatefulWidget {
   final String screenTitle;
@@ -56,138 +57,136 @@ class _ArticlesCategoriesDetailsScreen extends State<ArticlesCategoriesDetailsSc
 
     return Material(
       child: Stack(
-              children: [
-                Background(),
-                !isLoading
-                  ? Padding(
-                      padding: EdgeInsets.only(left: 0.0, right: 0.0, top: height / 20.83),
-                      child: Stack(
+        children: [
+          Background(),
+          !isLoading
+              ? Padding(
+                  padding: EdgeInsets.only(top: height / 20.83),
+                  child: Stack(
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                  width: width,
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    child: InkWell(
-                                        borderRadius: BorderRadius.circular(60),
-                                        focusColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        splashColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        radius: 25,
-                                        child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Container(
-                                              width: 50.0,
-                                              alignment: Alignment.center,
-                                              child: Padding(
-                                                padding: EdgeInsets.all(12.0),
-                                                child: Container(
-                                                  child: SvgPicture.asset(
-                                                    'assets/svg/back_vector.svg',
-                                                    color: kNavigBarInactiveColor,
-                                                  ),
-                                                ),
+                          Container(
+                              width: width,
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                    borderRadius: BorderRadius.circular(60.r),
+                                    focusColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    splashColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    radius: 25.r,
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
+                                          width: 50.w,
+                                          alignment: Alignment.center,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                                            child: Container(
+                                              child: SvgPicture.asset(
+                                                'assets/svg/back_vector.svg',
+                                                color: kNavigBarInactiveColor,
                                               ),
                                             ),
-                                            Container(
-                                              padding: EdgeInsets.only(bottom: height / 179.2),
-                                              child: Text(
-                                                widget.screenTitle,
-                                                style: TextStyle(
-                                                    fontFamily: Fonts.Exo2,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: height / 37.3, //24
-                                                    color: kNavigBarInactiveColor),
-                                              ),
-                                              width: SizeConfig.screenWidth * 0.75,
-                                            ),
-                                          ],
+                                          ),
                                         ),
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        }),
-                                  )),
-                              Expanded(
-                                child: GridView.count(
-                                  childAspectRatio: 0.85,
-                                  physics: BouncingScrollPhysics(),
-                                  crossAxisCount: 2,
-                                  padding: EdgeInsets.only(left: 20, right: 20, top: height / 44.8, bottom: height / 44.8),
-                                  crossAxisSpacing: 16,
-                                  mainAxisSpacing: 16,
-                                  children: List<Widget>.generate(
-                                    articlesList.length,
-                                    (index) {
-                                      return InkWell(
-                                        child: ArticleCard(
-                                            title: articlesList[index].title,
-                                            path: articlesList[index].coverImg,
-                                            textColor: kArticleCardTextColor,
-                                            height: 220 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                            radius: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                            width: 170 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                                            frozenHeight: 57 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                            fontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                            isPaid: articlesList[index].isPaid),
-                                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                                        onTap: () {
-                                          bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
-                                          if (articlesList[index].isPaid == 1) {
-                                            if (isAppPurchase) {
-                                              Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
-                                                "name": articlesList[index].title,
-                                              });
-                                              Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                  builder: (BuildContext context) => ArticleDetailsScreen(
-                                                    articleId: articlesList[index].id,
-                                                  ),
-                                                ),
-                                              );
-                                            } else {
-                                              Analytics().sendEventReports(event: EventsOfAnalytics.splash_show, attr: {
-                                                "name": articlesList[index].title,
-                                                'source': 'onboarding/speed_change/modes_screen/settings_screen',
-                                              });
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) => SubscribeScreen(isFromSplash: false),
-                                                ),
-                                              );
-                                            }
-                                          } else {
-                                            Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
-                                              "name": articlesList[index].title,
-                                            });
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (BuildContext context) => ArticleDetailsScreen(
-                                                  articleId: articlesList[index].id,
-                                                ),
+                                        Container(
+                                          padding: EdgeInsets.only(bottom: (height / 179.2).h),
+                                          child: Text(
+                                            widget.screenTitle,
+                                            style: TextStyle(
+                                                fontFamily: Fonts.Exo2,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 24.sp, //24
+                                                color: kNavigBarInactiveColor),
+                                          ),
+                                          width: SizeConfig.screenWidth * 0.75,
+                                        ),
+                                      ],
+                                    ),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    }),
+                              )),
+                          Expanded(
+                            child: GridView.count(
+                              childAspectRatio: 170.w / 220.h,
+                              physics: BouncingScrollPhysics(),
+                              crossAxisCount: 2,
+                              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                              crossAxisSpacing: 11.h,
+                              mainAxisSpacing: 11.h,
+                              children: List<Widget>.generate(
+                                articlesList.length,
+                                (index) {
+                                  return ArticleCard(
+                                    title: articlesList[index].title,
+                                    path: articlesList[index].coverImg,
+                                    textColor: kArticleCardTextColor,
+                                    height: 220.h,
+                                    radius: 25.r,
+                                    width: 170.w,
+                                    frozenHeight: 57.h + 11.h,
+                                    fontSize: 14.sp,
+                                    isPaid: articlesList[index].isPaid,
+                                    lineHeight: 1.193,
+                                    callback: () {
+                                      bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
+                                      if (articlesList[index].isPaid == 1) {
+                                        if (isAppPurchase) {
+                                          Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
+                                            "name": articlesList[index].title,
+                                          });
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (BuildContext context) => ArticleDetailsScreen(
+                                                articleId: articlesList[index].id,
                                               ),
-                                            );
-                                          }
-                                        },
-                                      );
+                                            ),
+                                          );
+                                        } else {
+                                          Analytics().sendEventReports(event: EventsOfAnalytics.splash_show, attr: {
+                                            "name": articlesList[index].title,
+                                            'source': 'onboarding/speed_change/modes_screen/settings_screen',
+                                          });
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => SubscribeScreen(isFromSplash: false),
+                                            ),
+                                          );
+                                        }
+                                      } else {
+                                        Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
+                                          "name": articlesList[index].title,
+                                        });
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) => ArticleDetailsScreen(
+                                              articleId: articlesList[index].id,
+                                            ),
+                                          ),
+                                        );
+                                      }
                                     },
-                                  ),
-                                ),
+                                  );
+                                },
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
-                    )
-                  : FullscreenPreloader(),
-              ],
-            ),
-    )
-    ;
+                    ],
+                  ),
+                )
+              : FullscreenPreloader(),
+        ],
+      ),
+    );
   }
 
   Future<void> getArticles() async {
