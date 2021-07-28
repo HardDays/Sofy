@@ -67,7 +67,7 @@ class Popular extends StatelessWidget {
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.all(Radius.circular(imageRadius)),
                                   height: cardHeight / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                  width: cardHeight / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                  width: cardWidth / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                 ),
                                 Visibility(
                                   // ignore: null_aware_in_logical_operator
@@ -98,7 +98,7 @@ class Popular extends StatelessWidget {
                                           color: textColor,
                                           height: 1.4,
                                           fontSize: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                          fontWeight: FontWeight.normal,
+                                          fontWeight: FontWeight.w500,
                                         )),
                                   ),
                                   Visibility(

@@ -137,8 +137,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                                       width: width,
                                       child: ExtendedImage.network(
                                         state.articleDetails.article.coverImg,
-                                        fit: BoxFit.cover,
                                         cache: true,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                     Padding(
@@ -153,7 +153,6 @@ class ArticleDetailsScreen extends StatelessWidget {
                                               width: width,
                                               color: Colors.white,
                                             ),
-
                                           ],
                                         ),
                                       ),
@@ -191,7 +190,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                         alignment: Alignment.topCenter,
                                         children: [
                                           Container(
-                                      // padding: EdgeInsets.only(top:26 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
+                                            // padding: EdgeInsets.only(top:26 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical),
                                             // padding: EdgeInsets.fromLTRB(21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                             //     26 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical, 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal, 0),
                                             child: Column(
@@ -200,19 +199,23 @@ class ArticleDetailsScreen extends StatelessWidget {
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.symmetric(horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,),
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                  ),
                                                   child: Text(
                                                     state.articleDetails.article.title,
                                                     style: TextStyle(
-                                                        fontFamily: Fonts.RobotoBold,
-                                                        fontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                        color: ArticlesColors.HeaderTextColor,
+                                                      fontFamily: Fonts.RobotoBold,
+                                                      fontSize: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
+                                                      color: ArticlesColors.HeaderTextColor,
                                                       height: 1.35,
                                                     ),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsets.symmetric(horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,),
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 21 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                  ),
                                                   child: Padding(
                                                     padding: EdgeInsets.only(
                                                         top: 25 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
@@ -242,8 +245,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                         ),
                                                         Visibility(
                                                           visible: isCommentsEnabled,
-                                                          child: SofyButton(            height: 52 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-
+                                                          child: SofyButton(
+                                                              height: 52 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                                               width: width / 2 - 30 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                                               label: AppLocalizations.of(context).translate('comments_btn'),
                                                               callback: () {
@@ -265,7 +268,9 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsets.symmetric(horizontal: 17 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,),
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 17 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                                  ),
                                                   child: Html(
                                                     style: {
                                                       "p": Style(
@@ -399,7 +404,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                           child: Stack(
                                         children: <Widget>[
                                           Container(
-                                            width: 75.0/ Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                            width: 75.0 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                             child: SvgPicture.asset(
                                               'assets/svg/back_vector.svg',
                                               color: backButton,
@@ -453,12 +458,13 @@ class ArticleDetailsScreen extends StatelessWidget {
                                         child: Stack(
                                           children: <Widget>[
                                             Container(
-                                              width: 75.0/ Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                              width: 75.0 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
                                               child: SvgPicture.asset(
                                                 'assets/svg/article_share.svg',
                                                 color: shareButton,
                                                 height: 24 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                                                width: 24 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,                                              ),
+                                                width: 24 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+                                              ),
                                             ),
                                             Positioned.fill(
                                               child: Material(

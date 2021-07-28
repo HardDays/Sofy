@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:extended_image/extended_image.dart';
@@ -20,6 +19,7 @@ class StoryBackground extends StatelessWidget {
       Container(
         child: ExtendedImage.network(
           coverImg,
+          cache: true,
           fit: BoxFit.cover,
         ),
         width: SizeConfig.screenWidth,

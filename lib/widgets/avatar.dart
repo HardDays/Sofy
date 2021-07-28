@@ -41,7 +41,7 @@ class Avatar extends StatelessWidget {
                       cache: true,
                     )
                   : Container(),
-              // ExtendedImage.network(
+              // ExtendedImage.network(cache: true,
               //                       'https://www.wikihow.com/images/thumb/4/45/Install-Windows-XP-on-an-ASUS-Eee-PC-Using-a-USB-Drive-Step-2-Version-2.jpg/v4-728px-Install-Windows-XP-on-an-ASUS-Eee-PC-Using-a-USB-Drive-Step-2-Version-2.jpg.webp',
               //                       fit: BoxFit.cover,
               //                       cache: true,
