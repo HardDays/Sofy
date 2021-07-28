@@ -14,6 +14,7 @@ const feedbackEmail = 'sofy1.app@gmail.com';
 // const Fonts.Montserrat = 'Montserrat';
 class Fonts {
   static const HindGuntur = 'Hind Guntur';
+  static const HindGunturMedium = 'Hind Guntur Medium';
   static const HindGunturBold = 'Hind Guntur Bold';
   static const HindGunturSemiBold = 'Hind Guntur SemiBold';
   static const Roboto = 'Roboto';

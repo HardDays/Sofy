@@ -47,6 +47,7 @@ class Categories extends StatelessWidget {
                   fontSize: fontTitleSize,
                   fontWeight: FontWeight.normal,
                   letterSpacing: -0.065*fontTitleSize,
+                    height: 31/fontTitleSize
                 ),
               )
             : Container(),

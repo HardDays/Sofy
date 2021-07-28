@@ -11,27 +11,20 @@ class SofyInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Badge(
-      padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 3.h),
-      elevation: 0.0,
-      shape: BadgeShape.square,
-      borderRadius: BorderRadius.circular(6.r),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(color: kSettingInActiveButtonColor, borderRadius: BorderRadius.all(Radius.circular(13.r))),
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              color: SofyRateColors.CardTextColor,
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w500,
-              fontStyle: FontStyle.normal,
-              fontFamily: Fonts.HindGuntur),
-        ),
+    return Container(
+      height: 56.h,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(color: kSettingInActiveButtonColor, borderRadius: BorderRadius.all(Radius.circular(13.r))),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            color: SofyRateColors.CardTextColor,
+            fontSize: 15.sp,
+            fontWeight: FontWeight.w500,
+            fontStyle: FontStyle.normal,
+            fontFamily: Fonts.HindGunturMedium),
       ),
-      showBadge: false,
     );
   }
 }

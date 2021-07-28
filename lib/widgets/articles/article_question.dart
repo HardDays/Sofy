@@ -51,12 +51,15 @@ class ArticleQuestion extends StatelessWidget {
             StoryInputCard(question: question, article: article, articleId: articleId, enabled: false),
           ],
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 21.w,
-            vertical: 30.h,
+        Container(
+          padding: EdgeInsets.fromLTRB(
+            21.w,
+            30.h,
+            21.w,
+            44.h,
           ),
           child: SofyButton(
+            width: SizeConfig.screenWidth,
             label: AppLocalizations.of(context).translate('show_answers'),
             callback: () {
               Analytics().sendEventReports(

@@ -42,7 +42,7 @@ class SofyVoteButton extends StatelessWidget {
                         style: TextStyle(
                           color: SofyVoteButtonColors.TextColor,
                           fontSize: 16.sp,
-                          fontFamily: Fonts.HindGuntur,
+                          fontFamily: Fonts.HindGunturMedium,
                           fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.normal,
                         ),

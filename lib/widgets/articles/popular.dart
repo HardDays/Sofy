@@ -40,6 +40,7 @@ class Popular extends StatelessWidget {
             color: textColor,
             fontSize: fontSize,
             letterSpacing: -0.065*fontSize,
+            height: 31/fontSize
           ),
         ),
         SizedBox(height: 14.h),
@@ -94,11 +95,10 @@ class Popular extends StatelessWidget {
                                         maxLines: 2,
                                         softWrap: true,
                                         style: TextStyle(
-                                          fontFamily: Fonts.HindGuntur,
+                                          fontFamily: Fonts.HindGunturMedium,
                                           color: textColor,
                                           height: 1.4,
                                           fontSize: 14.sp,
-                                          fontWeight: FontWeight.w500,
                                         )),
                                   ),
                                   Visibility(

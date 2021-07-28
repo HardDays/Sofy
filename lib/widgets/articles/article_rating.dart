@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
@@ -54,12 +56,7 @@ class ArticleRating extends StatelessWidget {
               Center(
                 child: Text(
                   AppLocalizations.of(context).translate('please_rate_this_article'),
-                  style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.normal,
-                      fontFamily: Fonts.HindGuntur,
-                      height: 1.7,
-                      color: SofyRateColors.Text),
+                  style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.normal, fontFamily: Fonts.HindGuntur, height: 1.7, color: SofyRateColors.Text),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -72,15 +69,14 @@ class ArticleRating extends StatelessWidget {
                   return Column(
                     children: [
                       Container(
-                        height: width / 10 < 24 ? width / 10 : 24,
+                        height: 19.sp,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.all(0.0),
+                          padding: EdgeInsets.zero,
                           itemCount: 10,
                           itemBuilder: (BuildContext context, int index) {
-                            double size = width / 10;
                             return GestureDetector(
                                 onTap: () {
                                   print(index);
@@ -89,24 +85,12 @@ class ArticleRating extends StatelessWidget {
                                 child: Container(
                                   child: state is ArticleRatingStateInit
                                       ? article.rating > index
-                                          ? Padding(
-                                              padding: EdgeInsets.symmetric(horizontal: 4),
-                                              child: Icon(Icons.star, size: size < 24 ? size : 24, color: SofyLikeColors.SelectedStarColor),
-                                            )
-                                          : Padding(
-                                              padding: EdgeInsets.symmetric(horizontal: 4),
-                                              child: Icon(Icons.star_border, size: size < 24 ? size : 24, color: SofyLikeColors.UnselectedStarColor),
-                                            )
+                                          ? Container(height: 24.h, width: 24.h, child: Icon(Icons.star, size: 21.h, color: SofyLikeColors.SelectedStarColor))
+                                          : Container(height: 24.h, width: 24.h, child: Icon(Icons.star_border_purple500_sharp, size: 21.h,color: SofyLikeColors.UnselectedStarColor))
                                       : state is ArticleRatingStateSettedRating || state is ArticleRatingStatePostedRating
                                           ? state.rating > index
-                                              ? Padding(
-                                                  padding: EdgeInsets.symmetric(horizontal: 4),
-                                                  child: Icon(Icons.star, size: size < 24 ? size : 24, color: SofyLikeColors.SelectedStarColor),
-                                                )
-                                              : Padding(
-                                                  padding: EdgeInsets.symmetric(horizontal: 4),
-                                                  child: Icon(Icons.star_border, size: size < 24 ? size : 24, color: SofyLikeColors.UnselectedStarColor),
-                                                )
+                                              ? Container(height: 24.h, width: 24.h, child: Icon(Icons.star, size: 21.h, color: SofyLikeColors.SelectedStarColor))
+                                              : Container(height: 24.h, width: 24.h, child: Icon(Icons.star_border_purple500_sharp, size: 21.h,color: SofyLikeColors.UnselectedStarColor))
                                           : Container(),
                                 ));
                           },

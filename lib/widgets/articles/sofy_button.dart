@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SofyButton extends StatelessWidget {
   const SofyButton({
     Key key,
-    this.width,
+    this.width = 100,
     this.linearGradientColors = const [
       Color(0xFFFDB0C1),
       Color(0xFFFF95AC),
@@ -42,14 +42,18 @@ class SofyButton extends StatelessWidget {
           ),
           height: 52.h,
           width: width,
-          child: Center(
+          child: Container(
+            padding: EdgeInsets.only(top: 15.h, bottom: 11.h),
             child: Text(
               label,
+              textAlign: TextAlign.center,
               style: TextStyle(
                   color: labelColor,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
-                  fontFamily: Fonts.HindGunturBold),
+                  fontFamily: Fonts.HindGunturBold,
+                height: 26/14.sp,
+              ),
             ),
           ),
         ),

@@ -18,8 +18,15 @@ class HeaderButton extends StatelessWidget {
       children: [
         Text(
           text,
-          style:
-              TextStyle(fontFamily: SizeConfig.lang == 'en' ? Fonts.Allerta : Fonts.SFProMedium, color: textColor, fontSize: fontSize, letterSpacing: -0.065 * fontSize, fontWeight: FontWeight.normal),
+          style: TextStyle(
+            fontFamily: SizeConfig.lang == 'en' ? Fonts.Allerta : Fonts.SFProMedium,
+            color: textColor,
+            fontSize: fontSize,
+            letterSpacing: -0.065 * fontSize,
+            fontWeight: FontWeight.normal,
+              height: 31/fontSize
+
+          ),
         ),
         // InkWell(
         //   child: Icon(Icons.arrow_forward_ios),

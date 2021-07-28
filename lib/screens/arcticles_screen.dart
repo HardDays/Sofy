@@ -62,7 +62,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ios? Container() : SizedBox(height: 44.h),
+                            ios? Container() : SizedBox(height: 8.h),
                             Container(
                               width: width - 20.w,
                               height: 96.h,
@@ -186,8 +186,8 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                               padding: EdgeInsets.fromLTRB(
                                 20.w,
                                 30.h,
-                                20.w,
-                                14.h,
+                                20.w,0
+                                // 14.h,
                               ),
                               child: Popular(title: AppLocalizations.of(context).translate('popular'), listOfArticles: state.listOfPopularArticles, fontSize: 24.sp,),
                             )
@@ -223,7 +223,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                           20.w,
-                          23.h,
+                          28.h,
                           20.w,
                           21.h,
                         ),

@@ -12,7 +12,7 @@ import 'package:sofy_new/widgets/articles/article_card.dart';
 import 'package:sofy_new/widgets/articles/header_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CardsHorizontalList extends StatelessWidget {
+class CardsHorizontalList extends StatefulWidget {
   CardsHorizontalList(
       {Key key,
       this.lineHeight = 1,
@@ -44,30 +44,36 @@ class CardsHorizontalList extends StatelessWidget {
   final double titleFontSize;
 
   @override
+  _CardsHorizontalListState createState() => _CardsHorizontalListState();
+}
+
+class _CardsHorizontalListState extends State<CardsHorizontalList>  with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
-    double width = SizeConfig.screenWidth;
+    super.build(context);
     return Column(
       children: [
-        title == ''
+        widget.title == ''
             ? Container()
             : Container(
-                height: 64.h,
-                width: width,
                 padding: EdgeInsets.fromLTRB(
-                  l,t,r,b
+                  widget.l,widget.t,widget.r,widget.b
                 ),
                 child: HeaderButton(
-                  text: title,
-                  callback: callback,
-                  fontSize: titleFontSize,
+                  text: widget.title,
+                  callback: widget.callback,
+                  fontSize: widget.titleFontSize,
                   textColor: kArticlesHeaderTextColor,
                 ),
               ),
         Container(
-          height: cardHeight,
+          height: widget.cardHeight,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: listOfArticles.length,
+            itemCount: widget.listOfArticles.length,
             itemBuilder: (BuildContext context, int index) {
               return Row(
                 children: [
@@ -75,35 +81,35 @@ class CardsHorizontalList extends StatelessWidget {
                       ? SizedBox(width: 22.w)
                       : SizedBox(width: 7.5.w),
                   ArticleCard(
-                    title: listOfArticles[index].title,
-                    path: listOfArticles[index].coverImg,
-                    height: cardHeight,
-                    width: cardWidth,
-                    frozenHeight: frozenCardHeight,
-                    fontSize: frozenCardFontSize,
-                    textColor: frozenCardTextColor,
-                    radius: cardRadius,
-                    isPaid: listOfArticles[index].isPaid,
-                    lineHeight: lineHeight,
+                    title: widget.listOfArticles[index].title,
+                    path: widget.listOfArticles[index].coverImg,
+                    height: widget.cardHeight,
+                    width: widget.cardWidth,
+                    frozenHeight: widget.frozenCardHeight,
+                    fontSize: widget.frozenCardFontSize,
+                    textColor: widget.frozenCardTextColor,
+                    radius: widget.cardRadius,
+                    isPaid: widget.listOfArticles[index].isPaid,
+                    lineHeight: widget.lineHeight,
                     callback: () async {
                       bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
-                      if (listOfArticles[index].isPaid == 1) {
+                      if (widget.listOfArticles[index].isPaid == 1) {
                         if (isAppPurchase) {
                           Analytics().sendEventReports(
                             event: EventsOfAnalytics.article_show,
-                            attr: {"name": listOfArticles[index].title, 'id': listOfArticles[index].id},
+                            attr: {"name": widget.listOfArticles[index].title, 'id': widget.listOfArticles[index].id},
                           );
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) => ArticleDetailsScreen(
-                                articleId: listOfArticles[index].id,
+                                articleId: widget.listOfArticles[index].id,
                               ),
                             ),
                           );
                         } else {
                           Analytics().sendEventReports(event: EventsOfAnalytics.splash_show, attr: {
-                            "name": listOfArticles[index].title,
-                            'id': listOfArticles[index].id,
+                            "name": widget.listOfArticles[index].title,
+                            'id': widget.listOfArticles[index].id,
                             'source': 'onboarding/speed_change/modes_screen/settings_screen',
                           });
                           Navigator.push(
@@ -115,20 +121,20 @@ class CardsHorizontalList extends StatelessWidget {
                         }
                       } else {
                         Analytics().sendEventReports(event: EventsOfAnalytics.article_show, attr: {
-                          "name": listOfArticles[index].title,
-                          'id': listOfArticles[index].id,
+                          "name": widget.listOfArticles[index].title,
+                          'id': widget.listOfArticles[index].id,
                         });
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (BuildContext context) => ArticleDetailsScreen(
-                              articleId: listOfArticles[index].id,
+                              articleId: widget.listOfArticles[index].id,
                             ),
                           ),
                         );
                       }
                     },
                   ),
-                  index == listOfArticles.length - 1
+                  index == widget.listOfArticles.length - 1
                       ? SizedBox(width: 22.w)
                       : SizedBox(width: 7.5.w),
                 ],

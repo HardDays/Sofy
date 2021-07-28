@@ -105,6 +105,7 @@ class ArticleVote extends StatelessWidget {
                                             bottom: 30.h,
                                           ),
                                           child: SofyButton(
+                                              width: SizeConfig.screenWidth,
                                               label: poll.buttonName,
                                               callback: () {
                                                 Analytics().sendEventReports(event: EventsOfAnalytics.reply_click, attr: {
