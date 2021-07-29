@@ -396,7 +396,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                         .toUpperCase(),
                                     style: TextStyle(
                                         color: press1
-                                            ? kArticlesWhiteColor.withOpacity(0.7)
+                                            ? kArticlesWhiteColor
+                                                .withOpacity(0.7)
                                             : kArticlesWhiteColor,
                                         fontFamily: Fonts.GilroyBold,
                                         fontSize:
@@ -615,12 +616,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
             Positioned(
               right: 0,
-              bottom: MediaQuery.of(context).size.height / 16.48,
-              child: Image.asset('assets/on_boarding2_bottom_right.png',
-                  height: MediaQuery.of(context).size.height / 7.47),
-            ),
-            Positioned(
-              right: 0,
               top: MediaQuery.of(context).size.height / 12.1,
               child: Image.asset('assets/on_boarding2_points.png',
                   height: MediaQuery.of(context).size.height / 7.42),
@@ -629,8 +624,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               alignment: Alignment.topCenter,
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height / 5.33),
-              child: Image.asset('assets/on_boarding2_center.png',
+              child: Image.asset('assets/on_boarding2_v2_center.png',
                   height: MediaQuery.of(context).size.height),
+            ),
+            Positioned(
+              right: 0,
+              bottom: MediaQuery.of(context).size.height / 16.48,
+              child: Image.asset('assets/on_boarding2_bottom_right.png',
+                  height: MediaQuery.of(context).size.height / 7.47),
             ),
             Container(
               width: width,
@@ -643,7 +644,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   Expanded(
                       child: Container(
                         margin: EdgeInsets.only(left: 10, right: 10),
-                        child: Text('SOFY',
+                        child: Text(AppLocalizations.of(context)
+                            .translate('new_on_boarding_control')
+                            .toUpperCase(),
                             textAlign: TextAlign.center,
                             maxLines: 2,
                             style: TextStyle(
@@ -783,124 +786,127 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
             Container(
               alignment: Alignment.center,
-              child: Column(children: [
-                Padding(
+              child: Column(
+                children: [
+                  Padding(
                     padding: EdgeInsets.only(top: height / 5.4),
-                    child: Row(children: [
-                      Expanded(
+                    child: Row(
+                      children: [
+                        Expanded(
                           child: ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              padding: EdgeInsets.all(0.0),
-                              itemCount: topicsList.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Padding(
-                                  padding: EdgeInsets.only(
-                                      top: height / 74.66,
-                                      left: 20.0,
-                                      right: 20.0),
-                                  child: InkWell(
-                                    onTap: () {
-                                      topicsList[index].selected =
-                                          !topicsList[index].selected;
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.all(0.0),
+                            itemCount: topicsList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                    top: height / 74.66,
+                                    left: 20.0,
+                                    right: 20.0),
+                                child: InkWell(
+                                  onTap: () {
+                                    topicsList[index].selected =
+                                        !topicsList[index].selected;
 
-                                      isCatChoose = true;
+                                    isCatChoose = true;
 
-                                      if (topicsList[index].selected) {
-                                        sendDeleteFavTopic(true,
-                                            topicsList[index].id.toString());
-                                      } else {
-                                        sendDeleteFavTopic(false,
-                                            topicsList[index].id.toString());
-                                      }
-                                      setState(() {});
-                                      //Analytics().sendEventReports(event: subscription_purchase_y_click);
-                                    },
-                                    child: Badge(
-                                      padding: EdgeInsets.all(3),
-                                      elevation: 0.0,
-                                      shape: BadgeShape.square,
-                                      borderRadius: BorderRadius.circular(6.0),
-                                      child: Container(
-                                        height: height / 13.17,
-                                        padding: EdgeInsets.only(
-                                            left: 20.0, right: 16.0),
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          color: kSettingInActiveButtonColor,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(13.0)),
-                                          border: Border.all(
-                                            color: topicsList[index].selected
-                                                ? kAppPinkDarkColor
-                                                : Colors.transparent,
-                                            width: 1.3,
-                                          ),
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Row(children: [
-                                              Container(
-                                                  height: height / 29.86,
-                                                  width: height / 29.86,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        kSettingActiveButtonColor,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                5.0)),
-                                                  ),
-                                                  alignment: Alignment.center,
-                                                  child: Image.network(
-                                                      topicsList[index]
-                                                          .coverImg,
-                                                      color: kArticlesWhiteColor,
-                                                      height: height / 49.77)),
-                                              Container(
-                                                  margin: EdgeInsets.only(
-                                                      left: height / 52.7),
-                                                  child: Text(
-                                                    topicsList[index].name,
-                                                    style: TextStyle(
-                                                      color:
-                                                          kWelcomDarkTextColor,
-                                                      fontFamily: Fonts.GilroyBold,
-                                                      fontSize: height / 56.0,
-                                                      height: 1.343,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                    ),
-                                                  )),
-                                            ]),
-                                            CircleAvatar(
-                                              radius: 8.0,
-                                              backgroundColor:
-                                                  topicsList[index].selected
-                                                      ? kAppPinkDarkColor
-                                                      : kArticlesWhiteColor,
-                                              child: Icon(
-                                                Icons.check,
-                                                size: 12,
-                                                color: kArticlesWhiteColor,
-                                              ),
-                                            )
-                                          ],
+                                    if (topicsList[index].selected) {
+                                      sendDeleteFavTopic(true,
+                                          topicsList[index].id.toString());
+                                    } else {
+                                      sendDeleteFavTopic(false,
+                                          topicsList[index].id.toString());
+                                    }
+                                    setState(() {});
+                                    //Analytics().sendEventReports(event: subscription_purchase_y_click);
+                                  },
+                                  child: Badge(
+                                    padding: EdgeInsets.all(3),
+                                    elevation: 0.0,
+                                    shape: BadgeShape.square,
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    child: Container(
+                                      height: height / 13.17,
+                                      padding: EdgeInsets.only(
+                                          left: 20.0, right: 16.0),
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: kSettingInActiveButtonColor,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(13.0)),
+                                        border: Border.all(
+                                          color: topicsList[index].selected
+                                              ? kAppPinkDarkColor
+                                              : Colors.transparent,
+                                          width: 1.3,
                                         ),
                                       ),
-                                      showBadge: false,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Row(children: [
+                                            Container(
+                                                height: height / 29.86,
+                                                width: height / 29.86,
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                      kSettingActiveButtonColor,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5.0)),
+                                                ),
+                                                alignment: Alignment.center,
+                                                child: Image.network(
+                                                    topicsList[index].coverImg,
+                                                    color: kArticlesWhiteColor,
+                                                    height: height / 49.77)),
+                                            Container(
+                                                margin: EdgeInsets.only(
+                                                    left: height / 52.7),
+                                                child: Text(
+                                                  topicsList[index].name,
+                                                  style: TextStyle(
+                                                    color: kWelcomDarkTextColor,
+                                                    fontFamily:
+                                                        Fonts.GilroyBold,
+                                                    fontSize: height / 56.0,
+                                                    height: 1.343,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle: FontStyle.normal,
+                                                  ),
+                                                )),
+                                          ]),
+                                          CircleAvatar(
+                                            radius: 8.0,
+                                            backgroundColor:
+                                                topicsList[index].selected
+                                                    ? kAppPinkDarkColor
+                                                    : kArticlesWhiteColor,
+                                            child: Icon(
+                                              Icons.check,
+                                              size: 12,
+                                              color: kArticlesWhiteColor,
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
+                                    showBadge: false,
                                   ),
-                                );
-                              },),)
-                    ],),)
-              ],),
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
             Container(
               width: width,
@@ -1106,7 +1112,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 color: kArticlesWhiteColor,
                                 fontFamily: Fonts.Exo2,
                                 fontSize:
-                                MediaQuery.of(context).size.height / 36.35,
+                                    MediaQuery.of(context).size.height / 36.35,
                                 letterSpacing: 0.015)),
                       ),
                       flex: 0),
@@ -1209,13 +1215,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget get screen5_1 => Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: kOnBrdScr2LinearGrd3Color,
-          stops: [0.45, 0.89, 0.96]),
-    ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: kOnBrdScr2LinearGrd3Color,
+              stops: [0.45, 0.89, 0.96]),
+        ),
         child: Stack(
           children: [
             Positioned(
