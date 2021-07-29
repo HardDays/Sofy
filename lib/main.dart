@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:sofy_new/app_purchase.dart';
 import 'package:sofy_new/models/PlaylistNameData.dart';
 import 'package:sofy_new/models/playlist_data.dart';
 import 'package:sofy_new/models/subscribe_data.dart';
@@ -104,6 +105,7 @@ class MyApp extends StatelessWidget {
               ),
           ),
           BlocProvider<PlayerBloc>(create: (context) => PlayerBloc()),
+          BlocProvider<AppPurchase>(create: (context) => AppPurchase()),
           BlocProvider<ArticlesBloc>(
             create: (context) => ArticlesBloc(restApi: RestApi(systemLang: systemLang), languageCode: systemLang)..add(ArticlesEventLoad()),
           )

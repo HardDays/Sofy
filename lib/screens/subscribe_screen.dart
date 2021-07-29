@@ -4,9 +4,11 @@ import 'dart:io';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:qonversion_flutter/qonversion_flutter.dart';
+import 'package:sofy_new/app_purchase.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/config_const.dart';
 import 'package:sofy_new/constants/constants.dart';
@@ -179,6 +181,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                       Provider.of<SubscribeData>(context,
                                               listen: false)
                                           .updateStatus(status: true);
+                                      BlocProvider.of<AppPurchase>(context).add(AppPurchaseChangeStatus(status: true));
                                       closeScreen();
                                     }
                                   },
@@ -501,6 +504,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                     });
                                 Provider.of<SubscribeData>(context, listen: false)
                                     .updateStatus(status: true);
+                                BlocProvider.of<AppPurchase>(context).add(AppPurchaseChangeStatus(status: true));
                                 closeScreen();
                               }
                             } else {
@@ -514,6 +518,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                     });
                                 Provider.of<SubscribeData>(context, listen: false)
                                     .updateStatus(status: true);
+                                BlocProvider.of<AppPurchase>(context).add(AppPurchaseChangeStatus(status: true));
                                 closeScreen();
                               }
                             }

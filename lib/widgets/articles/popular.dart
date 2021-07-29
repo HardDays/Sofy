@@ -1,8 +1,10 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:sofy_new/app_purchase.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/config_const.dart';
 import 'package:sofy_new/constants/constants.dart';
@@ -70,17 +72,23 @@ class Popular extends StatelessWidget {
                                   height: cardHeight.h,
                                   width: cardWidth.h,
                                 ),
-                                Visibility(
-                                  // ignore: null_aware_in_logical_operator
-                                  visible: listOfArticles[index].isPaid == 1 ? true : false,
-                                  child: Container(
-                                    height: 19.h,
-                                    width: 16.w,
-                                    child: SvgPicture.asset(
-                                      'assets/lock.svg',
-                                    ),
-                                  ),
-                                ),
+                                BlocBuilder<AppPurchase, AppPurchaseState>(builder: (context, state) {
+                                  if (state is AppPurchaseCurrentStatus)
+                                    return Visibility(
+                                      visible: listOfArticles[index].isPaid == 1,
+                                      child: Visibility(
+                                        visible: !state.status,
+                                        child: Container(
+                                          height: 19.h,
+                                          width: 16.w,
+                                          child: SvgPicture.asset(
+                                            'assets/lock.svg',
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  return Container();
+                                }),
                               ],
                             ),
                             SizedBox(
@@ -120,7 +128,7 @@ class Popular extends StatelessWidget {
                     ),
                     onTap: () {
                       Analytics().sendEventReports(event: 'article_show', attr: {'id': listOfArticles[index].id, 'name': listOfArticles[index].title});
-                      bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
+                      bool isAppPurchase = BlocProvider.of<AppPurchase>(context).isAppPurchase;
                       if (listOfArticles[index].isPaid == 1) {
                         if (isAppPurchase) {
                           Navigator.of(context).push(

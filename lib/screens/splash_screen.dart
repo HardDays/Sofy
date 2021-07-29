@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sofy_new/app_purchase.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/config/remote_config_helper.dart';
@@ -154,6 +156,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var monthly = await _blocStore.isCheckSubscribed(monthly_purchase_key);
     if (annual || monthly) {
       Provider.of<SubscribeData>(context, listen:false).updateStatus(status:true);
+      BlocProvider.of<AppPurchase>(context).add(AppPurchaseChangeStatus(status: true));
       if (annual) {
         sendUserProperty('year', true);
       }
@@ -162,6 +165,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     } else {
       Provider.of<SubscribeData>(context, listen:false).updateStatus(status:false);
+      BlocProvider.of<AppPurchase>(context).add(AppPurchaseChangeStatus(status: false));
       sendUserProperty('none', false);
     }
   }

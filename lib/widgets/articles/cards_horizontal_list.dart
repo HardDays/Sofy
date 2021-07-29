@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sofy_new/app_purchase.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
-import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
-import 'package:sofy_new/models/subscribe_data.dart';
 import 'package:sofy_new/screens/arcticle_details_screen.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
@@ -92,7 +91,7 @@ class _CardsHorizontalListState extends State<CardsHorizontalList>  with Automat
                     isPaid: widget.listOfArticles[index].isPaid,
                     lineHeight: widget.lineHeight,
                     callback: () async {
-                      bool isAppPurchase = Provider.of<SubscribeData>(context, listen: false).isAppPurchase;
+                      bool isAppPurchase = BlocProvider.of<AppPurchase>(context).isAppPurchase;
                       if (widget.listOfArticles[index].isPaid == 1) {
                         if (isAppPurchase) {
                           Analytics().sendEventReports(

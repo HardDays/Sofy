@@ -1,12 +1,11 @@
 import 'dart:ui';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
+import 'package:sofy_new/app_purchase.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
-import 'package:sofy_new/helper/size_config.dart';
-import 'package:sofy_new/models/subscribe_data.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ArticleCard extends StatelessWidget {
@@ -21,7 +20,6 @@ class ArticleCard extends StatelessWidget {
       this.textColor = const Color(0x725E5C),
       this.radius = 27,
       this.isPaid = 1,
-      this.isAppPurchase = false,
       this.callback,
       this.lineHeight = 1})
       : super(key: key);
@@ -36,12 +34,9 @@ class ArticleCard extends StatelessWidget {
   final String path;
   final int isPaid;
   final VoidCallback callback;
-  final bool isAppPurchase;
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = SizeConfig.screenHeight;
-
     return InkWell(
       onTap: callback,
       child: Container(
@@ -100,39 +95,28 @@ class ArticleCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Visibility(
-                  // ignore: null_aware_in_logical_operator
-                  visible: isPaid == 1
-                      ? isAppPurchase
-                          ? false
-                          : true
-                      : false,
-                  child: Container(
-                      height: Provider.of<SubscribeData>(context).isAppPurchase ? 0.0 : screenHeight,
-                      width: Provider.of<SubscribeData>(context).isAppPurchase ? 0.0 : screenHeight,
-                      alignment: Alignment.topRight,
-                      child: Container(
-                        padding: EdgeInsets.only(
-                          top: 11.h,
-                          right: 10.w,
+                BlocBuilder<AppPurchase, AppPurchaseState>(builder: (context, state) {
+                  if (state is AppPurchaseCurrentStatus)
+                    return Visibility(
+                      visible: isPaid == 1,
+                      child: Visibility(
+                        visible: !state.status,
+                        child: Container(
+                          alignment: Alignment.topRight,
+                          padding: EdgeInsets.only(
+                            top: 11.h,
+                            right: 10.w,
+                          ),
+                          height: (19 + 11).h,
+                          width: (16 + 10).w,
+                          child: SvgPicture.asset(
+                            'assets/lock.svg',
+                          ),
                         ),
-                        height: (19+11).h,
-                        width: (16+10).w,
-                        child: SvgPicture.asset(
-                          'assets/lock.svg',
-                        ),
-                      )
-                      //   Container(
-                      //       height: 64 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-                      //       width: 64 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-                      //       decoration: BoxDecoration(
-                      //         image: DecorationImage(
-                      //           image: AssetImage('assets/new_lock.png'),
-                      //           fit: BoxFit.fill,
-                      //         ),
-                      //       )),
                       ),
-                ),
+                    );
+                  return Container();
+                }),
               ],
             ),
           ),

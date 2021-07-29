@@ -276,7 +276,7 @@ class _CustomSlider extends StatelessWidget {
                   child: Visibility(
                     child: Material(
                       color: Colors.transparent,
-                      child: InkWell(
+                      child: GestureDetector(
                         onTap: () {
                           Analytics().sendEventReports(
                               event: EventsOfAnalytics.locked_slider_click);
