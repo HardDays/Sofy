@@ -342,19 +342,6 @@ class RestApi {
     if (apiPlayListAnswerModel != null && apiPlayListAnswerModel.info != null && apiPlayListAnswerModel.info.items != null && apiPlayListAnswerModel.info.items.length > 0) {
       temp = apiPlayListAnswerModel.info.items;
     }
-
-
-
-
-
-//     Response response1 = await dio.get(serverUrl + '/article-topic/list'  + '?lang_code=' + lang );
-//     Response response2 = await dio.get(serverUrl + '/article-topic/list-popular'  + '?lang_code=' + lang );
-//     Response response3 = await dio.get(serverUrl + '/article-topic/list-favorite'  + '?lang_code=' + lang );
-// print(response1);
-// print(response2);
-// print(response3);
-
-
     return temp;
   }
 
