@@ -238,6 +238,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 22.w),
                         child: SofyButton(
+                          width: SizeConfig.screenWidth,
                           label: AppLocalizations.of(context).translate('view_all'),
                           callback: () {
                             Analytics().sendEventReports(event: EventsOfAnalytics.show_all_articles_categories, attr: {});
