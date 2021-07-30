@@ -46,9 +46,16 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
 
 
         List<ApiArticlesModel> wmdta = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 19 : 20, token: userToken);
+        Future.wait(wmdta.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
+
         List<ApiArticlesModel> sip = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 27 : 28, token: userToken);
+        Future.wait(sip.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
+
         List<ApiArticlesModel> tin = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 29 : 30, token: userToken);
+        Future.wait(tin.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
+
         List<ApiArticlesModel> usd = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 17 : 18, token: userToken);
+        Future.wait(usd.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
         List<ApiArticleTopicModel> pp = [];
 
