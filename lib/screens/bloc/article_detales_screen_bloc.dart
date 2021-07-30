@@ -1,5 +1,8 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:sofy_new/models/api_article_details_info_model.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
@@ -22,9 +25,13 @@ class ArticleDetailsBloc
         ApiArticleDetailsInfoModel articleDetails = await restApi
             .getArticleDetailsWithoutCtx(event.articleId.toString(),
                 token: userToken);
+        await precacheImage(
+            CachedNetworkImageProvider(articleDetails.article.coverImg),
+            event.context);
         ApiProfileModel author = await restApi.getUserProfile(
             id: articleDetails.article.authorUserId, token: userToken);
-        yield ArticleDetailsStateResult(articleDetails: articleDetails, author: author);
+        yield ArticleDetailsStateResult(
+            articleDetails: articleDetails, author: author);
       } catch (e) {
         yield ArticleDetailsStateError('Ошибка загрузки');
       }
@@ -53,10 +60,13 @@ class ArticleDetailsStateError extends ArticleDetailsState {
   String error = '';
 }
 
-abstract class ArticleDetailsEvent {}
+abstract class ArticleDetailsEvent {
+  const ArticleDetailsEvent();
+}
 
 class ArticleDetailsEventLoad extends ArticleDetailsEvent {
-  ArticleDetailsEventLoad({this.articleId});
+  ArticleDetailsEventLoad(this.context, {this.articleId});
 
+  final BuildContext context;
   final int articleId;
 }

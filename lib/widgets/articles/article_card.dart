@@ -55,12 +55,6 @@ class ArticleCard extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 Image(image: CachedNetworkImageProvider(path,), fit: BoxFit.cover,),
-                // Image.network(path, fit: BoxFit.cover,),
-                // ExtendedImage.network(
-                //   path,
-                //   fit: BoxFit.cover,
-                //   cache: true,
-                // ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
