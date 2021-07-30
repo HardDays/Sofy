@@ -44,6 +44,12 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
         List<ApiArticlesModel> orgasms = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 13 : 14, token: userToken);
         Future.wait(orgasms.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
+
+        List<ApiArticlesModel> wmdta = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 19 : 20, token: userToken);
+        List<ApiArticlesModel> sip = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 27 : 28, token: userToken);
+        List<ApiArticlesModel> tin = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 29 : 30, token: userToken);
+        List<ApiArticlesModel> usd = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 17 : 18, token: userToken);
+
         List<ApiArticleTopicModel> pp = [];
 
         for (int i = 0; i < (listOfTopicsPopular.length > 4 ? 4 : listOfTopicsPopular.length); i++) pp.add(listOfTopicsPopular[i]);
@@ -57,7 +63,12 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
             interestingAboutSex: interestingAboutSex,
             listOfArticleTopic: listOfArticleTopic,
             orgasms: orgasms,
-            popularCategories: pp);
+            popularCategories: pp,
+            wmdta: wmdta,
+            sip: sip,
+            tin: tin,
+            usd: usd
+        );
       } catch (e) {
         yield ArticlesStateError('Ошибка загрузки');
       }
@@ -80,7 +91,12 @@ class ArticlesStateResult extends ArticlesState {
       this.femaleSexuality = const [],
       this.interestingAboutSex = const [],
       this.orgasms = const [],
-      this.popularCategories = const []});
+      this.popularCategories = const [],
+        this.wmdta = const [],
+        this.sip = const [],
+        this.tin = const [],
+        this.usd = const []
+      });
 
   final List<ApiArticlesModel> listOfArticles;
   final List<ApiArticleTopicModel> listOfTopicsPopular;
@@ -91,6 +107,10 @@ class ArticlesStateResult extends ArticlesState {
   final List<ApiArticlesModel> femaleSexuality; // 21
   final List<ApiArticlesModel> interestingAboutSex; // 11
   final List<ApiArticlesModel> orgasms; // 13
+  final List<ApiArticlesModel> wmdta;
+  final List<ApiArticlesModel> sip;
+  final List<ApiArticlesModel> tin;
+  final List<ApiArticlesModel> usd;
 }
 
 class ArticlesStateError extends ArticlesState {

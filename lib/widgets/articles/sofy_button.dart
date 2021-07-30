@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sofy_new/providers/app_localizations.dart';
 
 class SofyButton extends StatelessWidget {
   const SofyButton({
@@ -43,7 +44,7 @@ class SofyButton extends StatelessWidget {
           height: 52.h,
           width: width,
           child: Container(
-            padding: EdgeInsets.only(top: 15.h, bottom: 11.h),
+            padding: EdgeInsets.only(top: AppLocalizations.of(context).locale.languageCode == 'ru' ? 11.h : 15.h, bottom: 11.h),
             child: Text(
               label,
               textAlign: TextAlign.center,
