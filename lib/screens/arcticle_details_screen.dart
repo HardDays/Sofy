@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -114,7 +115,7 @@ class ArticleDetailsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: BlocProvider.value(
-        value: ArticleDetailsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode))..add(ArticleDetailsEventLoad(articleId: articleId)),
+        value: ArticleDetailsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode))..add(ArticleDetailsEventLoad(context ,articleId: articleId),),
         child: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
           builder: (context, state) {
             if (state is ArticleDetailsStateResult) {
@@ -134,11 +135,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                     Container(
                                       height: 390.h,
                                       width: width,
-                                      child: ExtendedImage.network(
-                                        state.articleDetails.article.coverImg,
-                                        cache: true,
-                                        fit: BoxFit.cover,
-                                      ),
+                                      child: Image(image: CachedNetworkImageProvider(state.articleDetails.article.coverImg),fit: BoxFit.cover,),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(top: 390.h - 25.h),
