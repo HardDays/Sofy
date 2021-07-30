@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
 import 'package:sofy_new/models/api_article_topic_model.dart';
 import 'package:sofy_new/models/favortes/api_fav_topics_answer_model.dart';
@@ -19,20 +21,28 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
         String userToken = await PreferencesProvider().getAnonToken();
 
         List<ApiArticleTopicModel> listOfTopicsPopular = await restApi.getArticleTopicsPopularWithoutCtx(token: userToken);
+        Future.wait(listOfTopicsPopular.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
         List<ApiFavTopicsInfoModel> listOfFavoritesTopics = await restApi.getFavoritesTopicsWithoutCtx(token: userToken);
+        Future.wait(listOfFavoritesTopics.map((e) => precacheImage(CachedNetworkImageProvider(e.icon,), event.context)).toList());
 
         List<ApiArticleTopicModel> listOfArticleTopic = await restApi.getTopicsListWithoutCtx(token: userToken);
+        Future.wait(listOfArticleTopic.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
         List<ApiArticlesModel> listOfArticles = await restApi.getNewArticlesWithoutCtx(token: userToken);
+        Future.wait(listOfArticles.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
         List<ApiArticlesModel> listOfPopularArticles = await restApi.getPopularArticlesWithoutCtx(token: userToken);
+        Future.wait(listOfPopularArticles.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
         List<ApiArticlesModel> femaleSexuality = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 21 : 22, token: userToken);
+        Future.wait(femaleSexuality.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
         List<ApiArticlesModel> interestingAboutSex = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 11 : 12, token: userToken);
+        Future.wait(interestingAboutSex.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
         List<ApiArticlesModel> orgasms = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 13 : 14, token: userToken);
+        Future.wait(orgasms.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
         List<ApiArticleTopicModel> pp = [];
 
@@ -89,6 +99,11 @@ class ArticlesStateError extends ArticlesState {
   String error = '';
 }
 
-abstract class ArticlesEvent {}
+abstract class ArticlesEvent {
+  const ArticlesEvent();
+}
 
-class ArticlesEventLoad extends ArticlesEvent {}
+class ArticlesEventLoad extends ArticlesEvent {
+  final BuildContext context;
+  const ArticlesEventLoad(this.context);
+}

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,12 +54,13 @@ class ArticleCard extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               fit: StackFit.expand,
               children: [
+                Image(image: CachedNetworkImageProvider(path,), fit: BoxFit.cover,),
                 // Image.network(path, fit: BoxFit.cover,),
-                ExtendedImage.network(
-                  path,
-                  fit: BoxFit.cover,
-                  cache: true,
-                ),
+                // ExtendedImage.network(
+                //   path,
+                //   fit: BoxFit.cover,
+                //   cache: true,
+                // ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

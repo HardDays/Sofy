@@ -107,7 +107,7 @@ class MyApp extends StatelessWidget {
           BlocProvider<PlayerBloc>(create: (context) => PlayerBloc()),
           BlocProvider<AppPurchase>(create: (context) => AppPurchase()),
           BlocProvider<ArticlesBloc>(
-            create: (context) => ArticlesBloc(restApi: RestApi(systemLang: systemLang), languageCode: systemLang)..add(ArticlesEventLoad()),
+            create: (context) => ArticlesBloc(restApi: RestApi(systemLang: systemLang), languageCode: systemLang)..add(ArticlesEventLoad(context)),
           )
         ],
         child: MaterialApp(
