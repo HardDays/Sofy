@@ -63,6 +63,6 @@ class Analytics {
     // );
 
     TenjinSDK.instance.eventWithName(event);
-    await firebaseAnalytics.logEvent(name: event, parameters: attr);
+    firebaseAnalytics.logEvent(name: event, parameters: attr);
   }
 }

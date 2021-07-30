@@ -101,11 +101,8 @@ class ArticleDetailsScreen extends StatelessWidget {
   final _commentsKey = GlobalKey();
 
   final _questionsKey = GlobalKey();
-  final _questionsKeyVD = GlobalKey();
 
   ScrollController _controller = ScrollController();
-
-  bool _articleWasReaded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -319,19 +316,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                VisibilityDetector(
-                                  key: _questionsKeyVD,
-                                  child: ArticleVote(poll: state.articleDetails.article.apiArticlePollModel),
-                                  onVisibilityChanged: (VisibilityInfo info) {
-                                    if (info.visibleFraction > 0 && !_articleWasReaded) {
-                                      _articleWasReaded = true;
-                                      Analytics().sendEventReports(
-                                        event: EventsOfAnalytics.article_readed,
-                                        attr: {'name': state.articleDetails.article.title, 'id': articleId},
-                                      );
-                                    }
-                                  },
-                                ),
+                                ArticleVote(poll: state.articleDetails.article.apiArticlePollModel),
                                 ArticleQuestion(key: _questionsKey, question: state.articleDetails.article.apiArticleQuestionModel, articleId: articleId, article: state.articleDetails.article),
                                 ArticleRating(article: state.articleDetails.article, articleId: articleId),
                                 Visibility(
