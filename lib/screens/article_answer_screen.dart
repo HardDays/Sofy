@@ -251,7 +251,7 @@ class _ArticleAnswerScreenState extends State<ArticleAnswerScreen> {
                                       provideHapticFeedback: false,
                                       onClick: () {
                                         if (isAnswerSent) return;
-                                        if (textController.text.length > 0 || textController.text.length < 255) {
+                                        if (textController.text.length > 0 && textController.text.length < 255) {
                                           // аналитика уходит в функции
                                           sendAnswer(widget.articleId, widget.questionId, textController.text.toString());
                                         }

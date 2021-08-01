@@ -49,6 +49,7 @@ class CardsHorizontalList extends StatefulWidget {
 class _CardsHorizontalListState extends State<CardsHorizontalList>  with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +72,7 @@ class _CardsHorizontalListState extends State<CardsHorizontalList>  with Automat
         Container(
           height: widget.cardHeight,
           child: ListView.builder(
+            controller: _scrollController,
             scrollDirection: Axis.horizontal,
             itemCount: widget.listOfArticles.length,
             itemBuilder: (BuildContext context, int index) {

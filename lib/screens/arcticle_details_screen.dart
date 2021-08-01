@@ -1,19 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:extended_image/extended_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:sofy_new/constants/app_colors.dart';
-import 'package:sofy_new/constants/config_const.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
-import 'package:sofy_new/rest_api.dart';
 import 'package:sofy_new/screens/bloc/article_detales_screen_bloc.dart';
-import 'package:sofy_new/screens/bloc/comments_bloc.dart';
-import 'package:sofy_new/widgets/articles/article_author_desciption.dart';
+import 'package:sofy_new/screens/bloc/article_rating_bloc.dart';
+import 'package:sofy_new/screens/bloc/article_vote_bloc.dart';
+import 'package:sofy_new/screens/bloc/story_bloc.dart';
 import 'package:sofy_new/widgets/articles/article_rating.dart';
 import 'package:sofy_new/widgets/articles/article_question.dart';
 import 'package:sofy_new/widgets/articles/article_vote.dart';
@@ -28,22 +25,27 @@ import 'package:flutter_html/style.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sofy_new/models/api_article_poll_model.dart';
-import 'package:sofy_new/widgets/comments/comments.dart';
 import 'package:sofy_new/widgets/fullscreen_preloader.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
-import '../rest_api.dart';
 import 'bloc/analytics.dart';
 import 'bloc/setting_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ArticleDetailsScreen extends StatelessWidget {
+class ArticleDetailsScreen extends StatefulWidget {
   ArticleDetailsScreen({Key key, this.articleId = 100}) : super(key: key);
   final int articleId;
 
+  @override
+  _ArticleDetailsScreenState createState() => _ArticleDetailsScreenState();
+}
+
+class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   final SettingBloc _bloc = SettingBloc();
 
-  var linearGradientColors = const [
+  final List<Color> linearGradientColors = const [
     Color(0xFFFDB0C1),
     Color(0xFFFF95AC),
   ];
@@ -71,13 +73,13 @@ class ArticleDetailsScreen extends StatelessWidget {
         shareButton = kArticlesPopularColor;
         backButton = kArticlesPopularColor;
         dividerColor = kArticlesDetailsNotifColor.withOpacity(0.15);
-        Future.delayed(Duration(milliseconds: 100), () {
+        Future.delayed(Duration(milliseconds: 30), () {
           SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
         });
       }
     } else {
       if (appBar == kArticlesDetailsAppBarColor) {
-        Future.delayed(Duration(milliseconds: 100), () {
+        Future.delayed(Duration(milliseconds: 30), () {
           SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
         });
         appBar = Colors.transparent;
@@ -99,20 +101,20 @@ class ArticleDetailsScreen extends StatelessWidget {
     return true;
   }
 
-  final _commentsKey = GlobalKey();
-
   final _questionsKey = GlobalKey();
 
   ScrollController _controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    double height = SizeConfig.screenHeight;
-    double width = SizeConfig.screenWidth;
+    super.build(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: BlocProvider.value(
-        value: ArticleDetailsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode))..add(ArticleDetailsEventLoad(context ,articleId: articleId),),
+        value: ArticleDetailsBloc()
+          ..add(
+            ArticleDetailsEventLoad(context, articleId: widget.articleId),
+          ),
         child: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
           builder: (context, state) {
             if (state is ArticleDetailsStateResult) {
@@ -124,15 +126,29 @@ class ArticleDetailsScreen extends StatelessWidget {
                         child: SingleChildScrollView(
                           controller: _controller,
                           physics: const ClampingScrollPhysics(),
-                          child: Container(
+                          child: MultiBlocProvider(
+                            providers: [
+                              BlocProvider<ArticleVoteBloc>(
+                                create: (BuildContext context) => ArticleVoteBloc(variants: state.articleDetails.article.apiArticlePollModel.variants)..add(ArticleVoteEventInit()),
+                              ),
+                              BlocProvider<StoryBloc>(
+                                create: (_) => StoryBloc(articleId: widget.articleId),
+                              ),
+                              BlocProvider<ArticleRatingBloc>(
+                                create: (BuildContext context) => ArticleRatingBloc(articleId: widget.articleId),
+                              ),
+                            ],
                             child: Column(
                               children: [
                                 Stack(
                                   children: [
                                     Container(
                                       height: 390.h,
-                                      width: width,
-                                      child: Image(image: CachedNetworkImageProvider(state.articleDetails.article.coverImg),fit: BoxFit.cover,),
+                                      width: SizeConfig.screenWidth,
+                                      child: Image(
+                                        image: CachedNetworkImageProvider(state.articleDetails.article.coverImg),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(top: 390.h - 25.h),
@@ -143,218 +159,78 @@ class ArticleDetailsScreen extends StatelessWidget {
                                           children: [
                                             Container(
                                               height: 26.h,
-                                              width: width,
+                                              width: SizeConfig.screenWidth,
                                               color: Colors.white,
                                             ),
                                           ],
                                         ),
                                       ),
                                     ),
-                                    Visibility(
-                                      visible: isAuthorEnabled,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(top: 366.h),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(25.r), topRight: Radius.circular(25.r)),
-                                          child: Stack(
-                                            alignment: Alignment.topCenter,
-                                            children: [
-                                              Container(
-                                                height: 60,
-                                                width: width,
-                                                color: Colors.white,
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsets.fromLTRB(21.h, 21.h, 21.h, 0),
-                                                child: ArticleAuthorDescription(author: state.author),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
                                     Padding(
-                                      padding: EdgeInsets.only(
-                                          top: isAuthorEnabled
-                                              ? 426.h
-                                              : 386.h),
-                                      child: Stack(
-                                        alignment: Alignment.topCenter,
+                                      padding: EdgeInsets.only(top: 386.h),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Container(
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.max,
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 21.w,
+                                            ),
+                                            child: Text(
+                                              state.articleDetails.article.title,
+                                              style: TextStyle(
+                                                fontFamily: Fonts.RobotoBold,
+                                                fontSize: 24.sp,
+                                                color: ArticlesColors.HeaderTextColor,
+                                                height: 1.35,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              top: 25.h,
+                                              bottom: 8.h,
+                                              left: 21.w,
+                                              right: 21.w,
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
-                                                Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                    horizontal: 21.w,
-                                                  ),
-                                                  child: Text(
-                                                    state.articleDetails.article.title,
-                                                    style: TextStyle(
-                                                      fontFamily: Fonts.RobotoBold,
-                                                      fontSize: 24.sp,
-                                                      color: ArticlesColors.HeaderTextColor,
-                                                      height: 1.35,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                    horizontal: 21.w,
-                                                  ),
-                                                  child: Padding(
-                                                    padding: EdgeInsets.only(
-                                                        top: 25.h,
-                                                        bottom: 8.h),
-                                                    child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        SofyButton(
-                                                          width: isCommentsEnabled
-                                                              ? width / 2 - 30.w
-                                                              : width - 42.w,
-                                                          label: AppLocalizations.of(context).translate('questions_btn'),
-                                                          callback: () {
-                                                            Analytics().sendEventReports(
-                                                              event: EventsOfAnalytics.questions_btn_click,
-                                                              attr: {
-                                                                'name': AppLocalizations.of(context).translate('questions_btn'),
-                                                                'id': articleId,
-                                                              },
-                                                            );
-                                                            final RenderBox questions = _questionsKey.currentContext.findRenderObject();
-                                                            final sizeQuestions = questions.localToGlobal(Offset.zero);
-                                                            _controller.animateTo(sizeQuestions.dy - (height / 8.21).h,
-                                                                duration: Duration(milliseconds: 350), curve: Curves.ease);
-                                                          },
-                                                        ),
-                                                        Visibility(
-                                                          visible: isCommentsEnabled,
-                                                          child: SofyButton(
-                                                              width: width / 2 - 30.w,
-                                                              label: AppLocalizations.of(context).translate('comments_btn'),
-                                                              callback: () {
-                                                                Analytics().sendEventReports(
-                                                                  event: EventsOfAnalytics.comments_btn_click,
-                                                                  attr: {
-                                                                    'name': AppLocalizations.of(context).translate('comments_btn'),
-                                                                    'id': articleId,
-                                                                  },
-                                                                );
-                                                                final RenderBox comments = _commentsKey.currentContext.findRenderObject();
-                                                                final sizeComments = comments.localToGlobal(Offset.zero);
-                                                                _controller.animateTo(sizeComments.dy - (height / 8.21).h,
-                                                                    duration: Duration(milliseconds: 350), curve: Curves.ease);
-                                                              }),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                    horizontal: 17.w,
-                                                  ),
-                                                  child: Html(
-                                                    style: {
-                                                      "p": Style(
-                                                          lineHeight: LineHeight.number(1.7),
-                                                          fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
-                                                          fontStyle: FontStyle.normal,
-                                                          fontSize: FontSize(17.sp),
-                                                          color: kArticlesDetailsScreenColor),
-                                                      "strong": Style(
-                                                          lineHeight: LineHeight.number(1.7),
-                                                          fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGunturBold : Fonts.RalewayBold,
-                                                          fontWeight: FontWeight.bold,
-                                                          fontStyle: FontStyle.normal,
-                                                          fontSize: FontSize(17.sp),
-                                                          color: kArticlesDetailsScreenColor),
-                                                      "h1": Style(
-                                                          lineHeight: LineHeight.number(1.7),
-                                                          fontFamily: Fonts.Roboto,
-                                                          fontWeight: FontWeight.w700,
-                                                          fontStyle: FontStyle.normal,
-                                                          fontSize: FontSize(22.sp),
-                                                          color: kArticlesDetailsScreenColor),
-                                                      "li": Style(
-                                                          lineHeight: LineHeight.number(1.5),
-                                                          fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
-                                                          fontStyle: FontStyle.normal,
-                                                          fontWeight: FontWeight.w500,
-                                                          fontSize: FontSize(17.sp),
-                                                          color: kArticlesDetailsScreenColor),
-                                                      "ol": Style(
-                                                          lineHeight: LineHeight.number(1.5),
-                                                          fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
-                                                          fontStyle: FontStyle.normal,
-                                                          fontWeight: FontWeight.w500,
-                                                          fontSize: FontSize(17.sp),
-                                                          color: kArticlesDetailsScreenColor),
-                                                      "u": Style(
-                                                          lineHeight: LineHeight.number(1.7),
-                                                          fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
-                                                          fontStyle: FontStyle.normal,
-                                                          fontWeight: FontWeight.w500,
-                                                          fontSize: FontSize(17.sp),
-                                                          color: kArticlesDetailsScreenColor),
-                                                    },
-                                                    data: state.articleDetails.article.content != null ? state.articleDetails.article.content : '',
-                                                  ),
+                                                SofyButton(
+                                                  width: SizeConfig.screenWidth - 42.w,
+                                                  label: AppLocalizations.of(context).translate('questions_btn'),
+                                                  callback: () {
+                                                    Analytics().sendEventReports(
+                                                      event: EventsOfAnalytics.questions_btn_click,
+                                                      attr: {
+                                                        'name': AppLocalizations.of(context).translate('questions_btn'),
+                                                        'id': widget.articleId,
+                                                      },
+                                                    );
+                                                    final RenderBox questions = _questionsKey.currentContext.findRenderObject();
+                                                    final sizeQuestions = questions.localToGlobal(Offset.zero);
+                                                    _controller.animateTo(sizeQuestions.dy - (SizeConfig.screenHeight / 8.21).h, duration: Duration(milliseconds: 350), curve: Curves.ease);
+                                                  },
                                                 ),
                                               ],
                                             ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 17.w,
+                                            ),
+                                            child: Content(content: state.articleDetails.article.content),
                                           ),
                                         ],
                                       ),
                                     ),
                                   ],
                                 ),
-                                ArticleVote(poll: state.articleDetails.article.apiArticlePollModel),
-                                ArticleQuestion(key: _questionsKey, question: state.articleDetails.article.apiArticleQuestionModel, articleId: articleId, article: state.articleDetails.article),
-                                ArticleRating(article: state.articleDetails.article, articleId: articleId),
-                                Visibility(
-                                  visible: isCommentsEnabled,
-                                  child: BlocProvider(
-                                    create: (_) => CommentsBloc(restApi: RestApi(systemLang: AppLocalizations.of(context).locale.languageCode)),
-                                    child: Comments(
-                                      articleId: articleId,
-                                      key: _commentsKey,
-                                    ),
-                                  ),
-                                ),
-                                Visibility(
-                                  visible: !isCommentsEnabled,
-                                  child: Column(
-                                    children: <Widget>[
-                                      Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(25.r),
-                                                topRight: Radius.circular(25.r)),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: CommentsColors.InputCardShadow1Color,
-                                                // color: Colors.red,
-                                                offset: Offset(0, -4),
-                                                blurRadius: 16,
-                                              ),
-                                              BoxShadow(
-                                                color: CommentsColors.InputCardShadow2Color,
-                                                // color: Colors.red,
-
-                                                offset: Offset(0, -11),
-                                                blurRadius: 14,
-                                              ),
-                                            ],
-                                          ),
-                                          height: SizeConfig.screenWidth / 8)
-                                    ],
-                                  ),
-                                ),
+                                state.articleDetails.article.apiArticlePollModel.variants.length > 0 ? ArticleVote(poll: state.articleDetails.article.apiArticlePollModel) : Container(),
+                                ArticleQuestion(key: _questionsKey, question: state.articleDetails.article.apiArticleQuestionModel, articleId: widget.articleId, article: state.articleDetails.article),
+                                ArticleRating(article: state.articleDetails.article, articleId: widget.articleId),
+                                BottomPadding()
                               ],
                             ),
                           ),
@@ -364,7 +240,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                         valueListenable: scroll,
                         builder: (_, value, __) => AnimatedContainer(
                           height: 104.h,
-                          padding: EdgeInsets.only(top: (height / 40.66).h),
+                          padding: EdgeInsets.only(top: (SizeConfig.screenHeight / 40.66).h),
                           color: appBar,
                           duration: Duration(milliseconds: 350),
                           child: Stack(
@@ -456,7 +332,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                                                       event: EventsOfAnalytics.share_article_click,
                                                       attr: {
                                                         'name': state.articleDetails.article.title,
-                                                        'id': articleId,
+                                                        'id': widget.articleId,
                                                       },
                                                     );
                                                     _bloc.shareArticle(state.articleDetails.article.title, context: context);
@@ -473,7 +349,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                               Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Container(
-                                  height: (height / 298.6).h,
+                                  height: (SizeConfig.screenHeight / 298.6).h,
                                   color: dividerColor,
                                   child: LinearProgressIndicator(
                                     backgroundColor: dividerColor,
@@ -501,6 +377,86 @@ class ArticleDetailsScreen extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class BottomPadding extends StatelessWidget {
+  const BottomPadding({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(25.r), topRight: Radius.circular(25.r)),
+          boxShadow: [
+            BoxShadow(
+              color: CommentsColors.InputCardShadow1Color,
+              // color: Colors.red,
+              offset: Offset(0, -4),
+              blurRadius: 16,
+            ),
+            BoxShadow(
+              color: CommentsColors.InputCardShadow2Color,
+              // color: Colors.red,
+
+              offset: Offset(0, -11),
+              blurRadius: 14,
+            ),
+          ],
+        ),
+        height: SizeConfig.screenWidth / 8);
+  }
+}
+
+class Content extends StatelessWidget {
+  const Content({Key key, this.content = ''}) : super(key: key);
+  final String content;
+
+  @override
+  Widget build(BuildContext context) {
+    return Html(
+      style: {
+        "p": Style(
+            lineHeight: LineHeight.number(1.7),
+            fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
+            fontStyle: FontStyle.normal,
+            fontSize: FontSize(17.sp),
+            color: kArticlesDetailsScreenColor),
+        "strong": Style(
+            lineHeight: LineHeight.number(1.7),
+            fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGunturBold : Fonts.RalewayBold,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.normal,
+            fontSize: FontSize(17.sp),
+            color: kArticlesDetailsScreenColor),
+        "h1": Style(
+            lineHeight: LineHeight.number(1.7), fontFamily: Fonts.Roboto, fontWeight: FontWeight.w700, fontStyle: FontStyle.normal, fontSize: FontSize(22.sp), color: kArticlesDetailsScreenColor),
+        "li": Style(
+            lineHeight: LineHeight.number(1.5),
+            fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w500,
+            fontSize: FontSize(17.sp),
+            color: kArticlesDetailsScreenColor),
+        "ol": Style(
+            lineHeight: LineHeight.number(1.5),
+            fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w500,
+            fontSize: FontSize(17.sp),
+            color: kArticlesDetailsScreenColor),
+        "u": Style(
+            lineHeight: LineHeight.number(1.7),
+            fontFamily: SizeConfig.lang == 'en' ? Fonts.HindGuntur : Fonts.RalewayRegular,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w500,
+            fontSize: FontSize(17.sp),
+            color: kArticlesDetailsScreenColor),
+      },
+      data: content,
     );
   }
 }

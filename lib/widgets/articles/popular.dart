@@ -3,15 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 import 'package:sofy_new/app_purchase.dart';
 import 'package:sofy_new/constants/app_colors.dart';
-import 'package:sofy_new/constants/config_const.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
-import 'package:sofy_new/models/subscribe_data.dart';
-import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/screens/arcticle_details_screen.dart';
 import 'package:sofy_new/screens/bloc/analytics.dart';
 import 'package:sofy_new/screens/subscribe_screen.dart';
@@ -37,19 +33,13 @@ class Popular extends StatelessWidget {
         Text(
           title,
           textAlign: TextAlign.left,
-          style: TextStyle(
-            fontFamily: SizeConfig.lang == 'en' ? Fonts.Allerta : Fonts.SFProMedium,
-            color: textColor,
-            fontSize: fontSize,
-            letterSpacing: -0.065*fontSize,
-            height: 31/fontSize
-          ),
+          style: TextStyle(fontFamily: SizeConfig.lang == 'en' ? Fonts.Allerta : Fonts.SFProMedium, color: textColor, fontSize: fontSize, letterSpacing: -0.065 * fontSize, height: 31 / fontSize),
         ),
         SizedBox(height: 14.h),
         ListView.builder(
             padding: EdgeInsets.zero,
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: listOfArticles.length,
             itemBuilder: (BuildContext context, int index) {
               return Column(
@@ -95,31 +85,19 @@ class Popular extends StatelessWidget {
                               width: 20.w,
                             ),
                             Container(
-                              width: SizeConfig.screenWidth - 20.w-22.w-64.h-22.w, // todo
-                              child: Column(
-                                children: [
-                                  Container(
-                                    child: Text(listOfArticles[index].title,
-                                        maxLines: 2,
-                                        softWrap: true,
-                                        style: TextStyle(
-                                          fontFamily: Fonts.HindGunturMedium,
-                                          color: textColor,
-                                          height: 1.4,
-                                          fontSize: 14.sp,
-                                        )),
+                              width: SizeConfig.screenWidth - 128.w,
+                              child: Container(
+                                child: Text(
+                                  listOfArticles[index].title,
+                                  maxLines: 2,
+                                  softWrap: true,
+                                  style: TextStyle(
+                                    fontFamily: Fonts.HindGunturMedium,
+                                    color: textColor,
+                                    height: 1.4,
+                                    fontSize: 14.sp,
                                   ),
-                                  Visibility(
-                                    child: Text('${listOfArticles[index].repliesCount} ${AppLocalizations.of(context).translate('comments')}',
-                                        style: TextStyle(
-                                          color: ArticlesColors.GreyColor,
-                                          fontSize: 12.h,
-                                        )),
-                                    visible: isCommentsEnabled,
-                                  ),
-                                ],
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                ),
                               ),
                             )
                           ],

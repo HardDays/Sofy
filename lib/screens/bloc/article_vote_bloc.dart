@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_variants_model.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/rest_api.dart';
 
 class ArticleVoteBloc extends Bloc<ArticleVoteEvent, ArticleVoteState> {
-  ArticleVoteBloc({this.restApi, this.variants})
+  ArticleVoteBloc({this.variants})
       : super(ArticleVoteStateInit(variants: variants));
-  final RestApi restApi;
+  final RestApi restApi = RestApi(systemLang: SizeConfig.lang);
   final List<ApiArticleVariantsModel> variants;
   int selectedVariantsId = -1;
   @override

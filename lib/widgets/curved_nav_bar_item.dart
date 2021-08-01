@@ -16,7 +16,6 @@ class CurvedNavBarItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(color: selected ? Colors.white : null, shape: BoxShape.circle),
       padding: selected ? null : EdgeInsets.only(top: 10.h),
-      //color: Colors.red,
       width: selected ? 40.w : null,
       height: selected ? 40.h : null,
 

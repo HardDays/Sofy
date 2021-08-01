@@ -23,8 +23,6 @@ import 'bloc/player_screen_v2/player_bloc.dart';
 class PlayerScreenV2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return BlocBuilder<PlayerScreenBloc, PlayerScreenState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {

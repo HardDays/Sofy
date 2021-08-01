@@ -34,17 +34,15 @@ class ArticleQuestion extends StatelessWidget {
         Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 21.w,
-              ), child: Text(
-              question.message,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: SofyQuestionColors.Text,
-                  fontFamily: Fonts.RobotoBold,
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
-                  height: 1.7),
-            ),),
+              padding: EdgeInsets.symmetric(
+                horizontal: 21.w,
+              ),
+              child: Text(
+                question.message,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: SofyQuestionColors.Text, fontFamily: Fonts.RobotoBold, fontSize: 20.sp, fontWeight: FontWeight.bold, height: 1.7),
+              ),
+            ),
             SizedBox(
               height: 15.h,
             ),
@@ -69,15 +67,7 @@ class ArticleQuestion extends StatelessWidget {
               Navigator.push(
                 context,
                 CustomMaterialPageRoute(
-                  builder: (context) =>
-                      BlocProvider(
-                        create: (_) =>
-                            StoryBloc(restApi: RestApi(systemLang: AppLocalizations
-                                .of(context)
-                                .locale
-                                .languageCode), articleId: articleId),
-                        child: StoryScreen(article: article),
-                      ),
+                  builder: (context) => StoryScreen(article: article),
                 ),
               );
             },

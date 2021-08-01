@@ -51,7 +51,6 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
             ),
             child: ListView(
               physics: const ClampingScrollPhysics(),
-              shrinkWrap: true,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius)),
@@ -280,87 +279,87 @@ class _ArticlesScreenState extends State<ArticlesScreen> with AutomaticKeepAlive
                           : Container(),
                       state.tin.length > 0
                           ? CardsHorizontalList(
-                          l: 20.w,
-                          t: 22.h,
-                          r: 22.w,
-                          b: 11.h,
-                          listOfArticles: state.tin,
-                          callback: () {
-                            Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('tin')});
-                            Navigator.push(
-                              context,
-                              CustomMaterialPageRoute(
-                                  builder: (context) => ArticlesCategoriesDetailsScreen(
-                                    categoryId: AppLocalizations.of(context).locale.languageCode == 'ru' ? 29 : 30,
-                                    screenTitle: AppLocalizations.of(context).translate('tin'),
-                                  )),
-                            );
-                          },
-                          frozenCardTextColor: Color.fromRGBO(56, 57, 79, 1),
-                          lineHeight: 1.378,
-                          title: AppLocalizations.of(context).translate('tin'),
-                          cardHeight: 220.h,
-                          cardRadius: 20.r,
-                          cardWidth: 170.w,
-                          frozenCardFontSize: 14.sp,
-                          frozenCardHeight: 57.h,
-                          titleFontSize: 24.sp)
+                              l: 20.w,
+                              t: 22.h,
+                              r: 22.w,
+                              b: 11.h,
+                              listOfArticles: state.tin,
+                              callback: () {
+                                Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('tin')});
+                                Navigator.push(
+                                  context,
+                                  CustomMaterialPageRoute(
+                                      builder: (context) => ArticlesCategoriesDetailsScreen(
+                                            categoryId: AppLocalizations.of(context).locale.languageCode == 'ru' ? 29 : 30,
+                                            screenTitle: AppLocalizations.of(context).translate('tin'),
+                                          )),
+                                );
+                              },
+                              frozenCardTextColor: Color.fromRGBO(56, 57, 79, 1),
+                              lineHeight: 1.378,
+                              title: AppLocalizations.of(context).translate('tin'),
+                              cardHeight: 220.h,
+                              cardRadius: 20.r,
+                              cardWidth: 170.w,
+                              frozenCardFontSize: 14.sp,
+                              frozenCardHeight: 57.h,
+                              titleFontSize: 24.sp)
                           : Container(),
                       state.sip.length > 0
                           ? CardsHorizontalList(
-                          l: 20.w,
-                          t: 22.h,
-                          r: 22.w,
-                          b: 11.h,
-                          listOfArticles: state.sip,
-                          callback: () {
-                            Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('sip')});
-                            Navigator.push(
-                              context,
-                              CustomMaterialPageRoute(
-                                  builder: (context) => ArticlesCategoriesDetailsScreen(
-                                    categoryId: AppLocalizations.of(context).locale.languageCode == 'ru' ? 27 : 28,
-                                    screenTitle: AppLocalizations.of(context).translate('sip'),
-                                  )),
-                            );
-                          },
-                          frozenCardTextColor: Color.fromRGBO(56, 57, 79, 1),
-                          lineHeight: 1.378,
-                          title: AppLocalizations.of(context).translate('sip'),
-                          cardHeight: 220.h,
-                          cardRadius: 20.r,
-                          cardWidth: 170.w,
-                          frozenCardFontSize: 14.sp,
-                          frozenCardHeight: 57.h,
-                          titleFontSize: 24.sp)
+                              l: 20.w,
+                              t: 22.h,
+                              r: 22.w,
+                              b: 11.h,
+                              listOfArticles: state.sip,
+                              callback: () {
+                                Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('sip')});
+                                Navigator.push(
+                                  context,
+                                  CustomMaterialPageRoute(
+                                      builder: (context) => ArticlesCategoriesDetailsScreen(
+                                            categoryId: AppLocalizations.of(context).locale.languageCode == 'ru' ? 27 : 28,
+                                            screenTitle: AppLocalizations.of(context).translate('sip'),
+                                          )),
+                                );
+                              },
+                              frozenCardTextColor: Color.fromRGBO(56, 57, 79, 1),
+                              lineHeight: 1.378,
+                              title: AppLocalizations.of(context).translate('sip'),
+                              cardHeight: 220.h,
+                              cardRadius: 20.r,
+                              cardWidth: 170.w,
+                              frozenCardFontSize: 14.sp,
+                              frozenCardHeight: 57.h,
+                              titleFontSize: 24.sp)
                           : Container(),
                       state.wmdta.length > 0
                           ? CardsHorizontalList(
-                          l: 20.w,
-                          t: 22.h,
-                          r: 22.w,
-                          b: 11.h,
-                          listOfArticles: state.wmdta,
-                          callback: () {
-                            Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('wmdta')});
-                            Navigator.push(
-                              context,
-                              CustomMaterialPageRoute(
-                                  builder: (context) => ArticlesCategoriesDetailsScreen(
-                                    categoryId: AppLocalizations.of(context).locale.languageCode == 'ru' ? 19 : 20,
-                                    screenTitle: AppLocalizations.of(context).translate('wmdta'),
-                                  )),
-                            );
-                          },
-                          frozenCardTextColor: Color.fromRGBO(56, 57, 79, 1),
-                          lineHeight: 1.378,
-                          title: AppLocalizations.of(context).translate('wmdta'),
-                          cardHeight: 220.h,
-                          cardRadius: 20.r,
-                          cardWidth: 170.w,
-                          frozenCardFontSize: 14.sp,
-                          frozenCardHeight: 57.h,
-                          titleFontSize: 24.sp)
+                              l: 20.w,
+                              t: 22.h,
+                              r: 22.w,
+                              b: 11.h,
+                              listOfArticles: state.wmdta,
+                              callback: () {
+                                Analytics().sendEventReports(event: EventsOfAnalytics.show_articles_categories, attr: {'name': AppLocalizations.of(context).translate('wmdta')});
+                                Navigator.push(
+                                  context,
+                                  CustomMaterialPageRoute(
+                                      builder: (context) => ArticlesCategoriesDetailsScreen(
+                                            categoryId: AppLocalizations.of(context).locale.languageCode == 'ru' ? 19 : 20,
+                                            screenTitle: AppLocalizations.of(context).translate('wmdta'),
+                                          )),
+                                );
+                              },
+                              frozenCardTextColor: Color.fromRGBO(56, 57, 79, 1),
+                              lineHeight: 1.378,
+                              title: AppLocalizations.of(context).translate('wmdta'),
+                              cardHeight: 220.h,
+                              cardRadius: 20.r,
+                              cardWidth: 170.w,
+                              frozenCardFontSize: 14.sp,
+                              frozenCardHeight: 57.h,
+                              titleFontSize: 24.sp)
                           : Container(),
                       SizedBox(height: 20),
                       Container(

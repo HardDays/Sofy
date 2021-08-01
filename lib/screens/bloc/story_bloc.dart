@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_answers_details_model.dart';
 import 'package:sofy_new/models/api_answers_info_model.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/rest_api.dart';
 
 class StoryBloc extends Bloc<StoryEvent, StoryState> {
-  StoryBloc({this.restApi, this.articleId}) : super(StoryStateLoading());
-  final RestApi restApi;
-final int articleId;
+  StoryBloc({this.articleId}) : super(StoryStateLoading());
+  final RestApi restApi = RestApi(systemLang: SizeConfig.lang);
+  final int articleId;
+
   @override
   Stream<StoryState> mapEventToState(StoryEvent event) async* {
     String userToken = await PreferencesProvider().getAnonToken();
@@ -45,8 +47,7 @@ class StoryStateError extends StoryState {
 abstract class StoryEvent {}
 
 class StoryEventChangePage extends StoryEvent {
-  StoryEventChangePage(
-      {this.page = 0});
+  StoryEventChangePage({this.page = 0});
 
   final int page;
 }

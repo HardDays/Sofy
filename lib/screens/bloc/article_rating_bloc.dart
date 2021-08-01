@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/rest_api.dart';
 
 class ArticleRatingBloc extends Bloc<ArticleRatingEvent, ArticleRatingState> {
-  ArticleRatingBloc({this.restApi, this.articleId})
-      : super(ArticleRatingStateInit());
-  final RestApi restApi;
+  ArticleRatingBloc({this.articleId}) : super(ArticleRatingStateInit());
+  final RestApi restApi = RestApi(systemLang: SizeConfig.lang);
   final int articleId;
   bool voting = false;
   int _rating;
@@ -26,7 +26,7 @@ class ArticleRatingBloc extends Bloc<ArticleRatingEvent, ArticleRatingState> {
       yield ArticleRatingStateSettedRating(rating: event.rating);
       try {
         String userToken = await PreferencesProvider().getAnonToken();
-        await restApi.sendArticleRating(articleId.toString(), event.rating, token:userToken);
+        await restApi.sendArticleRating(articleId.toString(), event.rating, token: userToken);
         voting = false;
         yield ArticleRatingStatePostedRating(rating: event.rating);
       } catch (e) {

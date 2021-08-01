@@ -38,31 +38,29 @@ void main() async {
   runZoned(() {
     runApp(ScreenUtilInit(
         designSize: Size(414, 896),
-        builder: () =>
-       MaterialApp(
-        supportedLocales: [
-          Locale('en', 'US'),
-          Locale('ru', 'RU'),
-        ],
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        debugShowCheckedModeBanner: false,
-        // home: OnBoardingScreen(),
-        home: MyApp(),
-        theme: ThemeData(
-          pageTransitionsTheme: PageTransitionsTheme(
-            builders: {
-              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-            },
-          ),
-        ),
-      )
-    ));
+        builder: () => MaterialApp(
+              supportedLocales: [
+                Locale('en', 'US'),
+                Locale('ru', 'RU'),
+              ],
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              debugShowCheckedModeBanner: false,
+              // home: OnBoardingScreen(),
+              home: MyApp(),
+              theme: ThemeData(
+                pageTransitionsTheme: PageTransitionsTheme(
+                  builders: {
+                    TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+                    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+                  },
+                ),
+              ),
+            )));
   });
 }
 
@@ -106,9 +104,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<PlayerBloc>(create: (context) => PlayerBloc()),
           BlocProvider<AppPurchase>(create: (context) => AppPurchase()),
-          BlocProvider<ArticlesBloc>(
-            create: (context) => ArticlesBloc(restApi: RestApi(systemLang: systemLang), languageCode: systemLang)..add(ArticlesEventLoad(context)),
-          )
+          BlocProvider<ArticlesBloc>(create: (context) => ArticlesBloc()..add(ArticlesEventLoad(context)))
         ],
         child: MaterialApp(
           supportedLocales: [

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
@@ -23,8 +21,6 @@ class ArticleRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = SizeConfig.screenWidth;
-
     return Column(
       children: [
         SofyDivider(
@@ -63,102 +59,99 @@ class ArticleRating extends StatelessWidget {
               SizedBox(
                 height: 27.5.h,
               ),
-              BlocProvider<ArticleRatingBloc>(
-                create: (BuildContext context) => ArticleRatingBloc(restApi: RestApi(), articleId: articleId),
-                child: BlocBuilder<ArticleRatingBloc, ArticleRatingState>(builder: (context, state) {
-                  return Column(
-                    children: [
-                      Container(
-                        height: 19.sp,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.zero,
-                          itemCount: 10,
-                          itemBuilder: (BuildContext context, int index) {
-                            return GestureDetector(
-                                onTap: () {
-                                  print(index);
-                                  if (!(state is ArticleRatingStatePostedRating || article.rating > 0)) BlocProvider.of<ArticleRatingBloc>(context).add(ArticleRatingEventSetRating(rating: index + 1));
-                                },
-                                child: Container(
-                                  child: state is ArticleRatingStateInit
-                                      ? article.rating > index
-                                          ? Container(height: 24.h, width: 24.h, child: Icon(Icons.star, size: 21.h, color: SofyLikeColors.SelectedStarColor))
-                                          : Container(height: 24.h, width: 24.h, child: Icon(Icons.star_border_purple500_sharp, size: 21.h,color: SofyLikeColors.UnselectedStarColor))
-                                      : state is ArticleRatingStateSettedRating || state is ArticleRatingStatePostedRating
-                                          ? state.rating > index
-                                              ? Container(height: 24.h, width: 24.h, child: Icon(Icons.star, size: 21.h, color: SofyLikeColors.SelectedStarColor))
-                                              : Container(height: 24.h, width: 24.h, child: Icon(Icons.star_border_purple500_sharp, size: 21.h,color: SofyLikeColors.UnselectedStarColor))
-                                          : Container(),
-                                ));
-                          },
-                        ),
+              BlocBuilder<ArticleRatingBloc, ArticleRatingState>(builder: (context, state) {
+                return Column(
+                  children: [
+                    Container(
+                      height: 19.sp,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.zero,
+                        itemCount: 10,
+                        itemBuilder: (BuildContext context, int index) {
+                          return GestureDetector(
+                              onTap: () {
+                                print(index);
+                                if (!(state is ArticleRatingStatePostedRating || article.rating > 0)) BlocProvider.of<ArticleRatingBloc>(context).add(ArticleRatingEventSetRating(rating: index + 1));
+                              },
+                              child: Container(
+                                child: state is ArticleRatingStateInit
+                                    ? article.rating > index
+                                        ? Container(height: 24.h, width: 24.h, child: Icon(Icons.star, size: 21.h, color: SofyLikeColors.SelectedStarColor))
+                                        : Container(height: 24.h, width: 24.h, child: Icon(Icons.star_border_purple500_sharp, size: 21.h,color: SofyLikeColors.UnselectedStarColor))
+                                    : state is ArticleRatingStateSettedRating || state is ArticleRatingStatePostedRating
+                                        ? state.rating > index
+                                            ? Container(height: 24.h, width: 24.h, child: Icon(Icons.star, size: 21.h, color: SofyLikeColors.SelectedStarColor))
+                                            : Container(height: 24.h, width: 24.h, child: Icon(Icons.star_border_purple500_sharp, size: 21.h,color: SofyLikeColors.UnselectedStarColor))
+                                        : Container(),
+                              ));
+                        },
                       ),
-                      SizedBox(
-                        height: 35.h,
-                      ),
-                      state is ArticleRatingStateInit
-                          ? article.rating < 0
-                              ? BlocProvider.of<ArticleRatingBloc>(context).voting
-                                  ? Container(
-                                      child: CircularProgressIndicator(
-                                        color: kAppPinkDarkColor,
-                                      ),
-                                      height: 16.h,
-                                      width: 16.h,
-                                    )
-                                  : SofyTextButton(
-                                      callback: () {
-                                        if (state is ArticleRatingStateSettedRating) {
-                                          Analytics().sendEventReports(
-                                            event: EventsOfAnalytics.articles_feedback,
-                                            attr: {
-                                              'id': articleId,
-                                              'name': article.title,
-                                            },
-                                          );
-                                          BlocProvider.of<ArticleRatingBloc>(context).add(ArticleRatingEventPostRating(rating: state.rating));
-                                        }
-                                      },
-                                      label: AppLocalizations.of(context).translate('done'),
-                                    )
-                              : SofyInfo(text: AppLocalizations.of(context).translate('thank_you_for_your_answer'))
-                          : state is ArticleRatingStateSettedRating
-                              ? BlocProvider.of<ArticleRatingBloc>(context).voting
-                                  ? Container(
-                                      child: CircularProgressIndicator(
-                                        color: kAppPinkDarkColor,
-                                      ),
-                                      height: 16.h,
-                                      width: 16.h,
-                                    )
-                                  : SofyTextButton(
-                                      callback: () {
-                                        if (state is ArticleRatingStateSettedRating) {
-                                          Analytics().sendEventReports(
-                                            event: EventsOfAnalytics.articles_feedback,
-                                            attr: {
-                                              'id': articleId,
-                                              'name': article.title,
-                                            },
-                                          );
-                                          BlocProvider.of<ArticleRatingBloc>(context).add(ArticleRatingEventPostRating(rating: state.rating));
-                                        }
-                                      },
-                                      label: AppLocalizations.of(context).translate('done'),
-                                    )
-                              : state is ArticleRatingStatePostedRating || article.rating < 0
-                                  ? SofyInfo(text: AppLocalizations.of(context).translate('thank_you_for_your_answer'))
-                                  : Container(),
-                      SizedBox(
-                        height: 18.h,
-                      ),
-                    ],
-                  );
-                }),
-              ),
+                    ),
+                    SizedBox(
+                      height: 35.h,
+                    ),
+                    state is ArticleRatingStateInit
+                        ? article.rating < 0
+                            ? BlocProvider.of<ArticleRatingBloc>(context).voting
+                                ? Container(
+                                    child: CircularProgressIndicator(
+                                      color: kAppPinkDarkColor,
+                                    ),
+                                    height: 16.h,
+                                    width: 16.h,
+                                  )
+                                : SofyTextButton(
+                                    callback: () {
+                                      if (state is ArticleRatingStateSettedRating) {
+                                        Analytics().sendEventReports(
+                                          event: EventsOfAnalytics.articles_feedback,
+                                          attr: {
+                                            'id': articleId,
+                                            'name': article.title,
+                                          },
+                                        );
+                                        BlocProvider.of<ArticleRatingBloc>(context).add(ArticleRatingEventPostRating(rating: state.rating));
+                                      }
+                                    },
+                                    label: AppLocalizations.of(context).translate('done'),
+                                  )
+                            : SofyInfo(text: AppLocalizations.of(context).translate('thank_you_for_your_answer'))
+                        : state is ArticleRatingStateSettedRating
+                            ? BlocProvider.of<ArticleRatingBloc>(context).voting
+                                ? Container(
+                                    child: CircularProgressIndicator(
+                                      color: kAppPinkDarkColor,
+                                    ),
+                                    height: 16.h,
+                                    width: 16.h,
+                                  )
+                                : SofyTextButton(
+                                    callback: () {
+                                      if (state is ArticleRatingStateSettedRating) {
+                                        Analytics().sendEventReports(
+                                          event: EventsOfAnalytics.articles_feedback,
+                                          attr: {
+                                            'id': articleId,
+                                            'name': article.title,
+                                          },
+                                        );
+                                        BlocProvider.of<ArticleRatingBloc>(context).add(ArticleRatingEventPostRating(rating: state.rating));
+                                      }
+                                    },
+                                    label: AppLocalizations.of(context).translate('done'),
+                                  )
+                            : state is ArticleRatingStatePostedRating || article.rating < 0
+                                ? SofyInfo(text: AppLocalizations.of(context).translate('thank_you_for_your_answer'))
+                                : Container(),
+                    SizedBox(
+                      height: 18.h,
+                    ),
+                  ],
+                );
+              }),
             ],
           ),
         ),

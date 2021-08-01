@@ -6,7 +6,6 @@ import 'package:sofy_new/constants/app_colors.dart';
 import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_topic_model.dart';
-import 'package:sofy_new/models/favortes/api_fav_topics_answer_model.dart';
 import 'package:sofy_new/providers/app_localizations.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/widgets/articles/categories.dart';

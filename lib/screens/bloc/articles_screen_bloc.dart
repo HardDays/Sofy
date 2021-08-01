@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_articles_model.dart';
 import 'package:sofy_new/models/api_article_topic_model.dart';
 import 'package:sofy_new/models/favortes/api_fav_topics_answer_model.dart';
@@ -9,9 +10,8 @@ import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/rest_api.dart';
 
 class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
-  ArticlesBloc({this.restApi, this.languageCode}) : super(ArticlesStateLoading());
-  final RestApi restApi;
-  final String languageCode;
+  ArticlesBloc() : super(ArticlesStateLoading());
+  final RestApi restApi = RestApi(systemLang: SizeConfig.lang);
 
   @override
   Stream<ArticlesState> mapEventToState(ArticlesEvent event) async* {
@@ -23,8 +23,8 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
         List<ApiArticleTopicModel> listOfTopicsPopular = await restApi.getArticleTopicsPopularWithoutCtx(token: userToken);
         Future.wait(listOfTopicsPopular.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
-        List<ApiFavTopicsInfoModel> listOfFavoritesTopics = await restApi.getFavoritesTopicsWithoutCtx(token: userToken);
-        Future.wait(listOfFavoritesTopics.map((e) => precacheImage(CachedNetworkImageProvider(e.icon,), event.context)).toList());
+        // List<ApiFavTopicsInfoModel> listOfFavoritesTopics = await restApi.getFavoritesTopicsWithoutCtx(token: userToken);
+        // Future.wait(listOfFavoritesTopics.map((e) => precacheImage(CachedNetworkImageProvider(e.icon,), event.context)).toList());
 
         List<ApiArticleTopicModel> listOfArticleTopic = await restApi.getTopicsListWithoutCtx(token: userToken);
         Future.wait(listOfArticleTopic.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
@@ -35,26 +35,26 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
         List<ApiArticlesModel> listOfPopularArticles = await restApi.getPopularArticlesWithoutCtx(token: userToken);
         Future.wait(listOfPopularArticles.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
-        List<ApiArticlesModel> femaleSexuality = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 21 : 22, token: userToken);
+        List<ApiArticlesModel> femaleSexuality = await restApi.getArticlesWithoutCtx(SizeConfig.lang == 'ru' ? 21 : 22, token: userToken);
         Future.wait(femaleSexuality.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
-        List<ApiArticlesModel> interestingAboutSex = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 11 : 12, token: userToken);
+        List<ApiArticlesModel> interestingAboutSex = await restApi.getArticlesWithoutCtx(SizeConfig.lang == 'ru' ? 11 : 12, token: userToken);
         Future.wait(interestingAboutSex.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
-        List<ApiArticlesModel> orgasms = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 13 : 14, token: userToken);
+        List<ApiArticlesModel> orgasms = await restApi.getArticlesWithoutCtx(SizeConfig.lang == 'ru' ? 13 : 14, token: userToken);
         Future.wait(orgasms.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
 
-        List<ApiArticlesModel> wmdta = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 19 : 20, token: userToken);
+        List<ApiArticlesModel> wmdta = await restApi.getArticlesWithoutCtx(SizeConfig.lang == 'ru' ? 19 : 20, token: userToken);
         Future.wait(wmdta.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
-        List<ApiArticlesModel> sip = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 27 : 28, token: userToken);
+        List<ApiArticlesModel> sip = await restApi.getArticlesWithoutCtx(SizeConfig.lang == 'ru' ? 27 : 28, token: userToken);
         Future.wait(sip.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
-        List<ApiArticlesModel> tin = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 29 : 30, token: userToken);
+        List<ApiArticlesModel> tin = await restApi.getArticlesWithoutCtx(SizeConfig.lang == 'ru' ? 29 : 30, token: userToken);
         Future.wait(tin.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
-        List<ApiArticlesModel> usd = await restApi.getArticlesWithoutCtx(languageCode == 'ru' ? 17 : 18, token: userToken);
+        List<ApiArticlesModel> usd = await restApi.getArticlesWithoutCtx(SizeConfig.lang == 'ru' ? 17 : 18, token: userToken);
         Future.wait(usd.map((e) => precacheImage(CachedNetworkImageProvider(e.coverImg), event.context)).toList());
 
         List<ApiArticleTopicModel> pp = [];
@@ -63,7 +63,7 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
 
         yield ArticlesStateResult(
             listOfArticles: listOfArticles,
-            listOfFavoritesTopics: listOfFavoritesTopics,
+            // listOfFavoritesTopics: listOfFavoritesTopics,
             listOfPopularArticles: listOfPopularArticles,
             listOfTopicsPopular: listOfTopicsPopular,
             femaleSexuality: femaleSexuality,
@@ -90,8 +90,9 @@ class ArticlesStateLoading extends ArticlesState {}
 
 class ArticlesStateResult extends ArticlesState {
   ArticlesStateResult(
-      {this.listOfArticles = const [],
-      this.listOfFavoritesTopics = const [],
+      {
+        this.listOfArticles = const [],
+      // this.listOfFavoritesTopics = const [],
       this.listOfArticleTopic = const [],
       this.listOfPopularArticles = const [],
       this.listOfTopicsPopular = const [],
@@ -110,7 +111,7 @@ class ArticlesStateResult extends ArticlesState {
   final List<ApiArticleTopicModel> popularCategories;
   final List<ApiArticleTopicModel> listOfArticleTopic;
   final List<ApiArticlesModel> listOfPopularArticles;
-  final List<ApiFavTopicsInfoModel> listOfFavoritesTopics;
+  // final List<ApiFavTopicsInfoModel> listOfFavoritesTopics;
   final List<ApiArticlesModel> femaleSexuality; // 21
   final List<ApiArticlesModel> interestingAboutSex; // 11
   final List<ApiArticlesModel> orgasms; // 13

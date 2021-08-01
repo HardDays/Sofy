@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sofy_new/constants/app_colors.dart';
-import 'package:sofy_new/constants/constants.dart';
 import 'package:sofy_new/helper/size_config.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,9 +16,9 @@ class SofyDivider extends StatelessWidget {
       // padding: EdgeInsets.only(
       //     top: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
       //     bottom: 14 / Layout.height * Layout.multiplier * SizeConfig.blockSizeVertical,
-          // left: 20.0 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
-          // right: 20.0 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal
-        // ),
+      // left: 20.0 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal,
+      // right: 20.0 / Layout.width * Layout.multiplier * SizeConfig.blockSizeHorizontal
+      // ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

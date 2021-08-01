@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:sofy_new/helper/size_config.dart';
 import 'package:sofy_new/models/api_article_replies.dart';
 import 'package:sofy_new/models/api_profile_model.dart';
 import 'package:sofy_new/providers/preferences_provider.dart';
 import 'package:sofy_new/rest_api.dart';
 
 class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
-  CommentsBloc({this.restApi}) : super(CommentsStateResult());
-  final RestApi restApi;
+  CommentsBloc() : super(CommentsStateResult());
+  final RestApi restApi = RestApi(systemLang: SizeConfig.lang);
   int _sortBy;
   List<Reply> _replies = [];
   List<ApiProfileModel> _profiles = [];
