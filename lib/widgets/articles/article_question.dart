@@ -67,7 +67,10 @@ class ArticleQuestion extends StatelessWidget {
               Navigator.push(
                 context,
                 CustomMaterialPageRoute(
-                  builder: (context) => StoryScreen(article: article),
+                  builder: (context) => BlocProvider(
+                    create: (_) => StoryBloc(articleId: articleId),
+                    child: StoryScreen(article: article),
+                  ),
                 ),
               );
             },

@@ -104,278 +104,278 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> with Automa
   final _questionsKey = GlobalKey();
 
   ScrollController _controller = ScrollController();
+  final ArticleDetailsBloc _articleDetailsBloc = ArticleDetailsBloc();
 
+  @override
+  void initState() {
+    _articleDetailsBloc.add(
+      ArticleDetailsEventLoad(context, articleId: widget.articleId),
+    );
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      body: BlocProvider.value(
-        value: ArticleDetailsBloc()
-          ..add(
-            ArticleDetailsEventLoad(context, articleId: widget.articleId),
-          ),
-        child: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
-          builder: (context, state) {
-            if (state is ArticleDetailsStateResult) {
-              return NotificationListener<ScrollNotification>(
-                  onNotification: scrollListener,
-                  child: Stack(
-                    children: [
-                      Scrollbar(
-                        child: SingleChildScrollView(
-                          controller: _controller,
-                          physics: const ClampingScrollPhysics(),
-                          child: MultiBlocProvider(
-                            providers: [
-                              BlocProvider<ArticleVoteBloc>(
-                                create: (BuildContext context) => ArticleVoteBloc(variants: state.articleDetails.article.apiArticlePollModel.variants)..add(ArticleVoteEventInit()),
-                              ),
-                              BlocProvider<StoryBloc>(
-                                create: (_) => StoryBloc(articleId: widget.articleId),
-                              ),
-                              BlocProvider<ArticleRatingBloc>(
-                                create: (BuildContext context) => ArticleRatingBloc(articleId: widget.articleId),
-                              ),
-                            ],
-                            child: Column(
-                              children: [
-                                Stack(
-                                  children: [
-                                    Container(
-                                      height: 390.h,
-                                      width: SizeConfig.screenWidth,
-                                      child: Image(
-                                        image: CachedNetworkImageProvider(state.articleDetails.article.coverImg),
-                                        fit: BoxFit.cover,
-                                      ),
+      body: BlocBuilder<ArticleDetailsBloc, ArticleDetailsState>(
+        bloc: _articleDetailsBloc,
+        builder: (context, state) {
+          if (state is ArticleDetailsStateResult) {
+            return NotificationListener<ScrollNotification>(
+                onNotification: scrollListener,
+                child: Stack(
+                  children: [
+                    Scrollbar(
+                      child: SingleChildScrollView(
+                        controller: _controller,
+                        physics: const ClampingScrollPhysics(),
+                        child: MultiBlocProvider(
+                          providers: [
+                            BlocProvider<ArticleVoteBloc>(
+                              create: (BuildContext context) => ArticleVoteBloc(variants: state.articleDetails.article.apiArticlePollModel.variants)..add(ArticleVoteEventInit()),
+                            ),
+                            BlocProvider<ArticleRatingBloc>(
+                              create: (BuildContext context) => ArticleRatingBloc(articleId: widget.articleId),
+                            ),
+                          ],
+                          child: Column(
+                            children: [
+                              Stack(
+                                children: [
+                                  Container(
+                                    height: 390.h,
+                                    width: SizeConfig.screenWidth,
+                                    child: Image(
+                                      image: CachedNetworkImageProvider(state.articleDetails.article.coverImg),
+                                      fit: BoxFit.cover,
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 390.h - 25.h),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(25.r), topRight: Radius.circular(25.r)),
-                                        child: Stack(
-                                          alignment: Alignment.topCenter,
-                                          children: [
-                                            Container(
-                                              height: 26.h,
-                                              width: SizeConfig.screenWidth,
-                                              color: Colors.white,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 386.h),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.max,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 390.h - 25.h),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(25.r), topRight: Radius.circular(25.r)),
+                                      child: Stack(
+                                        alignment: Alignment.topCenter,
                                         children: [
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 21.w,
-                                            ),
-                                            child: Text(
-                                              state.articleDetails.article.title,
-                                              style: TextStyle(
-                                                fontFamily: Fonts.RobotoBold,
-                                                fontSize: 24.sp,
-                                                color: ArticlesColors.HeaderTextColor,
-                                                height: 1.35,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                              top: 25.h,
-                                              bottom: 8.h,
-                                              left: 21.w,
-                                              right: 21.w,
-                                            ),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                SofyButton(
-                                                  width: SizeConfig.screenWidth - 42.w,
-                                                  label: AppLocalizations.of(context).translate('questions_btn'),
-                                                  callback: () {
-                                                    Analytics().sendEventReports(
-                                                      event: EventsOfAnalytics.questions_btn_click,
-                                                      attr: {
-                                                        'name': AppLocalizations.of(context).translate('questions_btn'),
-                                                        'id': widget.articleId,
-                                                      },
-                                                    );
-                                                    final RenderBox questions = _questionsKey.currentContext.findRenderObject();
-                                                    final sizeQuestions = questions.localToGlobal(Offset.zero);
-                                                    _controller.animateTo(sizeQuestions.dy - (SizeConfig.screenHeight / 8.21).h, duration: Duration(milliseconds: 350), curve: Curves.ease);
-                                                  },
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 17.w,
-                                            ),
-                                            child: Content(content: state.articleDetails.article.content),
+                                          Container(
+                                            height: 26.h,
+                                            width: SizeConfig.screenWidth,
+                                            color: Colors.white,
                                           ),
                                         ],
                                       ),
                                     ),
-                                  ],
-                                ),
-                                state.articleDetails.article.apiArticlePollModel.variants.length > 0 ? ArticleVote(poll: state.articleDetails.article.apiArticlePollModel) : Container(),
-                                ArticleQuestion(key: _questionsKey, question: state.articleDetails.article.apiArticleQuestionModel, articleId: widget.articleId, article: state.articleDetails.article),
-                                ArticleRating(article: state.articleDetails.article, articleId: widget.articleId),
-                                BottomPadding()
-                              ],
-                            ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 386.h),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 21.w,
+                                          ),
+                                          child: Text(
+                                            state.articleDetails.article.title,
+                                            style: TextStyle(
+                                              fontFamily: Fonts.RobotoBold,
+                                              fontSize: 24.sp,
+                                              color: ArticlesColors.HeaderTextColor,
+                                              height: 1.35,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 25.h,
+                                            bottom: 8.h,
+                                            left: 21.w,
+                                            right: 21.w,
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              SofyButton(
+                                                width: SizeConfig.screenWidth - 42.w,
+                                                label: AppLocalizations.of(context).translate('questions_btn'),
+                                                callback: () {
+                                                  Analytics().sendEventReports(
+                                                    event: EventsOfAnalytics.questions_btn_click,
+                                                    attr: {
+                                                      'name': AppLocalizations.of(context).translate('questions_btn'),
+                                                      'id': widget.articleId,
+                                                    },
+                                                  );
+                                                  final RenderBox questions = _questionsKey.currentContext.findRenderObject();
+                                                  final sizeQuestions = questions.localToGlobal(Offset.zero);
+                                                  _controller.animateTo(sizeQuestions.dy - (SizeConfig.screenHeight / 8.21).h, duration: Duration(milliseconds: 350), curve: Curves.ease);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 17.w,
+                                          ),
+                                          child: Content(content: state.articleDetails.article.content),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              state.articleDetails.article.apiArticlePollModel.variants.length > 0 ? ArticleVote(poll: state.articleDetails.article.apiArticlePollModel) : Container(),
+                              ArticleQuestion(key: _questionsKey, question: state.articleDetails.article.apiArticleQuestionModel, articleId: widget.articleId, article: state.articleDetails.article),
+                              ArticleRating(article: state.articleDetails.article, articleId: widget.articleId),
+                              BottomPadding()
+                            ],
                           ),
                         ),
                       ),
-                      ValueListenableBuilder(
-                        valueListenable: scroll,
-                        builder: (_, value, __) => AnimatedContainer(
-                          height: 104.h,
-                          padding: EdgeInsets.only(top: (SizeConfig.screenHeight / 40.66).h),
-                          color: appBar,
-                          duration: Duration(milliseconds: 350),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              Align(
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                          child: Stack(
+                    ),
+                    ValueListenableBuilder(
+                      valueListenable: scroll,
+                      builder: (_, value, __) => AnimatedContainer(
+                        height: 104.h,
+                        padding: EdgeInsets.only(top: (SizeConfig.screenHeight / 40.66).h),
+                        color: appBar,
+                        duration: Duration(milliseconds: 350),
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            Align(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                        child: Stack(
+                                      children: <Widget>[
+                                        Container(
+                                          width: 75.0.w,
+                                          child: SvgPicture.asset(
+                                            'assets/svg/back_vector.svg',
+                                            color: backButton,
+                                            height: 17.h,
+                                            width: 11.w,
+                                          ),
+                                        ),
+                                        Positioned.fill(
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            child: InkWell(
+                                                focusColor: Colors.transparent,
+                                                highlightColor: Colors.transparent,
+                                                splashColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                borderRadius: BorderRadius.circular(60.r),
+                                                radius: 25.r,
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                }),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                                    Expanded(
+                                      child: AnimatedOpacity(
+                                        duration: Duration(milliseconds: 350),
+                                        opacity: textColor == Colors.transparent ? 0.0 : 1.0,
+                                        curve: Curves.fastOutSlowIn,
+                                        child: Container(
+                                          child: Padding(
+                                            padding: EdgeInsets.only(top: 8.r),
+                                            child: AutoSizeText(
+                                              state.articleDetails.article.title != null ? state.articleDetails.article.title : '',
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                fontFamily: Fonts.HindGuntur,
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 15.sp,
+                                                color: kArticlesPopularColor,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Stack(
                                         children: <Widget>[
                                           Container(
                                             width: 75.0.w,
                                             child: SvgPicture.asset(
-                                              'assets/svg/back_vector.svg',
-                                              color: backButton,
-                                              height: 17.h,
-                                              width: 11.w,
+                                              'assets/svg/article_share.svg',
+                                              color: shareButton,
+                                              height: 24.h,
+                                              width: 24.w,
                                             ),
                                           ),
                                           Positioned.fill(
                                             child: Material(
                                               color: Colors.transparent,
                                               child: InkWell(
-                                                  focusColor: Colors.transparent,
-                                                  highlightColor: Colors.transparent,
-                                                  splashColor: Colors.transparent,
-                                                  hoverColor: Colors.transparent,
-                                                  borderRadius: BorderRadius.circular(60.r),
-                                                  radius: 25.r,
-                                                  onTap: () {
-                                                    Navigator.pop(context);
-                                                  }),
+                                                focusColor: Colors.transparent,
+                                                highlightColor: Colors.transparent,
+                                                splashColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                borderRadius: BorderRadius.circular(60.r),
+                                                radius: 25.r,
+                                                onTap: () {
+                                                  Analytics().sendEventReports(
+                                                    event: EventsOfAnalytics.share_article_click,
+                                                    attr: {
+                                                      'name': state.articleDetails.article.title,
+                                                      'id': widget.articleId,
+                                                    },
+                                                  );
+                                                  _bloc.shareArticle(state.articleDetails.article.title, context: context);
+                                                },
+                                              ),
                                             ),
                                           ),
                                         ],
-                                      )),
-                                      Expanded(
-                                        child: AnimatedOpacity(
-                                          duration: Duration(milliseconds: 350),
-                                          opacity: textColor == Colors.transparent ? 0.0 : 1.0,
-                                          curve: Curves.fastOutSlowIn,
-                                          child: Container(
-                                            child: Padding(
-                                              padding: EdgeInsets.only(top: 8.r),
-                                              child: AutoSizeText(
-                                                state.articleDetails.article.title != null ? state.articleDetails.article.title : '',
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  fontFamily: Fonts.HindGuntur,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontStyle: FontStyle.normal,
-                                                  fontSize: 15.sp,
-                                                  color: kArticlesPopularColor,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
                                       ),
-                                      Container(
-                                        child: Stack(
-                                          children: <Widget>[
-                                            Container(
-                                              width: 75.0.w,
-                                              child: SvgPicture.asset(
-                                                'assets/svg/article_share.svg',
-                                                color: shareButton,
-                                                height: 24.h,
-                                                width: 24.w,
-                                              ),
-                                            ),
-                                            Positioned.fill(
-                                              child: Material(
-                                                color: Colors.transparent,
-                                                child: InkWell(
-                                                  focusColor: Colors.transparent,
-                                                  highlightColor: Colors.transparent,
-                                                  splashColor: Colors.transparent,
-                                                  hoverColor: Colors.transparent,
-                                                  borderRadius: BorderRadius.circular(60.r),
-                                                  radius: 25.r,
-                                                  onTap: () {
-                                                    Analytics().sendEventReports(
-                                                      event: EventsOfAnalytics.share_article_click,
-                                                      attr: {
-                                                        'name': state.articleDetails.article.title,
-                                                        'id': widget.articleId,
-                                                      },
-                                                    );
-                                                    _bloc.shareArticle(state.articleDetails.article.title, context: context);
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  alignment: Alignment.center),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  height: (SizeConfig.screenHeight / 298.6).h,
-                                  color: dividerColor,
-                                  child: LinearProgressIndicator(
-                                    backgroundColor: dividerColor,
-                                    valueColor: AlwaysStoppedAnimation<Color>(kAlwaysStoppedAnimation),
-                                    value: scroll.value,
-                                  ),
+                                    ),
+                                  ],
+                                ),
+                                alignment: Alignment.center),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                height: (SizeConfig.screenHeight / 298.6).h,
+                                color: dividerColor,
+                                child: LinearProgressIndicator(
+                                  backgroundColor: dividerColor,
+                                  valueColor: AlwaysStoppedAnimation<Color>(kAlwaysStoppedAnimation),
+                                  value: scroll.value,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ));
-            }
-            if (state is ArticleDetailsStateError) {
-              return Padding(
-                padding: EdgeInsets.all(22.w),
-                child: Center(
-                  child: Container(child: Text(state.error)),
-                ),
-              );
-            }
-            return FullscreenPreloader();
-          },
-        ),
+                    ),
+                  ],
+                ));
+          }
+          if (state is ArticleDetailsStateError) {
+            return Padding(
+              padding: EdgeInsets.all(22.w),
+              child: Center(
+                child: Container(child: Text(state.error)),
+              ),
+            );
+          }
+          return FullscreenPreloader();
+        },
       ),
     );
   }
